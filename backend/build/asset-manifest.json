@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9fcde718.css",
+    "main.js": "/static/js/main.3d8f18ba.js",
+    "static/media/card.png": "/static/media/card.698bd77a0d6a8bf04a66.png",
+    "static/media/cat and women.png": "/static/media/cat and women.ee2f6974c200249354b4.png",
+    "static/media/ads-edit.svg": "/static/media/ads-edit.8d4d95f07ae895d26c5af01aba2ebaef.svg",
+    "static/media/global.svg": "/static/media/global.67faf26db39d8058b2562479bc33e768.svg",
+    "static/media/ads-delete.svg": "/static/media/ads-delete.b9b9b5344092e85640bfa5acb09120b2.svg",
+    "static/media/ads-view.svg": "/static/media/ads-view.b54f66e39ae55b435c84d8b77d80e20b.svg",
+    "static/media/lens.svg": "/static/media/lens.a5974a167ab00acd3b71725487a32cf4.svg",
+    "static/media/upArrow.svg": "/static/media/upArrow.b0156f9a700df077af8e012f7ac160b4.svg",
+    "static/media/whatsapp.svg": "/static/media/whatsapp.494e86d9389e0cca0067a0c1da8f8534.svg",
+    "static/media/negative.svg": "/static/media/negative.bd6d33d6c9ea9481fb01075233ecdbcc.svg",
+    "static/media/telegram.svg": "/static/media/telegram.b1de1e4022e56e79c10f5c3d5f9cad90.svg",
+    "static/media/positive.svg": "/static/media/positive.29c661c26fd0b91970be29ee84f39091.svg",
+    "static/media/upGraph.svg": "/static/media/upGraph.260d20f528d31fd2acbbe2ee0d406313.svg",
+    "static/media/diamond.svg": "/static/media/diamond.ea212bf3968b70118f2693e046dd2bc0.svg",
+    "static/media/call.svg": "/static/media/call.51a9b03f494607e4a79798831252604b.svg",
+    "static/media/notification.svg": "/static/media/notification.c37e4d3d60f3b7ba38836dede9f7e330.svg",
+    "index.html": "/index.html",
+    "static/media/email.svg": "/static/media/email.4efe0c7e8dea67a7c2ba4a986ca76d75.svg",
+    "main.9fcde718.css.map": "/static/css/main.9fcde718.css.map",
+    "main.3d8f18ba.js.map": "/static/js/main.3d8f18ba.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9fcde718.css",
+    "static/js/main.3d8f18ba.js"
+  ]
+}
