@@ -1,4 +1,5 @@
-// import { Analytics, BarChart, Comment, Edit, FavoriteBorderOutlined, Home, Leaderboard, PersonOff, Settings } from '@mui/icons-material'
+
+
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import Main from '../components/Main'
@@ -19,7 +20,8 @@ import VerifyAds from './components/VerifyAds'
 
 
 import HomeIcon from '../../../asset/icons/sidebar/home.js'
-import BlacklistedProfileIcon from '../../../asset/icons/sidebar/blacklisted.js'
+// import BlacklistedProfileIcon from '../../../asset/icons/sidebar/blacklisted.js'
+import ProfileIcon from '../../../asset/icons/sidebar/profile.js'
 import AuctionIcon from '../../../asset/icons/sidebar/Auction.js'
 import PaymentHistoryIcon from '../../../asset/icons/sidebar/payment-history.js'
 import BidPaymentsIcon from '../../../asset/icons/sidebar/bid-Payment.js'
@@ -36,7 +38,7 @@ import Support from './components/Support'
 import ReportIssues from './components/ReportIssues'
 import PaymentsHistory from './components/PaymentsHistory'
 
-// import DueAlert from './components/DueAlert'
+import DueAlert from './components/DueAlert'
 
 
 
@@ -51,16 +53,24 @@ function UserDashboard() {
           
           <div className="space-y-5">
             <Menu Icon={HomeIcon}               url='home'             title={'Home'} />
-            <Menu Icon={BlacklistedProfileIcon} url='blacklisted'      title={'Blacklisted Profiles'} />
+            <Menu Icon={ProfileIcon}            url='Profiles'         title={'Profiles'} />
             <Menu Icon={AuctionIcon}            url='auction-progress' title={'Auction In Progress'} />
             <Menu Icon={PaymentHistoryIcon}     url='payment-history'  title={'Payment History'} />
-            <Menu Icon={BidPaymentsIcon}        url='bid-Payments'     title={'Bid Payments'} />
+            <Menu Icon={BidPaymentsIcon}        url='billing'          title={'Billing'} />
             <Menu Icon={AdsAnalyticsIcon}       url='ads-analytics'    title={'Ads Analytics'} />
-            <Menu Icon={'Hello'}                url='live-cam'         title={'Live Cam'} />
-            <Menu Icon={BannerIcon}             url='banner'           title={'Banner'} />
+            
             <Menu Icon={'Hello'}                url='earn-credit'      title={'Earn Credit'} />
+            <Menu Icon={'Hello'}                url='live-cam'         title={'Live Cam'} />
+            <Menu Icon={'Hello'}                url='sex-toys'         title={'Sex Toys'} />
+            
+            <Menu Icon={BannerIcon}             url='banner'           title={'Banner'} />
             <Menu Icon={SupportIcon}            url='support'          title={'Support'} />
             <Menu Icon={ReportedIssueIcon}      url='reported-issues'  title={'Reported Issues'} />
+
+            {/* <Menu Icon={BlacklistedProfileIcon} url='blacklisted'      title={'Blacklisted Profiles'} /> */}
+            
+            
+
 
 
           </div>
@@ -93,7 +103,7 @@ function UserDashboard() {
           </Main>
         </div>
       </div>
-      {/* <DueAlert /> */}
+      <DueAlert />
     </>
   )
 }
