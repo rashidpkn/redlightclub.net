@@ -11,6 +11,7 @@ import upGraphIcon from '../../../../asset/icons/dashboard/home/upGraph.svg'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import map from '../../../../asset/images/dashboard/admin/map.png'
 
 
 
@@ -46,10 +47,23 @@ ChartJS.register(
 
 
 function Home() {
+    const { isDarkMode } = useSelector(state => state.util)
     return (
         <div className='space-y-5'>
             <MainMenu />
             <div className="flex flex-wrap gap-5">
+                <div className={`${isDarkMode ? 'bg-[#1A1F28] text-white shadow-blue-500 menu-shadow' : 'bg-white'} duration-[1.5s] rounded-xl  w-[500px] p-6 space-y-5`}>
+                    <h2 className='text-xl font-bold'>Ads</h2>
+                    <p className='text-sm text-[#787878] font-bold'>You have 456 contacts</p>
+                    <div className="w-[438px] h-[236px] relative">
+                        <img src={map} className='w-full h-full' alt="" />
+                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute top-[55px] left-[93px]"></div>
+                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute top-[10px] left-[110px]"></div>
+                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute top-[62px] left-[205px]"></div>
+                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute bottom-[40px] left-[215px]"></div>
+                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute bottom-[83px] right-[96px]"></div>
+                    </div>
+                </div>
                 <BidRevenue />
                 <TopBidLocation />
 
@@ -66,21 +80,21 @@ export default Home
 export const MainMenu = () => {
     const [ads, setAds] = useState([])
     useEffect(() => {
-      axios.get(`${BackendIP}/ads/get-all-ads`).then(res=>{
-        setAds(res.data)
-      })
+        axios.get(`${BackendIP}/ads/get-all-ads`).then(res => {
+            setAds(res.data)
+        })
     }, [])
 
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        axios.get(`${BackendIP}/user`).then(res=>{
+        axios.get(`${BackendIP}/user`).then(res => {
 
             setUsers(res.data)
         })
     }, [])
-    
-    
+
+
     return (
         <div className="flex gap-5 flex-wrap justify-center md:justify-start">
 
@@ -88,7 +102,7 @@ export const MainMenu = () => {
                 <img className='w-12 h-12' src={adsGreenIcon} alt="" />
                 <div className="">
                     <p className='font-bold text-lg'>Active Ads</p>
-                    <p className='font-bold text-2xl text-[#84DA91]'>{ads?.filter(e=>e.visibility===true)?.length}</p>
+                    <p className='font-bold text-2xl text-[#84DA91]'>{ads?.filter(e => e.visibility === true)?.length}</p>
                 </div>
             </Menu>
 
@@ -96,14 +110,14 @@ export const MainMenu = () => {
                 <img className='w-12 h-12' src={adsRedIcon} alt="" />
                 <div className="">
                     <p className='font-bold text-lg'>Inactive Ads</p>
-                    <p className='font-bold text-2xl text-[#FF0000]'>{ads?.filter(e=>e.visibility===false)?.length}</p>
+                    <p className='font-bold text-2xl text-[#FF0000]'>{ads?.filter(e => e.visibility === false)?.length}</p>
                 </div>
             </Menu>
 
             <Menu path={'verification'}>
                 <img className='w-12 h-12' src={verifiedIcon} alt="" />
                 <div className="">
-                    <p className='font-bold text-2xl'>{ads?.filter(e=>e.verificationRequest===true)?.length}</p>
+                    <p className='font-bold text-2xl'>{ads?.filter(e => e.verificationRequest === true)?.length}</p>
                     <p className='font-bold text-sm text-[#A5A5A5]' >Pending Verifications</p>
                 </div>
             </Menu>
@@ -135,14 +149,15 @@ const BidRevenue = () => {
 
     const { isDarkMode } = useSelector(state => state.util)
     return (
-        <div className={`${isDarkMode ? 'bg-[#1A1F28] text-white shadow-blue-500 menu-shadow' : 'bg-white'} duration-[1.5s] rounded-xl  w-[800px] p-6 space-y-5`}>
+        <div className={`${isDarkMode ? 'bg-[#1A1F28] text-white shadow-blue-500 menu-shadow' : 'bg-white'} duration-[1.5s] rounded-xl  w-[500px] p-6 space-y-5`}>
             <h2 className='text-xl font-bold'>Bid Revenue</h2>
             <p className='text-sm text-[#787878] font-bold'>Daily Bid Revenue in $</p>
             <div className="flex h-80 w-full gap-10">
-                <div className="w-[calc(100%-13rem)] h-full">
+                {/* <div className="w-[calc(100%-13rem)] h-full"> */}
+                <div className="w-full h-full">
                     <BidGragh />
                 </div>
-                <div className="w-52 h-full flex flex-col justify-center gap-3 px-5">
+                {/* <div className="w-52 h-full flex flex-col justify-center gap-3 px-5">
                     <div className="flex gap-5">
                         <p className='text-3xl font-bold'>49%</p>
 
@@ -153,7 +168,7 @@ const BidRevenue = () => {
                     </div>
                     <p className='text-base font-bold'>Total Increase</p>
                     <p className='font-bold'><img src={upGraphIcon} className='inline h-4' alt="" /> <span className='text-[#38E25D]'>5.4%</span> than last day</p>
-                </div>
+                </div> */}
             </div>
         </div>
     )
