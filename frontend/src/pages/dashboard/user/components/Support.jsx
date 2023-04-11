@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import BackendIP from '../../../../BackendIP'
 import { useEffect } from 'react'
+import { useDropzone } from 'react-dropzone'
 
 function Support() {
     const [newTicket, setNewTicket] = useState(false)
@@ -70,9 +71,12 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
         email,
         type: '',
         subject: '',
-        detail: ''
+        detail: '',
+        files:[]
 
     })
+
+    console.log(ticket)
 
     const createTicket = () =>{
         axios.post(`${BackendIP}/support`,ticket).then(res=>{
@@ -81,6 +85,7 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
             fetchData()
         })
     }
+    
 
     return (
         <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center px-3">
@@ -117,7 +122,19 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
                     <p className='text-[#C7C7C7] font-bold text-sm'>details</p>
                     <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 ' value={ticket.detail} onChange={e=>setTicket({...ticket,detail:e.target.value})} />
                 </div>
-                
+                <div className="flex gap-5 flex-wrap">
+                    <Photo setTicket={setTicket} ticket={ticket}/>
+                    {ticket.files.map(e=><div className='relative w-48 h-14 rounded-xl  flex flex-col justify-center  border border-[#6418C3] border-dashed pl-5'>
+                        <p className='text-xs'>{e.name}</p>
+                        <p className='text-xs'>{e.size/1024} kb</p>
+                        <div className="p-[1px] rounded-full bg-red-500 absolute -top-2 right-2 cursor-pointer flex justify-center items-center text-white" onClick={()=>{
+                            setTicket({...ticket,files:ticket.files.filter(ev=>ev!==e)})
+                        }}>
+                            <Close style={{fontSize:'0.6rem'}} />
+                        </div>
+                    </div>)}
+                </div>
+
                 <button className='w-40 h-12 rounded-xl bg-[#34C38F] text-white text-sm font-bold' type='submit'>Submit</button>
 
             </form>
@@ -125,6 +142,36 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
     )
 }
 
+
+const Photo = ({setTicket,ticket}) => {
+    
+    const { getRootProps, getInputProps } = useDropzone({
+        accept: {
+            'image/*': ['.png', '.jpg', '.jpegs', '.webp'],
+        },
+        // maxFiles: 1,
+        onDrop: acceptedFiles => {
+            // const data = new FormData()
+            // data.append('name', adsTitle)
+            // data.append('profile', acceptedFiles[0])
+            setTicket({...ticket,files:acceptedFiles})
+            // axios.post(`${BackendIP}/upload/profile`, data).then(res => { window.alert('Profile is Uploaded') }).then(res => {
+            //   setAds({...ads,profilePhoto:`/files/${adsTitle}-${acceptedFiles[0].name}`})
+            // })
+        }
+    });
+  
+    return (
+        
+            <div className='w-48 h-14 rounded-xl   bg-[#F5F5F5]'>
+                <div {...getRootProps({ className: 'dropzone h-full h-full flex justify-center items-center' })}>
+                    <input {...getInputProps()} />
+                    <p className='text-center'>Upload Files</p>
+                </div>
+            </div>
+        
+    )
+  }
 
 const TableRow = ({ id, subject, type, status, }) => {
     return (

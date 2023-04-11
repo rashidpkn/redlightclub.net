@@ -103,7 +103,7 @@ function UserDashboard() {
           </Main>
         </div>
       </div>
-      <DueAlert />
+      {/* <DueAlert /> */}
     </>
   )
 }
