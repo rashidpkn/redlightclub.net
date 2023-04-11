@@ -99,10 +99,13 @@ const Notifications = () => {
     setNotification(res.data)
   })
   }, [])
+
+  
   
 
   const [notification, setNotification] = useState([])
 
+  // eslint-disable-next-line
   const [viewAllNotification, setViewAllNotification] = useState(true)
   const [insideClick, setInsideClick] = useState(0)
   const [outsideClick, setOutsideClick] = useState(0)
@@ -131,11 +134,9 @@ const Notifications = () => {
 
           <div className="space-y-5">
             {
-              viewAllNotification && notification.map(e=><Notification {...e} setNotification={setNotification} notification={notification} time='2m'/>)
+               notification.map(e=><Notification key={e.id} {...e} setNotification={setNotification} notification={notification} time='2m'/>)
             }
-            {/* {
-              !viewAllNotification && notification.map(e=> e.id < 4 && <Notification {...e} setNotification={setNotification} notification={notification} time='2m' />)
-            } */}
+            
             
           </div>
 
@@ -159,8 +160,9 @@ const Notifications = () => {
 
 
 const Notification = ({ type, message, time,setNotification,notification,id }) => {
+  const [deleteNotification, setDeleteNotification] = useState(false)
   return (
-    <div className="flex justify-between items-end">
+    <div className={`flex justify-between items-end duration-500 ${deleteNotification && '-translate-x-[400px]'}`}>
       <div className="flex items-center gap-3">
         <div className={`
               ${type === ('newProfile' || 'verify') && 'bg-[#34C38F]'} 
@@ -173,7 +175,11 @@ const Notification = ({ type, message, time,setNotification,notification,id }) =
         </div>
       </div>
       <button className="text-[#6418C3] font-bold text-sm flex-shrink-0" onClick={()=>{
+        setDeleteNotification(true)
+        setTimeout(() => {
           setNotification(notification.filter(e=>e.id !== id))
+        }, 500);
+        
           axios.post(`${BackendIP}/notification/delete`,{id}).then(
             res=>{
               console.log(res.data)

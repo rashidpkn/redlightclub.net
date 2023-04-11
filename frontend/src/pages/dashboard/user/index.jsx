@@ -31,6 +31,11 @@ import BannerIcon from '../../../asset/icons/sidebar/banner.js'
 
 import SupportIcon from '../../../asset/icons/sidebar/support.js'
 import ReportedIssueIcon from '../../../asset/icons/sidebar/reported-issue.js'
+
+import EarnCredit from '../../../asset/icons/sidebar/earn-credit.js'
+import LiveCamIcon from '../../../asset/icons/sidebar/live-cam'
+import SexToysIcon from '../../../asset/icons/sidebar/sex-toys'
+
 import AuctionProgress from './components/AuctionProgress'
 import LiveCam from './components/LiveCam'
 import Banner from './components/Banner'
@@ -38,7 +43,7 @@ import Support from './components/Support'
 import ReportIssues from './components/ReportIssues'
 import PaymentsHistory from './components/PaymentsHistory'
 
-import DueAlert from './components/DueAlert'
+// import DueAlert from './components/DueAlert'
 
 
 
@@ -58,24 +63,14 @@ function UserDashboard() {
             <Menu Icon={PaymentHistoryIcon}     url='payment-history'  title={'Payment History'} />
             <Menu Icon={BidPaymentsIcon}        url='billing'          title={'Billing'} />
             <Menu Icon={AdsAnalyticsIcon}       url='ads-analytics'    title={'Ads Analytics'} />
-            
-            <Menu Icon={'Hello'}                url='earn-credit'      title={'Earn Credit'} />
-            <Menu Icon={'Hello'}                url='live-cam'         title={'Live Cam'} />
-            <Menu Icon={'Hello'}                url='sex-toys'         title={'Sex Toys'} />
-            
+            <Menu Icon={EarnCredit}             url='earn-credit'      title={'Earn Credit'} />
+            <Menu Icon={LiveCamIcon}            url='live-cam'         title={'Live Cam'} />
+            <Menu Icon={SexToysIcon}            url='sex-toys'         title={'Sex Toys'} />
             <Menu Icon={BannerIcon}             url='banner'           title={'Banner'} />
             <Menu Icon={SupportIcon}            url='support'          title={'Support'} />
             <Menu Icon={ReportedIssueIcon}      url='reported-issues'  title={'Reported Issues'} />
-
             {/* <Menu Icon={BlacklistedProfileIcon} url='blacklisted'      title={'Blacklisted Profiles'} /> */}
-            
-            
-
-
-
           </div>
-          
-          
         </Sidebar>
 
         <div className="w-[calc(100%-5rem)] lg:w-[calc(100%-18rem)] min-h-screen">
