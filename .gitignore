@@ -4,3 +4,4 @@ package-lock.json
 
 frontend/build
 /backend/files
+/backend/dist
