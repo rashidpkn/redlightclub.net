@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import BackendIP from "./BackendIP";
@@ -19,7 +19,9 @@ import Navbar from "./pages/shared/Navbar";
 import About from "./pages/static/about";
 import FAQ from "./pages/static/faq";
 import TermsAndConditions from "./pages/static/TermsAndConditions";
-import Test from "./pages/test";
+import Dev from './pages/dev'
+
+
 import { setRegion } from "./redux/slice/utilSlice";
 
 function App() {
@@ -112,7 +114,8 @@ function App() {
             (token) ? <NewAds /> : <Navigate to={"/auth"} />
           } />
 
-        <Route path="/test" element={<Test />} />
+        <Route path="/dev" element={<Dev />} />
+
 
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -122,7 +125,7 @@ function App() {
             <p className="text-xl font-bold">Select Your Region</p>
             <div className="flex justify-center">
 
-              <select className="h-12 outline-none border w-64 text-black" onChange={e=>{dispatch(setRegion(e.target.value))}}>
+              <select className="h-12 outline-none border w-64 text-black" onChange={e => { dispatch(setRegion(e.target.value)) }}>
                 <option className="text-black" value={''}>Select a region</option>
                 <option className="text-black" value={'Dubai'}>Dubai</option>
                 <option className="text-black" value={'UK'}>UK</option>
