@@ -47,88 +47,62 @@ ChartJS.register(
 
 
 function Home() {
-    const { isDarkMode } = useSelector(state => state.util)
+
     return (
         <div className='space-y-5'>
             <MainMenu />
-            <div className="flex flex-wrap gap-5">
-                <div className={`${isDarkMode ? 'bg-[#1A1F28] text-white shadow-blue-500 menu-shadow' : 'bg-white'} duration-[1.5s] rounded-xl  w-[500px] p-6 space-y-5`}>
-                    <h2 className='text-xl font-bold'>Ads</h2>
-                    <p className='text-sm text-[#787878] font-bold'>You have 456 contacts</p>
-                    <div className="w-[438px] h-[236px] relative">
-                        <img src={map} className='w-full h-full' alt="" />
-                        
-
-                        <div className="group cursor-pointer w-4 h-4 absolute top-[90px] right-[162px]">
-                            <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
-                            <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
-                                <p className='text-xs font-bold'>Dubai</p>
-                                <div className="flex justify-between w-full text-[9px] font-semibold">
-                                    <p>Total Ads</p>
-                                    <p>142</p>
-                                </div>
-                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
-                                    <p>New</p>
-                                    <p>12</p>
-                                </div>
-                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
-                                    <p>Inactive</p>
-                                    <p>120</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="group cursor-pointer w-4 h-4 absolute  top-[68px] left-[205px]">
-                            <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
-                            <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
-                                <p className='text-xs font-bold'>UK</p>
-                                <div className="flex justify-between w-full text-[9px] font-semibold">
-                                    <p>Total Ads</p>
-                                    <p>142</p>
-                                </div>
-                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
-                                    <p>New</p>
-                                    <p>12</p>
-                                </div>
-                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
-                                    <p>Inactive</p>
-                                    <p>120</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="group cursor-pointer w-4 h-4 absolute bottom-[90px] right-[85px]">
-                            <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
-                            <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
-                                <p className='text-xs font-bold'>Thailand</p>
-                                <div className="flex justify-between w-full text-[9px] font-semibold">
-                                    <p>Total Ads</p>
-                                    <p>142</p>
-                                </div>
-                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
-                                    <p>New</p>
-                                    <p>12</p>
-                                </div>
-                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
-                                    <p>Inactive</p>
-                                    <p>120</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+            <div className="flex gap-5">
+                <Map />
                 <BidRevenue />
-                <TopBidLocation />
-
             </div>
-
+            <TopBidLocation />
+            <Table />
         </div>
     )
 }
 
 export default Home
 
+
+const Table = () => {
+    return (
+        <div className="bg-white rounded-md w-full p-5 space-y-5">
+            <p className='text-lg fotn-bold'>Overview</p>
+            <table className='w-full'>
+                <thead className='w-full font-bold text-sm'>
+                    <tr className='w-full h-16 border-b'>
+                        <th className='h-full w-[5%]  text-start'></th>
+                        <th className='h-full w-[15%] text-start'>Location</th>
+                        <th className='h-full w-[15%] text-start'>Total Ads</th>
+                        <th className='h-full w-[15%] text-start'>New Ads</th>
+                        <th className='h-full w-[15%] text-start'>Total Contribution</th>
+                        <th className='h-full w-[20%] text-start'>Total Revenue</th>
+                        <th className='h-full w-[15%] text-start'>Bid Revenue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <TableRow location={'Dubai'} totalAds={320} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                    <TableRow location={'Dubai'} totalAds={320} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                    <TableRow location={'Dubai'} totalAds={320} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
+const TableRow = ({location,totalAds,newAds,TotalContribution,totalRevenue,BidRevenue}) => {
+    return (
+        <tr className='w-full h-16 border-b hover:shadow-lg'>
+            <td className='h-full w-[5%]   text-sm          '></td>
+            <td className='h-full w-[15%]  text-sm font-bold'>{location}</td>
+            <td className='h-full w-[15%]  text-sm          '>{totalAds}</td>
+            <td className='h-full w-[15%]  text-sm          '>{newAds}</td>
+            <td className='h-full w-[15%]  text-sm          '>{TotalContribution}%</td>
+            <td className='h-full w-[20%]  text-sm font-bold'>${totalRevenue}</td>
+            <td className='h-full w-[15%]  text-sm          '>${BidRevenue}</td>
+        </tr>
+    )
+}
 
 
 export const MainMenu = () => {
@@ -245,41 +219,42 @@ export const TopBidLocation = () => {
         }
         );
     }, [])
-    return (<div className={`${isDarkMode ? 'bg-[#1A1F28] text-white shadow-blue-500 menu-shadow' : 'bg-white text-black'} duration-[1.5s]  rounded-xl h-auto w-64 py-10 px-5 space-y-5`}>
+    return (<div className={`${isDarkMode ? 'bg-[#1A1F28] text-white shadow-blue-500 menu-shadow' : 'bg-white text-black'} duration-[1.5s] w-min  rounded-xl  py-10 px-5 space-y-5`}>
         <div className="">
             <p className='font-bold text-lg'>Top Location</p>
             <p className='text-xs'>Location with most listings</p>
         </div>
 
-        {/* graph */}
-        <div className="flex justify-center items-center cursor-pointer">
-            <div className='main h-32 w-32' ></div>
-        </div>
+        <div className="flex gap-5">
+            {/* graph */}
+            <div className="flex justify-center items-center cursor-pointer">
+                <div className='main h-32 w-32' ></div>
+            </div>
 
-        <div className="space-y-5 px-5">
-            <div className="w-full flex justify-between">
-                <div className="flex gap-2 items-center cursor-pointer">
-                    <div className="h-2 w-2 bg-[#5ECFFF] rounded-full" />
-                    <p className='text-sm'>UAE</p>
+            <div className="space-y-5 px-5 w-64">
+                <div className="w-full flex justify-between">
+                    <div className="flex gap-2 items-center cursor-pointer">
+                        <div className="h-2 w-2 bg-[#5ECFFF] rounded-full" />
+                        <p className='text-sm'>UAE</p>
+                    </div>
+                    <p className='font-bold text-lg'>45125</p>
                 </div>
-                <p className='font-bold text-lg'>45125</p>
-            </div>
-            <div className="w-full flex justify-between">
-                <div className="flex gap-2 items-center cursor-pointer">
-                    <div className="h-2 w-2 bg-[#E328AF] rounded-full" />
-                    <p className='text-sm'>INDIA</p>
+                <div className="w-full flex justify-between">
+                    <div className="flex gap-2 items-center cursor-pointer">
+                        <div className="h-2 w-2 bg-[#E328AF] rounded-full" />
+                        <p className='text-sm'>INDIA</p>
+                    </div>
+                    <p className='font-bold text-lg'>245</p>
                 </div>
-                <p className='font-bold text-lg'>245</p>
-            </div>
-            <div className="w-full flex justify-between">
-                <div className="flex gap-2 items-center cursor-pointer">
-                    <div className="h-2 w-2 bg-[#6418C3] rounded-full" />
-                    <p className='text-sm'>UK</p>
+                <div className="w-full flex justify-between">
+                    <div className="flex gap-2 items-center cursor-pointer">
+                        <div className="h-2 w-2 bg-[#6418C3] rounded-full" />
+                        <p className='text-sm'>UK</p>
+                    </div>
+                    <p className='font-bold text-lg'>675</p>
                 </div>
-                <p className='font-bold text-lg'>675</p>
             </div>
         </div>
-
     </div>
     )
 
@@ -350,4 +325,91 @@ function BidGragh() {
     };
 
     return <Line className='cursor-pointer' options={options} data={data} />;
+}
+
+
+const Map = () => {
+    const { isDarkMode } = useSelector(state => state.util)
+    const [ads, setAds] = useState([])
+    useEffect(() => {
+        axios.get(`${BackendIP}/ads/get-all-ads`).then(res=>{
+            setAds(res.data)
+        })
+    }, [])
+
+    function getPreviousWeek(date = new Date()) {
+        const previous = new Date(date.getTime());
+        previous.setDate(date.getDate() - 7);
+      
+        return previous;
+      }
+    
+    return (
+        <div className={`${isDarkMode ? 'bg-[#1A1F28] text-white shadow-blue-500 menu-shadow' : 'bg-white'} duration-[1.5s] rounded-xl  w-[500px] p-6 space-y-5`}>
+            <h2 className='text-xl font-bold'>Ads</h2>
+            <p className='text-sm text-[#787878] font-bold'>You have 456 contacts</p>
+            <div className="w-[438px] h-[236px] relative">
+                <img src={map} className='w-full h-full' alt="" />
+
+
+                <div className="group cursor-pointer w-4 h-4 absolute top-[90px] right-[162px]">
+                    <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
+                    <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
+                        <p className='text-xs font-bold'>Dubai</p>
+                        <div className="flex justify-between w-full text-[9px] font-semibold">
+                            <p>Total Ads</p>
+                            <p>{ads?.filter(e=>e.region === 'Dubai').length}</p>
+                        </div>
+                        <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
+                            <p>New</p>
+                            <p>{ads?.filter(e=>e.region === 'Dubai' && new Date(e.createdAt)>=getPreviousWeek()).length}</p>
+                        </div>
+                        <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
+                            <p>Inactive</p>
+                            <p>{ads?.filter(e=>e.region === 'Dubai' && e.visibility === false).length}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="group cursor-pointer w-4 h-4 absolute  top-[68px] left-[205px]">
+                    <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
+                    <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
+                        <p className='text-xs font-bold'>UK</p>
+                        <div className="flex justify-between w-full text-[9px] font-semibold">
+                            <p>Total Ads</p>
+                            <p>{ads?.filter(e=>e.region === 'UK').length}</p>
+                        </div>
+                        <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
+                            <p>New</p>
+                            <p>{ads?.filter(e=>e.region === 'UK' && new Date(e.createdAt)>=getPreviousWeek()).length}</p>
+                        </div>
+                        <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
+                            <p>Inactive</p>
+                            <p>{ads?.filter(e=>e.region === 'UK' && e.visibility === false).length}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="group cursor-pointer w-4 h-4 absolute bottom-[90px] right-[85px]">
+                    <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
+                    <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
+                        <p className='text-xs font-bold'>Thailand</p>
+                        <div className="flex justify-between w-full text-[9px] font-semibold">
+                            <p>Total Ads</p>
+                            <p>{ads?.filter(e=>e.region === 'Thailand').length}</p>
+                        </div>
+                        <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
+                            <p>New</p>
+                            <p>{ads?.filter(e=>e.region === 'Thailand' && new Date(e.createdAt)>=getPreviousWeek()).length}</p>
+                        </div>
+                        <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
+                            <p>Inactive</p>
+                            <p>{ads?.filter(e=>e.region === 'Thailand' && e.visibility === false).length}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    )
 }

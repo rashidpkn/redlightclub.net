@@ -44,7 +44,7 @@ function AdminDashboard() {
   const { menu } = useParams()
   
   return (
-    <div className='flex h-screen'>
+    <div className='flex min-h-screen h-full'>
       <Sidebar >
         <div className="space-y-5">
           <Menu Icon={ HomeIcon } title={'Home'} url='home' />
@@ -65,7 +65,7 @@ function AdminDashboard() {
         </div>
         
       </Sidebar>
-      <div className="h-screen w-[calc(100%-5rem)] lg:w-[calc(100%-18rem)]">
+      <div className="min-h-screen h-full w-[calc(100%-5rem)] lg:w-[calc(100%-18rem)]">
         <Navbar />
         <Main >
           
