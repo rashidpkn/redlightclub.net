@@ -8,6 +8,9 @@ module.exports = {
       fontFamily:{
         inter :['Inter'],
         times:['Times New Roman']
+      },
+      animation:{
+        'map-animation': 'map-animations 1000ms infinite ease'
       }
     },
   },

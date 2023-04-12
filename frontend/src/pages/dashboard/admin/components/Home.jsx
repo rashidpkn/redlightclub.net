@@ -57,11 +57,65 @@ function Home() {
                     <p className='text-sm text-[#787878] font-bold'>You have 456 contacts</p>
                     <div className="w-[438px] h-[236px] relative">
                         <img src={map} className='w-full h-full' alt="" />
-                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute top-[55px] left-[93px]"></div>
-                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute top-[10px] left-[110px]"></div>
-                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute top-[62px] left-[205px]"></div>
-                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute bottom-[40px] left-[215px]"></div>
-                        <div className="w-3 h-3 bg-[#6418C3] rounded-full absolute bottom-[83px] right-[96px]"></div>
+                        
+
+                        <div className="group cursor-pointer w-4 h-4 absolute top-[90px] right-[162px]">
+                            <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
+                            <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
+                                <p className='text-xs font-bold'>Dubai</p>
+                                <div className="flex justify-between w-full text-[9px] font-semibold">
+                                    <p>Total Ads</p>
+                                    <p>142</p>
+                                </div>
+                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
+                                    <p>New</p>
+                                    <p>12</p>
+                                </div>
+                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
+                                    <p>Inactive</p>
+                                    <p>120</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="group cursor-pointer w-4 h-4 absolute  top-[68px] left-[205px]">
+                            <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
+                            <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
+                                <p className='text-xs font-bold'>UK</p>
+                                <div className="flex justify-between w-full text-[9px] font-semibold">
+                                    <p>Total Ads</p>
+                                    <p>142</p>
+                                </div>
+                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
+                                    <p>New</p>
+                                    <p>12</p>
+                                </div>
+                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
+                                    <p>Inactive</p>
+                                    <p>120</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="group cursor-pointer w-4 h-4 absolute bottom-[90px] right-[85px]">
+                            <div className="group-hover:animate-map-animation  w-3 h-3 bg-[#6418C3] rounded-full"></div>
+                            <div className="absolute top-4 p-2 w-36  bg-white hidden group-hover:block z-40 rounded-xl border ">
+                                <p className='text-xs font-bold'>Thailand</p>
+                                <div className="flex justify-between w-full text-[9px] font-semibold">
+                                    <p>Total Ads</p>
+                                    <p>142</p>
+                                </div>
+                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#38E25D]">
+                                    <p>New</p>
+                                    <p>12</p>
+                                </div>
+                                <div className="flex justify-between w-full text-[9px] font-semibold text-[#D80027]">
+                                    <p>Inactive</p>
+                                    <p>120</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <BidRevenue />

@@ -2,17 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.menu-shadow{
+.menu-shadow {
     box-shadow: 0 4px 6px -1px var(--tw-shadow-color), 0px 2px 4px -5px var(--tw-shadow-color);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-@font-face{
-    font-family:times new roman;
-    font-style:normal;
-    font-weight:400;
-    src:local('Times New Roman'),url(https://fonts.cdnfonts.com/s/57197/times.woff) format('woff')
+@font-face {
+    font-family: times new roman;
+    font-style: normal;
+    font-weight: 400;
+    src: local('Times New Roman'), url(https://fonts.cdnfonts.com/s/57197/times.woff) format('woff')
 }
 
 
@@ -215,4 +215,20 @@ html {
 .MuiSlider-rail,
 .MuiSlider-thumb {
     color: #F13353;
+}
+
+@keyframes map-animations {
+    0% {
+        width: 12px;
+        height: 12px;
+    }
+
+    50% {
+        width: 16px;
+        height: 16px;
+    }
+    100% {
+        width: 12px;
+        height: 12px;
+    }
 }
