@@ -20,6 +20,7 @@ const initialState = {
     socialMedia: {
         video: '',
         website: '',
+        onlyFans:'',
         instagram: '',
         twitter: '',
         telegram: '',
