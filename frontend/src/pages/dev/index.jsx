@@ -56,10 +56,7 @@ function NewAds() {
 
                         <div className="w-full h-[10%] flex flex-col justify-between">
                             <div className="flex justify-between items-center px-5">
-                                <button className='font-bold' onClick={() => {pageNo !==1 ? setPageNo(pageNo-1):navigate('/dashboard')}}>
-                                    {pageNo !==1 ? 'Back' : 'Dashboard'}
-                                    
-                                    </button>
+                                <button className='font-bold' onClick={() => {pageNo !==1 ? setPageNo(pageNo-1):navigate('/dashboard')}}>Back</button>
                                 <button className={`${disable ? 'bg-[#6418C3]/50' :'bg-[#6418C3]'} px-4 py-2  rounded-lg text-white font-bold`} onClick={() => {
                                     if(!disable) {
                                         

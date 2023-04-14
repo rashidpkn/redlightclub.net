@@ -137,7 +137,9 @@ function Page1({ setDisable }) {
 
             <div className="space-y-2">
                 <p className='text-sm font-bold'>Bio*</p>
-                <textarea name="" id="" className='w-full h-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl p-5' onChange={e => { dispatch(setInto(e.target.value)) }} value={intro}></textarea>
+                <textarea
+                placeholder='I’m Stacy, born on 14 April 1998, brought up and raised in a well-to-do Christian family who is fair and tall.  I’ve completed my qualification at the Moscow state university, Russia in interior designing.  As I had a keen interest in the modelling career  I luckily had received opportunities to endorse various brands and have done various commercials ads as well where  I was one amongst to walk on the ramp for Louis Vuitton in 2018.'
+                 name="" id="" className='w-full h-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl p-5' onChange={e => { dispatch(setInto(e.target.value)) }} value={intro}></textarea>
             </div>
 
 
