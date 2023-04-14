@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { setAge, setEye, setHair, setNationality, setPrice } from "../../../redux/slice/filterSlice"
 import { setShowFilter } from "../../../redux/slice/utilSlice"
-import Nationality from "../../newAds/components/Nationality"
+
 
 const MainFilter = () => {
     const dispatch = useDispatch()
@@ -27,7 +27,7 @@ const MainFilter = () => {
                 <option value={5}>4000 - 5000</option>
             </select>
             <select onChange={e=>dispatch(setNationality(e.target.value))} className="bg-[#17191E] w-[155px] h-[27px] rounded-lg outline-none">
-                <Nationality color={'white'} />
+                
             </select>
             <select className="bg-[#17191E] w-[155px] h-[27px] rounded-lg outline-none">
                 <option value="">Select Language</option>

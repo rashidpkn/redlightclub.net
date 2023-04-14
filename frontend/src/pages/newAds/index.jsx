@@ -1,37 +1,86 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import lady from '../../asset/images/new-ads/lady.png'
+import Page1 from './components/Page1'
+import Page2 from './components/Page2'
+import Page3 from './components/Page3'
+import Page4 from './components/Page4'
+import Page5 from './components/Page5'
+import {useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import LeftSide from './components/LeftSide'
-import Q1 from './question/Q1'
-import Q2 from './question/Q2'
-import Q3 from './question/Q3'
-import Q4 from './question/Q4'
-import Q5 from './question/Q5'
-import Q6 from './question/Q6'
-import Q7 from './question/Q7'
-import RightSide from './components/RightSide'
-import Q8 from './question/Q8'
-import Q9 from './question/Q9'
-import Q10 from './question/Q10'
+import axios from 'axios'
+import BackendIP from '../../BackendIP'
+
 
 function NewAds() {
-    const { qno } = useSelector(state => state.util.newAds)
+    const [pageNo, setPageNo] = useState(1)
+    const [progress, setProgress] = useState(pageNo/5*100)
+    const [disable, setDisable] = useState(true)
+    const { ads, user } = useSelector(state => state)
+    const { username, email } = user
+    const {region} = useSelector(state=>state.util)
+    useEffect(() => {  
+        setProgress(pageNo/5*100)
+    }, [pageNo])
+    const navigate = useNavigate()
+
+    const PublishAds = ()=>{
+        axios.post(`${BackendIP}/ads/create`, { ads, username, email,region }).then(res => {
+            if (res.data.status) {
+                window.alert('Your ads will publish soon')
+                navigate('/dashboard')
+        
+            }
+        })
+    }
+
     return (
-        <div className='flex justify-center w-full h-screen'>
-            <LeftSide />
-            <RightSide >
-                {qno === 1 && <Q1 />}
-                {qno === 2 && <Q2 />}
-                {qno === 3 && <Q3 />}
-                {qno === 4 && <Q4 />}
-                {qno === 5 && <Q5 />}
-                {qno === 6 && <Q6 />}
-                {qno === 7 && <Q7 />}
-                {qno === 8 && <Q8 />}
-                {qno === 9 && <Q9 />}
-                {qno === 10 && <Q10 />}
-            </RightSide>
+        <div className='min-h-screen h-full'>
+            <div className="nav h-24 w-full px-20 flex gap-5 items-center shadow-xl">
+                <div className="h-9 w-9">
+                    <img src="/images/common/logo-rounded.png" className='h-full w-full' alt="" />
+                </div>
+                <p className='text-[#E11700] font-bold text-xl'>Red Light Club</p>
+            </div>
+
+            <div className="p-5 bg-[#F5F5F5] h-[calc(100%-7rem)]  mt-4 flex justify-center items-center">
+                <div className="w-full h-full bg-white rounded-xl flex">
+                    <img src={lady} className='h-[700px] w-[40%] hidden md:block ' alt="" />
+                    <div className="h-auto w-full md:w-[60%] flex flex-col justify-between gap-3 ">
+                        <div className="w-full h-[90%] p-5">
+                            {pageNo === 1 && <Page1 setDisable={setDisable} />}
+                            {pageNo === 2 && <Page2 setDisable={setDisable} />}
+                            {pageNo === 3 && <Page3 setDisable={setDisable} />}
+                            {pageNo === 4 && <Page4 setDisable={setDisable} />}
+                            {pageNo === 5 && <Page5 setDisable={setDisable} />}
+                        </div>
+
+                        <div className="w-full h-[10%] flex flex-col justify-between">
+                            <div className="flex justify-between items-center px-5">
+                                <button className='font-bold' onClick={() => {pageNo !==1 ? setPageNo(pageNo-1):navigate('/dashboard')}}>Back</button>
+                                <button className={`${disable ? 'bg-[#6418C3]/50' :'bg-[#6418C3]'} px-4 py-2  rounded-lg text-white font-bold`} onClick={() => {
+                                    if(!disable) {
+                                        
+                                        if(pageNo !==5){
+                                            setPageNo(pageNo+1)
+                                        }else PublishAds()
+                                        setDisable(true)
+                                    } 
+                                    }}>
+                                    {pageNo !==5 ? 'Next' : 'Publish'} 
+                                    </button>
+                            </div>
+                            <div className="w-full h-1">
+                                <div className={`h-full bg-[#6418c3] duration-500 rounded-full`} style={{width:`${progress}%`}}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     )
 }
 
 export default NewAds
+
+

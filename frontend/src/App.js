@@ -19,7 +19,7 @@ import Navbar from "./pages/shared/Navbar";
 import About from "./pages/static/about";
 import FAQ from "./pages/static/faq";
 import TermsAndConditions from "./pages/static/TermsAndConditions";
-import Dev from './pages/dev'
+
 
 
 import { setRegion } from "./redux/slice/utilSlice";
@@ -114,7 +114,7 @@ function App() {
             (token) ? <NewAds /> : <Navigate to={"/auth"} />
           } />
 
-        <Route path="/dev" element={<Dev />} />
+       
 
 
         <Route path="*" element={<NotFound />} />

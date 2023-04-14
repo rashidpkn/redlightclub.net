@@ -2,7 +2,7 @@ import { Close } from "@mui/icons-material"
 import { useDispatch, useSelector } from "react-redux"
 import { setAge, setEye, setHair, setHeight, setLocation, setNationality, setWeight } from "../../../redux/slice/filterSlice"
 import { setShowFilter } from "../../../redux/slice/utilSlice"
-import Nationality from "../../newAds/components/Nationality"
+// import Nationality from "../../newAds/components/Nationality"
 import { LocationSearchInput } from "./LocationSearchInput"
 
 export const  DesktopFilter = () => {
@@ -45,7 +45,7 @@ export const  DesktopFilter = () => {
           <div className="w-[232px] h-[86px] px-[15px]">
             <h1 className='text-lg text-white '>Nationality</h1>
             <select onChange={e=>{dispatch(setNationality(e.target.value))}} className='bg-white rounded w-full h-[34px] pl-3' type="text" name="" id="" placeholder='UAE' >
-              <Nationality />
+              
             </select>
           </div>
           <div className="w-[232px] h-[86px] px-[15px]">

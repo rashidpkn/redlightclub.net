@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import BackendIP from '../../BackendIP'
-import Nationality from '../newAds/components/Nationality'
+
 import { LocationSearchInput } from './components/LocationSearchInput'
 
 function DataImport() {
@@ -106,7 +106,7 @@ function DataImport() {
             <div className="flex flex-col gap-2 w-full md:w-96">
                 <label htmlFor="Nationality">Nationality</label>
                 <select value={ads.nationality} onChange={e=>setAds({...ads,nationality:e.target.value})} required className='border-b outline-none' type="text" >
-                    <Nationality/>
+                    
                     </select>
             </div>
 
