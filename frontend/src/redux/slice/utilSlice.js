@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    region:'',
+    region:'Dubai',
     newAds: {
         qno: 1,
         error:"",

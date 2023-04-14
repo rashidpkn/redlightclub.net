@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     adsTitle: "",
     phone: {
-        code: '+91',
+        code: '',
         number: ''
     },
     intro: '',
@@ -13,9 +13,9 @@ const initialState = {
     eye: '',
     hair: '',
     measurement: {
-        bust: 60,
-        waist: 60,
-        hip: 60
+        bust: '',
+        waist: '',
+        hip: ''
     },
     socialMedia: {
         video: '',
@@ -27,19 +27,19 @@ const initialState = {
         facebook: '',
         tiktok: ''
     },
-    height: 160,
-    weight: 55,
-    age: 22,
-    currencyType: 'AED',
+    height: '',
+    weight: '',
+    age: '',
+    currencyType: '',
     outCall: {
-        oneHourOut: 40,
-        twoHourOut: 80,
-        nightOut: 200
+        oneHourOut: '',
+        twoHourOut: '',
+        nightOut: ''
     },
     inCall: {
-        oneHourIn: 40,
-        twoHourIn: 80,
-        nightIn: 200
+        oneHourIn: '',
+        twoHourIn: '',
+        nightIn: ''
     },
     service: [],
     profilePhoto: '',

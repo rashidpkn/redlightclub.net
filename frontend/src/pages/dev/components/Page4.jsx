@@ -84,7 +84,7 @@ const Gallery = () => {
             <input {...getInputProps()} />
             <p className='text-sm font-bold'>Upload Photo</p>
         </div>
-        <div className="flex justify-center gap-5">
+        <div className="flex gap-5 flex-wrap">
             {preview.map(e=><img src={e} className='w-[100px] h-[124px] rounded-xl' alt="" />)}
         </div>
         </>

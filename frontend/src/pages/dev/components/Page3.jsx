@@ -21,8 +21,8 @@ function Page3({ setDisable }) {
 
             <div className="space-y-2">
                 <p className='text-sm font-bold'>Currency*</p>
-                <select type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setCurrencyType(e.target.value))} value={currencyType} >
-                    <option value="">Select your  currency</option>
+                <select type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setCurrencyType(e.target.value))} value ={currencyType} >
+                    <option value="" disabled defaultValue>Select your  currency</option>
                     <option value="AED">UAE Dirham (AED)</option>
                     <option value="USD"> United States Dollar (USD)</option>
                     <option value="BHD">Bahraini Dinar (BHD)</option>
@@ -79,6 +79,7 @@ const Buttons = ({ value }) => {
 
 
 const InCall = () => {
+    const { currencyType } = useSelector(state => state.ads)
     const dispatch = useDispatch()
     const { inCall } = useSelector(state => state.ads)
     const { oneHourIn, twoHourIn, nightIn } = inCall
@@ -89,17 +90,26 @@ const InCall = () => {
             <div className="space-y-4">
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'1 Hr'} readOnly />
-                    <input type="number" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={oneHourIn} onChange={e => dispatch(setInCall({ type: 'oneHourIn', value: Number(e.target.value) }))} />
+                    
+                    <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={oneHourIn} onChange={e => dispatch(setInCall({ type: 'oneHourIn', value: Number(e.target.value) }))} />
+                        <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
+                    </div>
 
                 </div>
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'3 Hr'} readOnly />
-                    <input type="number" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={twoHourIn} onChange={e => dispatch(setInCall({ type: 'twoHourIn', value: Number(e.target.value) }))} />
-
+                    <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={twoHourIn} onChange={e => dispatch(setInCall({ type: 'twoHourIn', value: Number(e.target.value) }))}  />
+                        <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
+                    </div>
                 </div>
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'Full Night'} readOnly />
-                    <input type="number" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={nightIn} onChange={e => dispatch(setInCall({ type: 'nightIn', value: Number(e.target.value) }))} />
+                    <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={nightIn} onChange={e => dispatch(setInCall({ type: 'nightIn', value: Number(e.target.value) }))} />
+                        <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
+                    </div>
 
                 </div>
             </div>
@@ -108,6 +118,7 @@ const InCall = () => {
 }
 
 const OutCall = () => {
+    const { currencyType } = useSelector(state => state.ads) 
     const dispatch = useDispatch()
     const { outCall } = useSelector(state => state.ads)
     const { oneHourOut, twoHourOut, nightOut } = outCall
@@ -117,17 +128,26 @@ const OutCall = () => {
             <div className="space-y-4">
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'1 Hr'} readOnly />
-                    <input type="number" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={oneHourOut} onChange={e => { dispatch(setOutCall({ type: 'oneHourOut', value: Number(e.target.value) })) }} />
+                    <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={oneHourOut} onChange={e => { dispatch(setOutCall({ type: 'oneHourOut', value: Number(e.target.value) })) }} />
+                        <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
+                    </div>
 
                 </div>
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'3 Hr'} readOnly />
-                    <input type="number" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={twoHourOut} onChange={e => { dispatch(setOutCall({ type: 'twoHourOut', value: Number(e.target.value) })) }} />
+                    <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={twoHourOut} onChange={e => { dispatch(setOutCall({ type: 'twoHourOut', value: Number(e.target.value) })) }} />
+                        <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
+                    </div>
 
                 </div>
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'Full Night'} readOnly />
-                    <input type="number" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={nightOut} onChange={e => { dispatch(setOutCall({ type: 'nightOut', value: Number(e.target.value) })) }} />
+                    <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center'  value={nightOut} onChange={e => { dispatch(setOutCall({ type: 'nightOut', value: Number(e.target.value) })) }}/>
+                        <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
+                    </div>
 
                 </div>
             </div>
