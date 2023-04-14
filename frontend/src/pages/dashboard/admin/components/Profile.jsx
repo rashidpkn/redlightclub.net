@@ -187,7 +187,7 @@ const Menu = ({data,setAds,fetchData,locations,setLocation}) => {
                 }}>Search</button>
 
 
-                <Link to={'/new-ads'}>
+                <Link to={'/dev'}>
                     <button className='hover:shadow-2xl duration-500 w-36 h-14 rounded-xl text-white bg-[#34C38F] text-sm font-bold'>Add Profile</button>
                 </Link>
             </div>
