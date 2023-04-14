@@ -5,22 +5,33 @@ import Graph from '../../components/Graph'
 import { TopBidLocation } from './Home'
 
 import totalVisit from '../../../../asset/icons/dashboard/site analytics/totalVisit.png'
-import users from '../../../../asset/icons/dashboard/site analytics/users.png'
 import customers from '../../../../asset/icons/dashboard/site analytics/customers.png'
-import contactView from '../../../../asset/icons/dashboard/site analytics/contactView.png'
+
 
 function SiteAnalytics() {
     const [date, setDate] = useState([])
     const [view, setView] = useState([])
+    const [totalViewers, setTotalViewers] = useState(0)
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        axios.get(`${BackendIP}/user`).then(res=>{
+            setUsers(res.data)
+        })
+    
+    }, [])
+    
     useEffect(() => {
         axios.get(`${BackendIP}/analytics`).then(res => {
             let date = []
             let view = []
+            let viewers = 0
             //eslint-disable-next-line
             res.data.map(e => {
                 date.push(e.date)
                 view.push(e.view)   
+                viewers = viewers+e.view
             })
+            setTotalViewers(viewers)
             setDate(date)
             setView(view)
         })
@@ -54,7 +65,7 @@ function SiteAnalytics() {
                         <div className="h-7 w-7 bg-[#0062F4] rounded-lg flex justify-center items-center">
                             <img src={totalVisit} alt="" />
                         </div>
-                        <p className='text-xl font-bold'>39008</p>
+                        <p className='text-xl font-bold'>{totalViewers}</p>
                     </div>
                     <p className='text-[10px]'>Lorem ipsum dolor sit amet, </p>
                 </div>
@@ -65,7 +76,7 @@ function SiteAnalytics() {
                         <div className="h-7 w-7 bg-[#6418C3] rounded-lg flex justify-center items-center">
                             <img src={users} alt="" />
                         </div>
-                        <p className='text-xl font-bold'>450</p>
+                        <p className='text-xl font-bold'>{users.length}</p>
                     </div>
                     <p className='text-[10px]'>Lorem ipsum dolor sit amet, </p>
                 </div>
@@ -76,21 +87,12 @@ function SiteAnalytics() {
                         <div className="h-7 w-7 bg-[#34C38F] rounded-lg flex justify-center items-center">
                             <img src={customers} alt="" />
                         </div>
-                        <p className='text-xl font-bold'>450</p>
+                        <p className='text-xl font-bold'>{users.filter(e=>e.role==='user').length}</p>
                     </div>
                     <p className='text-[10px]'>Lorem ipsum dolor sit amet, </p>
                 </div>
 
-                <div className="w-64 h-[150px] bg-white rounded-md p-5 flex flex-col justify-between">
-                    <p className='text-xl font-bold'>Contact Views</p>
-                    <div className="flex gap-3 items-center">
-                        <div className="h-7 w-7 bg-[#5ECFFF] rounded-lg flex justify-center items-center">
-                            <img src={contactView} alt="" />
-                        </div>
-                        <p className='text-xl font-bold'>450</p>
-                    </div>
-                    <p className='text-[10px]'>Lorem ipsum dolor sit amet, </p>
-                </div>
+                
 
             </div>
             <TopBidLocation />

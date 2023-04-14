@@ -7,33 +7,33 @@ import BackendIP from '../../../../BackendIP'
 
 
 function Verification() {
-    const fetchdata = () =>{
-        axios.get(`${BackendIP}/verify`).then(res=>{
+    const fetchdata = () => {
+        axios.get(`${BackendIP}/verify`).then(res => {
             setVerifyAds(res.data)
         })
     }
 
     useEffect(() => {
-    fetchdata()
+        fetchdata()
     }, [])
-    
+
     const [verifyAds, setVerifyAds] = useState([])
     return (
         <div className='h-full w-full space-y-5'>
             <h1 className='text-2xl font-bold'>Verification</h1>
-            <table className='w-full'>
-                <thead className='w-full'>
-                    <tr className='border w-full'>
-                        <th className='w-[10%] border'>SL NO</th>
-                        <th className='w-[20%] border'>Ads Title</th>
-                        <th className='w-[20%] border'>Verifcation Image</th>
-                        <th className='w-[20%] border'>Verify</th>
-                        <th className='w-[15%] border'>Unverify</th>
+            <table className='bg-white rounded-md w-full '>
+                <thead className='w-full font-bold text-sm'>
+                    <tr className='w-full h-16 border-b'>
+                        <th className='w-[5%] h-full text-start'></th>
+                        <th className='w-[20%] h-full text-start'>Profile</th>
+                        <th className='w-[20%] h-full text-start'>Date</th>
+                        <th className='w-[20%] h-full text-start'>Status</th>
+                        <th className='w-[35%] h-full text-start'>Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='w-full'>
                     {
-                        verifyAds.map(e=>{ return(<TableBody{...e} fetchdata={fetchdata} />) })
+                        verifyAds.map(e => { return (<TableBody{...e} fetchdata={fetchdata} />) })
                     }
                 </tbody>
             </table>
@@ -44,22 +44,40 @@ function Verification() {
 export default Verification
 
 
-const TableBody = ({id,adsTitle,verificationImage,fetchdata}) => {
+const TableBody = ({ id, adsTitle, verificationImage, fetchdata, updatedAt, verificationRequest }) => {
     const [viewImage, setviewImage] = useState(false)
     return (
         <>
-            <tr className='hover:bg-gray-300 text-center border'>
-                <td className='border py-5'>{id}</td>
-                <td className='border py-5'>{adsTitle}</td>
-                <td className='border py-5'> <button className='border bg-red-500 px-3 py-2 rounded-lg text-white' onClick={() => { setviewImage(true) }}>View Image</button></td>
-                <td className='border py-5'> <button className='border bg-red-500 px-3 py-2 rounded-lg text-white' onClick={()=>{axios.post(`${BackendIP}/verify/verify`,{id}).then(res=>{
-                    window.alert('verified')
-                    fetchdata()
-                })}}>Verify</button></td>
-                <td className='border py-5'> <button className='border bg-red-500 px-3 py-2 rounded-lg text-white' onClick={()=>{axios.post(`${BackendIP}/verify/unverify`,{id}).then(res=>{
-                    window.alert('unverified')
-                    fetchdata()
-                })}}>Unverify</button></td>
+            <tr className='w-full h-16 border-b hover:shadow-lg'>
+                <td className='w-[5%] h-full text-center'>
+                    <input type="checkbox" name="" id="" />
+                </td>
+                <td className='w-[20%] h-full'>{adsTitle}</td>
+                <td className='w-[20%] h-full'>{updatedAt}</td>
+                <td className='w-[20%] h-full'>{verificationRequest ? 'Pending' : 'Done'}</td>
+                <td className='w-[35%] h-full'>
+                    <div className="flex justify-center items-center gap-3">
+
+                        <button className='border bg-[#0062F4] px-3 py-2 rounded-lg text-white' onClick={() => { setviewImage(true) }}>View Details</button>
+
+
+
+                        <button className='border bg-[#D80027] px-3 py-2 rounded-lg text-white' onClick={() => {
+                            axios.post(`${BackendIP}/verify/unverify`, { id }).then(res => {
+                                window.alert('unverified')
+                                fetchdata()
+                            })
+                        }}>Reject</button>
+
+                        <button className='border bg-[#34C38f] px-3 py-2 rounded-lg text-white' onClick={() => {
+                            axios.post(`${BackendIP}/verify/verify`, { id }).then(res => {
+                                window.alert('verified')
+                                fetchdata()
+                            })
+                        }}>Mark Verfied</button>
+
+                    </div>
+                </td>
 
             </tr>
             {
@@ -71,7 +89,7 @@ const TableBody = ({id,adsTitle,verificationImage,fetchdata}) => {
                             <div className="" onClick={() => { setviewImage(false) }}><Close /></div>
                         </div>
                         <div className="h-[calc(100%-6rem)] w-full">
-                                <img src={`${BackendIP}${verificationImage}`} alt="verificationImage" />
+                            <img src={`${BackendIP}${verificationImage}`} alt="verificationImage" />
                         </div>
                     </div>
                 </div>

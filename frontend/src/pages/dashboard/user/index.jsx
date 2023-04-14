@@ -44,6 +44,7 @@ import ReportIssues from './components/ReportIssues'
 import PaymentsHistory from './components/PaymentsHistory'
 import Profiles from './components/Profiles'
 import ViewAds from './components/ViewAds'
+import SexToys from './components/SexToys'
 
 // import DueAlert from './components/DueAlert'
 
@@ -88,6 +89,7 @@ function UserDashboard() {
             {menu === 'support' && <Support/>}
             {menu === 'reported-issues' && <ReportIssues/>}
             {menu === 'payment-history' && <PaymentsHistory/>}
+            {menu === 'sex-toys' && <SexToys/>}
 
 
 
@@ -97,7 +99,7 @@ function UserDashboard() {
             {menu === 'comments' && <Comments />}
             {menu === 'settings' && <SettingsMenu />}
             {menu === 'blacklisted' && <Blacklisted />}
-            {menu === 'edit' && <EditAds />}
+            {menu === 'edit-ads' && <EditAds />}
             {menu === 'verify' && <VerifyAds />}
 
           </Main>

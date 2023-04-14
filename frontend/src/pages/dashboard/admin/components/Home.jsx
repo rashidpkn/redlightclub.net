@@ -5,8 +5,8 @@ import userIcon from '../../../../asset/icons/dashboard/home/user.png'
 import verifiedIcon from '../../../../asset/icons/dashboard/home/verified.png'
 import adsRedIcon from '../../../../asset/icons/dashboard/home/ads-red.png'
 import adsGreenIcon from '../../../../asset/icons/dashboard/home/ads-green.png'
-import upArrowIcon from '../../../../asset/icons/dashboard/home/upArrow.svg'
-import upGraphIcon from '../../../../asset/icons/dashboard/home/upGraph.svg'
+// import upArrowIcon from '../../../../asset/icons/dashboard/home/upArrow.svg'
+// import upGraphIcon from '../../../../asset/icons/dashboard/home/upGraph.svg'
 
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -65,6 +65,12 @@ export default Home
 
 
 const Table = () => {
+    const [ads, setAds] = useState([])
+    useEffect(() => {
+        axios.get(`${BackendIP}/ads/get-all-ads`).then(res=>{
+            setAds(res.data)
+        })
+    }, [])
     return (
         <div className="bg-white rounded-md w-full p-5 space-y-5">
             <p className='text-lg fotn-bold'>Overview</p>
@@ -81,22 +87,28 @@ const Table = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <TableRow location={'Dubai'} totalAds={320} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
-                    <TableRow location={'Dubai'} totalAds={320} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
-                    <TableRow location={'Dubai'} totalAds={320} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                    <TableRow ads={ads} location={'Dubai'} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                    <TableRow ads={ads} location={'UK'} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                    <TableRow ads={ads} location={'Thailand'} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
                 </tbody>
             </table>
         </div>
     )
 }
 
-const TableRow = ({location,totalAds,newAds,TotalContribution,totalRevenue,BidRevenue}) => {
+const TableRow = ({location,ads,totalAds,newAds,TotalContribution,totalRevenue,BidRevenue}) => {
+    function getPreviousWeek(date = new Date()) {
+        const previous = new Date(date.getTime());
+        previous.setDate(date.getDate() - 7);
+      
+        return previous;
+      }
     return (
         <tr className='w-full h-16 border-b hover:shadow-lg'>
             <td className='h-full w-[5%]   text-sm          '></td>
             <td className='h-full w-[15%]  text-sm font-bold'>{location}</td>
-            <td className='h-full w-[15%]  text-sm          '>{totalAds}</td>
-            <td className='h-full w-[15%]  text-sm          '>{newAds}</td>
+            <td className='h-full w-[15%]  text-sm          '>{ads?.filter(e=>e.region === location).length}</td>
+            <td className='h-full w-[15%]  text-sm          '>{ads?.filter(e=>e.region === location && new Date(e.createdAt)>=getPreviousWeek()).length}</td>
             <td className='h-full w-[15%]  text-sm          '>{TotalContribution}%</td>
             <td className='h-full w-[20%]  text-sm font-bold'>${totalRevenue}</td>
             <td className='h-full w-[15%]  text-sm          '>${BidRevenue}</td>
@@ -204,6 +216,13 @@ const BidRevenue = () => {
 
 export const TopBidLocation = () => {
     const { isDarkMode } = useSelector(state => state.util)
+    const [ads, setAds] = useState([])
+    useEffect(() => {
+        axios.get(`${BackendIP}/ads/get-all-ads`).then(res=>{
+            setAds(res.data)
+        })
+    }, [])
+
     useEffect(() => {
         new RadialProgressChart('.main', {
             diameter: 130,
@@ -235,23 +254,23 @@ export const TopBidLocation = () => {
                 <div className="w-full flex justify-between">
                     <div className="flex gap-2 items-center cursor-pointer">
                         <div className="h-2 w-2 bg-[#5ECFFF] rounded-full" />
-                        <p className='text-sm'>UAE</p>
+                        <p className='text-sm'>Dubai</p>
                     </div>
-                    <p className='font-bold text-lg'>45125</p>
+                    <p className='font-bold text-lg'>{ads?.filter(e=>e.region === 'Dubai').length}</p>
                 </div>
                 <div className="w-full flex justify-between">
                     <div className="flex gap-2 items-center cursor-pointer">
                         <div className="h-2 w-2 bg-[#E328AF] rounded-full" />
-                        <p className='text-sm'>INDIA</p>
+                        <p className='text-sm'>UK</p>
                     </div>
-                    <p className='font-bold text-lg'>245</p>
+                    <p className='font-bold text-lg'>{ads?.filter(e=>e.region === 'UK').length}</p>
                 </div>
                 <div className="w-full flex justify-between">
                     <div className="flex gap-2 items-center cursor-pointer">
                         <div className="h-2 w-2 bg-[#6418C3] rounded-full" />
-                        <p className='text-sm'>UK</p>
+                        <p className='text-sm'>Thailand</p>
                     </div>
-                    <p className='font-bold text-lg'>675</p>
+                    <p className='font-bold text-lg'>{ads?.filter(e=>e.region === 'Thailand').length}</p>
                 </div>
             </div>
         </div>

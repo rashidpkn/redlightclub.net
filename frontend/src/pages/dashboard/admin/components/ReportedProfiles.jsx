@@ -136,7 +136,7 @@ const Menu = ({data, setReportedProfiles,fetchData}) => {
     return (
         <div className="flex justify-between items-center flex-wrap gap-3">
             <div className="">
-                <h2 className='font-bold text-2xl'>Reported Profiles</h2>
+                <h2 className='font-bold text-2xl'>Reported Issues</h2>
                 <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
             </div>
             <div className="flex gap-3 flex-wrap justify-center">

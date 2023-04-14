@@ -16,6 +16,17 @@ import { setId } from '../../../../redux/slice/utilSlice'
 import { useNavigate } from 'react-router-dom'
 
 function ViewAds() {
+    
+    // const {username} = useSelector(state=>state.user)
+    // const [ids, setIds] = useState([])
+    // useEffect(() => {
+    //   axios.get(`${BackendIP}/ads/get-user-ads`,{params:{username}}).then(res=>{
+    //     let ids = []
+    //     res.data?.map(e=>ids.push(e.id))
+    //     setIds(ids)
+    //   })
+    // }, [])
+    
     const dispatch = useDispatch()
     const { id } = useSelector(state => state.util.dashboard)
     const [ads, setAds] = useState({})
@@ -61,17 +72,17 @@ function ViewAds() {
     return (
         <div className='space-y-5'>
 
-            <div className="flex justify-between items-center">
+            {/* <div className="flex justify-between items-center">
                 <button className='w-40 h-10 rounded-xl bg-[#6418C3] text-white font-bold text-sm hover:shadow-xl' onClick={() => { previousAds() }}>Previous Profile</button>
                 <button className='w-40 h-10 rounded-xl bg-[#6418C3] text-white font-bold text-sm hover:shadow-xl' onClick={() => { dispatch(setId(id + 1)) }}>Next Profile</button>
-            </div>
+            </div> */}
 
             <div className="flex gap-5 flex-wrap">
 
                 <div className="w-[830px]  bg-white rounded-2xl p-5 pb-10 space-y-5">
                     <div className=" justify-between flex-wrap-reverse">
 
-                        <Buttons id={id} fetchData={fetchData} />
+                        <Buttons id={id} fetchData={fetchData}  />
 
                         <Profile ads={ads} />
 

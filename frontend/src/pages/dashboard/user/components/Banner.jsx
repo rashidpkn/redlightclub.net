@@ -71,7 +71,11 @@ const TableRow = ({ url, status, credit }) => {
             </td>
             <td className='h-full w-[20%] font-bold text-xs'>June 1,2020, 08:22 AM</td>
             <td className='h-full w-[20%] font-bold text-xs'>{url}</td>
-            <td className='h-full w-[15%] font-bold text-xs'>{status?'Done':'Pending'}</td>
+            {status ?
+            credit ?<td className='h-full w-[15%] font-bold text-xs text-[#34C38F]'>Approve</td> : <td className='h-full w-[15%] font-bold text-xs text-[#CE0000]'>Rejected</td>
+                
+                :<td className='h-full w-[15%] font-bold text-xs text-[#F4B000]'>Pending</td>
+            }
             <td className='h-full w-[15%] font-bold text-xs'>{credit}</td>
             <td className='h-full w-[10%] font-bold text-xs'>
                 <a href={url} target="_blank" rel="noopener noreferrer">

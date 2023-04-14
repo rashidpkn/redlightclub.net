@@ -1,8 +1,11 @@
 {
   "files": {
-    "main.css": "/static/css/main.dadeabe5.css",
-    "main.js": "/static/js/main.0c513c55.js",
+    "main.css": "/static/css/main.afb90bd8.css",
+    "main.js": "/static/js/main.66c019d4.js",
     "static/media/lady.png": "/static/media/lady.53ac6f75387354f8bc01.png",
+    "static/media/sextoy1.png": "/static/media/sextoy1.fe393ceddae2e0d6dd9a.png",
+    "static/media/sextoy3.png": "/static/media/sextoy3.ef35b863dd56df461886.png",
+    "static/media/sextoy2.png": "/static/media/sextoy2.3ccc5d17d7955e92e8d4.png",
     "static/media/map.png": "/static/media/map.fe4a651ad1ac5cdfd357.png",
     "static/media/onlyfans.gif": "/static/media/onlyfans.106be888e5d963c8d7c8.gif",
     "static/media/card.png": "/static/media/card.698bd77a0d6a8bf04a66.png",
@@ -12,22 +15,20 @@
     "static/media/ads-delete.svg": "/static/media/ads-delete.b9b9b5344092e85640bfa5acb09120b2.svg",
     "static/media/ads-view.svg": "/static/media/ads-view.b54f66e39ae55b435c84d8b77d80e20b.svg",
     "static/media/lens.svg": "/static/media/lens.a5974a167ab00acd3b71725487a32cf4.svg",
-    "static/media/upArrow.svg": "/static/media/upArrow.b0156f9a700df077af8e012f7ac160b4.svg",
     "static/media/whatsapp.svg": "/static/media/whatsapp.494e86d9389e0cca0067a0c1da8f8534.svg",
     "static/media/negative.svg": "/static/media/negative.bd6d33d6c9ea9481fb01075233ecdbcc.svg",
     "static/media/telegram.svg": "/static/media/telegram.b1de1e4022e56e79c10f5c3d5f9cad90.svg",
     "static/media/positive.svg": "/static/media/positive.29c661c26fd0b91970be29ee84f39091.svg",
-    "static/media/upGraph.svg": "/static/media/upGraph.260d20f528d31fd2acbbe2ee0d406313.svg",
     "static/media/diamond.svg": "/static/media/diamond.ea212bf3968b70118f2693e046dd2bc0.svg",
     "static/media/call.svg": "/static/media/call.51a9b03f494607e4a79798831252604b.svg",
     "static/media/notification.svg": "/static/media/notification.c37e4d3d60f3b7ba38836dede9f7e330.svg",
     "index.html": "/index.html",
     "static/media/email.svg": "/static/media/email.4efe0c7e8dea67a7c2ba4a986ca76d75.svg",
-    "main.dadeabe5.css.map": "/static/css/main.dadeabe5.css.map",
-    "main.0c513c55.js.map": "/static/js/main.0c513c55.js.map"
+    "main.afb90bd8.css.map": "/static/css/main.afb90bd8.css.map",
+    "main.66c019d4.js.map": "/static/js/main.66c019d4.js.map"
   },
   "entrypoints": [
-    "static/css/main.dadeabe5.css",
-    "static/js/main.0c513c55.js"
+    "static/css/main.afb90bd8.css",
+    "static/js/main.66c019d4.js"
   ]
 }
