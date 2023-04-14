@@ -42,6 +42,8 @@ import Banner from './components/Banner'
 import Support from './components/Support'
 import ReportIssues from './components/ReportIssues'
 import PaymentsHistory from './components/PaymentsHistory'
+import Profiles from './components/Profiles'
+import ViewAds from './components/ViewAds'
 
 // import DueAlert from './components/DueAlert'
 
@@ -77,6 +79,9 @@ function UserDashboard() {
           <Navbar />
           <Main >
             {(menu === undefined || menu === 'home') && <HomeMenu />}
+            {menu === 'Profiles' && <Profiles/>}
+            {menu === 'view' && <ViewAds/>}
+            
             {menu === 'auction-progress' && <AuctionProgress/>}
             {menu === 'live-cam'  && <LiveCam/>}
             {menu === 'banner' && <Banner/>}

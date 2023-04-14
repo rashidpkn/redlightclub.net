@@ -73,11 +73,12 @@ const adsSlice = createSlice({
 
         setOutCall(state, { payload }) { state.outCall[payload.type] = payload.value },
         setInCall(state, { payload }) { state.inCall[payload.type] = payload.value },
-        addService(state, { payload }) { state.service.push({ name: payload, charge: 0 }) },
+        addService(state, { payload }) { state.service.push({ name: payload, charge: '' }) },
         removeService(state, { payload }) { state.service = state.service.filter(e => e.name !== payload) },
 
         setServiceCharge(state, { payload }) {
             const { name, charge } = payload
+            console.log(name,charge)
             const index = state.service.findIndex(e => e.name === name)
             state.service[index].charge = charge
         },
