@@ -61,25 +61,25 @@ function Page1({ setDisable }) {
             <div className="flex gap-5 flex-wrap">
                 <div className="space-y-2">
                     <p className='text-sm font-bold'>Age*</p>
-                    <select type="text" className='w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl' onChange={e => dispatch(setAge(Number(e.target.value)))} value={age} >
+                    <select type="text" className={`w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${age==='' && 'text-[#A5A5A5]'}`} onChange={e => dispatch(setAge(Number(e.target.value)))} value={age} >
                     <option value="" disabled defaultValue>eg: 22</option>
-                        {[...Array(23)].map((e, i) => <option key={i} value={i + 18}>{i + 18}</option>)}
+                        {[...Array(23)].map((e, i) => <option className='text-black' key={i} value={i + 18}>{i + 18}</option>)}
                     </select>
                 </div>
 
                 <div className="space-y-2">
                     <p className='text-sm font-bold'>Height(cm)*</p>
-                    <select type="text" className='w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl' value={height} onChange={e => dispatch(setHeight(Number(e.target.value)))} >
+                    <select type="text" className={`w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${height==='' && 'text-[#A5A5A5]'}`} value={height} onChange={e => dispatch(setHeight(Number(e.target.value)))} >
                     <option value="" disabled defaultValue>eg: 160</option>
-                        {[...Array(101)].map((e, i) => <option key={i} value={i + 100}>{i + 100}</option>)}
+                        {[...Array(101)].map((e, i) => <option className='text-black' key={i} value={i + 100}>{i + 100}</option>)}
                     </select>
                 </div>
 
                 <div className="space-y-2">
                     <p className='text-sm font-bold'>Weight(kg)*</p>
-                    <select type="text" className='w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl' value={weight} onChange={e => dispatch(setWeight(Number(e.target.value)))}>
+                    <select type="text" className={`w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${weight==='' && 'text-[#A5A5A5]'}`} value={weight} onChange={e => dispatch(setWeight(Number(e.target.value)))}>
                     <option value="" disabled defaultValue>eg: 50</option>
-                        {[...Array(41)].map((e, i) => <option key={i} value={i + 40}>{i + 40}</option>)}
+                        {[...Array(41)].map((e, i) => <option className='text-black' key={i} value={i + 40}>{i + 40}</option>)}
                     </select>
                 </div>
 
@@ -117,19 +117,19 @@ function Page1({ setDisable }) {
                 <p className='text-sm font-bold'>Measurments*</p>
                 <div className="flex gap-5">
 
-                    <select type="text" className='w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl' onChange={e => dispatch(setMesurement({ type: 'bust', value: e.target.value }))} value={measurement.bust} >
+                    <select type="text" className={`w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${measurement.bust==='' && 'text-[#A5A5A5]'}`} onChange={e => dispatch(setMesurement({ type: 'bust', value: e.target.value }))} value={measurement.bust} >
                     <option value="" disabled defaultValue>eg: 60</option>
-                        {[...Array(41)].map((e, i) => <option key={i} value={i + 60}>{i + 60}</option>)}
+                        {[...Array(41)].map((e, i) => <option className='text-black' key={i} value={i + 60}>{i + 60}</option>)}
                     </select>
 
-                    <select type="text" className='w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl' onChange={e => dispatch(setMesurement({ type: 'waist', value: e.target.value }))} value={measurement.waist} >
+                    <select type="text" className={`w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${measurement.waist==='' && 'text-[#A5A5A5]'}`} onChange={e => dispatch(setMesurement({ type: 'waist', value: e.target.value }))} value={measurement.waist} >
                     <option value="" disabled defaultValue>eg: 60</option>
-                        {[...Array(41)].map((e, i) => <option key={i} value={i + 60}>{i + 60}</option>)}
+                        {[...Array(41)].map((e, i) => <option className='text-black' key={i} value={i + 60}>{i + 60}</option>)}
                     </select>
 
-                    <select type="text" className='w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl' onChange={e => dispatch(setMesurement({ type: 'hip', value: e.target.value }))} value={measurement.hip} >
+                    <select type="text" className={`w-16 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${measurement.hip==='' && 'text-[#A5A5A5]'}`} onChange={e => dispatch(setMesurement({ type: 'hip', value: e.target.value }))} value={measurement.hip} >
                     <option value="" disabled defaultValue>eg: 60</option>
-                        {[...Array(41)].map((e, i) => <option key={i} value={i + 60}>{i + 60}</option>)}
+                        {[...Array(41)].map((e, i) => <option className='text-black' key={i} value={i + 60}>{i + 60}</option>)}
                     </select>
 
                 </div>

@@ -8,7 +8,13 @@ export class NotificationController {
 
   @Get('admin')
   async getAdminNotification(){
-    return await Notification.findAll({where:{role:'admin'}})
+    return await Notification.findAll({
+      where:{role:'admin'},
+      order:[
+        ['id','ASC']
+      ]
+      
+    })
   }
 
   @Post('delete')

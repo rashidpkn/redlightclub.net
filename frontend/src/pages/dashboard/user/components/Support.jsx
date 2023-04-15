@@ -34,7 +34,7 @@ function Support() {
                 </div>
                 <div className="flex justify-center items-center gap-5">
                     <input className='h-12 w-52 rounded-xl pl-3' type="text" placeholder='Enter Ticket Number' />
-                    <button className='h-12 w-44 rounded-xl bg-[#34C38f] text-white' onClick={setNewTicket}>Create New Ticket</button>
+                    <button className='h-12 w-44 rounded-xl bg-[#34C38f] text-white hover:shadow-xl' onClick={setNewTicket}>Create New Ticket</button>
                 </div>
             </div>
             <table className='bg-white rounded-md w-full '>
@@ -114,7 +114,7 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
                         </select>
                 </div>
                 <div className="w-full">
-                    <p className='text-[#C7C7C7] font-bold text-sm'>Subject</p>
+                    <p className='text-[#C7C7C7] font-bold text-sm hover:shadow-xl'>Subject</p>
                     <input type="text" className='w-full h-12 bg-[#F5f5f5] rounded-md pl-3 ' value={ticket.subject}  onChange={e=>setTicket({...ticket,subject:e.target.value})}/>
                 </div>
 
@@ -184,7 +184,7 @@ const TableRow = ({ id, subject, type, status, }) => {
             <td className='h-full w-[15%] font-bold text-xs'>{type}</td>
             <td className='h-full w-[15%] font-bold text-xs'>{status?'Resolve':'Open'}</td>
             <td className='h-full w-[10%] font-bold text-xs'>
-                <button className='bg-[#0062F4] text-white px-2 py-3 rounded-lg'>View Details</button>
+                <button className='bg-[#0062F4] text-white px-2 py-3 rounded-lg hover:shadow-xl'>View Details</button>
             </td>
         </tr>
     )

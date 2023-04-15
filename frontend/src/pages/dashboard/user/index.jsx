@@ -90,7 +90,7 @@ function UserDashboard() {
             {menu === 'reported-issues' && <ReportIssues/>}
             {menu === 'payment-history' && <PaymentsHistory/>}
             {menu === 'sex-toys' && <SexToys/>}
-
+            {menu === 'ads-analytics' && <Analatics />}
 
 
             {menu === 'my-adverts' && <Manage />}

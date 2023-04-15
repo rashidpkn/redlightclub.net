@@ -15,7 +15,12 @@ function AuctionProgress() {
         setBidPosition(data)
     }
     useEffect(() => {
-        fetchData()
+        const fetchBid = setInterval(() => {
+            fetchData()    
+        }, 3000);
+
+        return () => clearInterval(fetchBid)
+        
     }, [])
     return (
         <div className=' space-y-5'>
@@ -51,7 +56,7 @@ const Card = ({ tier, largestBidAmount, position, status, bid ,e ,fetchData}) =>
     const [amount, setAmount] = useState(largestBidAmount + 10)
     return (
         <>
-            <div className="w-[170px] h-56 bg-white rounded-lg flex flex-col justify-center items-center gap-3">
+            <div className="w-[170px] h-56 bg-white rounded-lg flex flex-col justify-center items-center gap-3 hover:shadow-xl">
 
 
                 {

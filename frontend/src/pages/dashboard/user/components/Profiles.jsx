@@ -23,9 +23,9 @@ function Profiles() {
         <div className="flex justify-between items-center">
             <p className='text-2xl font-bold'>Profile</p>
             <div className="flex gap-5 text-white text-sm font-bold">
-                <button className='px-4 py-3 rounded-xl bg-[#6418C3]'>Setup Ads</button>
+                <button className='px-4 py-3 rounded-xl bg-[#6418C3] hover:shadow-xl'>Setup Ads</button>
                 <Link to={'/new-ads'}>
-                    <button className='px-4 py-3 rounded-xl bg-[#34C38F]'><Add/> Add New Profile</button>
+                    <button className='px-4 py-3 rounded-xl bg-[#34C38F] hover:shadow-xl'><Add/> Add New Profile</button>
                 </Link> 
             </div>
         </div>
@@ -43,7 +43,7 @@ const Card = ({adsTitle,profilePhoto,id})=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     return(
-        <div className="w-[170px]  rounded-xl p-2 bg-white flex flex-col items-center gap-1">
+        <div className="w-[170px]  rounded-xl p-2 bg-white flex flex-col items-center gap-1 hover:shadow-xl">
             <div className="h-[145px] w-full rounded-md bg-[#F6EEFF]">
                 <img src={profilePhoto} className='w-full h-full object-cover object-top rounded-md' alt="" />
             </div>

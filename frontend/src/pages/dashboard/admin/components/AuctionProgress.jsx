@@ -36,13 +36,21 @@ ChartJS.register(
 function AuctionProgress() {
     const [bid, setBid] = useState([])
     const fetchData = () => {
+
+        
+
         axios.get(`${BackendIP}/bid`).then(res => {
             setBid(res.data)
         })
     }
 
     useEffect(() => {
-        fetchData()
+        const fetchBid = setInterval(() => {
+            fetchData()    
+        }, 2000);
+
+        return () => clearInterval(fetchBid)
+        
     }, [])
 
 

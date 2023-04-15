@@ -16,6 +16,8 @@
 }
 
 
+
+
 html::-webkit-scrollbar {
     display: none;
 }
@@ -232,3 +234,21 @@ html {
         height: 12px;
     }
 }
+
+
+.rotate-card{
+    animation:  2s rotate-y ;
+  }
+  
+  @keyframes rotate-y {
+    0% {
+      transform: rotatey(0deg);
+    }
+    50% {
+      transform: rotatey(180deg);
+    }
+  
+    100% {
+      transform: rotatey(0deg);
+    }
+  }

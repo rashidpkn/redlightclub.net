@@ -62,10 +62,17 @@ export default HomeMenu
 
 const Card = ({credit,username}) => {
     // const { username } = useSelector(state => state.user)
-
+    const [effect, setEffect] = useState(false);
     return (
         <div className="flex flex-col justify-center items-center">
-            <div className="relative w-[375px] h-[228px]">
+            <div className={`relative w-[375px] h-[228px]  ${effect ? 'rotate-card' : 'cursor-pointer'} `}
+                onClick={()=>{
+                    setEffect(true)
+                }}
+                onAnimationEnd={()=>{
+                    setEffect(false)
+                }}
+            >
                 <img className='w-full h-full' src={cardImage} alt="" />
                 <div className="h-10 w-full absolute bottom-5 flex justify-between items-center p-5 text-white font-bold">
                     <p className='capitalize'>{username}</p>

@@ -32,7 +32,7 @@ function Banner() {
                 </div>
                 <div className="flex justify-center items-center gap-5">
                     <input className='h-12 w-52 rounded-xl pl-3' type="text" placeholder='Search here' />
-                    <button className='h-12 w-44 rounded-xl bg-[#34C38f] text-white' onClick={setNewBanner}>Add New Banner</button>
+                    <button className='h-12 w-44 rounded-xl bg-[#34C38f] text-white hover:shadow-xl' onClick={setNewBanner}>Add New Banner</button>
                 </div>
             </div>
             <table className='bg-white rounded-md w-full '>
@@ -106,7 +106,7 @@ const NewBanner = ({ setNewBanner,fetchDate }) => {
                     <input className='w-full h-12  border bg-[#F5F5F5] rounded-md pl-3' type="url" required onChange={e => setUrl(e.target.value)} />
                 </div>
                 <div className="flex justify-center items-center">
-                    <button className='w-[250px] h-12 rounded-lg bg-[#34C38F] text-white' type='submit'>Add new banner</button>
+                    <button className='w-[250px] h-12 rounded-lg bg-[#34C38F] text-white hover:shadow-xl' type='submit'>Add new banner</button>
                 </div>
                 <p className='text-center text-xs'>Please note that all new banner requests and are approved after  inspection from the admin side and may take few days.</p>
 
