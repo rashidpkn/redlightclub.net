@@ -117,7 +117,7 @@ const Notifications = () => {
     }
 
 
-  }, [])
+  }, [role])
 
 
   const [notification, setNotification] = useState([])
@@ -126,6 +126,7 @@ const Notifications = () => {
   const [viewAllNotification, setViewAllNotification] = useState(true)
   const [insideClick, setInsideClick] = useState(0)
   const [outsideClick, setOutsideClick] = useState(0)
+  const [clearall, setClearall] = useState(false)
   useEffect(() => {
 
     if (outsideClick > insideClick) {
@@ -146,12 +147,15 @@ const Notifications = () => {
 
           <div className="flex justify-between items-center w-full">
             <p className="font-bold text-xl text-black">Notifications</p>
-            <p className="font-bold text-sm text-[#A5A5A5]">View All</p>
+            <button className="font-bold text-sm text-[#A5A5A5]"
+            onClick={setClearall}
+            
+            >Clear All</button>
           </div>
 
           <div className="space-y-5">
             {
-              notification.map(e => <Notification key={e.id} {...e} setNotification={setNotification} notification={notification} time='2m' />)
+              notification.map(e => <Notification clearall={clearall} key={e.id} {...e} setNotification={setNotification} notification={notification} time='2m' />)
             }
 
 
@@ -176,8 +180,24 @@ const Notifications = () => {
 }
 
 
-const Notification = ({ type, message, time, setNotification, notification, id }) => {
+const Notification = ({ type, message, time, setNotification, notification, id,clearall }) => {
   const [deleteNotification, setDeleteNotification] = useState(false)
+  useEffect(() => {
+    clearall && deleteMessage()
+  }, [clearall])
+  
+  const deleteMessage = () =>{
+    setDeleteNotification(true)
+        setTimeout(() => {
+          setNotification(notification.filter(e => e.id !== id))
+        }, 500);
+
+        axios.post(`${BackendIP}/notification/delete`, { id }).then(
+          res => {
+            console.log(res.data)
+          }
+        )
+  }
   return (
     <div className={`flex justify-between items-end duration-500 ${deleteNotification && '-translate-x-[400px]'}`}>
       <div className="flex items-center gap-3">
@@ -191,18 +211,7 @@ const Notification = ({ type, message, time, setNotification, notification, id }
           <p className="text-sm">{time} ago</p>
         </div>
       </div>
-      <button className="text-[#6418C3] font-bold text-sm flex-shrink-0" onClick={() => {
-        setDeleteNotification(true)
-        setTimeout(() => {
-          setNotification(notification.filter(e => e.id !== id))
-        }, 500);
-
-        axios.post(`${BackendIP}/notification/delete`, { id }).then(
-          res => {
-            console.log(res.data)
-          }
-        )
-      }}>Mark as read</button>
+      <button className="text-[#6418C3] font-bold text-sm flex-shrink-0" onClick={deleteMessage}>Mark as read</button>
     </div>
   )
 }

@@ -5,7 +5,6 @@ import { useDropzone } from 'react-dropzone'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import BackendIP from '../../../../BackendIP'
-import Buttons from './Buttons'
 
 function VerifyAds() {
     const [preview, setPreview] = useState('')

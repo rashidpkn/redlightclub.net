@@ -12,20 +12,18 @@ const initialState = {
     language: [],
     eye: '',
     hair: '',
-    measurement: {
-        bust: '',
-        waist: '',
-        hip: ''
-    },
+    bust: '',
+    orientation:'',
     socialMedia: {
         video: '',
+        whatsapp:'',
         website: '',
-        onlyFans:'',
+        onlyFans: '',
         instagram: '',
         twitter: '',
         telegram: '',
         facebook: '',
-        tiktok: ''
+        
     },
     height: '',
     weight: '',
@@ -61,7 +59,9 @@ const adsSlice = createSlice({
         setEye(state, { payload }) { state.eye = payload },
         setHair(state, { payload }) { state.hair = payload },
 
-        setMesurement(state, { payload }) { state.measurement[payload.type] = payload.value },
+        // setMesurement(state, { payload }) { state.measurement[payload.type] = payload.value },
+        setBust (state,{payload}){state.bust = payload},
+        SetOrientation(state,{payload}){state.orientation = payload},
 
         setSocialMedia(state, { payload }) { state.socialMedia[payload.type] = payload.value },
 
@@ -78,7 +78,7 @@ const adsSlice = createSlice({
 
         setServiceCharge(state, { payload }) {
             const { name, charge } = payload
-            console.log(name,charge)
+            console.log(name, charge)
             const index = state.service.findIndex(e => e.name === name)
             state.service[index].charge = charge
         },
@@ -90,7 +90,7 @@ const adsSlice = createSlice({
 
 export const {
     setAdsTitle, setInto, setPhone, setLocation, setNationality, setLanguage,
-    setEye, setHair, setMesurement, setSocialMedia, setHeight, setWeight, setAge,
+    setEye, setHair, setBust,SetOrientation, setSocialMedia, setHeight, setWeight, setAge,
     setCurrencyType, setOutCall, setInCall, addService, removeService, setServiceCharge,
     setProfilePhoto, setGallery, clearGallery
 } = adsSlice.actions

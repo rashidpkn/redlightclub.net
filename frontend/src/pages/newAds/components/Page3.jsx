@@ -42,7 +42,7 @@ function Page3({ setDisable }) {
 
 
 
-            <p className='text-sm font-bold'>Services</p>
+            <p className='text-sm font-bold'>Add-On Service</p>
             <Service />
 
             <p className='text-sm font-bold'>Services Charges</p>
@@ -125,7 +125,7 @@ const InCall = () => {
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'1 Hr'} readOnly />
 
                     <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
-                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={oneHourIn} onChange={e => dispatch(setInCall({ type: 'oneHourIn', value: Number(e.target.value) }))} />
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center'  onChange={e => dispatch(setInCall({ type: 'oneHourIn', value: Number(e.target.value) }))} />
                         <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
                     </div>
 
@@ -133,14 +133,14 @@ const InCall = () => {
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'3 Hr'} readOnly />
                     <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
-                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={twoHourIn} onChange={e => dispatch(setInCall({ type: 'twoHourIn', value: Number(e.target.value) }))} />
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center'  onChange={e => dispatch(setInCall({ type: 'twoHourIn', value: Number(e.target.value) }))} />
                         <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
                     </div>
                 </div>
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'Full Night'} readOnly />
                     <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
-                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={nightIn} onChange={e => dispatch(setInCall({ type: 'nightIn', value: Number(e.target.value) }))} />
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center'  onChange={e => dispatch(setInCall({ type: 'nightIn', value: Number(e.target.value) }))} />
                         <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
                     </div>
 
@@ -162,7 +162,7 @@ const OutCall = () => {
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'1 Hr'} readOnly />
                     <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
-                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={oneHourOut} onChange={e => { dispatch(setOutCall({ type: 'oneHourOut', value: Number(e.target.value) })) }} />
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' onChange={e => { dispatch(setOutCall({ type: 'oneHourOut', value: Number(e.target.value) })) }} />
                         <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
                     </div>
 
@@ -170,7 +170,7 @@ const OutCall = () => {
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'3 Hr'} readOnly />
                     <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
-                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={twoHourOut} onChange={e => { dispatch(setOutCall({ type: 'twoHourOut', value: Number(e.target.value) })) }} />
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' onChange={e => { dispatch(setOutCall({ type: 'twoHourOut', value: Number(e.target.value) })) }} />
                         <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
                     </div>
 
@@ -178,7 +178,7 @@ const OutCall = () => {
                 <div className="flex gap-5">
                     <input type="text" className='h-10 w-32 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center font-bold' value={'Full Night'} readOnly />
                     <div className="h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
-                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' value={nightOut} onChange={e => { dispatch(setOutCall({ type: 'nightOut', value: Number(e.target.value) })) }} />
+                        <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center' onChange={e => { dispatch(setOutCall({ type: 'nightOut', value: Number(e.target.value) })) }} />
                         <div className="h-full w-14 flex justify-center items-center opacity-50 font-bold" >{currencyType}</div>
                     </div>
 

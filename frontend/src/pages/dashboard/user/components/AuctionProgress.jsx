@@ -16,32 +16,32 @@ function AuctionProgress() {
     }
     useEffect(() => {
         const fetchBid = setInterval(() => {
-            fetchData()    
+            fetchData()
         }, 3000);
 
         return () => clearInterval(fetchBid)
-        
+
     }, [])
     return (
         <div className=' space-y-5'>
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 {
-                    bidPosition.map(e => e.tier === 'platinum' && <Card e={e} key={e.id} {...e}  fetchData={fetchData}/>)
+                    bidPosition.map(e => e.tier === 'platinum' && <Card e={e} key={e.id} {...e} fetchData={fetchData} />)
                 }
             </div>
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 {
-                    bidPosition.map(e => e.tier === 'gold' && <Card e={e} key={e.id} {...e}  fetchData={fetchData}/>)
+                    bidPosition.map(e => e.tier === 'gold' && <Card e={e} key={e.id} {...e} fetchData={fetchData} />)
                 }
             </div>
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 {
-                    bidPosition.map(e => e.tier === 'silver' && <Card e={e} key={e.id} {...e}  fetchData={fetchData}/>)
+                    bidPosition.map(e => e.tier === 'silver' && <Card e={e} key={e.id} {...e} fetchData={fetchData} />)
                 }
             </div>
-            
+
 
         </div>
     )
@@ -50,7 +50,7 @@ function AuctionProgress() {
 export default AuctionProgress
 
 
-const Card = ({ tier, largestBidAmount, position, status, bid ,e ,fetchData}) => {
+const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) => {
     const { username } = useSelector(state => state.user)
     const [makeOffer, setMakeOffer] = useState(false)
     const [amount, setAmount] = useState(largestBidAmount + 10)
@@ -61,11 +61,11 @@ const Card = ({ tier, largestBidAmount, position, status, bid ,e ,fetchData}) =>
 
                 {
                     status === 'open' ?
-                    (bid?.find(e => e.username === username) ? (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-xs font-bold text-[#34C38F]'>You are winning</p> : <p className='text-xs font-bold text-[#D80027]'>You are losing</p>) : <p className='text-xs font-bold'>Make an offer</p>)
-                    :
-                     (bid?.find(e => e.username === username) ? (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-xs font-bold text-[#34C38F]'>You are won &#128515;</p> : <p className='text-xs font-bold text-[#D80027]'>You are loss &#128542;</p>) : <p className='text-xs font-bold'>Not Participated</p>)
+                        (bid?.find(e => e.username === username) ? (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-xs font-bold text-[#34C38F]'>You are winning</p> : <p className='text-xs font-bold text-[#D80027]'>You are losing</p>) : <p className='text-xs font-bold'>Make an offer</p>)
+                        :
+                        (bid?.find(e => e.username === username) ? (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-xs font-bold text-[#34C38F]'>You are won &#128515;</p> : <p className='text-xs font-bold text-[#D80027]'>You are loss &#128542;</p>) : <p className='text-xs font-bold'>Not Participated</p>)
                 }
-                
+
 
 
                 <div className={`w-8 h-8 rounded-lg flex justify-center items-center
@@ -110,7 +110,7 @@ const Card = ({ tier, largestBidAmount, position, status, bid ,e ,fetchData}) =>
                 `}>
                     <div className={`
                     w-[600px] bg-white rounded-lg p-5 space-y-5
-                    ${bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? 'border-[#34C38F] border-8' : 'border-[#D80027] border-8' )}
+                    ${bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? 'border-[#34C38F] border-8' : 'border-[#D80027] border-8')}
                     `}>
                         <div className="flex justify-end">
                             <Close className='cursor-pointer' onClick={() => setMakeOffer(false)} />
@@ -160,15 +160,18 @@ const Card = ({ tier, largestBidAmount, position, status, bid ,e ,fetchData}) =>
 
                                 <div className="flex justify-between items-center gap-3">
 
-                                    <button className='h-14 w-14 border rounded-xl' onClick={() => { setAmount(amount + 10) }}>
-                                        <Add />
+                                    <button className='h-14 w-14 border rounded-xl' onClick={() => { amount > largestBidAmount + 10 && setAmount(amount - 10) }}>
+                                        <Remove />
                                     </button>
 
                                     <input className='h-14 w-3/6 border rounded-xl text-center' type="text" value={amount} />
 
-                                    <button className='h-14 w-14 border rounded-xl' onClick={() => { amount > largestBidAmount + 10 && setAmount(amount - 10) }}>
-                                        <Remove />
+                                    <button className='h-14 w-14 border rounded-xl' onClick={() => { setAmount(amount + 10) }}>
+                                        <Add />
                                     </button>
+
+
+
 
                                 </div>
 
@@ -176,11 +179,10 @@ const Card = ({ tier, largestBidAmount, position, status, bid ,e ,fetchData}) =>
                                     onClick={() => {
                                         if (amount > largestBidAmount) {
 
-                                            axios.post(`${BackendIP}/bid/auction`, { amount, username,...e })
-                                            window.alert("Done")
+                                            axios.post(`${BackendIP}/bid/auction`, { amount, username, ...e })
                                             fetchData()
-                                            setMakeOffer(false)
-                                            
+                                            // setMakeOffer(false)
+
                                         } else {
                                             window.alert("Amount must be greater than Largest Amount")
                                         }
@@ -190,11 +192,11 @@ const Card = ({ tier, largestBidAmount, position, status, bid ,e ,fetchData}) =>
                             </div>
                             <div className="w-1/2 h-[316px] rounded-xl bg-[#F6EEFF] p-5 space-y-5">
                                 <p className='text-sm font-bold text-center'>Live Bidding</p>
-                                {bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-center text-xs text-[#34C38F]'>Wow! You are Winning</p> : <p className='text-center text-xs text-[#D80027]'>Sorry! You are loosing</p> )}
-                                {bid?.map((e,index) =>
+                                {bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-center text-xs text-[#34C38F]'>Wow! You are Winning</p> : <p className='text-center text-xs text-[#D80027]'>Sorry! You are loosing</p>)}
+                                {bid?.map((e, index) =>
                                     <div className='flex justify-between items-center'>
                                         <div className="flex gap-2 items-center">
-                                            <div className="w-9 h-9 rounded-lg bg-[#0062F4] flex justify-center items-center text-white">{index+1}</div>
+                                            <div className="w-9 h-9 rounded-lg bg-[#0062F4] flex justify-center items-center text-white">{index + 1}</div>
                                             <p className='text-xs font-bold capitalize'>{e.username[0]} {e.username.split('').map(e => '*')}</p>
                                         </div>
                                         <p className='text-xs font-bold'>AED {e.amount}</p>

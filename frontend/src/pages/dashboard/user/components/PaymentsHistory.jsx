@@ -1,10 +1,10 @@
 import React from 'react'
 
-import totalAmountIcon from '../../../../asset/icons/dashboard/payment history/totalAmout.png'
-import upArrowIcon from '../../../../asset/icons/dashboard/payment history/upArrow.png'
-import downArrowIcon from '../../../../asset/icons/dashboard/payment history/downArrow.png'
+// import totalAmountIcon from '../../../../asset/icons/dashboard/payment history/totalAmout.png'
+// import upArrowIcon from '../../../../asset/icons/dashboard/payment history/upArrow.png'
+// import downArrowIcon from '../../../../asset/icons/dashboard/payment history/downArrow.png'
 
-import { Line } from 'react-chartjs-2'
+// import { Line } from 'react-chartjs-2'
 import {
     Chart as ChartJS, CategoryScale,
     LinearScale,
@@ -14,7 +14,7 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 
 ChartJS.register(
@@ -73,85 +73,85 @@ export default PaymentsHistory
 
 
 
-const Menu = () => {
-    return (
-        <div className="flex justify-between items-center flex-wrap gap-3">
-            <div className="">
-                <h2 className='font-bold text-2xl'>Payment History</h2>
-                <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
-            </div>
+// const Menu = () => {
+//     return (
+//         <div className="flex justify-between items-center flex-wrap gap-3">
+//             <div className="">
+//                 <h2 className='font-bold text-2xl'>Payment History</h2>
+//                 <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
+//             </div>
 
-        </div>
-    )
-}
+//         </div>
+//     )
+// }
 
 
-const Graph = () => {
-    const { isDarkMode } = useSelector(state => state.util)
+// const Graph = () => {
+//     const { isDarkMode } = useSelector(state => state.util)
 
-    const options = {
-        elements: {
-            point: {
-                radius: 0
-            }
-        },
-        animations: {
-            radius: {
-                duration: 400,
-                loop: (context) => context.active
-            }
-        },
-        hoverRadius: 8,
-        hoverBackgroundColor: isDarkMode ? '#3b82f6' : " #6418C3",
-        interaction: {
-            mode: "nearest",
-            intersect: false,
-            axis: "x"
-        },
-        plugins: {
-            tooltip: {
-                enabled: true
-            },
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            x:{
-                grid: {
-                    color:"rgba(0,0,0,0)"
-                }
+//     const options = {
+//         elements: {
+//             point: {
+//                 radius: 0
+//             }
+//         },
+//         animations: {
+//             radius: {
+//                 duration: 400,
+//                 loop: (context) => context.active
+//             }
+//         },
+//         hoverRadius: 8,
+//         hoverBackgroundColor: isDarkMode ? '#3b82f6' : " #6418C3",
+//         interaction: {
+//             mode: "nearest",
+//             intersect: false,
+//             axis: "x"
+//         },
+//         plugins: {
+//             tooltip: {
+//                 enabled: true
+//             },
+//             legend: {
+//                 display: false
+//             }
+//         },
+//         scales: {
+//             x:{
+//                 grid: {
+//                     color:"rgba(0,0,0,0)"
+//                 }
                 
-            },
-            y:{
-                grid: {
-                    color:"rgba(0,0,0,0)"
-                }
-            }
-        },
+//             },
+//             y:{
+//                 grid: {
+//                     color:"rgba(0,0,0,0)"
+//                 }
+//             }
+//         },
 
-    };
+//     };
 
-    const data = {
-        labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-        datasets: [
-            {
-                label: 'Revenue ',
-                data: [10, 30, 20, 40, 30, 40, 50],
-                borderColor: isDarkMode ? '#3b82f6' : " #6418C3",
-                tension: 0.4,
-                borderWidth: 5,
-                filler: true,
-            }
-        ],
+//     const data = {
+//         labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+//         datasets: [
+//             {
+//                 label: 'Revenue ',
+//                 data: [10, 30, 20, 40, 30, 40, 50],
+//                 borderColor: isDarkMode ? '#3b82f6' : " #6418C3",
+//                 tension: 0.4,
+//                 borderWidth: 5,
+//                 filler: true,
+//             }
+//         ],
 
-    };
-    return (
-        <div className="h-56 w-full cursor-pointer">
-            <Line options={options} data={data} />
-        </div>
-    )
-}
+//     };
+//     return (
+//         <div className="h-56 w-full cursor-pointer">
+//             <Line options={options} data={data} />
+//         </div>
+//     )
+// }
 
 
 const TableBody = () =>{

@@ -1,7 +1,7 @@
 
 
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import Main from '../components/Main'
 import Menu from '../components/Menu'
 
@@ -13,7 +13,7 @@ import Blacklisted from './components/Blacklisted'
 import Comments from './components/Comments'
 import Earn from './components/Earn'
 import EditAds from './components/EditAds'
-import HomeMenu from './components/HomeMenu'
+
 import Manage from './components/Manage'
 import SettingsMenu from './components/SettingsMenu'
 import VerifyAds from './components/VerifyAds'
@@ -45,6 +45,10 @@ import PaymentsHistory from './components/PaymentsHistory'
 import Profiles from './components/Profiles'
 import ViewAds from './components/ViewAds'
 import SexToys from './components/SexToys'
+import AvailableCredit from './components/AvailableCredit'
+
+import sidebarImage from '../../../asset/images/dashboard/user/user-sidebar.png'
+import Home from './components/Home'
 
 // import DueAlert from './components/DueAlert'
 
@@ -53,25 +57,40 @@ import SexToys from './components/SexToys'
 
 function UserDashboard() {
   const { menu } = useParams()
-
+  const [showBillMenu, setShowBillMenu] = useState(false)
   return (
     <>
       <div className='flex'>
         <Sidebar >
-          
+
           <div className="space-y-5">
-            <Menu Icon={HomeIcon}               url='home'             title={'Home'} />
-            <Menu Icon={ProfileIcon}            url='Profiles'         title={'Profiles'} />
-            <Menu Icon={AuctionIcon}            url='auction-progress' title={'Auction In Progress'} />
-            <Menu Icon={PaymentHistoryIcon}     url='payment-history'  title={'Payment History'} />
-            <Menu Icon={BidPaymentsIcon}        url='billing'          title={'Billing'} />
-            <Menu Icon={AdsAnalyticsIcon}       url='ads-analytics'    title={'Ads Analytics'} />
-            <Menu Icon={EarnCredit}             url='earn-credit'      title={'Earn Credit'} />
-            <Menu Icon={LiveCamIcon}            url='live-cam'         title={'Live Cam'} />
-            <Menu Icon={SexToysIcon}            url='sex-toys'         title={'Sex Toys'} />
-            <Menu Icon={BannerIcon}             url='banner'           title={'Banner'} />
-            <Menu Icon={SupportIcon}            url='support'          title={'Support'} />
-            <Menu Icon={ReportedIssueIcon}      url='reported-issues'  title={'Reported Issues'} />
+            <Menu Icon={HomeIcon} url='home' title={'Home'} />
+            <Menu Icon={ProfileIcon} url='Profiles' title={'Profiles'} />
+            <Menu Icon={AuctionIcon} url='auction-progress' title={'Auction In Progress'} />
+            <div className="" onClick={setShowBillMenu}>
+              <Menu Icon={BidPaymentsIcon} url='payment-history' title={'Billing'}  />
+
+            </div>
+            {
+              showBillMenu && 
+              <div className="pl-5 relative -top-1 space-y-5">
+                <Menu url='payment-history' title={'Payment History'} />
+                <Menu url='available-credit' title={'Available Credit'} />
+              </div>
+            }
+
+            <Menu Icon={AdsAnalyticsIcon} url='ads-analytics' title={'Ads Analytics'} />
+            <Menu Icon={EarnCredit} url='earn-credit' title={'Earn Credit'} />
+            <Menu Icon={LiveCamIcon} url='live-cam' title={'Live Cam'} />
+            <Menu Icon={SexToysIcon} url='sex-toys' title={'Sex Toys'} />
+            <Menu Icon={BannerIcon} url='banner' title={'Banner'} />
+            <Menu Icon={SupportIcon} url='support' title={'Support'} />
+            <Menu Icon={ReportedIssueIcon} url='reported-issues' title={'Reported Issues'} />
+            <Link to={'/dashboard/earn-credit'}>
+              <div className="flex justify-center cursor-pointer">
+                <img src={sidebarImage} className='w-[238px]' alt="" />
+              </div>
+            </Link>
             {/* <Menu Icon={BlacklistedProfileIcon} url='blacklisted'      title={'Blacklisted Profiles'} /> */}
           </div>
         </Sidebar>
@@ -79,17 +98,18 @@ function UserDashboard() {
         <div className="w-[calc(100%-5rem)] lg:w-[calc(100%-18rem)] min-h-screen">
           <Navbar />
           <Main >
-            {(menu === undefined || menu === 'home') && <HomeMenu />}
-            {menu === 'Profiles' && <Profiles/>}
-            {menu === 'view' && <ViewAds/>}
-            
-            {menu === 'auction-progress' && <AuctionProgress/>}
-            {menu === 'live-cam'  && <LiveCam/>}
-            {menu === 'banner' && <Banner/>}
-            {menu === 'support' && <Support/>}
-            {menu === 'reported-issues' && <ReportIssues/>}
-            {menu === 'payment-history' && <PaymentsHistory/>}
-            {menu === 'sex-toys' && <SexToys/>}
+            {(menu === undefined || menu === 'home') && <Home />}
+            {menu === 'Profiles' && <Profiles />}
+            {menu === 'view' && <ViewAds />}
+
+            {menu === 'auction-progress' && <AuctionProgress />}
+            {menu === 'live-cam' && <LiveCam />}
+            {menu === 'banner' && <Banner />}
+            {menu === 'support' && <Support />}
+            {menu === 'reported-issues' && <ReportIssues />}
+            {menu === 'payment-history' && <PaymentsHistory />}
+            {menu === 'available-credit' && <AvailableCredit />}
+            {menu === 'sex-toys' && <SexToys />}
             {menu === 'ads-analytics' && <Analatics />}
 
 
