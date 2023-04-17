@@ -50,7 +50,7 @@ function Support() {
                 </thead>
                 <tbody>
                     {
-                        ticket.map(e=><TableRow {...e}/>)
+                        ticket.map(e=><TableRow {...e} e={e}/>)
                     }
                     
                 </tbody>
@@ -76,7 +76,6 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
 
     })
 
-    console.log(ticket)
 
     const createTicket = () =>{
         axios.post(`${BackendIP}/support`,ticket).then(res=>{
@@ -173,7 +172,8 @@ const Photo = ({setTicket,ticket}) => {
     )
   }
 
-const TableRow = ({ id, subject, type, status, }) => {
+const TableRow = ({ id, subject, type, status, e}) => {
+    const [showTicket,setShowTicket] = useState(false)
     return (
         <tr className='w-full h-16 border-b hover:shadow-lg'>
             <td className='h-full w-[5%]  font-bold text-xs text-center'>
@@ -184,8 +184,67 @@ const TableRow = ({ id, subject, type, status, }) => {
             <td className='h-full w-[15%] font-bold text-xs'>{type}</td>
             <td className='h-full w-[15%] font-bold text-xs'>{status?'Resolve':'Open'}</td>
             <td className='h-full w-[10%] font-bold text-xs'>
-                <button className='bg-[#0062F4] text-white px-2 py-3 rounded-lg hover:shadow-xl'>View Details</button>
+                <button className='bg-[#0062F4] text-white px-2 py-3 rounded-lg hover:shadow-xl' onClick={()=>setShowTicket(true)}>View Details</button>
             </td>
+            {showTicket && <Ticket {...e} setShowTicket={setShowTicket}/>
+            }
         </tr>
+    )
+}
+
+
+const Ticket = ({ username, email, type, subject, detail,setShowTicket }) => {
+
+
+
+    return (
+        <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center px-3">
+            <div className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5" >
+                <div className="flex justify-between items-center">
+                    <p className='font-bold'>Ticket Details</p>
+                    <Close onClick={()=>setShowTicket(false)}/>
+                </div>
+                <div className="flex flex-col md:flex-row justify-between items-center gap-10 ">
+                    <div className="w-full md:w-1/2">
+                        <p className='text-[#C7C7C7] font-bold text-sm'>Name</p>
+                        <input type="text" className='w-full h-12 bg-[#F5f5f5] rounded-md pl-3 capitalize' readOnly value={username} />
+                    </div>
+                    <div className="w-full md:w-1/2">
+                        <p className='text-[#C7C7C7] font-bold text-sm'>Email</p>
+                        <input type="text" className='w-full h-12 bg-[#F5f5f5] rounded-md pl-3 ' readOnly value={email} />
+                    </div>
+                </div>
+                <p className='text-2xl font-bold'>General Info</p>
+                <div className="w-full md:w-1/2">
+                    <p className='text-[#C7C7C7] font-bold text-sm'>Ticket Type</p>
+                    <input type="text" className='w-full h-12 bg-[#F5f5f5] rounded-md pl-3 ' value={type} readOnly />
+                </div>
+                <div className="w-full">
+                    <p className='text-[#C7C7C7] font-bold text-sm'>Subject</p>
+                    <input type="text" className='w-full h-12 bg-[#F5f5f5] rounded-md pl-3 ' value={subject} readOnly />
+                </div>
+
+                <div className="w-full">
+                    <p className='text-[#C7C7C7] font-bold text-sm'>Details</p>
+                    <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 ' value={detail} readOnly />
+                </div>
+
+                <div className="w-full">
+                    <p className='text-[#C7C7C7] font-bold text-sm'>Response from Admin</p>
+                    <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 '  readOnly />
+                </div>
+                
+                {/* <div className="space-x-3">
+                    
+                    <a href={`mailto:${email}`}>
+                        <button className='w-40 h-12 rounded-xl bg-[#5ECFFF] text-white text-sm font-bold'>Message User</button>
+                    </a>
+                    
+                    <button className='w-40 h-12 rounded-xl bg-[#34C38F] text-white text-sm font-bold' >Mark Resolved</button>
+
+                </div> */}
+
+            </div>
+        </div>
     )
 }

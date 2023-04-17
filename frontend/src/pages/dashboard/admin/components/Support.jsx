@@ -41,14 +41,7 @@ function Support() {
                 </thead>
                 <tbody className='w-full'>
                     {ticket.map(e => <TableRow {...e} />)}
-                    {/* <TableRow/>
-                    <TableRow/>
-                    <TableRow/>
-                    <TableRow/>
-                    <TableRow/>
-                    <TableRow/>
-                    <TableRow/>
-                    <TableRow/> */}
+                    
                 </tbody>
             </table>
         </div>
@@ -124,9 +117,9 @@ const Ticket = ({ username, email, type, subject, detail,setShowTicket }) => {
 
     return (
         <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center px-3">
-            <form className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5" >
+            <div className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5" >
                 <div className="flex justify-between items-center">
-                    <p className='text-2xl font-bold'>Please Provide the below details</p>
+                    <p className='font-bold'>Ticket Details</p>
                     <Close onClick={()=>setShowTicket(false)}/>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between items-center gap-10 ">
@@ -153,10 +146,18 @@ const Ticket = ({ username, email, type, subject, detail,setShowTicket }) => {
                     <p className='text-[#C7C7C7] font-bold text-sm'>details</p>
                     <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 ' value={detail} readOnly />
                 </div>
+                
+                <div className="space-x-3">
+                    
+                    <a href={`mailto:${email}`}>
+                        <button className='w-40 h-12 rounded-xl bg-[#5ECFFF] text-white text-sm font-bold'>Message User</button>
+                    </a>
+                    
+                    <button className='w-40 h-12 rounded-xl bg-[#34C38F] text-white text-sm font-bold' >Mark Resolved</button>
 
-                <button className='w-40 h-12 rounded-xl bg-[#34C38F] text-white text-sm font-bold' type='submit'>Submit</button>
+                </div>
 
-            </form>
+            </div>
         </div>
     )
 }

@@ -48,14 +48,14 @@ const TableBody = ({ id, adsTitle, verificationImage, fetchdata, updatedAt, veri
     const [viewImage, setviewImage] = useState(false)
     return (
         <>
-            <tr className='w-full h-16 border-b hover:shadow-lg'>
+            <tr className='w-full h-16 border-b hover:shadow-lg text-sm'>
                 <td className='w-[5%] h-full text-center'>
                     <input type="checkbox" name="" id="" />
                 </td>
-                <td className='w-[20%] h-full'>{adsTitle}</td>
-                <td className='w-[20%] h-full'>{updatedAt}</td>
-                <td className='w-[20%] h-full'>{verificationRequest ? 'Pending' : 'Done'}</td>
-                <td className='w-[35%] h-full'>
+                <td className='w-[20%] h-full text-xs font-bold'>{adsTitle}</td>
+                <td className='w-[20%] h-full text-xs'>{updatedAt}</td>
+                <td className='w-[20%] h-full text-xs'>{verificationRequest ? 'Pending' : 'Done'}</td>
+                <td className='w-[35%] h-full text-xs'>
                     <div className="flex justify-center items-center gap-3">
 
                         <button className='border bg-[#0062F4] px-3 py-2 rounded-lg text-white' onClick={() => { setviewImage(true) }}>View Details</button>
@@ -89,7 +89,7 @@ const TableBody = ({ id, adsTitle, verificationImage, fetchdata, updatedAt, veri
                             <div className="" onClick={() => { setviewImage(false) }}><Close /></div>
                         </div>
                         <div className="h-[calc(100%-6rem)] w-full">
-                            <img src={`${BackendIP}${verificationImage}`} alt="verificationImage" />
+                            <img src={`${BackendIP}${verificationImage}`} className='w-full h-full object-cover object-top' alt="verificationImage" />
                         </div>
                     </div>
                 </div>

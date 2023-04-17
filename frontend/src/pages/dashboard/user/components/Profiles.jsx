@@ -53,6 +53,12 @@ const Card = ({adsTitle,profilePhoto,id})=>{
                 dispatch(setId(id))
                 navigate('/dashboard/view')
             }}>View Profile</button>
+
+<button className='w-full h-9 rounded-lg bg-[#6418C3] text-white' onClick={()=>{
+                dispatch(setId(id))
+                navigate('/dashboard/verify')
+            }}>Verify Ads</button>
+
         </div>
     )
 }
