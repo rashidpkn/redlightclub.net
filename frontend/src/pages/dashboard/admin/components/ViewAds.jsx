@@ -89,7 +89,9 @@ function ViewAds() {
 
 
                     <select className="w-40 h-8 bg-[#F6EEFF] rounded-md outline-none border border-[#6418C3] text-[#6418C3]">
-                        <option value="">Select any Option</option>
+                        
+                        <option value="">Newest Comments</option>
+                        <option value="">Oldest Comments</option>
                     </select>
 
                     <Review review={ads.review?.reverse()} />

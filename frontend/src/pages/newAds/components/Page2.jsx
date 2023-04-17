@@ -91,9 +91,9 @@ const SocialMedia = () => {
 
 
     const { video,
+        whatsapp,
         website,
         instagram,
-        twitter,
         telegram,
         facebook,
         tiktok } = socialMedia
@@ -106,7 +106,7 @@ const SocialMedia = () => {
 
             <div className="flex  items-center">
                 <p className='text-sm w-32 '>Whatsapp</p>
-                <input placeholder='Enter Whatsapp number' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'whatsapp', value: e.target.value }))} value={twitter} />
+                <input placeholder='Enter Whatsapp number' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'whatsapp', value: e.target.value }))} value={whatsapp} />
             </div>
 
 

@@ -100,7 +100,8 @@ function ViewAds() {
 
 
                     <select className="w-40 h-8 bg-[#F6EEFF] rounded-md outline-none border border-[#6418C3] text-[#6418C3]">
-                        <option value="">Select any Option</option>
+                        <option value="">Newest Comments</option>
+                        <option value="">Oldest Comments</option>
                     </select>
 
                     <Review review={ads.review?.reverse()} />
@@ -137,7 +138,7 @@ export default ViewAds
 
 const OutCall = ({ outCall, currencyType }) => {
     return (
-        <div className="h-28 w-40">
+        <div className="h-28 w-40 font-normal text-xs">
             <div className="flex h-1/4">
                 <p className='text-sm font-bold'>Outcalls</p>
             </div>
@@ -160,7 +161,7 @@ const OutCall = ({ outCall, currencyType }) => {
 const InCall = ({ inCall, currencyType
 }) => {
     return (
-        <div className="h-28 w-40">
+        <div className="h-28 w-40 font-normal text-xs">
             <div className="flex h-1/4">
                 <p className='text-sm font-bold'>Incalls</p>
             </div>
@@ -182,7 +183,7 @@ const InCall = ({ inCall, currencyType
 
 const Appearance = ({ ads }) => {
     return (
-        <div className="h-28 w-36 flex flex-col justify-between">
+        <div className="h-28 w-36 flex flex-col justify-between font-normal text-xs">
             <div className="flex h-1/4">
                 <div className="w-1/2 h-full">Age:</div>
                 <div className="w-1/2 h-full">{ads.age}</div>
@@ -224,13 +225,13 @@ const Buttons = ({ id, fetchData, vacation }) => {
                 <button className="hover:shadow-xl h-[26px] w-[26px] rounded-md bg-[#34C38F] flex justify-center items-center cursor-pointer" onClick={() => navigate('/dashboard/edit-ads')}><img src={adsEdit} alt="" /></button>
                 <button className="hover:shadow-xl h-[26px] w-[26px] rounded-md bg-[#FF0000] flex justify-center items-center cursor-pointer" onClick={deleteAds}><img src={adsDelete} alt="" /></button>
                 {
-                    vacation ? 
-                    <button className='px-3 py-1 rounded-xl bg-[#F4B000] text-white' onClick={() => {
-                        axios.post(`${BackendIP}/ads/vacation`, { id, vacation: false }).then(res => {
-                            fetchData()
-                        })
-                    }}>Turn Off Vacation Mode</button> 
-                    :
+                    vacation ?
+                        <button className='px-3 py-1 rounded-xl bg-[#F4B000] text-white' onClick={() => {
+                            axios.post(`${BackendIP}/ads/vacation`, { id, vacation: false }).then(res => {
+                                fetchData()
+                            })
+                        }}>Turn Off Vacation Mode</button>
+                        :
                         <button className='px-3 py-1 rounded-xl bg-[#F4B000] text-white' onClick={() => {
                             axios.post(`${BackendIP}/ads/vacation`, { id, vacation: true }).then(res => {
                                 fetchData()

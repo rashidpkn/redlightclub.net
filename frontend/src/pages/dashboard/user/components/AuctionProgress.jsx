@@ -7,6 +7,7 @@ import BackendIP from '../../../../BackendIP'
 
 import diamondIcon from '../../../../asset/icons/dashboard/profile/diamond.svg'
 import UpArrow from '../../../../asset/icons/dashboard/auction/upArrow.png'
+import popup from '../../../../asset/images/dashboard/user/onlyfans.gif'
 
 function AuctionProgress() {
     const [bidPosition, setBidPosition] = useState([])
@@ -56,7 +57,7 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
     const [amount, setAmount] = useState(largestBidAmount + 10)
     return (
         <>
-            <div className="w-[170px] h-56 bg-white rounded-lg flex flex-col justify-center items-center gap-3 hover:shadow-xl">
+            <div className={`${status === 'close' && 'opacity-70'} w-[170px] h-56 bg-white rounded-lg flex flex-col justify-center items-center gap-3 hover:shadow-xl`}>
 
 
                 {
@@ -110,7 +111,7 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
                 `}>
                     <div className={`
                     w-[600px] bg-white rounded-lg p-5 space-y-5
-                    ${bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? 'border-[#34C38F] border-8' : 'border-[#D80027] border-8')}
+                    ${bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? 'border-[#34C38F] border-8 ' : 'border-[#D80027] border-8')}
                     `}>
                         <div className="flex justify-end">
                             <Close className='cursor-pointer' onClick={() => setMakeOffer(false)} />
@@ -192,14 +193,18 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
                             </div>
                             <div className="w-1/2 h-[316px] rounded-xl bg-[#F6EEFF] p-5 space-y-5">
                                 <p className='text-sm font-bold text-center'>Live Bidding</p>
-                                {bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-center text-xs text-[#34C38F]'>Wow! You are Winning</p> : <p className='text-center text-xs text-[#D80027]'>Sorry! You are loosing</p>)}
+                                {bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? 
+                                <div className='flex justify-center items-center'>
+                                <img src={popup} className='h-7 w-7' alt="" />
+                                <p className='text-center text-xs text-[#34C38F]'>Wow! You are Winning</p> 
+                                </div>: <p className='text-center text-xs text-[#D80027]'>Sorry! You are loosing</p>)}
                                 {bid?.map((e, index) =>
                                     <div className='flex justify-between items-center'>
                                         <div className="flex gap-2 items-center">
                                             <div className="w-9 h-9 rounded-lg bg-[#0062F4] flex justify-center items-center text-white">{index + 1}</div>
                                             <p className='text-xs font-bold capitalize'>{e.username[0]} {e.username.split('').map(e => '*')}</p>
                                         </div>
-                                        <p className='text-xs font-bold'>AED {e.amount}</p>
+                                        <p className='text-xs font-bold'>AED ***</p>
                                     </div>
                                 )}
                             </div>
