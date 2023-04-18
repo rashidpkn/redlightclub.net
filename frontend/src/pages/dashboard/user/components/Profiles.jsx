@@ -1,4 +1,4 @@
-import { Add } from '@mui/icons-material'
+import { Add, Close, Done } from '@mui/icons-material'
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
@@ -7,57 +7,157 @@ import { Link, useNavigate } from 'react-router-dom'
 import BackendIP from '../../../../BackendIP'
 import { useDispatch, useSelector } from 'react-redux'
 import { setId } from '../../../../redux/slice/utilSlice'
+import { useDropzone } from 'react-dropzone'
 
 function Profiles() {
-    const {username} = useSelector(state=>state.user)
+    const { username } = useSelector(state => state.user)
     const [ads, setAds] = useState([])
     useEffect(() => {
-        axios.get(`${BackendIP}/ads/get-user-ads`,{params:{username}}).then(res=>{
+        axios.get(`${BackendIP}/ads/get-user-ads`, { params: { username } }).then(res => {
             setAds(res.data)
         })
-    
+
     }, [username])
-    
-  return (
-    <div className='space-y-5'>
-        <div className="flex justify-between items-center">
-            <p className='text-2xl font-bold'>Profile</p>
-            <div className="flex gap-5 text-white text-sm font-bold">
-                <button className='px-4 py-3 rounded-xl bg-[#6418C3] hover:shadow-xl'>Setup Ads</button>
-                <Link to={'/new-ads'}>
-                    <button className='px-4 py-3 rounded-xl bg-[#34C38F] hover:shadow-xl'><Add/> Add New Profile</button>
-                </Link> 
+
+    return (
+        <div className='space-y-5'>
+            <div className="flex justify-between items-center">
+                <p className='text-2xl font-bold'>Profile</p>
+                <div className="flex gap-5 text-white text-sm font-bold">
+                    <button className='px-4 py-3 rounded-xl bg-[#6418C3] hover:shadow-xl'>Setup Ads</button>
+                    <Link to={'/new-ads'}>
+                        <button className='px-4 py-3 rounded-xl bg-[#34C38F] hover:shadow-xl'><Add /> Add New Profile</button>
+                    </Link>
+                </div>
+            </div>
+            <div className="flex flex-wrap justify-start items-center gap-4">
+                {ads.map(e => <Card {...e} e={e} />)}
+
             </div>
         </div>
-        <div className="flex flex-wrap justify-start items-center gap-4">
-            {ads.map(e=><Card {...e} />)}
-            
-        </div>
-    </div>
-  )
+    )
 }
 
 export default Profiles
 
-const Card = ({adsTitle,profilePhoto,id})=>{
+const Card = ({ adsTitle, profilePhoto, id, e }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    return(
-        <div className="w-[170px]  rounded-xl p-2 bg-white flex flex-col items-center gap-1 hover:shadow-xl">
-            <div className="h-[145px] w-full rounded-md bg-[#F6EEFF]">
-                <img src={profilePhoto} className='w-full h-full object-cover object-top rounded-md' alt="" />
-            </div>
-            <p className='text-xs font-bold'>{adsTitle}</p>
-            <p className='text-[8px] font-bold text-[#38E25D]'>Active</p>
-            <button className='w-full h-9 rounded-lg bg-[#6418C3] text-white' onClick={()=>{
-                dispatch(setId(id))
-                navigate('/dashboard/view')
-            }}>View Profile</button>
+    const [verify, setVerify] = useState(false)
+    return (
+        <>
+            <div className="w-[170px]  rounded-xl p-2 bg-white flex flex-col items-center gap-1 hover:shadow-xl">
+                <div className="h-[145px] w-full rounded-md bg-[#F6EEFF]">
+                    <img src={profilePhoto} className='w-full h-full object-cover object-top rounded-md' alt="" />
+                </div>
+                <p className='text-xs font-bold'>{adsTitle}</p>
+                <p className='text-[8px] font-bold text-[#38E25D]'>Active</p>
+                <button className='w-full h-9 rounded-lg bg-[#6418C3] text-white' onClick={() => {
+                    dispatch(setId(id))
+                    navigate('/dashboard/view')
+                }}>View Profile</button>
 
-<button className='w-full h-9 rounded-lg bg-[#6418C3] text-white' onClick={()=>{
-                dispatch(setId(id))
-                navigate('/dashboard/verify')
-            }}>Verify Ads</button>
+                <button className='w-full h-9 rounded-lg bg-[#6418C3] text-white' onClick={() => {
+                    // dispatch(setId(id))
+                    // navigate('/dashboard/verify')
+                    setVerify(true)
+                }}>Verify Ads</button>
+
+            </div>
+            {
+                verify && <Verify e={e} setVerify={setVerify}/>
+            }
+            
+        </>
+    )
+}
+
+
+const Verify = ({ e,setVerify }) => {
+    const [step, setStep] = useState(1)
+    const [preview, setPreview] = useState('')
+    const [verificationImage, setVerificationImage] = useState('')
+    return (
+        <div className="fixed -top-5 left-0 flex justify-center items-center h-screen w-full bg-black/20 z-50">
+            <div className="max-w-[1000px] min-w-[700px]  rounded-xl bg-[#F5F5F5] p-5">
+                <div className="flex justify-end">
+                    <Close onClick={()=>setVerify(false)}/>
+                </div>
+                {
+                    step === 1 &&
+                    <div className="flex justify-center items-center">
+                        <div className="space-y-3">
+                            <p className='text-lg font-bold'>What to do</p>
+                            <p>Step 1 : Take a white paper and write down the unique code shown.</p>
+                            <p>Step 2 : Take a selfie clearly showing you holding the paper with unique code and your face</p>
+                            <p>Step 3 : Upload the image onto our website and thats it. We’ll take care of the rest!</p>
+                            <div className="flex justify-center items-center">
+                                <div className="w-48 h-14 bg-white flex justify-center items-center">
+                                    <p>12B3411</p>
+                                </div>
+                            </div>
+                            <p className='text-sm'>Note: While taking the photo please be in a well lit room with nothing obstructing the camera and you.</p>
+                            <p className='text-sm'>We do not use or share this photo on the website or for any other purposes.</p>
+                            <div className="flex justify-center items-center">
+                                <button className='px-10 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => { setStep(2) }}>Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                {
+                    step === 2 && <div className="flex flex-col justify-center items-center h-full gap-5">
+                        <ProfilePhoto {...e} setPreview={setPreview} setVerificationImage={setVerificationImage} />
+                        <button className='px-10 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => {
+                            if (verificationImage) {
+                                axios.post(`${BackendIP}/verify/request`, { id: e.id, verificationImage }).then(res => {
+                                    setStep(3)
+                                })
+
+                            } else {
+                                window.alert("Upload Verification image")
+                            }
+                        }}>Submit</button>
+                    </div>
+                }
+                {
+                    step === 3 && <div className="h-full flex flex-col justify-center items-center gap-5">
+                        <div className="h-10 w-10 rounded-full border border-[#34C38F] text-[#34C38F] flex justify-center items-center">
+                            <Done/>
+                        </div>
+                        <p className='text-xl font-bold'>Your request has been successfully submitted</p>
+                    </div>
+                }
+            </div>
+        </div>
+    )
+}
+
+
+const ProfilePhoto = ({ adsTitle, setPreview, setVerificationImage }) => {
+    const { getRootProps, getInputProps } = useDropzone({
+        accept: {
+            'image/*': ['.png', '.jpg', '.jpegs', '.webp'],
+        },
+        maxFiles: 1,
+        onDrop: acceptedFiles => {
+            setPreview(URL.createObjectURL(acceptedFiles[0]))
+            const data = new FormData()
+            data.append('name', adsTitle)
+            data.append('profile', acceptedFiles[0])
+            axios.post(`${BackendIP}/upload/profile`, data).then(res => { window.alert('Virification image  is Uploaded') }).then(res => {
+                setVerificationImage(`/files/${adsTitle}-${acceptedFiles[0].name}`)
+            })
+        }
+    });
+
+    return (
+        <div className='flex flex-col justify-center items-center gap-10'>
+            <div className="profilePhoto h-16 w-64 bg-[#F5F5F5] border-[3px] border-dashed border-[#CBC8C8] rounded-lg flex justify-center items-center">
+                <div {...getRootProps({ className: 'dropzone h-full h-full flex justify-center items-center' })}>
+                    <input {...getInputProps()} />
+                    <p>Upload Image</p>
+                </div>
+            </div>
 
         </div>
     )

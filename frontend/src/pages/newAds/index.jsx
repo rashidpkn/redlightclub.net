@@ -5,7 +5,7 @@ import Page2 from './components/Page2'
 import Page3 from './components/Page3'
 import Page4 from './components/Page4'
 import Page5 from './components/Page5'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import BackendIP from '../../BackendIP'
@@ -13,22 +13,22 @@ import BackendIP from '../../BackendIP'
 
 function NewAds() {
     const [pageNo, setPageNo] = useState(1)
-    const [progress, setProgress] = useState(pageNo/5*100)
+    const [progress, setProgress] = useState(pageNo / 5 * 100)
     const [disable, setDisable] = useState(true)
     const { ads, user } = useSelector(state => state)
     const { username, email } = user
-    const {region} = useSelector(state=>state.util)
-    useEffect(() => {  
-        setProgress(pageNo/5*100)
+    const { region } = useSelector(state => state.util)
+    useEffect(() => {
+        setProgress(pageNo / 5 * 100)
     }, [pageNo])
     const navigate = useNavigate()
-
-    const PublishAds = ()=>{
-        axios.post(`${BackendIP}/ads/create`, { ads, username, email,region }).then(res => {
+    const [underVerifcation, setUnderVerifcation] = useState(false)
+    const PublishAds = () => {
+        axios.post(`${BackendIP}/ads/create`, { ads, username, email, region }).then(res => {
             if (res.data.status) {
-                window.alert('Your ads will publish soon')
-                navigate('/dashboard')
-        
+                setUnderVerifcation(true)
+                
+
             }
         })
     }
@@ -56,27 +56,27 @@ function NewAds() {
 
                         <div className="w-full h-[10%] flex flex-col justify-between">
                             <div className="flex justify-between items-center px-5">
-                                <button className='font-bold' onClick={() => {pageNo !==1 ? setPageNo(pageNo-1):navigate('/dashboard')}}>Back</button>
-                                <button className={`${disable ? 'bg-[#6418C3]/50' :'bg-[#6418C3]'} px-4 py-2  rounded-lg text-white font-bold`} onClick={() => {
-                                    if(!disable) {
-                                        
-                                        if(pageNo !==5){
-                                            setPageNo(pageNo+1)
-                                        }else PublishAds()
+                                <button className='font-bold' onClick={() => { pageNo !== 1 ? setPageNo(pageNo - 1) : navigate('/dashboard') }}>Back</button>
+                                <button className={`${disable ? 'bg-[#6418C3]/50' : 'bg-[#6418C3]'} px-4 py-2  rounded-lg text-white font-bold`} onClick={() => {
+                                    if (!disable) {
+
+                                        if (pageNo !== 5) {
+                                            setPageNo(pageNo + 1)
+                                        } else PublishAds()
                                         setDisable(true)
-                                    } 
-                                    }}>
-                                    {pageNo !==5 ? 'Next' : 'Publish'} 
-                                    </button>
+                                    }
+                                }}>
+                                    {pageNo !== 5 ? 'Next' : 'Publish'}
+                                </button>
                             </div>
                             <div className="w-full h-1">
-                                <div className={`h-full bg-[#6418c3] duration-500 rounded-full`} style={{width:`${progress}%`}}></div>
+                                <div className={`h-full bg-[#6418c3] duration-500 rounded-full`} style={{ width: `${progress}%` }}></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+               {underVerifcation && <UnderVerification/>}
         </div>
     )
 }
@@ -84,3 +84,18 @@ function NewAds() {
 export default NewAds
 
 
+const UnderVerification = () => {
+    const navigate = useNavigate()
+    return (
+        <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 flex justify-center items-center">
+            <div className="p-5 w-96 bg-white rounded-lg space-y-5">
+                <p className='text-center font-medium text-xl'>Your ads is under verification</p>
+                <div className="flex justify-center items-center">
+                    <button className='px-4 py-3 rounded-lg bg-[#34C38F] text-white font-bold' onClick={()=>{
+                        navigate('/dashboard/Profiles')
+                    }}>Goto Dashboard</button>
+                </div>
+            </div>
+        </div>
+    )
+}

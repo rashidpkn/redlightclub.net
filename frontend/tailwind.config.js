@@ -10,7 +10,8 @@ module.exports = {
         times:['Times New Roman']
       },
       animation:{
-        'map-animation': 'map-animations 1000ms infinite ease'
+        'map-animation': 'map-animations 1000ms infinite ease',
+        'cardSwing' :'cardSwing 250ms '
       }
     },
   },

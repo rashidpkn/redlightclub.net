@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f979ddac.css",
-    "main.js": "/static/js/main.41ca5cad.js",
+    "main.css": "/static/css/main.e4fa6843.css",
+    "main.js": "/static/js/main.1e804c01.js",
     "static/media/lady.png": "/static/media/lady.53ac6f75387354f8bc01.png",
     "static/media/sextoy1.png": "/static/media/sextoy1.fe393ceddae2e0d6dd9a.png",
     "static/media/sextoy3.png": "/static/media/sextoy3.ef35b863dd56df461886.png",
@@ -9,26 +9,28 @@
     "static/media/map.png": "/static/media/map.fe4a651ad1ac5cdfd357.png",
     "static/media/onlyfans.gif": "/static/media/onlyfans.106be888e5d963c8d7c8.gif",
     "static/media/card.png": "/static/media/card.698bd77a0d6a8bf04a66.png",
+    "static/media/user-sidebar.png": "/static/media/user-sidebar.0c5e3fb398e2ae574466.png",
     "static/media/cat and women.png": "/static/media/cat and women.ee2f6974c200249354b4.png",
-    "static/media/ads-edit.svg": "/static/media/ads-edit.ff89dbdfc2047dca2e234eb1c720cfd6.svg",
-    "static/media/global.svg": "/static/media/global.62b7db3f7f271d62f6674909d2ee1e82.svg",
-    "static/media/ads-delete.svg": "/static/media/ads-delete.caa1d8da305c622f2319e90d8963d385.svg",
-    "static/media/ads-view.svg": "/static/media/ads-view.bfa4b87de185a1a78bc60a4714b1d72c.svg",
-    "static/media/lens.svg": "/static/media/lens.068cc9c348b534fd46437b55eb72b4a3.svg",
-    "static/media/whatsapp.svg": "/static/media/whatsapp.d512851319adf3d1b3bd5b437f12d567.svg",
-    "static/media/negative.svg": "/static/media/negative.8af164d2afab9e612dd39b93a5038985.svg",
-    "static/media/telegram.svg": "/static/media/telegram.2f240e8e23622f42e67ff3287590699a.svg",
-    "static/media/positive.svg": "/static/media/positive.fdc1fcfba9f5f9200aef632d5ced970d.svg",
-    "static/media/diamond.svg": "/static/media/diamond.2a978761d8e60d9c778617d18b457a01.svg",
-    "static/media/call.svg": "/static/media/call.8ac68fa4c06ce7980f61a26b034e4426.svg",
-    "static/media/notification.svg": "/static/media/notification.6e0b02d86964b724116bff1d37799d5f.svg",
+    "static/media/ads-edit.svg": "/static/media/ads-edit.8d4d95f07ae895d26c5af01aba2ebaef.svg",
+    "static/media/loading.svg": "/static/media/loading.b767aab46ea3fa309aff5e12d5006915.svg",
+    "static/media/global.svg": "/static/media/global.67faf26db39d8058b2562479bc33e768.svg",
+    "static/media/ads-delete.svg": "/static/media/ads-delete.b9b9b5344092e85640bfa5acb09120b2.svg",
+    "static/media/ads-view.svg": "/static/media/ads-view.b54f66e39ae55b435c84d8b77d80e20b.svg",
+    "static/media/lens.svg": "/static/media/lens.a5974a167ab00acd3b71725487a32cf4.svg",
+    "static/media/whatsapp.svg": "/static/media/whatsapp.494e86d9389e0cca0067a0c1da8f8534.svg",
+    "static/media/negative.svg": "/static/media/negative.bd6d33d6c9ea9481fb01075233ecdbcc.svg",
+    "static/media/telegram.svg": "/static/media/telegram.b1de1e4022e56e79c10f5c3d5f9cad90.svg",
+    "static/media/positive.svg": "/static/media/positive.29c661c26fd0b91970be29ee84f39091.svg",
+    "static/media/diamond.svg": "/static/media/diamond.ea212bf3968b70118f2693e046dd2bc0.svg",
+    "static/media/call.svg": "/static/media/call.51a9b03f494607e4a79798831252604b.svg",
+    "static/media/notification.svg": "/static/media/notification.c37e4d3d60f3b7ba38836dede9f7e330.svg",
     "index.html": "/index.html",
-    "static/media/email.svg": "/static/media/email.da4a9514ae3f6fb0e8828e1730d4f963.svg",
-    "main.f979ddac.css.map": "/static/css/main.f979ddac.css.map",
-    "main.41ca5cad.js.map": "/static/js/main.41ca5cad.js.map"
+    "static/media/email.svg": "/static/media/email.4efe0c7e8dea67a7c2ba4a986ca76d75.svg",
+    "main.e4fa6843.css.map": "/static/css/main.e4fa6843.css.map",
+    "main.1e804c01.js.map": "/static/js/main.1e804c01.js.map"
   },
   "entrypoints": [
-    "static/css/main.f979ddac.css",
-    "static/js/main.41ca5cad.js"
+    "static/css/main.e4fa6843.css",
+    "static/js/main.1e804c01.js"
   ]
 }

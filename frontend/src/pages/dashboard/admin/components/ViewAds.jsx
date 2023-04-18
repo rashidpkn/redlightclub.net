@@ -71,13 +71,13 @@ function ViewAds() {
                 <div className="w-[830px]  bg-white rounded-2xl p-5 pb-10 space-y-5">
                     <div className=" justify-between flex-wrap-reverse">
 
-                        <Buttons id={id} fetchData={fetchData} />
+                        <Buttons id={id} fetchData={fetchData} visibility={ads.visibility}/>
 
                         <Profile ads={ads} />
 
                     </div>
 
-                    <div className="flex gap-5  flex-wrap text-xs font-semibold">
+                    <div className="flex gap-5  flex-wrap text-xs ">
 
                         <Appearance ads={ads} />
                         <OutCall outCall={ads.outCall} currencyType={ads.currencyType} />
@@ -89,7 +89,9 @@ function ViewAds() {
 
 
                     <select className="w-40 h-8 bg-[#F6EEFF] rounded-md outline-none border border-[#6418C3] text-[#6418C3]">
-                        <option value="">Select any Option</option>
+                        
+                        <option value="">Newest Comments</option>
+                        <option value="">Oldest Comments</option>
                     </select>
 
                     <Review review={ads.review?.reverse()} />
@@ -99,16 +101,16 @@ function ViewAds() {
                 <div className="w-64 space-y-5 flex-shrink-0">
                     <div className="w-full h-80 bg-white rounded-2xl p-5 overflow-y-scroll">
                         <p className='text-lg font-bold'>I Do Provide</p>
-                        <div className="space-y-3">
-                            {ads?.service?.map(e => <p>{e.name}</p>)}
+                        <div className="space-y-2 mt-5">
+                            {ads?.service?.map(e => <p className='text-xs text-[#A5A5A5]'>{e.name}</p>)}
                         </div>
                     </div>
 
                     <div className="w-full h-80 bg-white rounded-2xl p-5 overflow-y-scroll">
                         <p className='text-lg font-bold'>I Don't Provide</p>
-                        <div className="space-y-3">
+                        <div className="space-y-2 mt-5">
                             {
-                                allServices?.filter(e => !ads?.service?.map(ev => ev.name).includes(e))?.map(e => <p>{e}</p>)
+                                allServices?.filter(e => !ads?.service?.map(ev => ev.name).includes(e))?.map(e => <p className='text-xs text-[#A5A5A5]'>{e}</p>)
                             }
                         </div>
                     </div>
@@ -126,7 +128,7 @@ export default ViewAds
 
 const OutCall = ({ outCall, currencyType }) => {
     return (
-        <div className="h-28 w-40">
+        <div className="h-28 w-40 font-normal text-sm">
             <div className="flex h-1/4">
                 <p className='text-sm font-bold'>Outcalls</p>
             </div>
@@ -149,7 +151,7 @@ const OutCall = ({ outCall, currencyType }) => {
 const InCall = ({ inCall, currencyType
 }) => {
     return (
-        <div className="h-28 w-40">
+        <div className="h-28 w-40 font-normal text-sm">
             <div className="flex h-1/4">
                 <p className='text-sm font-bold'>Incalls</p>
             </div>
@@ -171,7 +173,7 @@ const InCall = ({ inCall, currencyType
 
 const Appearance = ({ ads }) => {
     return (
-        <div className="h-28 w-36 flex flex-col justify-between">
+        <div className="h-28 w-36 flex flex-col justify-between font-normal text-sm">
             <div className="flex h-1/4">
                 <div className="w-1/2 h-full">Age:</div>
                 <div className="w-1/2 h-full">{ads.age}</div>
@@ -192,7 +194,7 @@ const Appearance = ({ ads }) => {
     )
 }
 
-const Buttons = ({ id, fetchData }) => {
+const Buttons = ({ id, fetchData,visibility }) => {
     const navigate = useNavigate()
     const deleteAds = async () => {
         try {
@@ -208,10 +210,28 @@ const Buttons = ({ id, fetchData }) => {
     }
     return (
         <div className="flex flex-col items-end gap-3 float-right">
-            <p className='hidden md:block'>Last seen Online 31/01/2023</p>
+            <p className='hidden md:block text-[12px] text-[#A5A5A5]'>Last seen Online 31/01/2023</p>
             <div className="flex gap-5">
                 <button className="hover:shadow-xl h-[26px] w-[26px] rounded-md bg-[#34C38F] flex justify-center items-center cursor-pointer" onClick={() => navigate('/dashboard/edit-ads')}><img src={adsEdit} alt="" /></button>
                 <button className="hover:shadow-xl h-[26px] w-[26px] rounded-md bg-[#FF0000] flex justify-center items-center cursor-pointer" onClick={deleteAds}><img src={adsDelete} alt="" /></button>
+                {visibility 
+                ? 
+                <button className='px-3 py-1 rounded-xl bg-[#F4B000] text-white' 
+                onClick={()=>{
+                    axios.post(`${BackendIP}/ads/block`,{id}).then(res=>{
+                        fetchData()
+                    })
+                }}
+                >Block Profile</button> 
+                :
+                <button className='px-3 py-1 rounded-xl bg-[#F4B000] text-white' 
+                onClick={()=>{
+                    axios.post(`${BackendIP}/ads/unblock`,{id}).then(res=>{
+                        fetchData()
+                    })
+                }}
+                >Unblock Profile</button>}
+                
             </div>
         </div>
     )
@@ -253,16 +273,16 @@ const Profile = ({ ads }) => {
                 <p className='font-bold text-[10px] text-[#2E2E2E]'>{ads.location}</p>
                 <div className="flex gap-5 items-center">
                     <a target={'_blank'} rel='noreferrer' href={`tel:${ads.phone?.code}${ads.phone?.number}`}>
-                        <img alt='icon' src={callIcon} className="h-8 w-8" />
+                        <img alt='icon' src={callIcon} className="w-5 h-5" />
                     </a>
                     <a target={'_blank'} rel='noreferrer' href={`mailto:${ads.email}`}>
-                        <img alt='icon' src={emailIcon} className="h-8 w-8" />
+                        <img alt='icon' src={emailIcon} className="w-5 h-5" />
                     </a>
                     <a target={'_blank'} rel='noreferrer' href={`https://telegram.com`}>
-                        <img alt='icon' src={telegramIcon} className="h-8 w-8" />
+                        <img alt='icon' src={telegramIcon} className="w-5 h-5" />
                     </a>
                     <a target={'_blank'} rel='noreferrer' href={`https://api.whatsapp.com/send?phone=${ads.phone?.number}`}>
-                        <img alt='icon' src={whatsappIcon} className="h-8 w-8" />
+                        <img alt='icon' src={whatsappIcon} className="w-5 h-5" />
                     </a>
                 </div>
             </div>

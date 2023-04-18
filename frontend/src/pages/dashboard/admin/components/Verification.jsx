@@ -89,7 +89,7 @@ const TableBody = ({ id, adsTitle, verificationImage, fetchdata, updatedAt, veri
                             <div className="" onClick={() => { setviewImage(false) }}><Close /></div>
                         </div>
                         <div className="h-[calc(100%-6rem)] w-full">
-                            <img src={`${BackendIP}${verificationImage}`} className='w-full h-full object-cover object-top' alt="verificationImage" />
+                            <img src={`${BackendIP}${verificationImage}`} className='w-full h-full  object-top' alt="verificationImage" />
                         </div>
                     </div>
                 </div>

@@ -91,9 +91,9 @@ const SocialMedia = () => {
 
 
     const { video,
+        whatsapp,
         website,
         instagram,
-        twitter,
         telegram,
         facebook,
         tiktok } = socialMedia
@@ -102,6 +102,11 @@ const SocialMedia = () => {
             <div className="flex  items-center">
                 <p className='text-sm w-32 '>Video Url</p>
                 <input placeholder='Enter Url' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'video', value: e.target.value }))} value={video} />
+            </div>
+
+            <div className="flex  items-center">
+                <p className='text-sm w-32 '>Whatsapp</p>
+                <input placeholder='Enter Whatsapp number' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'whatsapp', value: e.target.value }))} value={whatsapp} />
             </div>
 
 
@@ -133,10 +138,7 @@ const SocialMedia = () => {
                 <input placeholder='Enter username' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'tiktok', value: e.target.value }))} value={tiktok} />
             </div>
 
-            <div className="flex  items-center">
-                <p className='text-sm w-32 '>Twitter</p>
-                <input placeholder='Enter username' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'twitter', value: e.target.value }))} value={twitter} />
-            </div>
+            
 
         </div>
     )

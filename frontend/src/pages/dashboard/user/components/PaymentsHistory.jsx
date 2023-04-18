@@ -1,10 +1,10 @@
 import React from 'react'
 
-import totalAmountIcon from '../../../../asset/icons/dashboard/payment history/totalAmout.png'
-import upArrowIcon from '../../../../asset/icons/dashboard/payment history/upArrow.png'
-import downArrowIcon from '../../../../asset/icons/dashboard/payment history/downArrow.png'
+// import totalAmountIcon from '../../../../asset/icons/dashboard/payment history/totalAmout.png'
+// import upArrowIcon from '../../../../asset/icons/dashboard/payment history/upArrow.png'
+// import downArrowIcon from '../../../../asset/icons/dashboard/payment history/downArrow.png'
 
-import { Line } from 'react-chartjs-2'
+// import { Line } from 'react-chartjs-2'
 import {
     Chart as ChartJS, CategoryScale,
     LinearScale,
@@ -14,7 +14,9 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+
+import diamondIcon from '../../../../asset/icons/dashboard/profile/diamond.svg'
 
 
 ChartJS.register(
@@ -50,16 +52,11 @@ function PaymentsHistory() {
 
                 </thead>
                 <tbody className='w-full '>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
+                    <TableBody tier={'platinum'} amount={400} position={1} status={'Paid'} invoice={'Not Generated'}/>
+                    <TableBody tier={'gold'}     amount={300} position={1} status={'Paid'} invoice={'Not Generated'}/>
+                    <TableBody tier={'gold'}     amount={350} position={2} status={'Pending'} invoice={'Not Generated'}/>
+                    <TableBody tier={'silver'}   amount={200} position={1} status={'Paid'} invoice={'Not Generated'}/>
+                    
                 </tbody>
 
             </table>
@@ -73,88 +70,90 @@ export default PaymentsHistory
 
 
 
-const Menu = () => {
-    return (
-        <div className="flex justify-between items-center flex-wrap gap-3">
-            <div className="">
-                <h2 className='font-bold text-2xl'>Payment History</h2>
-                <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
-            </div>
+// const Menu = () => {
+//     return (
+//         <div className="flex justify-between items-center flex-wrap gap-3">
+//             <div className="">
+//                 <h2 className='font-bold text-2xl'>Payment History</h2>
+//                 <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
+//             </div>
 
-        </div>
-    )
-}
+//         </div>
+//     )
+// }
 
 
-const Graph = () => {
-    const { isDarkMode } = useSelector(state => state.util)
+// const Graph = () => {
+//     const { isDarkMode } = useSelector(state => state.util)
 
-    const options = {
-        elements: {
-            point: {
-                radius: 0
-            }
-        },
-        animations: {
-            radius: {
-                duration: 400,
-                loop: (context) => context.active
-            }
-        },
-        hoverRadius: 8,
-        hoverBackgroundColor: isDarkMode ? '#3b82f6' : " #6418C3",
-        interaction: {
-            mode: "nearest",
-            intersect: false,
-            axis: "x"
-        },
-        plugins: {
-            tooltip: {
-                enabled: true
-            },
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            x:{
-                grid: {
-                    color:"rgba(0,0,0,0)"
-                }
+//     const options = {
+//         elements: {
+//             point: {
+//                 radius: 0
+//             }
+//         },
+//         animations: {
+//             radius: {
+//                 duration: 400,
+//                 loop: (context) => context.active
+//             }
+//         },
+//         hoverRadius: 8,
+//         hoverBackgroundColor: isDarkMode ? '#3b82f6' : " #6418C3",
+//         interaction: {
+//             mode: "nearest",
+//             intersect: false,
+//             axis: "x"
+//         },
+//         plugins: {
+//             tooltip: {
+//                 enabled: true
+//             },
+//             legend: {
+//                 display: false
+//             }
+//         },
+//         scales: {
+//             x:{
+//                 grid: {
+//                     color:"rgba(0,0,0,0)"
+//                 }
                 
-            },
-            y:{
-                grid: {
-                    color:"rgba(0,0,0,0)"
-                }
-            }
-        },
+//             },
+//             y:{
+//                 grid: {
+//                     color:"rgba(0,0,0,0)"
+//                 }
+//             }
+//         },
 
-    };
+//     };
 
-    const data = {
-        labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-        datasets: [
-            {
-                label: 'Revenue ',
-                data: [10, 30, 20, 40, 30, 40, 50],
-                borderColor: isDarkMode ? '#3b82f6' : " #6418C3",
-                tension: 0.4,
-                borderWidth: 5,
-                filler: true,
-            }
-        ],
+//     const data = {
+//         labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+//         datasets: [
+//             {
+//                 label: 'Revenue ',
+//                 data: [10, 30, 20, 40, 30, 40, 50],
+//                 borderColor: isDarkMode ? '#3b82f6' : " #6418C3",
+//                 tension: 0.4,
+//                 borderWidth: 5,
+//                 filler: true,
+//             }
+//         ],
 
-    };
-    return (
-        <div className="h-56 w-full cursor-pointer">
-            <Line options={options} data={data} />
-        </div>
-    )
-}
+//     };
+//     return (
+//         <div className="h-56 w-full cursor-pointer">
+//             <Line options={options} data={data} />
+//         </div>
+//     )
+// }
 
 
-const TableBody = () =>{
+const TableBody = (
+    {tier,position,amount,status,invoice}
+) =>{
     return(
         <tr className='w-full h-16 border-b hover:shadow-lg'>
 
@@ -164,16 +163,23 @@ const TableBody = () =>{
 
                         <td className='h-full w-[25%] '>
                             <div className="h-full w-full flex items-center gap-3">
-                                <div className="w-8 h-8 bg-black rounded-md"></div>
+                                <div className={`w-8 h-8 
+                                ${tier ==='platinum' && 'bg-[#0062F4]'}
+                                ${tier ==='gold' && 'bg-[#F4B000]'}
+                                ${tier ==='silver' && 'bg-[#A63200]'}
+                                
+                                 rounded-md flex justify-center items-center`}>
+                                    <img src={diamondIcon} className='w-5' alt="" />
+                                 </div>
                                 <div className="">
-                                    <p className='font-bold text-xs'>Roshni</p>
-                                    <p className='text-xs'>India</p>
+                                    <p className='font-bold text-xs capitalize'>{tier}</p>
+                                    <p className='text-xs'> Position {position}</p>
                                 </div>
                             </div>
                         </td>
 
                         <td className='h-full w-[15%] font-bold text-xs'>400 AED</td>
-                        <td className='h-full w-[15%] font-bold text-xs'>Paid</td>
+                        <td className='h-full w-[15%] font-bold text-xs'>{status}</td>
                         <td className='h-full w-[15%] font-bold text-xs'>Platinum</td>
                         <td className='h-full w-[15%] font-bold text-xs'>Active</td>
                     </tr>
