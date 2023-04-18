@@ -48,7 +48,10 @@ const adsSlice = createSlice({
     name: 'ads',
     initialState,
     reducers: {
-        setAdsTitle(state, { payload }) { state.adsTitle = payload },
+        setAdsTitle(state, { payload }) { 
+            state.adsTitle = payload
+            state.adsTitle = state.adsTitle.charAt(0).toUpperCase() + state.adsTitle.slice(1) 
+        },
         setInto(state, { payload }) { state.intro = payload },
         setPhone(state, { payload }) { state.phone[payload.type] = payload.value },
 

@@ -27,19 +27,19 @@ function AuctionProgress() {
         <div className=' space-y-5'>
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 {
-                    bidPosition.map(e => e.tier === 'platinum' && <Card e={e} key={e.id} {...e} fetchData={fetchData} />)
+                    bidPosition.map(e => e.tier === 'platinum' && <Card e={e} key={e.id} {...e} fetchData={fetchData} bid={e?.bid?.sort((a,b)=>b.amount - a.amount)}/>)
                 }
             </div>
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 {
-                    bidPosition.map(e => e.tier === 'gold' && <Card e={e} key={e.id} {...e} fetchData={fetchData} />)
+                    bidPosition.map(e => e.tier === 'gold' && <Card e={e} key={e.id} {...e} fetchData={fetchData} bid={e?.bid?.sort((a,b)=>b.amount - a.amount)}/>)
                 }
             </div>
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 {
-                    bidPosition.map(e => e.tier === 'silver' && <Card e={e} key={e.id} {...e} fetchData={fetchData} />)
+                    bidPosition.map(e => e.tier === 'silver' && <Card e={e} key={e.id} {...e} fetchData={fetchData} bid={e?.bid?.sort((a,b)=>b.amount - a.amount)}/>)
                 }
             </div>
 
@@ -55,6 +55,8 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
     const { username } = useSelector(state => state.user)
     const [makeOffer, setMakeOffer] = useState(false)
     const [amount, setAmount] = useState(largestBidAmount + 10)
+    const [effect, setEffect] = useState(false)
+    
     return (
         <>
             <div className={`${status === 'close' && 'opacity-70'} w-[170px] h-56 bg-white rounded-lg flex flex-col justify-center items-center gap-3 hover:shadow-xl`}>
@@ -108,9 +110,16 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
                 <div className={`
                     h-screen w-full fixed top-0 left-0 bg-black/10 flex justify-center items-center z-50
                     
-                `}>
-                    <div className={`
+
+                `}
+                
+                >
+                    <div 
+                    onAnimationEnd={()=>{setEffect(false)}}
+                    className={`
                     w-[600px] bg-white rounded-lg p-5 space-y-5
+                    ${effect && 'animate-cardSwing'}
+
                     ${bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? 'border-[#34C38F] border-8 ' : 'border-[#D80027] border-8')}
                     `}>
                         <div className="flex justify-end">
@@ -183,6 +192,7 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
                                             axios.post(`${BackendIP}/bid/auction`, { amount, username, ...e })
                                             fetchData()
                                             // setMakeOffer(false)
+                                            setEffect(true)
 
                                         } else {
                                             window.alert("Amount must be greater than Largest Amount")
@@ -191,20 +201,20 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
                                 >Place a Bid</button>
 
                             </div>
-                            <div className="w-1/2 h-[316px] rounded-xl bg-[#F6EEFF] p-5 space-y-5">
+                            <div className="w-1/2  rounded-xl bg-[#F6EEFF] p-5 space-y-5 overflow-scroll sc">
                                 <p className='text-sm font-bold text-center'>Live Bidding</p>
-                                {bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? 
-                                <div className='flex justify-center items-center'>
-                                <img src={popup} className='h-7 w-7' alt="" />
-                                <p className='text-center text-xs text-[#34C38F]'>Wow! You are Winning</p> 
-                                </div>: <p className='text-center text-xs text-[#D80027]'>Sorry! You are loosing</p>)}
-                                {bid?.map((e, index) =>
+                                {bid?.find(e => e.username === username) && (bid?.find(e => e.username === username && e.amount === largestBidAmount) ?
+                                    <div className='flex justify-center items-center'>
+                                        <img src={popup} className='h-7 w-7' alt="" />
+                                        <p className='text-center text-xs text-[#34C38F]'>Wow! You are Winning</p>
+                                    </div> : <p className='text-center text-xs text-[#D80027]'>Sorry! You are loosing</p>)}
+                                {bid?.slice(0,4).map((e, index) =>
                                     <div className='flex justify-between items-center'>
                                         <div className="flex gap-2 items-center">
                                             <div className="w-9 h-9 rounded-lg bg-[#0062F4] flex justify-center items-center text-white">{index + 1}</div>
                                             <p className='text-xs font-bold capitalize'>{e.username[0]} {e.username.split('').map(e => '*')}</p>
                                         </div>
-                                        <p className='text-xs font-bold'>AED ***</p>
+                                        <p className='text-xs font-bold'>AED {e.amount}</p>
                                     </div>
                                 )}
                             </div>

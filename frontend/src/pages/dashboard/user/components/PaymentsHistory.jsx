@@ -16,6 +16,8 @@ import {
 } from "chart.js";
 // import { useSelector } from 'react-redux';
 
+import diamondIcon from '../../../../asset/icons/dashboard/profile/diamond.svg'
+
 
 ChartJS.register(
     CategoryScale,
@@ -50,16 +52,11 @@ function PaymentsHistory() {
 
                 </thead>
                 <tbody className='w-full '>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
+                    <TableBody tier={'platinum'} amount={400} position={1} status={'Paid'} invoice={'Not Generated'}/>
+                    <TableBody tier={'gold'}     amount={300} position={1} status={'Paid'} invoice={'Not Generated'}/>
+                    <TableBody tier={'gold'}     amount={350} position={2} status={'Pending'} invoice={'Not Generated'}/>
+                    <TableBody tier={'silver'}   amount={200} position={1} status={'Paid'} invoice={'Not Generated'}/>
+                    
                 </tbody>
 
             </table>
@@ -154,7 +151,9 @@ export default PaymentsHistory
 // }
 
 
-const TableBody = () =>{
+const TableBody = (
+    {tier,position,amount,status,invoice}
+) =>{
     return(
         <tr className='w-full h-16 border-b hover:shadow-lg'>
 
@@ -164,16 +163,23 @@ const TableBody = () =>{
 
                         <td className='h-full w-[25%] '>
                             <div className="h-full w-full flex items-center gap-3">
-                                <div className="w-8 h-8 bg-black rounded-md"></div>
+                                <div className={`w-8 h-8 
+                                ${tier ==='platinum' && 'bg-[#0062F4]'}
+                                ${tier ==='gold' && 'bg-[#F4B000]'}
+                                ${tier ==='silver' && 'bg-[#A63200]'}
+                                
+                                 rounded-md flex justify-center items-center`}>
+                                    <img src={diamondIcon} className='w-5' alt="" />
+                                 </div>
                                 <div className="">
-                                    <p className='font-bold text-xs'>Roshni</p>
-                                    <p className='text-xs'>India</p>
+                                    <p className='font-bold text-xs capitalize'>{tier}</p>
+                                    <p className='text-xs'> Position {position}</p>
                                 </div>
                             </div>
                         </td>
 
                         <td className='h-full w-[15%] font-bold text-xs'>400 AED</td>
-                        <td className='h-full w-[15%] font-bold text-xs'>Paid</td>
+                        <td className='h-full w-[15%] font-bold text-xs'>{status}</td>
                         <td className='h-full w-[15%] font-bold text-xs'>Platinum</td>
                         <td className='h-full w-[15%] font-bold text-xs'>Active</td>
                     </tr>

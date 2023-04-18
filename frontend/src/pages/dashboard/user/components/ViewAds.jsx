@@ -80,9 +80,9 @@ function ViewAds() {
             <div className="flex gap-5 flex-wrap">
 
                 <div className="w-[830px]  bg-white rounded-2xl p-5 pb-10 space-y-5">
-                    <div className=" justify-between flex-wrap-reverse">
+                    <div className=" justify-between flex-wrap-reverse border-b border-dashed py-2">
 
-                        <Buttons id={id} fetchData={fetchData} vacation={ads.vacation} />
+                        <Buttons id={id} fetchData={fetchData} vacation={ads.vacation} {...ads} />
 
                         <Profile ads={ads} />
 
@@ -204,7 +204,7 @@ const Appearance = ({ ads }) => {
     )
 }
 
-const Buttons = ({ id, fetchData, vacation }) => {
+const Buttons = ({ id, fetchData, vacation,gallery }) => {
     const navigate = useNavigate()
     const deleteAds = async () => {
         try {
@@ -219,7 +219,7 @@ const Buttons = ({ id, fetchData, vacation }) => {
         }
     }
     return (
-        <div className="flex flex-col items-end gap-3 float-right">
+        <div className="flex flex-col justify-between items-end gap-3 float-right h-full">
             <p className='hidden md:block text-[12px] text-[#A5A5A5]'>Last seen Online 31/01/2023</p>
             <div className="flex gap-5">
                 <button className="hover:shadow-xl h-[26px] w-[26px] rounded-md bg-[#34C38F] flex justify-center items-center cursor-pointer" onClick={() => navigate('/dashboard/edit-ads')}><img src={adsEdit} alt="" /></button>
@@ -238,11 +238,12 @@ const Buttons = ({ id, fetchData, vacation }) => {
                             })
                         }}>Turn On Vacation Mode</button>
                 }
-
-
-
-
             </div>
+            <div className="gallery flex gap-5 ">
+                    {gallery?.map(e=><div className='w-14 h-14'>
+                        <img src={e} className='w-full h-full rounded-md' alt="" />
+                    </div>)}
+                </div>
         </div>
     )
 }
@@ -281,7 +282,9 @@ const Profile = ({ ads }) => {
                 <p className='font-bold text-2xl'>{ads.adsTitle}</p>
                 <p className='font-bold text-xs text-[#2E2E2E]'>{ads.nationality}</p>
                 <p className='font-bold text-[10px] text-[#2E2E2E]'>{ads.location}</p>
-                <div className="flex gap-5 items-center">
+                <div className="flex items-center">
+
+
                     <a target={'_blank'} rel='noreferrer' href={`tel:${ads.phone?.code}${ads.phone?.number}`}>
                         <img alt='icon' src={callIcon} className="w-5 h-5" />
                     </a>
@@ -295,6 +298,8 @@ const Profile = ({ ads }) => {
                         <img alt='icon' src={whatsappIcon} className="w-5 h-5" />
                     </a>
                 </div>
+
+
             </div>
         </div>
     )
