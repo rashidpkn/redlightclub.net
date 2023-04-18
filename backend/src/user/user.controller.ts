@@ -35,18 +35,31 @@ export class UserController {
   }
 
   @Get('')
-  getAllUsers(){
+  getAllUsers() {
     return User.findAll()
   }
 
   @Get('get-a-user')
   async getAUser(
-    @Query() query:any
-  ){
-    
-    const {username}:any = query
-    
-    return await User.findOne({where:{username}})
+    @Query() query: any
+  ) {
+
+    const { username }: any = query
+
+    return await User.findOne({ where: { username } })
+  }
+
+  @Post('clear-due')
+  async clearDue(
+    @Body() body : any
+  ) {
+    const {username} = body
+    const update = await User.update({due:false,dueAmount:0},{where:{username}})
+  
+    return true
+
+
   }
 
 }
+

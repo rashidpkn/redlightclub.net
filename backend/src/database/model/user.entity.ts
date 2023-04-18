@@ -1,4 +1,4 @@
-import { Table, Column, Model, Default } from 'sequelize-typescript';
+import { Table, Column, Model, Default, DataType } from 'sequelize-typescript';
 
 @Table
 export class User extends Model {
@@ -22,6 +22,17 @@ export class User extends Model {
     @Column({defaultValue:0})
     credit:number
 
+    @Column({defaultValue:false})
+    due:boolean
+
+    @Column({defaultValue:0})
+    dueAmount:number
+
+    @Column({type:DataType.ARRAY(DataType.JSON),defaultValue:[]})
+    bid:[{
+        tier:string,
+        position:number
+    }]
 
 }
 

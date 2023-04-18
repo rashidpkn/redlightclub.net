@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { Banners } from 'src/database/model/banner.entity';
 import { User } from 'src/database/model/user.entity';
 import { BannerService } from './banner.service';
+import { Notification } from 'src/database/model/notification.entity';
 
 @Controller('banner')
 export class BannerController {
@@ -12,6 +13,7 @@ export class BannerController {
     @Body('username') username : string,
     @Body('url') url : string
   ){
+    await Notification.create({message:`${username} is send a banner link`,role:'admin',type:'banner'})
       await Banners.create({username,url})
       return true
   }

@@ -2,6 +2,8 @@ import { Controller, Post, Body, HttpException, HttpStatus, Get } from '@nestjs/
 import { Ads } from 'src/database/model/ads.entity';
 import { Bid } from 'src/database/model/bid.entity';
 import { BidService } from './bid.service';
+import { User } from 'src/database/model/user.entity';
+import { async } from 'rxjs';
 
 @Controller('bid')
 export class BidController {
@@ -13,21 +15,23 @@ export class BidController {
   ) {
     
     const { tier, position } = body
+    const found = await Bid.findOne({where:{position,tier}})
 
     try {
       if (tier && position <= 6) {
-        // const found = await Bid.findOne({ where: { tier, position } })
-        // if (found) {
-          await Bid.update({ bid: null, largestBidAmount: 50, status: "open" }, { where: { position, tier } })
+        if(found)
+          {await Bid.update({ bid: null, largestBidAmount: 50, status: "open" }, { where: { position, tier } })
           return {
             status: true,
             message: "Position opened"
           }
-        // }
-        // else {
-        //   await Bid.create({ tier, position })
-        //   return true
-        // }
+      }else {
+       await Bid.create({position,tier,status: "open",bid: null,largestBidAmount: 50 })
+       return {
+        status: true,
+        message: "Position opened",
+      }
+      }
       } 
       else {
         throw new HttpException("UNPROCESSABLE_ENTITY", HttpStatus.UNPROCESSABLE_ENTITY)
@@ -88,12 +92,14 @@ export class BidController {
 
 
   @Post('close')
-  closeBid(
+  async closeBid(
     @Body() body:any
   ){
-      const {id,bid,largestBidAmount,position,tier} = body
-      // const  {username} =  bid.find((e: { amount: any; })=> e.amount===largestBidAmount)
-      // Ads.update({tier},{where:{adsTitle}})
+      const {id,position,tier} = body
+      const {bid,largestBidAmount} =  await Bid.findOne({where:{tier,position}})
+      const  {username} =  bid.find((e: { amount: any; })=> e.amount===largestBidAmount)
+      const found = await User.findOne({where:{username}})
+      await User.update({bid:[...found.bid,{tier,position}],due:true,dueAmount:found.dueAmount+largestBidAmount},{where:{username}})
       Bid.update({status:'close'},{where:{position,tier}})
       return true
   }
@@ -104,6 +110,23 @@ export class BidController {
     Ads.update({tier:'none'},{where:{}}),
     Bid.update({status:'close',bid:null,largestBidAmount:50,baseAmount:50},{where:{}})
     return true;
+  }
+
+  @Post('assign')
+  async Assign(
+    @Body() body:any
+  ){
+    const {username,position,tier,adsTitle} = body
+    const user = await User.findOne({where:{username}})
+    const ads = await Ads.findOne({where:{adsTitle}})
+    
+    const bid = user.bid.filter(e=> e.position===position ? e.tier ===tier ? null : e :e)
+    
+    await User.update({bid},{where:{username}})
+    await Ads.update({tier:'none',position:null},{where:{tier,position}})
+    await Ads.update({tier,position},{where:{adsTitle}})
+
+    return(true)
   }
 
 

@@ -133,6 +133,9 @@ export class Ads extends Model {
   @Column({defaultValue:'none'})
   tier : string
 
+  @Column
+  position : number
+
   @Column({defaultValue:'Dubai'})
   region : string
 
