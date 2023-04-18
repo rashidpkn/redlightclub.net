@@ -20,15 +20,13 @@ function Home() {
         axios.get(`${BackendIP}/ads/get-user-ads`, { params: { username } }).then(res => {
             setAds(res.data)
         })
-        // eslint-disable-next-line
-    }, [])
-
-    useEffect(() => {
         axios.get(`${BackendIP}/user/get-a-user`, { params: { username } }).then(res => {
             setUser(res.data)
         })
         // eslint-disable-next-line
     }, [])
+
+   
 
 
     const [verifyEmailAlert, setVerifyEmailAlert] = useState(false)

@@ -184,6 +184,7 @@ const Notification = ({ type, message, time, setNotification, notification, id,c
   const [deleteNotification, setDeleteNotification] = useState(false)
   useEffect(() => {
     clearall && deleteMessage()
+    // eslint-disable-next-line
   }, [clearall])
   
   const deleteMessage = () =>{

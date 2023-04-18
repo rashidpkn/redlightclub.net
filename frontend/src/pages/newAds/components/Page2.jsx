@@ -5,6 +5,7 @@ import { setLanguage, setLocation, setNationality, setSocialMedia } from '../../
 import { useDispatch, useSelector } from 'react-redux';
 
 import onlyfansImage from '../../../asset/images/new-ads/onlyfans.gif'
+import { MultiSelect } from 'react-multi-select-component';
 
 function Page2({ setDisable }) {
 
@@ -19,16 +20,28 @@ function Page2({ setDisable }) {
         // eslint-disable-next-line
     }, [language, location, nationality])
 
+    const [selected, setSelected] = useState([]);
+    useEffect(() => {
+      
+        dispatch(setLanguage(selected.map(e=>e.value)))
+      // eslint-disable-next-line
+    }, [selected])
+    
 
     return (
         <div className='h-full w-full space-y-4'>
 
             <div className="space-y-2">
                 <p className='text-sm font-bold'>Language*</p>
-                <select type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setLanguage(e.target.value))} value={language} >
+                {/* <select type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setLanguage(e.target.value))} value={language} >
                     <option value="" disabled defaultValue>Select your language</option>
                     {languages.map(e => <option key={e} value={e}>{e}</option>)}
-                </select>
+                </select> */}
+                <MultiSelect 
+                
+                options={languages.map(e=>{return({label:e,value:e})})} 
+                value={selected}
+                onChange={setSelected} />
             </div>
 
             <div className="flex gap-5 items-center flex-wrap">
@@ -74,7 +87,7 @@ const Location = () => {
             {({ getInputProps, suggestions, getSuggestionItemProps, loading, }) => (
                 <div className='w-80 h-11 bg-white relative'>
                     <input {...getInputProps({ placeholder: 'eg: Dubai', className: 'w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' })} />
-                    <div className="autocomplete-dropdown-container bg-white absolute z-20 w-full space-y-2 rounded-xl p-2">
+                    <div className="autocomplete-dropdown-container bg-white absolute w-full space-y-2 rounded-xl p-2">
                         {loading && <div>Loading...</div>}
                         {suggestions.map(suggestion => <div{...getSuggestionItemProps(suggestion, { className: 'cursor-pointer border-b py-1' })}><span>{suggestion.description}</span></div>)}
                     </div>

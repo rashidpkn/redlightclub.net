@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Main from '../components/Main'
 import Menu from '../components/Menu'
@@ -23,7 +23,7 @@ import HomeIcon from '../../../asset/icons/sidebar/home.js'
 // import BlacklistedProfileIcon from '../../../asset/icons/sidebar/blacklisted.js'
 import ProfileIcon from '../../../asset/icons/sidebar/profile.js'
 import AuctionIcon from '../../../asset/icons/sidebar/Auction.js'
-import PaymentHistoryIcon from '../../../asset/icons/sidebar/payment-history.js'
+// import PaymentHistoryIcon from '../../../asset/icons/sidebar/payment-history.js'
 import BidPaymentsIcon from '../../../asset/icons/sidebar/bid-Payment.js'
 import AdsAnalyticsIcon from '../../../asset/icons/sidebar/ads-analytics.js'
 
@@ -49,8 +49,11 @@ import AvailableCredit from './components/AvailableCredit'
 
 import sidebarImage from '../../../asset/images/dashboard/user/user-sidebar.png'
 import Home from './components/Home'
+import axios from 'axios'
+import BackendIP from '../../../BackendIP'
+import { useSelector } from 'react-redux'
 
-// import DueAlert from './components/DueAlert'
+import DueAlert from './components/DueAlert'
 
 
 
@@ -58,6 +61,15 @@ import Home from './components/Home'
 function UserDashboard() {
   const { menu } = useParams()
   const [showBillMenu, setShowBillMenu] = useState(false)
+  const {username} = useSelector(state=>state.user)
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    axios.get(`${BackendIP}/user/get-a-user`, { params: { username } }).then(res => {
+      setUser(res.data)
+  })
+  // eslint-disable-next-line
+  }, [])
+  
   return (
     <>
       <div className='flex'>
@@ -125,7 +137,8 @@ function UserDashboard() {
           </Main>
         </div>
       </div>
-      {/* <DueAlert /> */}
+      {user.due && <DueAlert {...user}/>}
+      
     </>
   )
 }

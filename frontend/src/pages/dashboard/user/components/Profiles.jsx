@@ -8,6 +8,9 @@ import BackendIP from '../../../../BackendIP'
 import { useDispatch, useSelector } from 'react-redux'
 import { setId } from '../../../../redux/slice/utilSlice'
 import { useDropzone } from 'react-dropzone'
+import verifyIcon from '../../../../asset/icons/dashboard/profile/verify.svg'
+import DiamondIcon from '../../../../asset/icons/dashboard/profile/diamond.svg'
+
 
 function Profiles() {
     const { username } = useSelector(state => state.user)
@@ -40,48 +43,68 @@ function Profiles() {
 
 export default Profiles
 
-const Card = ({ adsTitle, profilePhoto, id, e }) => {
+const Card = ({ adsTitle, profilePhoto, id, e, tier, position }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [verify, setVerify] = useState(false)
     return (
         <>
-            <div className="w-[170px]  rounded-xl p-2 bg-white flex flex-col items-center gap-1 hover:shadow-xl">
-                <div className="h-[145px] w-full rounded-md bg-[#F6EEFF]">
+            <div className={`w-[170px]  rounded-xl p-2 bg-white flex flex-col items-center gap-1 hover:shadow-xl
+                ${tier === 'platinum' && 'border-[#0062F4] border-2'}
+                ${tier === 'gold' && 'border-[#F4B000] border-2'}
+                ${tier === 'silver' && 'border-[#A63200] border-2'}
+            `}>
+                <div className="h-[145px] w-full rounded-md bg-[#F6EEFF] relative">
                     <img src={profilePhoto} className='w-full h-full object-cover object-top rounded-md' alt="" />
+
+                    {e.verify && <div className="absolute top-1 right-1  flex justify-center items-center">
+                        <img src={verifyIcon} alt="" />
+                    </div>}
+
+                   {tier !== 'none' && <div className={`absolute bottom-0 w-full h-[43px] rounded-b-lg p-5 flex justify-between items-center text-white
+                 ${tier === 'platinum' && 'bg-[#0062F4]'}
+                 ${tier === 'gold' && 'bg-[#F4B000]'}
+                 ${tier === 'silver' && 'bg-[#A63200]'}`}>
+                        <img src={DiamondIcon} alt="" />
+                        <p className='text-sm font-bold capitalize'>{tier}</p>
+                        <p className='text-[10px]'>{position}</p>
+                    </div>}
+
                 </div>
                 <p className='text-xs font-bold'>{adsTitle}</p>
-                <p className='text-[8px] font-bold text-[#38E25D]'>Active</p>
+                {tier !== 'none' && <p className='text-[8px] font-bold text-[#6418C3]'>Expires in 7 Days</p>}
                 <button className='w-full h-9 rounded-lg bg-[#6418C3] text-white' onClick={() => {
                     dispatch(setId(id))
                     navigate('/dashboard/view')
                 }}>View Profile</button>
 
-                <button className='w-full h-9 rounded-lg bg-[#6418C3] text-white' onClick={() => {
-                    // dispatch(setId(id))
-                    // navigate('/dashboard/verify')
+                 <button className='w-full h-9 rounded-lg bg-[#6418C3] text-white' onClick={()=>{
+                    e.verify ?
+                    window.alert('You are already verified')
+                    :
                     setVerify(true)
-                }}>Verify Ads</button>
+                 }}>Verify Ads</button>
 
             </div>
             {
-                verify && <Verify e={e} setVerify={setVerify}/>
+                verify && <Verify e={e} setVerify={setVerify} />
             }
-            
+
         </>
     )
 }
 
 
-const Verify = ({ e,setVerify }) => {
+const Verify = ({ e, setVerify }) => {
     const [step, setStep] = useState(1)
+    // eslint-disable-next-line
     const [preview, setPreview] = useState('')
     const [verificationImage, setVerificationImage] = useState('')
     return (
         <div className="fixed -top-5 left-0 flex justify-center items-center h-screen w-full bg-black/20 z-50">
             <div className="max-w-[1000px] min-w-[700px]  rounded-xl bg-[#F5F5F5] p-5">
                 <div className="flex justify-end">
-                    <Close onClick={()=>setVerify(false)}/>
+                    <Close onClick={() => setVerify(false)} />
                 </div>
                 {
                     step === 1 &&
@@ -122,7 +145,7 @@ const Verify = ({ e,setVerify }) => {
                 {
                     step === 3 && <div className="h-full flex flex-col justify-center items-center gap-5">
                         <div className="h-10 w-10 rounded-full border border-[#34C38F] text-[#34C38F] flex justify-center items-center">
-                            <Done/>
+                            <Done />
                         </div>
                         <p className='text-xl font-bold'>Your request has been successfully submitted</p>
                     </div>

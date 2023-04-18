@@ -114,8 +114,8 @@ const Buttons = ({ value }) => {
 const InCall = () => {
     const { currencyType } = useSelector(state => state.ads)
     const dispatch = useDispatch()
-    const { inCall } = useSelector(state => state.ads)
-    const { oneHourIn, twoHourIn, nightIn } = inCall
+    // const { inCall } = useSelector(state => state.ads)
+    // const { oneHourIn, twoHourIn, nightIn } = inCall
 
     return (
         <div className="flex gap-5">
@@ -153,8 +153,8 @@ const InCall = () => {
 const OutCall = () => {
     const { currencyType } = useSelector(state => state.ads)
     const dispatch = useDispatch()
-    const { outCall } = useSelector(state => state.ads)
-    const { oneHourOut, twoHourOut, nightOut } = outCall
+    // const { outCall } = useSelector(state => state.ads)
+    // const { oneHourOut, twoHourOut, nightOut } = outCall
     return (
         <div className="flex gap-5">
             <p className='text-sm font-bold w-14'>Outcalls</p>

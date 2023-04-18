@@ -6,7 +6,6 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
 import BackendIP from '../../../../BackendIP'
-import { Close } from '@mui/icons-material'
 
 
 
@@ -105,29 +104,3 @@ const Card = ({ credit, username }) => {
 }
 
 
-const VerifyBox = ({ setVerifyEmailAlert }) => {
-    return (
-        <div className="fixed top-0 left-0 z-50 h-screen w-full flex justify-center items-center bg-black/30 p-3">
-            <div className="max-w-[600px] w-full bg-white rounded-lg p-5 flex flex-col justify-center items-center gap-5">
-                <div className="w-full flex justify-between items-center">
-                    <div className=""></div>
-                    <p>Verify Your Email</p>
-                    <Close onClick={() => setVerifyEmailAlert(false)} />
-                </div>
-
-                <p className='text-center'>Please Enter 4 digit OTP send to your email address to verify your email</p>
-
-                <div className="flex justify-center items-center gap-3 text-center">
-                    <input className='h-12 w-12 border rounded-md text-center' type="number" min={0} max={9} />
-                    <input className='h-12 w-12 border rounded-md text-center' type="number" min={0} max={9} />
-                    <input className='h-12 w-12 border rounded-md text-center' type="number" min={0} max={9} />
-                    <input className='h-12 w-12 border rounded-md text-center' type="number" min={0} max={9} />
-                </div>
-
-                <button className='px-4 py-3 rounded-lg bg-[#34C38F] text-white'>Submit</button>
-
-
-            </div>
-        </div>
-    )
-}

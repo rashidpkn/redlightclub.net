@@ -148,15 +148,15 @@ function AuctionProgress() {
             <div className="space-y-4">
 
                 <div className="flex flex-wrap gap-4">
-                    {[1, 2, 3, 4, 5, 6].map(e => <Card fetchData={fetchData} bid={bid} tier={'platinum'} position={e} bidEnd={'12 Hr'} />)}
+                    {[1, 2, 3, 4, 5, 6].map(e => <Card key={e} fetchData={fetchData} bid={bid} tier={'platinum'} position={e} bidEnd={'12 Hr'} />)}
                 </div>
 
                 <div className="flex flex-wrap gap-4">
-                    {[1, 2, 3, 4, 5, 6].map(e => <Card fetchData={fetchData} bid={bid} tier={'gold'} position={e} bidEnd={'12 Hr'} />)}
+                    {[1, 2, 3, 4, 5, 6].map(e => <Card key={e} fetchData={fetchData} bid={bid} tier={'gold'} position={e} bidEnd={'12 Hr'} />)}
                 </div>
 
                 <div className="flex flex-wrap gap-4">
-                    {[1, 2, 3, 4, 5, 6].map(e => <Card fetchData={fetchData} bid={bid} tier={'silver'} position={e} bidEnd={'12 Hr'} />)}
+                    {[1, 2, 3, 4, 5, 6].map(e => <Card key={e} fetchData={fetchData} bid={bid} tier={'silver'} position={e} bidEnd={'12 Hr'} />)}
                 </div>
 
             </div>
@@ -176,7 +176,7 @@ const Card = ({ position, tier, bidEnd, bid, fetchData }) => {
     useEffect(() => {
         const status = bid?.find(e => e.position === position && e.tier === tier)?.status
         const largestBidAmount = bid?.find(e => e.position === position && e.tier === tier)?.largestBidAmount
-        setHighestBidder(bid?.find(e => e.position === position && e.tier === tier)?.bid?.find(e => e.amount === largestBidAmount).username)
+        status === 'open' && setHighestBidder(bid?.find(e => e.position === position && e.tier === tier)?.bid?.find(e => e.amount === largestBidAmount).username)
 
         setStatus(status ? status : 'close')
         setLargestBidAmount(largestBidAmount ? largestBidAmount : 40)

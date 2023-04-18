@@ -222,8 +222,8 @@ const Buttons = ({ id, fetchData, vacation,gallery }) => {
         <div className="flex flex-col justify-between items-end gap-3 float-right h-full">
             <p className='hidden md:block text-[12px] text-[#A5A5A5]'>Last seen Online 31/01/2023</p>
             <div className="flex gap-5">
-                <button className="hover:shadow-xl h-[26px] w-[26px] rounded-md bg-[#34C38F] flex justify-center items-center cursor-pointer" onClick={() => navigate('/dashboard/edit-ads')}><img src={adsEdit} alt="" /></button>
-                <button className="hover:shadow-xl h-[26px] w-[26px] rounded-md bg-[#FF0000] flex justify-center items-center cursor-pointer" onClick={deleteAds}><img src={adsDelete} alt="" /></button>
+                <button className="hover:shadow-xl h-[38px] w-[38px] rounded-md bg-[#34C38F] flex justify-center items-center cursor-pointer" onClick={() => navigate('/dashboard/edit-ads')}><img src={adsEdit} alt="" /></button>
+                <button className="hover:shadow-xl h-[38px] w-[38px] rounded-md bg-[#FF0000] flex justify-center items-center cursor-pointer" onClick={deleteAds}><img src={adsDelete} alt="" /></button>
                 {
                     vacation ?
                         <button className='px-3 py-1 rounded-xl bg-[#F4B000] text-white' onClick={() => {
@@ -278,11 +278,17 @@ const Profile = ({ ads }) => {
                 <img src={ads.profilePhoto} alt="" className='h-full w-full rounded-md object-cover object-top hover:scale-125 duration-500' />
             </div>
             <div className="h-36 rounded-md flex flex-col justify-between  p-2">
-                <p className='font-bold text-xs text-[#38E25D]'>Active</p>
-                <p className='font-bold text-2xl'>{ads.adsTitle}</p>
-                <p className='font-bold text-xs text-[#2E2E2E]'>{ads.nationality}</p>
+                <div className="flex gap-2 items-center">
+                    <div className="w-2 h-2 rounded-full bg-[#38E25D]"></div>
+                    <p className='font-bold text-xs text-[#38E25D]'>Active</p>
+                </div>
+                <div className="">
+                    <p className='font-bold text-2xl'>{ads.adsTitle}</p>
+                    <p className='font-bold text-xs text-[#2E2E2E]'>{ads.nationality}</p>
+                </div>
                 <p className='font-bold text-[10px] text-[#2E2E2E]'>{ads.location}</p>
-                <div className="flex items-center">
+                
+                <div className="flex items-center gap-6">
 
 
                     <a target={'_blank'} rel='noreferrer' href={`tel:${ads.phone?.code}${ads.phone?.number}`}>
