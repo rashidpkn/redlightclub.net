@@ -28,8 +28,8 @@ export class Ads extends Model {
   @Column
   nationality: string;
 
-  @Column
-  language: string;
+  @Column({type:DataType.ARRAY(DataType.STRING),defaultValue:['English']})
+  language: [string];
 
   @Column
   eye: string;
