@@ -1,6 +1,6 @@
 import { Close } from '@mui/icons-material'
 import axios from 'axios'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import BackendIP from '../../../../BackendIP'
@@ -72,9 +72,11 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
         type: '',
         subject: '',
         detail: '',
-        files:[]
+        images:[]
 
     })
+
+    console.log(ticket);
 
 
     const createTicket = () =>{
@@ -118,16 +120,16 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
                 </div>
 
                 <div className="w-full">
-                    <p className='text-[#C7C7C7] font-bold text-sm'>details</p>
+                    <p className='text-[#C7C7C7] font-bold text-sm'>Details</p>
                     <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 ' value={ticket.detail} onChange={e=>setTicket({...ticket,detail:e.target.value})} />
                 </div>
                 <div className="flex gap-5 flex-wrap">
                     <Photo setTicket={setTicket} ticket={ticket}/>
-                    {ticket.files.map(e=><div className='relative w-48 h-14 rounded-xl  flex flex-col justify-center  border border-[#6418C3] border-dashed pl-5'>
-                        <p className='text-xs'>{e.name}</p>
-                        <p className='text-xs'>{e.size/1024} kb</p>
+                    {ticket.images.map(e=><div className='relative w-48 h-14 rounded-xl  flex flex-col justify-center  border border-[#6418C3] border-dashed pl-5'>
+                        <p className='text-xs'>{e}</p>
+                        {/* <p className='text-xs'>{e.size/1024} kb</p> */}
                         <div className="p-[1px] rounded-full bg-red-500 absolute -top-2 right-2 cursor-pointer flex justify-center items-center text-white" onClick={()=>{
-                            setTicket({...ticket,files:ticket.files.filter(ev=>ev!==e)})
+                            setTicket({...ticket,images:ticket.images.filter(ev=>ev!==e)})
                         }}>
                             <Close style={{fontSize:'0.6rem'}} />
                         </div>
@@ -143,21 +145,26 @@ const NewTicket = ({ setNewTicket,fetchData }) => {
 
 
 const Photo = ({setTicket,ticket}) => {
+    const [image, setImage] = useState([])
+    useEffect(() => {
+      
+    setTicket({...ticket,images:image})
+    }, [image])
     
     const { getRootProps, getInputProps } = useDropzone({
         accept: {
             'image/*': ['.png', '.jpg', '.jpegs', '.webp'],
         },
-        // maxFiles: 1,
-        onDrop: acceptedFiles => {
-            // const data = new FormData()
-            // data.append('name', adsTitle)
-            // data.append('profile', acceptedFiles[0])
-            setTicket({...ticket,files:acceptedFiles})
-            // axios.post(`${BackendIP}/upload/profile`, data).then(res => { window.alert('Profile is Uploaded') }).then(res => {
-            //   setAds({...ads,profilePhoto:`/files/${adsTitle}-${acceptedFiles[0].name}`})
-            // })
-        }
+        onDrop : useCallback(acceptedFiles => {
+            const data = new FormData()
+            data.append('name', 'support')
+            acceptedFiles.map(e => data.append('gallery', e))
+            axios.post(`${BackendIP}/upload/gallery`, data)
+            let files = []
+            acceptedFiles.map(e => files.push(`/files/${'support'}-${e.name}`))
+            setImage(files)
+            // setTicket({...ticket,images:files})
+        }, [])
     });
   
     return (
@@ -193,7 +200,7 @@ const TableRow = ({ id, subject, type, status, e}) => {
 }
 
 
-const Ticket = ({ username, email, type, subject, detail,setShowTicket }) => {
+const Ticket = ({ username, email, type, subject, detail,setShowTicket,response }) => {
 
 
 
@@ -231,7 +238,7 @@ const Ticket = ({ username, email, type, subject, detail,setShowTicket }) => {
 
                 <div className="w-full">
                     <p className='text-[#C7C7C7] font-bold text-sm'>Response from Admin</p>
-                    <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 '  readOnly />
+                    <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 ' value={response}  readOnly />
                 </div>
                 
                 {/* <div className="space-x-3">

@@ -52,7 +52,7 @@ export default Support
 
 
 
-const TableRow = ({ id, username, subject, status, email, type, detail }) => {
+const TableRow = ({ id, username, subject, status, email, type, detail,images }) => {
     const [showTicket, setShowTicket] = useState()
     return (
         <>
@@ -73,7 +73,7 @@ const TableRow = ({ id, username, subject, status, email, type, detail }) => {
                     </div>
                 </td>
             </tr>
-            {showTicket && <Ticket username={username} email={email} type={type} subject={subject} detail={detail} setShowTicket={setShowTicket} />}
+            {showTicket && <Ticket username={username} email={email} type={type} subject={subject} detail={detail} setShowTicket={setShowTicket} id={id} images={images}/>}
         </>
 
     )
@@ -111,13 +111,13 @@ const Menu = () => {
 }
 
 
-const Ticket = ({ username, email, type, subject, detail,setShowTicket }) => {
-
+const Ticket = ({ username, email, type, subject, detail,setShowTicket,id,images }) => {
+const [response, setResponse] = useState('')
 
 
     return (
         <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center px-3">
-            <div className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5" >
+            <div className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5 overflow-y-scroll" >
                 <div className="flex justify-between items-center">
                     <p className='font-bold'>Ticket Details</p>
                     <Close onClick={()=>setShowTicket(false)}/>
@@ -143,15 +143,29 @@ const Ticket = ({ username, email, type, subject, detail,setShowTicket }) => {
                 </div>
 
                 <div className="w-full">
-                    <p className='text-[#C7C7C7] font-bold text-sm'>details</p>
+                    <p className='text-[#C7C7C7] font-bold text-sm'>Details</p>
                     <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 ' value={detail} readOnly />
                 </div>
+
+                <div className="w-full">
+                    <p className='text-[#C7C7C7] font-bold text-sm'>Response</p>
+                    <textarea type="text" className='w-full h-32 bg-[#F5f5f5] rounded-md p-3 ' value={response} onChange={e=>setResponse(e.target.value)} />
+                </div>
                 
+                <div className="flex  items-center flex-wrap">
+                    {images?.map(e=><img className='w-32 border' src={BackendIP + e } alt='' />)}
+                </div>
+                
+
                 <div className="space-x-3">
                     
-                    <a href={`mailto:${email}`}>
-                        <button className='w-40 h-12 rounded-xl bg-[#5ECFFF] text-white text-sm font-bold'>Message User</button>
-                    </a>
+                    
+                        <button className='w-40 h-12 rounded-xl bg-[#5ECFFF] text-white text-sm font-bold' onClick={()=>{
+                            axios.post(`${BackendIP}/support/response`,{response,id}).then(res=>{
+                                window.alert("You are response to the client")
+                            })
+                        }}>Message User</button>
+                    
                     
                     <button className='w-40 h-12 rounded-xl bg-[#34C38F] text-white text-sm font-bold' >Mark Resolved</button>
 

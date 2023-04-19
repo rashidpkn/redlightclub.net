@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.b83437a6.css",
-    "main.js": "/static/js/main.294bd93a.js",
+    "main.css": "/static/css/main.b6b64b6a.css",
+    "main.js": "/static/js/main.e9bd42a6.js",
     "static/media/lady.png": "/static/media/lady.53ac6f75387354f8bc01.png",
     "static/media/sextoy1.png": "/static/media/sextoy1.fe393ceddae2e0d6dd9a.png",
     "static/media/sextoy3.png": "/static/media/sextoy3.ef35b863dd56df461886.png",
@@ -28,11 +28,11 @@
     "static/media/notification.svg": "/static/media/notification.c37e4d3d60f3b7ba38836dede9f7e330.svg",
     "index.html": "/index.html",
     "static/media/email.svg": "/static/media/email.4efe0c7e8dea67a7c2ba4a986ca76d75.svg",
-    "main.b83437a6.css.map": "/static/css/main.b83437a6.css.map",
-    "main.294bd93a.js.map": "/static/js/main.294bd93a.js.map"
+    "main.b6b64b6a.css.map": "/static/css/main.b6b64b6a.css.map",
+    "main.e9bd42a6.js.map": "/static/js/main.e9bd42a6.js.map"
   },
   "entrypoints": [
-    "static/css/main.b83437a6.css",
-    "static/js/main.294bd93a.js"
+    "static/css/main.b6b64b6a.css",
+    "static/js/main.e9bd42a6.js"
   ]
 }

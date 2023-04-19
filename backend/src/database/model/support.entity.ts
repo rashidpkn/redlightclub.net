@@ -17,6 +17,12 @@ export class Supports extends Model{
    @Column
    detail:string
 
+   @Column
+   response : string
+
+   @Column({type:DataType.ARRAY(DataType.STRING)})
+   images : [string]
+
    @Column({defaultValue:false})
    status:boolean
 }
