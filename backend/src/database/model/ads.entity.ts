@@ -85,7 +85,7 @@ export class Ads extends Model {
   @Column({ defaultValue: 1 })
   view: number;
 
-  @Column({ defaultValue: true })
+  @Column({ defaultValue: false })
   visibility: boolean;
 
   @Column({ defaultValue: false })
