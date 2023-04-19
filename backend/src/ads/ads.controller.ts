@@ -1,6 +1,6 @@
 import { Controller, HttpException, HttpStatus } from '@nestjs/common';
 import { Delete, Get, Post } from '@nestjs/common/decorators/http/request-mapping.decorator';
-import { Body, Query, Req } from '@nestjs/common/decorators/http/route-params.decorator';
+import { Body, Headers, Query, Req } from '@nestjs/common/decorators/http/route-params.decorator';
 import { Ads } from 'src/database/model/ads.entity';
 import { Notification } from 'src/database/model/notification.entity';
 import { AdsService } from './ads.service';
@@ -21,7 +21,8 @@ export class AdsController {
   }
 
   @Get('get-all-ads')
-  getAllAds() {
+  getAllAds(
+  ) {
     return Ads.findAll()
   }
 

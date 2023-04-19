@@ -8,6 +8,7 @@ import { Notification } from './model/notification.entity';
 import { Report } from './model/reportedProfile.entity';
 import { User } from './model/user.entity';
 import { Supports } from './model/support.entity';
+import { PaymentHistory } from './model/paymentHistory';
 
 export const databaseProviders = [
   {
@@ -22,7 +23,7 @@ export const databaseProviders = [
         database: 'test',
         logging: false,
       });
-      sequelize.addModels([User, Ads, Analytics,Report,Banners,Blacklist,Bid,Notification,Supports]);
+      sequelize.addModels([User, Ads, Analytics,Report,Banners,Blacklist,Bid,Notification,Supports,PaymentHistory]);
       await sequelize.sync({ alter:true });
       return sequelize;
     },

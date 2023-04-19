@@ -4,6 +4,7 @@ import { Bid } from 'src/database/model/bid.entity';
 import { BidService } from './bid.service';
 import { User } from 'src/database/model/user.entity';
 import { async } from 'rxjs';
+import { PaymentHistory } from 'src/database/model/paymentHistory';
 
 @Controller('bid')
 export class BidController {
@@ -100,6 +101,7 @@ export class BidController {
       const  {username} =  bid.find((e: { amount: any; })=> e.amount===largestBidAmount)
       const found = await User.findOne({where:{username}})
       await User.update({bid:[...found.bid,{tier,position}],due:true,dueAmount:found.dueAmount+largestBidAmount},{where:{username}})
+      await PaymentHistory.create({username,bid:{tier,position},amount:largestBidAmount,})
       Bid.update({status:'close'},{where:{position,tier}})
       return true
   }

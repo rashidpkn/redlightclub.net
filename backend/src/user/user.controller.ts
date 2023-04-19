@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Get, Req, Query } from '@nestjs/common';
 import { User } from 'src/database/model/user.entity';
 import { UserService } from './user.service';
+import { PaymentHistory } from 'src/database/model/paymentHistory';
 
 @Controller('user')
 export class UserController {
@@ -55,7 +56,7 @@ export class UserController {
   ) {
     const {username} = body
     const update = await User.update({due:false,dueAmount:0},{where:{username}})
-  
+    await PaymentHistory.update({status:'paid'},{where:{username}})
     return true
 
 
