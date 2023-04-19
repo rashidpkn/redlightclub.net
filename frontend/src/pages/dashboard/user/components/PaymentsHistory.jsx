@@ -45,7 +45,7 @@ function PaymentsHistory() {
       })
 
     
-    }, [])
+    }, [username])
     
     return (
         <div className='space-y-5'>
@@ -112,7 +112,11 @@ const TableBody = (
             </td>
 
             <td className='h-full w-[15%] font-bold text-xs'>{amount} AED</td>
-            <td className='h-full w-[15%] font-bold text-xs'>{status}</td>
+            <td className={`h-full w-[15%] font-bold text-xs capitalize
+            ${status==='paid' && 'text-[#38E25D]'}
+            ${status==='pending' && 'text-[#F4B000]'}
+            ${status==='decliend' && 'text-[#CE0000]'}
+            `}>{status}</td>
             <td className='h-full w-[15%] font-bold text-xs'>APR 19,2023</td>
             <td className='h-full w-[15%] font-bold text-xs'>{invoice}</td>
         </tr>

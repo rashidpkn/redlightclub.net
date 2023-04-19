@@ -4,6 +4,9 @@ import totalAmountIcon from '../../../../asset/icons/dashboard/payment history/t
 import upArrowIcon from '../../../../asset/icons/dashboard/payment history/upArrow.png'
 import downArrowIcon from '../../../../asset/icons/dashboard/payment history/downArrow.png'
 
+import diamondIcon from '../../../../asset/icons/dashboard/profile/diamond.svg'
+
+
 import { Line } from 'react-chartjs-2'
 import {
     Chart as ChartJS, CategoryScale,
@@ -36,16 +39,18 @@ ChartJS.register(
 function PaymentsHistory() {
     const [paymentHistory, setPaymentHistory] = useState([])
     const [totalAmount, setTotalAmount] = useState(0)
+
     useEffect(() => {
       axios.get(`${BackendIP}/payment`).then(res=>{
         setPaymentHistory(res.data)
         
         let amount = 0
+        // eslint-disable-next-line
         res.data?.map(e=>{
             amount = amount + e.amount
         })
         setTotalAmount(amount)
-        
+
       })
     }, [])
     
@@ -81,9 +86,9 @@ function PaymentsHistory() {
                     <div className="flex gap-5 font-bold">
 
                         <div className="w-[230px] h-[130px] bg-white rounded-lg p-5 space-y-5">
-                            <p className='text-lg'>Successful Bid</p>
+                            <p className='text-lg'>Successful Bids</p>
                             <div className="flex items-center gap-5">
-                                <p className='text-3xl'>421</p>
+                                <p className='text-3xl'>{paymentHistory.filter(e=>e.status==='paid').length}</p>
                                 <div className="w-20 h-8 rounded-xl bg-[#38E25D] flex gap-1 justify-center items-center text-white font-normal text-sm">
                                     <img src={upArrowIcon} alt="" />
                                     <p>+ 0.5%</p>
@@ -94,7 +99,7 @@ function PaymentsHistory() {
                         <div className="w-[230px] h-[130px] bg-white rounded-lg p-5 space-y-5">
                             <p className='text-lg'>Declined Bids</p>
                             <div className="flex items-center gap-5">
-                                <p className='text-3xl'>21</p>
+                                <p className='text-3xl'>{paymentHistory.filter(e=>e.status==='declined').length}</p>
                                 <div className="w-20 h-8 rounded-xl bg-[#D80027] flex gap-1 justify-center items-center text-white font-normal text-sm">
                                 <img src={downArrowIcon} alt="" />
                                     <p>- 0.5%</p>
@@ -228,11 +233,13 @@ const TableBody = ({username,amount,status,bid}) =>{
 
                         <td className='h-full w-[25%] '>
                             <div className="h-full w-full flex items-center gap-3">
-                                <div className={`w-8 h-8  rounded-md
+                                <div className={`w-8 h-8  rounded-md flex justify-center items-center
                                 ${bid?.tier === 'platinum' && 'bg-[#0062F4]'}
                                 ${bid?.tier === 'gold' && 'bg-[#F4B000]'}
                                 ${bid?.tier === 'silver' && 'bg-[#A63200]'}
-                                `}></div>
+                                `}>
+                                    <img src={diamondIcon} alt="" />
+                                </div>
                                 <div className="">
                                     <p className='font-bold text-xs capitalize'>{username}</p>
                                     {/* <p className='text-xs'>India</p> */}
@@ -241,7 +248,11 @@ const TableBody = ({username,amount,status,bid}) =>{
                         </td>
 
                         <td className='h-full w-[15%] font-bold text-xs'>{amount} AED</td>
-                        <td className='h-full w-[15%] font-bold text-xs capitalize'>{status}</td>
+                        <td className={`h-full w-[15%] font-bold text-xs capitalize 
+                        ${status==='paid' && 'text-[#38E25D]'}
+                        ${status==='pending' && 'text-[#F4B000]'}
+                        ${status==='decliend' && 'text-[#CE0000]'}
+                        `}>{status}</td>
                         <td className='h-full w-[15%] font-bold text-xs capitalize'>{bid?.tier}</td>
                         <td className='h-full w-[15%] font-bold text-xs'>Active</td>
                     </tr>
