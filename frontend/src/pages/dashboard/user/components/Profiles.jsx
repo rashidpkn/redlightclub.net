@@ -27,14 +27,14 @@ function Profiles() {
             <div className="flex justify-between items-center">
                 <p className='text-2xl font-bold'>Profile</p>
                 <div className="flex gap-5 text-white text-sm font-bold">
-                    <button className='px-4 py-3 rounded-xl bg-[#6418C3] hover:shadow-xl'>Setup Ads</button>
+                    
                     <Link to={'/new-ads'}>
                         <button className='px-4 py-3 rounded-xl bg-[#34C38F] hover:shadow-xl'><Add /> Add New Profile</button>
                     </Link>
                 </div>
             </div>
             <div className="flex flex-wrap justify-start items-center gap-4">
-                {ads.map(e => <Card {...e} e={e} />)}
+                {ads.map(e => <Card key={e.id} {...e} e={e} />)}
 
             </div>
         </div>

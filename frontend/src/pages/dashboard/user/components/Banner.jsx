@@ -49,7 +49,7 @@ function Banner() {
 
                 </thead>
                 <tbody>
-                    {banners.map(e=><TableRow {...e}  />)}
+                    {banners.map(e=><TableRow key={e.id} {...e}  />)}
                 </tbody>
 
             </table>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import totalAmountIcon from '../../../../asset/icons/dashboard/payment history/totalAmout.png'
 import upArrowIcon from '../../../../asset/icons/dashboard/payment history/upArrow.png'
@@ -15,6 +15,8 @@ import {
     Legend,
 } from "chart.js";
 import { useSelector } from 'react-redux';
+import axios from 'axios'
+import BackendIP from '../../../../BackendIP'
 
 
 ChartJS.register(
@@ -29,7 +31,24 @@ ChartJS.register(
 
 
 
+
+
 function PaymentsHistory() {
+    const [paymentHistory, setPaymentHistory] = useState([])
+    const [totalAmount, setTotalAmount] = useState(0)
+    useEffect(() => {
+      axios.get(`${BackendIP}/payment`).then(res=>{
+        setPaymentHistory(res.data)
+        
+        let amount = 0
+        res.data?.map(e=>{
+            amount = amount + e.amount
+        })
+        setTotalAmount(amount)
+        
+      })
+    }, [])
+    
     return (
         <div className='space-y-5'>
             <Menu />
@@ -49,7 +68,7 @@ function PaymentsHistory() {
                             <img src={totalAmountIcon} alt="" />
                             <div className="">
                                 <p className='text-sm'>Total Amount</p>
-                                <p className='text-2xl'>AED 21,560.57</p>
+                                <p className='text-2xl'>AED {totalAmount}</p>
                             </div>
                         </div>
 
@@ -104,16 +123,7 @@ function PaymentsHistory() {
 
                 </thead>
                 <tbody className='w-full '>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
-                    <TableBody/>
+                    {paymentHistory.map(e=><TableBody {...e} />)}
                 </tbody>
 
             </table>
@@ -208,7 +218,7 @@ const Graph = () => {
 }
 
 
-const TableBody = () =>{
+const TableBody = ({username,amount,status,bid}) =>{
     return(
         <tr className='w-full h-16 border-b hover:shadow-lg'>
 
@@ -218,17 +228,21 @@ const TableBody = () =>{
 
                         <td className='h-full w-[25%] '>
                             <div className="h-full w-full flex items-center gap-3">
-                                <div className="w-8 h-8 bg-black rounded-md"></div>
+                                <div className={`w-8 h-8  rounded-md
+                                ${bid?.tier === 'platinum' && 'bg-[#0062F4]'}
+                                ${bid?.tier === 'gold' && 'bg-[#F4B000]'}
+                                ${bid?.tier === 'silver' && 'bg-[#A63200]'}
+                                `}></div>
                                 <div className="">
-                                    <p className='font-bold text-xs'>Roshni</p>
-                                    <p className='text-xs'>India</p>
+                                    <p className='font-bold text-xs capitalize'>{username}</p>
+                                    {/* <p className='text-xs'>India</p> */}
                                 </div>
                             </div>
                         </td>
 
-                        <td className='h-full w-[15%] font-bold text-xs'>400 AED</td>
-                        <td className='h-full w-[15%] font-bold text-xs'>Paid</td>
-                        <td className='h-full w-[15%] font-bold text-xs'>Platinum</td>
+                        <td className='h-full w-[15%] font-bold text-xs'>{amount} AED</td>
+                        <td className='h-full w-[15%] font-bold text-xs capitalize'>{status}</td>
+                        <td className='h-full w-[15%] font-bold text-xs capitalize'>{bid?.tier}</td>
                         <td className='h-full w-[15%] font-bold text-xs'>Active</td>
                     </tr>
     )

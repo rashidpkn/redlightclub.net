@@ -6,15 +6,15 @@ import { setServiceCharge } from '../../../redux/slice/adsSlice'
 
 function Page3({ setDisable }) {
     const dispatch = useDispatch()
-    const { currencyType, service } = useSelector(state => state.ads)
+    const { currencyType} = useSelector(state => state.ads)
 
 
     useEffect(() => {
-        if (currencyType && service.length) {
+        if (currencyType ) {
             setDisable(false)
         } else setDisable(true)
         // eslint-disable-next-line
-    }, [currencyType, service])
+    }, [currencyType])
 
 
     return (
@@ -63,7 +63,7 @@ const ServiceCharges = () => {
     return (
 
         <div className="flex gap-5 flex-wrap">
-            {service.map(e => <div className="flex items-center gap-2">
+            {service.map(e => <div key={e.name} className="flex items-center gap-2">
                 <p className='w-24 text-sm font-bold'>{e.name}</p>
                 <div className=" h-10 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center flex justify-center items-center">
                     <input placeholder='eg: 200 ' type="number" className='h-full w-20 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl text-center'
@@ -89,7 +89,7 @@ const ServiceCharges = () => {
 const Service = () => {
     return (
         <div className="flex flex-wrap gap-x-2 gap-y-1 h-36 overflow-y-scroll">
-            {services.map(e => <Buttons key={e} value={e} />)}
+            {services.map(e => <Buttons  key={e} value={e} />)}
         </div>
     )
 }

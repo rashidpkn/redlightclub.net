@@ -103,7 +103,7 @@ const Gallery = () => {
             {loading && <img className='h-16' src={loadingSvg} alt="" />}
         </div>
             <div className="flex gap-5 flex-wrap">
-                {preview.map(e => <img src={e} className='w-[100px] h-[124px] rounded-xl' alt="" />)}
+                {preview.map(e => <img key={e} src={e} className='w-[100px] h-[124px] rounded-xl' alt="" />)}
             </div>
         </>
     )

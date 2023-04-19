@@ -89,7 +89,7 @@ const Location = () => {
                     <input {...getInputProps({ placeholder: 'eg: Dubai', className: 'w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' })} />
                     <div className="autocomplete-dropdown-container bg-white absolute w-full space-y-2 rounded-xl p-2">
                         {loading && <div>Loading...</div>}
-                        {suggestions.map(suggestion => <div{...getSuggestionItemProps(suggestion, { className: 'cursor-pointer border-b py-1' })}><span>{suggestion.description}</span></div>)}
+                        {suggestions.map(suggestion => <div key={suggestion.description} {...getSuggestionItemProps(suggestion, { className: 'cursor-pointer border-b py-1' })}><span>{suggestion.description}</span></div>)}
                     </div>
                 </div>
             )}

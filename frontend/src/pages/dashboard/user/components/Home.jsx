@@ -1,12 +1,31 @@
 import React from 'react'
 
 import cardImage from '../../../../asset/images/dashboard/user/card.png'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
 import BackendIP from '../../../../BackendIP'
 import { Close } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
+import { setId } from '../../../../redux/slice/utilSlice'
+
+import liveAds from '../../../../asset/icons/dashboard/home-user/live-ads.svg'
+import profileView from '../../../../asset/icons/dashboard/home-user/profile-views.svg'
+import rating from '../../../../asset/icons/dashboard/home-user/rating.svg'
+import Star from '../../../../asset/icons/dashboard/home-user/star'
+import clickRate from '../../../../asset/icons/dashboard/home-user/click-rate.svg'
+import responseRate from '../../../../asset/icons/dashboard/home-user/response-rate.svg'
+
+import { Line } from 'react-chartjs-2'
+import { Chart as ChartJS ,CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,} from "chart.js";
+
 
 
 
@@ -26,7 +45,7 @@ function Home() {
         // eslint-disable-next-line
     }, [])
 
-   
+
 
 
     const [verifyEmailAlert, setVerifyEmailAlert] = useState(false)
@@ -37,47 +56,10 @@ function Home() {
                 <p className='text-red-500'>Please Verify Your Email</p>
                 <button className='px-4 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => setVerifyEmailAlert(true)}>Verify</button>
             </div>
-            <div className=" bg-white rounded-xl flex justify-between p-5">
-                <div className="space-y-5">
-                    <div className="flex gap-5">
-                        <img src={ads[0]?.profilePhoto} className='w-36 h-36 border' alt="" />
-                        <div className="flex flex-col justify-between">
-                            <div className="">
-                                <p className='text-2xl font-bold'>{ads[0]?.adsTitle}</p>
-                                <p className='text-xs'>Indian</p>
-                            </div>
-                            <p className='text-xs font-bold'>Active</p>
-                            <button className='rounded-xl h-10 w-36 border'>Edit Profile</button>
-                        </div>
-                    </div>
-                    <div className="flex gap-5 items-center justify-center">
-                        <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
-                            <p className='text-[10px]'>Live Ads</p>
-                            <div className="flex gap-3 items-center">
-                                <div className="w-6 h-6 bg-black"></div>
-                                <p className='text-lg font-bold'>{ads.length}</p>
-                            </div>
-                        </div>
-                        <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
-                            <p className='text-[10px]'>Profile Views</p>
-                            <div className="flex gap-3 items-center">
-                                <div className="w-6 h-6 bg-black"></div>
-                                <p className='text-lg font-bold'>0</p>
-                            </div>
-                        </div>
-                        <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
-                            <p className='text-[10px]'>Rating</p>
-                            <div className="flex gap-3 items-center">
-                                <div className="w-6 h-6 bg-black"></div>
-                                <p className='text-lg font-bold'>0</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <Card {...user} />
-            </div>
-            <Analatics />
+            <Profile ads={ads} user={user} />
+
+            <HomeAnalatics ads={ads} />
 
             {verifyEmailAlert && <VerifyBox setVerifyEmailAlert={setVerifyEmailAlert} />}
         </div>
@@ -86,87 +68,239 @@ function Home() {
 
 export default Home
 
-const Analatics = ()=>{
-    return(
-        <>
-        <div className=" flex gap-3 flex-wrap">
-                
-                <div className="h-[380px] w-[570px] rounded-xl bg-white p-4">
-                    <div className="flex justify-between items-center">
+
+const Profile = ({ ads, user }) => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    return (
+        <div className=" bg-white rounded-xl flex justify-between p-5">
+            <div className="space-y-5">
+                <div className="flex gap-5">
+                    <img src={ads[0]?.profilePhoto} className='w-36 h-36 border' alt="" />
+                    <div className="flex flex-col justify-between">
                         <div className="">
-                            <p className='text-xl font-bold'>Ad Analytics</p>
-                            <p className='text-[10px] text-[#A5A5A5]'>Jan 1 - Dec 31,2023</p>
+                            <p className='text-2xl font-bold'>{ads[0]?.adsTitle}</p>
+                            <p className='text-xs text-[#2e2e2e]/70'>{ads[0]?.location}</p>
                         </div>
-                        <div className="flex gap-3">
-                            <p className='text-xs font-bold'>Sub Profiles1</p>
-                            <p className='text-xs font-bold'>Monthly</p>
-                        </div>
+                        {ads[0]?.visibility ?<p className='text-xs font-bold text-[#38E25D]'>Active</p>:<p className='text-xs font-bold text-[#E11700]'>Inactive</p>}
+                        
+                        <button className='rounded-xl h-10 w-36 border font-bold text-[#585858] text-xs'
+                            onClick={() => {
+                                dispatch(setId(ads[0]?.id))
+                                navigate('/dashboard/edit-ads')
+                            }}
+                        >Edit Profile</button>
                     </div>
                 </div>
-                
-                <div className="h-[380px] w-[300px] rounded-xl bg-white p-4 space-y-5">
-                    <div className="flex justify-between items-center">
-                        <p className='text-xl font-bold'>Overall Statistics</p>
-                        <p className='text-xs font-bold'>Sub Profile</p>
-                    </div>
-                    <div className="flex ">
-                        <div className="w-full flex flex-col justify-center">
-                            <p className='text-xl font-bold'>4.5</p>
-                            <p className='text-sm'>Overall Rating</p>
-                        </div>
-                        <div className="w-full flex flex-col justify-center">
-                            <p className='text-xl font-bold'>68</p>
-                            <p className='text-sm'>Reviews</p>
+                <div className="flex gap-5 items-center justify-center">
+                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
+                        <p className='text-[10px] text-[#202020]'>Live Ads</p>
+                        <div className="flex gap-3 items-center">
+                            <div className="w-6 h-6">
+                                <img src={liveAds} className='w-full h-full' alt="" />
+                            </div>
+                            <p className='text-lg font-bold'>{ads.length}</p>
                         </div>
                     </div>
-                    <div className="flex justify-between">
-                        <div className=""></div>
-                        <div className="space-y-5">
-                            <div className="flex justify-center items-center gap-1"> <p>1/5</p> <div className="w-5 h-5 bg-black"></div> </div>
-                            <div className="flex justify-center items-center gap-1"> <p>2/5</p> <div className="w-5 h-5 bg-black"></div> </div>
-                            <div className="flex justify-center items-center gap-1"> <p>3/5</p> <div className="w-5 h-5 bg-black"></div> </div>
-                            <div className="flex justify-center items-center gap-1"> <p>4/5</p> <div className="w-5 h-5 bg-black"></div> </div>
-                            <div className="flex justify-center items-center gap-1"> <p>5/5</p> <div className="w-5 h-5 bg-black"></div> </div>
+                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
+                        <p className='text-[10px] text-[#202020]'>Profile Views</p>
+                        <div className="flex gap-3 items-center">
+                            <div className="w-6 h-6">
+                                <img src={profileView} className='w-full h-full' alt="" />
+                            </div>
+                            <p className='text-lg font-bold'>{ads[0]?.view}</p>
                         </div>
                     </div>
-                </div>
-                
-                <div className="w-[210px] space-y-5">
-
-                    <div className="w-full rounded-xl bg-white p-4 space-y-3">
-                        <p className='text-xl font-bold'>Click Rate</p>
-                        <div className="flex items-center gap-3">
-                            <div className="w-7 h-7 rounded-lg flex justify-between items-center bg-[#0062F4]"></div>
-                            <p className='text-xl font-bold'>1.5%</p>
+                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
+                        <p className='text-[10px] text-[#202020]'>Rating</p>
+                        <div className="flex gap-3 items-center">
+                            <div className="w-6 h-6">
+                                <img src={rating} className='w-full h-full' alt="" />
+                            </div>
+                            <p className='text-lg font-bold'>0</p>
                         </div>
-                        <p className='text-[9px]'>How often has the customers clicked on your profile while browsing.</p>
                     </div>
-                    <div className="w-full rounded-xl bg-white p-4 space-y-3">
-                        <p className='text-xl font-bold'>Response Rate</p>
-                        <div className="flex items-center gap-3">
-                            <div className="w-7 h-7 rounded-lg flex justify-between items-center bg-[#6418C3]"></div>
-                            <p className='text-xl font-bold'>20%</p>
-                        </div>
-                        <p className='text-[9px]'>How often has the customers clicked on your profile while browsing.</p>
-                    </div>
-
                 </div>
             </div>
 
-            <div className="w-[906px] h-[280px] rounded-xl bg-white p-4">
-                <div className="flex justify-between items-center">
-                    <div className="">
-                        <p className='text-xl font-bold'>Website Traffic</p>
-                        <p className='text-[10px] text-[#A5A5A5]'>Website Traffic for Redlightclub.net</p>
-                    </div>
-                    <p className='text-xs font-bold'>Monthly</p>
-                </div>
+            <Card {...user} />
+        </div>
+    )
+}
+
+
+export const HomeAnalatics = ({ ads }) => {
+    return (
+        <>
+            <div className=" flex gap-3 flex-wrap">
+                <AdsAnalytics ads={ads} />
+                <OverallStatistics ads={ads} />
+                <ClickAndResponse />
             </div>
+            <SiteTraffic />
         </>
     )
 }
 
 
+const AdsAnalytics = ({ ads }) => {
+    const [date, setDate] = useState([])
+    const [view, setView] = useState([])
+    const [id, setId] = useState(0)
+
+    useEffect(() => {
+        let date = []
+        let view = []
+        //eslint-disable-next-line
+        ads[id]?.analytics?.map(e => {
+            date.push(e.date)
+            view.push(e.view)
+            
+        })
+        setDate(date)
+        setView(view)
+    }, [id,ads])
+    
+
+    return (
+        <div className="h-[380px] w-[570px] rounded-xl bg-white p-4">
+            <div className="flex justify-between items-center">
+                <div className="">
+                    <p className='text-xl font-bold'>Ad Analytics</p>
+                    <p className='text-[10px] text-[#A5A5A5]'>Jan 1 - Dec 31,2023</p>
+                </div>
+                <div className="flex gap-3">
+
+                    <select className='text-xs font-bold' onChange={e=>setId(e.target.value)}>
+                        {ads?.map((e,index) => <option key={index} value={index}>{e?.adsTitle}</option>)}
+                    </select>
+                    <select className='text-xs font-bold' >
+                        <option value="Monthly">Monthly</option>
+                        <option value="Half Yearly">Half Yearly</option>
+                        <option value="Yearly">Yearly</option>
+                    </select>
+                </div>
+            </div>
+            <div className="">
+                <Graph date={date} view={view} />
+            </div>
+        </div>
+    )
+}
+
+
+const ClickAndResponse = () =>{
+    return(
+<div className="w-[210px] space-y-5">
+
+<div className="w-full rounded-xl bg-white p-4 space-y-3">
+    <p className='text-xl font-bold'>Click Rate</p>
+    <div className="flex items-center gap-3">
+        <div className="w-7 h-7 rounded-lg flex justify-center items-center bg-[#0062F4]">
+            <img src={clickRate} alt="" />
+        </div>
+        <p className='text-xl font-bold'>1.5%</p>
+    </div>
+    <p className='text-[9px]'>How often has the customers clicked on your profile while browsing.</p>
+</div>
+<div className="w-full rounded-xl bg-white p-4 space-y-3">
+    <p className='text-xl font-bold'>Response Rate</p>
+    <div className="flex items-center gap-3">
+        <div className="w-7 h-7 rounded-lg flex justify-center items-center bg-[#6418C3]">
+            <img src={responseRate} alt="" />
+        </div>
+        <p className='text-xl font-bold'>20%</p>
+    </div>
+    <p className='text-[9px]'>How often has the customers clicked on your profile while browsing.</p>
+</div>
+
+</div>
+    )
+}
+
+const OverallStatistics = ({ ads }) => {
+    return (
+        <div className="h-[380px] w-[300px] rounded-xl bg-white p-4 space-y-5">
+            <div className="flex justify-between items-center">
+                <p className='text-xl font-bold'>Overall Statistics</p>
+                <select className='text-xs font-bold'>
+                    {ads?.map((e,index) => <option key={index} value={e?.id}>{e?.adsTitle}</option>)}
+                </select>
+            </div>
+            <div className="flex ">
+                <div className="w-full flex flex-col justify-center">
+                    <p className='text-xl font-bold'>4.5</p>
+                    <p className='text-sm'>Overall Rating</p>
+                </div>
+                <div className="w-full flex flex-col justify-center">
+                    <p className='text-xl font-bold'>68</p>
+                    <p className='text-sm'>Reviews</p>
+                </div>
+            </div>
+            <div className="flex justify-between">
+                <div className=""></div>
+                <div className="space-y-5">
+                    <div className="flex justify-center items-center gap-1"> <p>1/5</p>
+                        <Star fill='#6418C3' />
+                    </div>
+                    <div className="flex justify-center items-center gap-1"> <p>2/5</p>
+                        <Star fill='#5ECFFF' />
+                    </div>
+                    <div className="flex justify-center items-center gap-1"> <p>3/5</p>
+                        <Star fill='#E328AF' />
+                    </div>
+                    <div className="flex justify-center items-center gap-1"> <p>4/5</p>
+                        <Star fill='#FFAB2D' />
+                    </div>
+                    <div className="flex justify-center items-center gap-1"> <p>5/5</p>
+                        <Star fill='#FF4A55' />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+const SiteTraffic = () => {
+    const [date, setDate] = useState([])
+    const [view, setView] = useState([])
+
+    useEffect(() => {
+        axios.get(`${BackendIP}/analytics`).then(res => {
+            let date = []
+            let view = []
+            //eslint-disable-next-line
+            res.data.map(e => {
+                date.push(e.date)
+                view.push(e.view)   
+            })
+            setDate(date)
+            setView(view)
+        })
+        //eslint-disable-next-line
+    }, [])
+
+
+    return (
+        <div className="  rounded-xl bg-white p-4">
+            <div className="flex justify-between items-center">
+                <div className="">
+                    <p className='text-xl font-bold'>Website Traffic</p>
+                    <p className='text-[10px] text-[#A5A5A5]'>Website Traffic for Redlightclub.net</p>
+                </div>
+                <select className='text-xs font-bold' >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Half Yearly">Half Yearly</option>
+                    <option value="Yearly">Yearly</option>
+                </select>
+            </div>
+            <div className="w-full ">
+                <Graph date={date} view={view} />
+            </div>
+        </div>
+    )
+}
 
 
 const Card = ({ credit, username }) => {
@@ -222,4 +356,86 @@ const VerifyBox = ({ setVerifyEmailAlert }) => {
             </div>
         </div>
     )
+}
+
+
+
+    
+    ChartJS.register(
+        CategoryScale,
+        LinearScale,
+        PointElement,
+        LineElement,
+        Title,
+        Tooltip,
+        Legend,
+        )
+
+function Graph({date,view}) {
+  const { isDarkMode } = useSelector(state => state.util)
+    
+
+  const options = {
+    elements: {
+        point: {
+            radius: 0
+        }
+    },
+    scales: {
+        x: {
+            grid: {
+                color: "rgba(0,0,0,0)"
+            }
+
+        },
+        y: {
+            grid: {
+                color: "rgba(0,0,0,0)"
+            }
+        }
+    },
+    animations: {
+        radius: {
+            duration: 400,
+            loop: (context) => context.active
+        }
+    },
+    hoverRadius: 8,
+    hoverBackgroundColor: isDarkMode ? '#3b82f6' : " #6418C3",
+    interaction: {
+        mode: "nearest",
+        intersect: false,
+        axis: "x"
+    },
+    plugins: {
+        tooltip: {
+            enabled: true
+        },
+        legend: {
+            display: false
+        }
+    }
+};
+
+      
+       const data = {
+        labels:date,
+        datasets: [
+          {
+              label: 'Views ',
+              data: view,
+              borderColor:  '#E328AF' ,
+              tension: 0.4,
+              borderWidth: 3,
+              filler:true,
+          }
+      ],
+      };
+
+  return (
+    <div className="graph h-full w-full">
+        <Line className='w-full'  options={options} data={data} />
+    </div>
+    
+  )
 }

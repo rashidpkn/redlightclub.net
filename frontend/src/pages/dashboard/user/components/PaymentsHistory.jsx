@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // import totalAmountIcon from '../../../../asset/icons/dashboard/payment history/totalAmout.png'
 // import upArrowIcon from '../../../../asset/icons/dashboard/payment history/upArrow.png'
@@ -17,6 +17,9 @@ import {
 // import { useSelector } from 'react-redux';
 
 import diamondIcon from '../../../../asset/icons/dashboard/profile/diamond.svg'
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import BackendIP from '../../../../BackendIP';
 
 
 ChartJS.register(
@@ -32,9 +35,21 @@ ChartJS.register(
 
 
 function PaymentsHistory() {
+    const {username} = useSelector(state=>state.user)
+
+    const [paymentHistory, setPaymentHistory] = useState([])
+
+    useEffect(() => {
+      axios.get(`${BackendIP}/payment/get-by-user`,{params:{username}}).then(res=>{
+        setPaymentHistory(res.data)
+      })
+
+    
+    }, [])
+    
     return (
         <div className='space-y-5'>
-            
+
 
 
 
@@ -43,20 +58,20 @@ function PaymentsHistory() {
 
                     <tr className='w-full h-16 border-b'>
                         <th className='h-full w-[15%]  text-start'></th>
-                        <th className='h-full w-[25%] text-start'>Bidder</th>
+                        <th className='h-full w-[25%] text-start'>Bid</th>
                         <th className='h-full w-[15%] text-start'>Bid Amount</th>
                         <th className='h-full w-[15%] text-start'>Payment Status</th>
-                        <th className='h-full w-[15%] text-start'>Bid Category</th>
-                        <th className='h-full w-[15%] text-start'>Profile Status</th>
+                        <th className='h-full w-[15%] text-start'>Date</th>
+                        <th className='h-full w-[15%] text-start'>Invoice</th>
                     </tr>
 
                 </thead>
                 <tbody className='w-full '>
-                    <TableBody tier={'platinum'} amount={400} position={1} status={'Paid'} invoice={'Not Generated'}/>
-                    <TableBody tier={'gold'}     amount={300} position={1} status={'Paid'} invoice={'Not Generated'}/>
-                    <TableBody tier={'gold'}     amount={350} position={2} status={'Pending'} invoice={'Not Generated'}/>
-                    <TableBody tier={'silver'}   amount={200} position={1} status={'Paid'} invoice={'Not Generated'}/>
-                    
+                    {
+                        paymentHistory.map(e=><TableBody {...e} />)
+                    }
+                   
+
                 </tbody>
 
             </table>
@@ -69,119 +84,37 @@ function PaymentsHistory() {
 export default PaymentsHistory
 
 
-
-// const Menu = () => {
-//     return (
-//         <div className="flex justify-between items-center flex-wrap gap-3">
-//             <div className="">
-//                 <h2 className='font-bold text-2xl'>Payment History</h2>
-//                 <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
-//             </div>
-
-//         </div>
-//     )
-// }
-
-
-// const Graph = () => {
-//     const { isDarkMode } = useSelector(state => state.util)
-
-//     const options = {
-//         elements: {
-//             point: {
-//                 radius: 0
-//             }
-//         },
-//         animations: {
-//             radius: {
-//                 duration: 400,
-//                 loop: (context) => context.active
-//             }
-//         },
-//         hoverRadius: 8,
-//         hoverBackgroundColor: isDarkMode ? '#3b82f6' : " #6418C3",
-//         interaction: {
-//             mode: "nearest",
-//             intersect: false,
-//             axis: "x"
-//         },
-//         plugins: {
-//             tooltip: {
-//                 enabled: true
-//             },
-//             legend: {
-//                 display: false
-//             }
-//         },
-//         scales: {
-//             x:{
-//                 grid: {
-//                     color:"rgba(0,0,0,0)"
-//                 }
-                
-//             },
-//             y:{
-//                 grid: {
-//                     color:"rgba(0,0,0,0)"
-//                 }
-//             }
-//         },
-
-//     };
-
-//     const data = {
-//         labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-//         datasets: [
-//             {
-//                 label: 'Revenue ',
-//                 data: [10, 30, 20, 40, 30, 40, 50],
-//                 borderColor: isDarkMode ? '#3b82f6' : " #6418C3",
-//                 tension: 0.4,
-//                 borderWidth: 5,
-//                 filler: true,
-//             }
-//         ],
-
-//     };
-//     return (
-//         <div className="h-56 w-full cursor-pointer">
-//             <Line options={options} data={data} />
-//         </div>
-//     )
-// }
-
-
 const TableBody = (
-    {tier,position,amount,status,invoice}
-) =>{
-    return(
+    { bid, amount, status, invoice }
+) => {
+    return (
         <tr className='w-full h-16 border-b hover:shadow-lg'>
 
-                        <td className='h-full w-[15%] text-center'>
-                            <input type="checkbox" name="" id="" />
-                        </td>
+            <td className='h-full w-[15%] text-center'>
+                <input type="checkbox" name="" id="" />
+            </td>
 
-                        <td className='h-full w-[25%] '>
-                            <div className="h-full w-full flex items-center gap-3">
-                                <div className={`w-8 h-8 
-                                ${tier ==='platinum' && 'bg-[#0062F4]'}
-                                ${tier ==='gold' && 'bg-[#F4B000]'}
-                                ${tier ==='silver' && 'bg-[#A63200]'}
+            <td className='h-full w-[25%] '>
+                <div className="h-full w-full flex items-center gap-3">
+                    <div className={`w-8 h-8 
+                                ${bid?.tier === 'platinum' && 'bg-[#0062F4]'}
+                                ${bid?.tier === 'gold' && 'bg-[#F4B000]'}
+                                ${bid?.tier === 'silver' && 'bg-[#A63200]'}
                                 
                                  rounded-md flex justify-center items-center`}>
-                                    <img src={diamondIcon} className='w-5' alt="" />
-                                 </div>
-                                <div className="">
-                                    <p className='font-bold text-xs capitalize'>{tier}</p>
-                                    <p className='text-xs'> Position {position}</p>
-                                </div>
-                            </div>
-                        </td>
+                        <img src={diamondIcon} className='w-5' alt="" />
+                    </div>
+                    <div className="">
+                        <p className='font-bold text-xs capitalize'>{bid?.tier}</p>
+                        <p className='text-xs'> Position {bid?.position}</p>
+                    </div>
+                </div>
+            </td>
 
-                        <td className='h-full w-[15%] font-bold text-xs'>400 AED</td>
-                        <td className='h-full w-[15%] font-bold text-xs'>{status}</td>
-                        <td className='h-full w-[15%] font-bold text-xs'>Platinum</td>
-                        <td className='h-full w-[15%] font-bold text-xs'>Active</td>
-                    </tr>
+            <td className='h-full w-[15%] font-bold text-xs'>{amount} AED</td>
+            <td className='h-full w-[15%] font-bold text-xs'>{status}</td>
+            <td className='h-full w-[15%] font-bold text-xs'>APR 19,2023</td>
+            <td className='h-full w-[15%] font-bold text-xs'>{invoice}</td>
+        </tr>
     )
 }

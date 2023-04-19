@@ -81,11 +81,10 @@ function UserDashboard() {
             <Menu Icon={AuctionIcon} url='auction-progress' title={'Auction In Progress'} />
             <div className="" onClick={setShowBillMenu}>
               <Menu Icon={BidPaymentsIcon} url='payment-history' title={'Billing'}  />
-
             </div>
             {
               showBillMenu && 
-              <div className="pl-5 relative -top-1 space-y-5">
+              <div className="pl-5" style={{margin:'2px'}}>
                 <Menu url='payment-history' title={'Payment History'} />
                 <Menu url='available-credit' title={'Available Credit'} />
               </div>
