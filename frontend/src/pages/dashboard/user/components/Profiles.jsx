@@ -95,7 +95,7 @@ const Card = ({ adsTitle, profilePhoto, id, e, tier, position }) => {
 }
 
 
-const Verify = ({ e, setVerify }) => {
+export const Verify = ({ e, setVerify }) => {
     const [step, setStep] = useState(1)
     // eslint-disable-next-line
     const [preview, setPreview] = useState('')

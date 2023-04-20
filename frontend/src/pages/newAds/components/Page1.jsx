@@ -21,18 +21,18 @@ function Page1({ setDisable }) {
     }, [adsTitle, phone, age, height, weight, hair, eye, bust, intro,orientation])
 
     return (
-        <div className='h-full w-full space-y-4'>
+        <div className='h-full w-full space-y-3.5 font-openSan'>
 
             <div className="space-y-2">
                 <p className='text-sm font-bold'>I Am</p>
 
-                <div className="flex gap-5">
+                <div className="flex gap-[25px]">
                     <div className="space-x-2">
-                        <input className='accent-[#6418C3]' type="radio" name="type" onChange={e => setType(e.target.value)} defaultChecked value={'independent'} id="independent" />
+                        <input className='accent-[#6418C3] h-[15px]' type="radio" name="type" onChange={e => setType(e.target.value)} defaultChecked value={'independent'} id="independent" />
                         <label htmlFor="independent">Independent</label>
                     </div>
                     <div className="space-x-2">
-                        <input className='accent-[#6418C3]' type="radio" name="type" onChange={e => setType(e.target.value)} value={'agency'} id="agency" />
+                        <input className='accent-[#6418C3] h-[15px]' type="radio" name="type" onChange={e => setType(e.target.value)} value={'agency'} id="agency" />
                         <label htmlFor="agency">Agency</label>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ function Page1({ setDisable }) {
                 <input placeholder='eg: Stacy' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' value={adsTitle} onChange={e => dispatch(setAdsTitle(e.target.value))} />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-3.5" style={{marginTop:'25px'}}>
                 <p className='text-sm font-bold'>Phone Number*</p>
                 <div className="w-fit h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl flex  overflow-hidden">
                     <select className={`w-20 h-full outline-[#6418C3] outline-1 rounded-l-xl bg-[#F5F5F5] text-sm text-center ${phone.code === '' && 'text-[#A5A5A5]'}`} placeholder='eg:+971' value={phone.code} onChange={e => dispatch(setPhone({ type: 'code', value: e.target.value }))} >
@@ -58,10 +58,10 @@ function Page1({ setDisable }) {
                 </div>
             </div>
 
-            <div className="flex gap-5 flex-wrap">
+            <div className="flex gap-5 flex-wrap" style={{marginTop:'19px'}}>
                 <div className="space-y-2">
                     <p className='text-sm font-bold'>Age*</p>
-                    <select type="text" className={`w-20 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${age === '' && 'text-[#A5A5A5]'}`} onChange={e => dispatch(setAge(Number(e.target.value)))} value={age} >
+                    <select type="text" className={`w-[83px] h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${age === '' && 'text-[#A5A5A5]'}`} onChange={e => dispatch(setAge(Number(e.target.value)))} value={age} >
                         <option value="" disabled defaultValue>eg: 22</option>
                         {[...Array(23)].map((e, i) => <option className='text-black' key={i} value={i + 18}>{i + 18}</option>)}
                     </select>
@@ -69,7 +69,7 @@ function Page1({ setDisable }) {
 
                 <div className="space-y-2">
                     <p className='text-sm font-bold'>Height(cm)*</p>
-                    <select type="text" className={`w-20 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${height === '' && 'text-[#A5A5A5]'}`} value={height} onChange={e => dispatch(setHeight(Number(e.target.value)))} >
+                    <select type="text" className={`w-[108px] h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${height === '' && 'text-[#A5A5A5]'}`} value={height} onChange={e => dispatch(setHeight(Number(e.target.value)))} >
                         <option value="" disabled defaultValue>eg: 160</option>
                         {[...Array(101)].map((e, i) => <option className='text-black' key={i} value={i + 100}>{i + 100}</option>)}
                     </select>
@@ -77,7 +77,7 @@ function Page1({ setDisable }) {
 
                 <div className="space-y-2">
                     <p className='text-sm font-bold'>Weight(kg)*</p>
-                    <select type="text" className={`w-20 h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${weight === '' && 'text-[#A5A5A5]'}`} value={weight} onChange={e => dispatch(setWeight(Number(e.target.value)))}>
+                    <select type="text" className={`w-[96px] h-11 outline-[#6418C3] outline-1 text-center bg-[#F5F5F5] text-sm rounded-xl ${weight === '' && 'text-[#A5A5A5]'}`} value={weight} onChange={e => dispatch(setWeight(Number(e.target.value)))}>
                         <option value="" disabled defaultValue>eg: 50</option>
                         {[...Array(41)].map((e, i) => <option className='text-black' key={i} value={i + 40}>{i + 40}</option>)}
                     </select>
@@ -113,7 +113,7 @@ function Page1({ setDisable }) {
 
 
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 " style={{marginTop:'25px'}}>
 
                 <div className="space-y-2">
                     <p className='text-sm font-bold'>Bust*</p>
@@ -143,7 +143,7 @@ function Page1({ setDisable }) {
 
 
 
-            <div className="space-y-2">
+            <div className="space-y-2" style={{marginTop:'25px'}}>
                 <p className='text-sm font-bold'>Bio*</p>
                 <textarea
                     placeholder='I’m Stacy, born on 14 April 1998, brought up and raised in a well-to-do Christian family who is fair and tall.  I’ve completed my qualification at the Moscow state university, Russia in interior designing.  As I had a keen interest in the modelling career  I luckily had received opportunities to endorse various brands and have done various commercials ads as well where  I was one amongst to walk on the ramp for Louis Vuitton in 2018.'

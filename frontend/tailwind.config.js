@@ -7,7 +7,9 @@ module.exports = {
     extend: {
       fontFamily:{
         inter :['Inter'],
-        times:['Times New Roman']
+        times:['Times New Roman'],
+        cairo:['Cairo'],
+        openSan:["'Open Sans'",]
       },
       animation:{
         'map-animation': 'map-animations 1000ms infinite ease',

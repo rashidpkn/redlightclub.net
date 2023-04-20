@@ -29,7 +29,7 @@ function Navbar() {
 
 
   return (
-    <div className={`w-full h-24    flex items-center justify-end px-[5%] gap-10 ${isDarkMode && 'bg-[#1A1f28] menu-shadow shadow-blue-500'} duration-[1.5s]`}>
+    <div className={`w-full h-24    flex items-center justify-end px-[5%] gap-10 drop-shadow-xl ${isDarkMode && 'bg-[#1A1f28] menu-shadow shadow-blue-500'} duration-[1.5s]`}>
       <div className="flex justify-center items-center gap-10  text-[#A5A5A5]">
         <Notifications />
         <DarkModeToggle
