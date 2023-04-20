@@ -1,35 +1,44 @@
 import { Close } from '@mui/icons-material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 import lensIcon from '../../../../asset/icons/dashboard/profile/lens.svg'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import BackendIP from '../../../../BackendIP'
 
 function ReportIssues() {
+    const [reports, setReports] = useState([])
+
+    const fetchData = () => {
+        axios.get(`${BackendIP}/issues`).then(res => {
+            setReports(res.data)
+        })
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
 
     return (
         <div className='space-y-5'>
-            <Menu />
+            <Menu fetchData={fetchData}/>
             <table className='bg-white rounded-md w-full '>
                 <thead className='w-full font-bold text-sm'>
 
                     <tr className='w-full h-16 border-b'>
-                        <th className='h-full w-[5%]  text-start'></th>
-                        <th className='h-full w-[15%] text-start'>Reported by</th>
-                        <th className='h-full w-[20%] text-start'>Subject</th>
-                        <th className='h-full w-[20%] text-start'>Date</th>
-                        <th className='h-full w-[10%] text-start'>Status</th>
-                        <th className='h-full w-[15%] text-start'>Action</th>
+                        <th className='h-full w-[10%]  text-start'>SL.NO</th>
+                        <th className='h-full w-[20%] text-start'>Profile</th>
+                        <th className='h-full w-[20%] text-start'>Reason</th>
+                        <th className='h-full w-[30%] text-start'>Description</th>
+                        <th className='h-full w-[20%] text-start'>Vote</th>
                     </tr>
                 </thead>
                 <tbody className='w-full'>
-                    <TableRow />
-                    <TableRow />
-                    <TableRow />
-                    <TableRow />
-                    <TableRow />
-                    <TableRow />
-                    <TableRow />
-                    <TableRow />
+                    {reports.map(e => <TableRow {...e} e={e} fetchData={fetchData}/>)}
+
+
                 </tbody>
             </table>
         </div>
@@ -40,25 +49,27 @@ export default ReportIssues
 
 
 
-const TableRow = () => {
+const TableRow = ({ id, phoneNumber, subject, description, vote, e,fetchData}) => {
     const [alertDetails, setAlertDetails] = useState(false)
+    const {username} = useSelector(state=>state.user)
     return (
         <>
             <tr className='w-full h-16 border-b hover:shadow-lg'>
-                <td className='h-full w-[5%]  font-bold text-xs text-center'>
-                    <input type="checkbox" name="" id="" />
-                </td>
-                <td className='h-full w-[15%] font-bold text-xs'>Roshni</td>
-                <td className='h-full w-[20%] font-bold text-xs'>Some issues in Filter page</td>
-                <td className='h-full w-[20%] font-bold text-xs'>June 1 2022 , 09:22 AM</td>
-                <td className='h-full w-[10%] font-bold text-xs'>Pending</td>
-                <td className='h-full w-[15%] font-bold text-[8px]'>
-                    <div className="w-full h-full flex justify-center items-center gap-5 text-white">
-                        <button className='w-20 h-9 rounded-lg bg-[#0062F4]' onClick={() => { setAlertDetails(true) }}>View Details</button>
-
-                        <button className='w-20 h-9 rounded-lg bg-[#34C38F]'>Mark Resolved</button>
+                <td className='h-full w-[10%]  font-bold text-xs'>1</td>
+                <td className='h-full w-[20%] font-bold text-xs'>{e.username}</td>
+                <td className='h-full w-[20%] font-bold text-xs'>{subject}</td>
+                <td className='h-full w-[30%] font-bold text-xs'>{description}</td>
+                <td className='h-full w-[20%] font-bold text-xs'>
+                    <div className="flex justify-center items-center w-full h-full gap-5">
+                        <div className="flex items-center gap-3">
+                            <div className="h-10 w-10 bg-black" onClick={()=>axios.post(`${BackendIP}/issues/vote`,{id,username,response:true}).then(res=>{res.data?window.alert("Done"):window.alert("You are alredy voted");fetchData()})}></div>
+                            <p>{vote?.filter(e => e.response === true).length}</p></div>
+                        <div className="flex items-center gap-3">
+                            <div className="h-10 w-10 bg-black" onClick={()=>axios.post(`${BackendIP}/issues/vote`,{id,username,response:false}).then(res=>{res.data?window.alert("Done"):window.alert("You are alredy voted");fetchData()})}></div>
+                            <p>{vote?.filter(e => e.response === false).length}</p></div>
                     </div>
                 </td>
+
             </tr>
             {
                 alertDetails && <div className="fixed w-full h-screen bg-black/10 top-0 left-0 flex justify-center items-center">
@@ -93,10 +104,7 @@ const TableRow = () => {
                             <input type="text" className='w-full h-48 bg-[#F5F5F5] rounded-xl' />
                         </div>
 
-                        <div className="flex gap-5">
-                            <div className="h-10 w-52 bg-black"></div>
-                            <div className="h-10 w-52 bg-black"></div>
-                        </div>
+                        
 
                         <div className="flex gap-5">
                             <button className='h-11 w-40 rounded-2xl text-white bg-[#5ECFFF]' onClick={() => { setAlertDetails(false) }}>Message Client</button>
@@ -114,16 +122,17 @@ const TableRow = () => {
 
 
 
-const Menu = () => {
+const Menu = ({fetchData}) => {
     const [reportIssue, setReportIssue] = useState(false)
+    const { username } = useSelector(state => state.user)
     const [report, setReport] = useState({
-        username:'',
-        phoneNumber:'',
-        reason:'',
-        description:''
+        username: '',
+        phoneNumber: '',
+        subject: '',
+        description: ''
     })
 
-    console.log(report)
+
 
     return (
         <>
@@ -149,16 +158,17 @@ const Menu = () => {
                     <div className="mt-6 flex gap-5">
                         <div className="space-y-3.5">
                             <p className='text-sm font-bold '>Username</p>
-                            <input className='w-[300px] h-[47px] bg-[#F5F5F5] rounded-xl pl-5' type="text" onChange={e=>setReport({...report,username:e.target.value})} />
+                            <input className='w-[300px] h-[47px] bg-[#F5F5F5] rounded-xl pl-5' type="text" onChange={e => setReport({ ...report, username: e.target.value })} />
                         </div>
                         <div className="space-y-3.5">
                             <p className='text-sm font-bold '>Phone Number</p>
-                            <input className='w-[300px] h-[47px] bg-[#F5F5F5] rounded-xl pl-5' type="text" onChange={e=>setReport({...report,phoneNumber:e.target.value})} />
+                            <input className='w-[300px] h-[47px] bg-[#F5F5F5] rounded-xl pl-5' type="text" onChange={e => setReport({ ...report, phoneNumber: e.target.value })} />
                         </div>
                     </div>
                     <div className="space-y-3.5 mt-6">
                         <p className='text-sm font-bold '>Reason for report</p>
-                        <select className='w-[300px] h-[47px] bg-[#F5F5F5] rounded-xl pl-5' type="text" onChange={e=>setReport({...report,reason:e.target.value})} >
+                        <select className='w-[300px] h-[47px] bg-[#F5F5F5] rounded-xl pl-5' type="text" onChange={e => setReport({ ...report, subject: e.target.value })} >
+                            <option value="">Select your reason</option>
                             <option value="Police Authority">Police Authority</option>
                             <option value="Rude Behaviour">Rude Behaviour</option>
                             <option value="Scam">Scam</option>
@@ -168,11 +178,17 @@ const Menu = () => {
                     </div>
                     <div className="space-y-3.5 mt-6">
                         <p className='text-sm font-bold '>Description</p>
-                        <textarea className='w-full h-[217px] bg-[#F5F5F5] rounded-xl p-5' type="text" onChange={e=>setReport({...report,description:e.target.value})}/>
+                        <textarea className='w-full h-[217px] bg-[#F5F5F5] rounded-xl p-5' type="text" onChange={e => setReport({ ...report, description: e.target.value })} />
                     </div>
                     <div className="flex gap-5 mt-4">
-                        <button className='px-4 py-3 rounded-xl bg-[#D80027] text-sm font-bold text-white'>Report Issue</button>
-                        <button className='px-4 py-3 rounded-xl bg-[#D80027] text-sm font-bold text-white' onClick={()=>{setReportIssue(false)}}>Close</button>
+                        <button className='px-4 py-3 rounded-xl bg-[#D80027] text-sm font-bold text-white' onClick={() => {
+                            axios.post(`${BackendIP}/issues`, { ...report, reportedby: username }).then(res => {
+                                window.alert("You Repoting is submitted")
+                                fetchData()
+                                setReportIssue(false)
+                            })
+                        }}>Report Issue</button>
+                        <button className='px-4 py-3 rounded-xl bg-[#D80027] text-sm font-bold text-white' onClick={() => { setReportIssue(false) }}>Close</button>
 
                     </div>
                 </div>
