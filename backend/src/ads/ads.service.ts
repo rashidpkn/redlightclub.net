@@ -3,20 +3,18 @@ import { Ads } from 'src/database/model/ads.entity';
 
 @Injectable()
 export class AdsService {
-    create(ads: JSON, username: string, email: string,region:string) {
+    async create(ads: JSON, username: string, email: string,region:string) {
         try {
-            Ads.create({ ...ads, username, email,region }).catch(error=>{
-                console.log(error.message)
-                return ({
-                    status: false,
-                    reason: error.message
-                })
-            })
-           
+            const data = await Ads.create({ ...ads, username, email,region })
+
+            
             return ({
                 status: true,
-                reason: 'Ads is created'
+                reason: 'Ads is created',
+                data    
             })
+           
+            
         } catch (error) {
             console.log(error.message)
             return ({
