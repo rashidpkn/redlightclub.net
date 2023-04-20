@@ -66,7 +66,7 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
                     status === 'open' ?
                         (bid?.find(e => e.username === username) ? (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-xs font-bold text-[#34C38F]'>You are winning</p> : <p className='text-xs font-bold text-[#D80027]'>You are losing</p>) : <p className='text-xs font-bold'>Make an offer</p>)
                         :
-                        (bid?.find(e => e.username === username) ? (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-xs font-bold text-[#34C38F]'>You are won &#128515;</p> : <p className='text-xs font-bold text-[#D80027]'>You are loss &#128542;</p>) : <p className='text-xs font-bold'>Not Participated</p>)
+                        (bid?.find(e => e.username === username) ? (bid?.find(e => e.username === username && e.amount === largestBidAmount) ? <p className='text-xs font-bold text-[#34C38F]'>You Won This Auction &#128515;</p> : <p className='text-xs font-bold text-[#D80027]'>You are loss &#128542;</p>) : <p className='text-xs font-bold'>Auction Closed</p>)
                 }
 
 
@@ -87,7 +87,10 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
                     <p>AED {largestBidAmount}</p>
                     <p >{tier.toUpperCase()}</p>
                 </div>
-                <p className='text-xs text-[#A5A5A5]'>Bid on {position} is {status === 'open' ? 'started' : 'closed'}</p>
+                {status==='open'?
+                <p className='text-xs text-[#A5A5A5]'>Bid on {position} is  started </p>
+                :<p className='text-xs text-[#A5A5A5]'>This Auction Is Finished</p>
+            }
                 {
                     status === 'open'
                         ?
@@ -98,11 +101,11 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
                                 window.alert('we will notify when the bid is start')
                             }}
 
-                        >Notify Me</button>
+                        >Notify Me When Live</button>
                 }
 
                 <p className='text-xs text-[#6418C3]'>
-                    {status === 'open' ? 'Ends in 1 Day' : 'End in 0m'}
+                    {status === 'open' ? 'Finishes in 1 Day' : 'Finishes in 0m'}
                 </p>
             </div>
             {

@@ -30,7 +30,7 @@ function Support() {
             <div className="flex justify-between items-center">
                 <div className="">
                     <p className='text-2xl font-bold'>Support</p>
-                    <p className='text-xs text-[#A5A5A5]'>Check the status of any grievances raised by you or raise a ticket for a new grievance </p>
+                    <p className='text-xs text-[#A5A5A5]'>Create Support tickets for problems you have with our site, Check the status of issues and see replies to your tickets. </p>
                 </div>
                 <div className="flex justify-center items-center gap-5">
                     <input className='h-12 w-52 rounded-xl pl-3' type="text" placeholder='Enter Ticket Number' />

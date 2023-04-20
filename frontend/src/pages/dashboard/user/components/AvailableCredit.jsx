@@ -68,7 +68,7 @@ const TableRow = () => {
             <td className='h-full w-[5%]  text-xs text-center'>
                 <input type="checkbox" name="" id="" />
             </td>
-            <td className='h-full w-[25%] text-xs'>Bid : Gold Pos 1</td>
+            <td className='h-full w-[25%] text-xs'>Bid : Gold Spot 1</td>
             <td className='h-full w-[25%] text-xs'>June 12, 2020, 08:22 AM</td>
             <td className='h-full w-[25%] text-xs font-bold text-[#D80027]'>- 400 AED</td>
             <td className='h-full w-[20%] text-xs'>1000 AED</td>
@@ -98,7 +98,7 @@ const Card = ({ credit, username }) => {
                     </div>
                 </div>
             </div>
-            <p className='text-[13px]'>Need more credits? <span className='text-[#0062F4] cursor-pointer'>Lean How</span> </p>
+            <p className='text-[13px]'>Need more credits? <span className='text-[#0062F4] cursor-pointer'>Learn How</span> </p>
         </div>
     )
 }

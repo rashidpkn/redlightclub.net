@@ -7,8 +7,8 @@ function SexToys() {
   return (
     <div className='space-y-5'>
         <div className="">
-            <p className='text-2xl font-bold'>Sex Toys</p>
-            <p className='text-sm text-[#A5A5A5]'>Lorem ipsum dolor sit</p>
+            <p className='text-2xl font-bold'>Buy Sex Toys</p>
+            <p className='text-sm text-[#A5A5A5]'>Customers LOVE them!</p>
         </div>
         <div className="flex flex-wrap gap-3">
             <div className="w-[717px]  h-[300px] hover:shadow-xl"><img src={sexToy1} className='w-full h-full rounded-xl' alt="" /> </div>

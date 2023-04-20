@@ -59,7 +59,7 @@ function PaymentsHistory() {
                     <tr className='w-full h-16 border-b'>
                         <th className='h-full w-[15%]  text-start'></th>
                         <th className='h-full w-[25%] text-start'>Bid</th>
-                        <th className='h-full w-[15%] text-start'>Bid Amount</th>
+                        <th className='h-full w-[15%] text-start'>Winning Bid Amount</th>
                         <th className='h-full w-[15%] text-start'>Payment Status</th>
                         <th className='h-full w-[15%] text-start'>Date</th>
                         <th className='h-full w-[15%] text-start'>Invoice</th>

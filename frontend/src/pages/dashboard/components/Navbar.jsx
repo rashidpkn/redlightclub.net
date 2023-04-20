@@ -5,7 +5,8 @@ import DarkModeToggle from "react-dark-mode-toggle";
 import NotificationIcon from '../../../asset/icons/navbar/notification.svg'
 
 import EnglishIcon from '../../../asset/icons/navbar/english.png'
-import SpanishIcon from '../../../asset/icons/navbar/spanish.png'
+// import SpanishIcon from '../../../asset/icons/navbar/spanish.png'
+import ThailandIcon from '../../../asset/icons/navbar/thailand.webp'
 import ArabicIcon from '../../../asset/icons/navbar/arabic.png'
 
 
@@ -29,7 +30,7 @@ function Navbar() {
 
 
   return (
-    <div className={`w-full h-24    flex items-center justify-end px-[5%] gap-10 drop-shadow-xl ${isDarkMode && 'bg-[#1A1f28] menu-shadow shadow-blue-500'} duration-[1.5s]`}>
+    <div className={`w-full h-24  relative flex items-center justify-end px-[5%] gap-10 ${isDarkMode && 'bg-[#1A1f28] shadow-blue-500'} duration-[1.5s]`} >
       <div className="flex justify-center items-center gap-10  text-[#A5A5A5]">
         <Notifications />
         <DarkModeToggle
@@ -74,7 +75,7 @@ const Language = () => {
     <div className="relative w-36 h-14 border rounded-full flex justify-center items-center pr-5">
       {region === 'UK' && <img src={EnglishIcon} className='w-6 h-6 rounded-full absolute top-4 left-3' alt="" />}
       {region === 'Dubai' && <img src={ArabicIcon} className='w-6 h-6 rounded-full absolute top-4 left-3' alt="" />}
-      {region === 'Thailand' && <img src={SpanishIcon} className='w-6 h-6 rounded-full absolute top-4 left-3' alt="" />}
+      {region === 'Thailand' && <img src={ThailandIcon} className='w-6 h-6 rounded-full absolute top-4 left-3' alt="" />}
       <select value={region} className={`outline-none   pl-10 hidden md:block bg-transparent font-medium ${isDarkMode ? 'text-white' : 'text-black'}`}
         onChange={e => { dispatch(setRegion(e.target.value)) }}
       >

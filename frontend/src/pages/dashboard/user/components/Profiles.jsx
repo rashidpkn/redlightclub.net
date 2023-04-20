@@ -25,7 +25,7 @@ function Profiles() {
     return (
         <div className='space-y-5'>
             <div className="flex justify-between items-center">
-                <p className='text-2xl font-bold'>Profile</p>
+                <p className='text-2xl font-bold'>Your Profile</p>
                 <div className="flex gap-5 text-white text-sm font-bold">
                     
                     <Link to={'/new-ads'}>

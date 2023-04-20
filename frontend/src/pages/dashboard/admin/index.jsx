@@ -65,7 +65,7 @@ function AdminDashboard() {
         </div>
         
       </Sidebar>
-      <div className="min-h-screen h-full w-[calc(100%-5rem)] lg:w-[calc(100%-18rem)]">
+      <div className="min-h-screen h-full w-[calc(100%-5rem)] lg:w-[calc(100%-280px)]">
         <Navbar />
         <Main >
           

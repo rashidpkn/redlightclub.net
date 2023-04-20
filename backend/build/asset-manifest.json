@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.635d7dfd.css",
-    "main.js": "/static/js/main.0f274e23.js",
+    "main.css": "/static/css/main.0f8349f1.css",
+    "main.js": "/static/js/main.ae515556.js",
     "static/media/lady.png": "/static/media/lady.53ac6f75387354f8bc01.png",
     "static/media/sextoy1.png": "/static/media/sextoy1.fe393ceddae2e0d6dd9a.png",
     "static/media/sextoy3.png": "/static/media/sextoy3.ef35b863dd56df461886.png",
@@ -33,11 +33,12 @@
     "static/media/notification.svg": "/static/media/notification.c37e4d3d60f3b7ba38836dede9f7e330.svg",
     "index.html": "/index.html",
     "static/media/email.svg": "/static/media/email.4efe0c7e8dea67a7c2ba4a986ca76d75.svg",
-    "main.635d7dfd.css.map": "/static/css/main.635d7dfd.css.map",
-    "main.0f274e23.js.map": "/static/js/main.0f274e23.js.map"
+    "static/media/thailand.webp": "/static/media/thailand.5c4ff419995a55f0804e.webp",
+    "main.0f8349f1.css.map": "/static/css/main.0f8349f1.css.map",
+    "main.ae515556.js.map": "/static/js/main.ae515556.js.map"
   },
   "entrypoints": [
-    "static/css/main.635d7dfd.css",
-    "static/js/main.0f274e23.js"
+    "static/css/main.0f8349f1.css",
+    "static/js/main.ae515556.js"
   ]
 }

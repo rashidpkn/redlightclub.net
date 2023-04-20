@@ -75,10 +75,10 @@ function UserDashboard() {
       <div className='flex'>
         <Sidebar >
 
-          <div className="space-y-5">
+          <div className="space-y-5" style={{boxShadow:'4px 10px 18px -1px rgba(0,0,0,0.14)'}}>
             <Menu Icon={HomeIcon} url='home' title={'Home'} />
             <Menu Icon={ProfileIcon} url='Profiles' title={'Profiles'} />
-            <Menu Icon={AuctionIcon} url='auction-progress' title={'Auction In Progress'} />
+            <Menu Icon={AuctionIcon} url='auction-progress' title={'Top Spot Live Auctions'} />
             <div className="" onClick={setShowBillMenu}>
               <Menu Icon={BidPaymentsIcon} url='payment-history' title={'Billing'}  />
             </div>
@@ -106,7 +106,7 @@ function UserDashboard() {
           </div>
         </Sidebar>
 
-        <div className="w-[calc(100%-5rem)] lg:w-[calc(100%-18rem)] min-h-screen">
+        <div className="w-[calc(100%-5rem)] lg:w-[calc(100%-280px)] min-h-screen">
           <Navbar />
           <Main >
             {(menu === undefined || menu === 'home') && <Home />}

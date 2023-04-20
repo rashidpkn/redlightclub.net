@@ -52,9 +52,9 @@ function Home() {
 
     return (
         <div className='space-y-5'>
-            <div className="flex justify-between items-center">
+            <div className="flex gap-5 items-center">
                 <p className='text-red-500'>Please Verify Your Email</p>
-                <button className='px-4 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => setVerifyEmailAlert(true)}>Verify</button>
+                <button className='px-4 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => setVerifyEmailAlert(true)}>Verify Now</button>
             </div>
 
             <Profile ads={ads} user={user} />
@@ -201,7 +201,7 @@ const ClickAndResponse = () =>{
         </div>
         <p className='text-xl font-bold'>1.5%</p>
     </div>
-    <p className='text-[9px]'>How often has the customers clicked on your profile while browsing.</p>
+    <p className='text-[9px]'>How often customers have clicked on your profile on our site.</p>
 </div>
 <div className="w-full rounded-xl bg-white p-4 space-y-3">
     <p className='text-xl font-bold'>Response Rate</p>
@@ -211,7 +211,7 @@ const ClickAndResponse = () =>{
         </div>
         <p className='text-xl font-bold'>20%</p>
     </div>
-    <p className='text-[9px]'>How often has the customers clicked on your profile while browsing.</p>
+    <p className='text-[9px]'>The percentage of customers who view your profile that speak to you.</p>
 </div>
 
 </div>
@@ -325,7 +325,7 @@ const Card = ({ credit, username }) => {
                     </div>
                 </div>
             </div>
-            <p className='text-[13px]'>Need more credits? <span className='text-[#0062F4] cursor-pointer'>Lean How</span> </p>
+            <p className='text-[13px]'>Need more credits? <span className='text-[#0062F4] cursor-pointer'>Learn How</span> </p>
         </div>
     )
 }
@@ -341,7 +341,7 @@ const VerifyBox = ({ setVerifyEmailAlert }) => {
                     <Close onClick={() => setVerifyEmailAlert(false)} />
                 </div>
 
-                <p className='text-center'>Please Enter 4 digit OTP send to your email address to verify your email</p>
+                <p className='text-center'>We have sent you a 4 Digit OTP code to your email address. <br /> Please check your email and input the code to verify your email.</p>
 
                 <div className="flex justify-center items-center gap-3 text-center">
                     <input className='h-12 w-12 border rounded-md text-center' type="number" min={0} max={9} />
