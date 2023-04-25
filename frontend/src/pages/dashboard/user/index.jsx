@@ -78,7 +78,7 @@ function UserDashboard() {
             <Menu Icon={HomeIcon} url='home' title={'Home'} />
             <Menu Icon={ProfileIcon} url='Profiles' title={'Profiles'} />
             <Menu Icon={AuctionIcon} url='auction-progress' title={'Top Spot Live Auctions'} />
-            <div className="" onClick={setShowBillMenu}>
+            <div style={{margin:'0px'}} onClick={setShowBillMenu}>
               <Menu Icon={BidPaymentsIcon} url='payment-history' title={'Billing'}  />
             </div>
             {
