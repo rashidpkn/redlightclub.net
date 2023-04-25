@@ -129,6 +129,11 @@ export const Verify = ({ e, setVerify }) => {
                 }
                 {
                     step === 2 && <div className="flex flex-col justify-center items-center h-full gap-5">
+                        
+                    </div>
+                }
+                {
+                    step === 2 && <div className="flex flex-col justify-center items-center h-full gap-5">
                         <ProfilePhoto {...e} setPreview={setPreview} setVerificationImage={setVerificationImage} />
                         <button className='px-10 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => {
                             if (verificationImage) {
