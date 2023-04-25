@@ -32,8 +32,11 @@ function Navbar() {
   return (
     <div className={`w-full h-24  relative flex items-center justify-end px-[5%] gap-10 ${isDarkMode && 'bg-[#1A1f28] shadow-blue-500'} duration-[1.5s]`} >
       <div className="flex justify-center items-center gap-10  text-[#A5A5A5]">
+
         <Notifications />
+        
         <DarkModeToggle
+
           onChange={setState}
           checked={state}
           size={80}
@@ -172,7 +175,7 @@ const Notifications = () => {
       </div>}
 
 
-      <div className="h-6 w-6 rounded-full  absolute -top-3 -right-2 overflow-hidden bg-white flex justify-center items-center z-50 cursor-pointer">
+      <div className="h-6 w-6 rounded-full  absolute -top-3 -right-2 overflow-hidden bg-white flex justify-center items-center z-50 cursor-pointer" onClick={() => { setShowNotification(!showNotification) }}>
         <div className={`h-5 w-5  rounded-full flex justify-center items-center ${isDarkMode ? 'bg-white text-black' : 'bg-red-500 text-white'} `}>{notification.length}</div>
       </div>
 

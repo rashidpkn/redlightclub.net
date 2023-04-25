@@ -16,7 +16,6 @@ import EditAds from './components/EditAds'
 
 import Manage from './components/Manage'
 import SettingsMenu from './components/SettingsMenu'
-import VerifyAds from './components/VerifyAds'
 
 
 import HomeIcon from '../../../asset/icons/sidebar/home.js'
@@ -131,7 +130,6 @@ function UserDashboard() {
             {menu === 'settings' && <SettingsMenu />}
             {menu === 'blacklisted' && <Blacklisted />}
             {menu === 'edit-ads' && <EditAds />}
-            {menu === 'verify' && <VerifyAds />}
 
           </Main>
         </div>

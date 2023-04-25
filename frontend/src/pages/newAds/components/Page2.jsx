@@ -38,7 +38,7 @@ function Page2({ setDisable }) {
                     {languages.map(e => <option key={e} value={e}>{e}</option>)}
                 </select> */}
                 <MultiSelect 
-                
+                hasSelectAll={false}
                 options={languages.map(e=>{return({label:e,value:e})})} 
                 value={selected}
                 onChange={setSelected} />
@@ -113,14 +113,14 @@ const SocialMedia = () => {
     return (
         <div className="space-y-1">
             <div className="flex  items-center">
+                <p className='text-sm w-32 '>Whatsapp</p>
+                <input placeholder='Enter Whatsapp number' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'whatsapp', value: e.target.value }))} value={whatsapp} />
+            </div>
+            <div className="flex  items-center">
                 <p className='text-sm w-32 '>Video Url</p>
                 <input placeholder='Enter Url' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'video', value: e.target.value }))} value={video} />
             </div>
 
-            <div className="flex  items-center">
-                <p className='text-sm w-32 '>Whatsapp</p>
-                <input placeholder='Enter Whatsapp number' type="text" className='w-80 h-11 outline-[#6418C3] outline-1 bg-[#F5F5F5] text-sm rounded-xl pl-5' onChange={e => dispatch(setSocialMedia({ type: 'whatsapp', value: e.target.value }))} value={whatsapp} />
-            </div>
 
 
 
