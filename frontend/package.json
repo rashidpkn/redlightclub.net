@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.6",
     "@reduxjs/toolkit": "^1.9.1",
+    "aos": "^2.3.4",
     "axios": "^1.2.5",
     "chart.js": "^4.2.0",
     "radial-progress-chart": "^0.0.4",

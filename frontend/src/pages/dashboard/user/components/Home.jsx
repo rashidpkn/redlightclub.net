@@ -332,9 +332,20 @@ const Card = ({ credit, username }) => {
 
 
 const VerifyBox = ({ setVerifyEmailAlert }) => {
+    const [insideClick, setInsideClick] = useState(0)
+  const [outsideClick, setOutsideClick] = useState(0)
+  useEffect(() => {
+
+    if (outsideClick > insideClick) {
+      setVerifyEmailAlert(false)
+      setInsideClick(0)
+      setOutsideClick(0)
+    }
+    // eslint-disable-next-line
+  }, [outsideClick])
     return (
-        <div className="fixed top-0 left-0 z-50 h-screen w-full flex justify-center items-center bg-black/30 p-3">
-            <div className="max-w-[600px] w-full bg-white rounded-lg p-5 flex flex-col justify-center items-center gap-5">
+        <div className="fixed top-0 left-0 z-50 h-screen w-full flex justify-center items-center bg-black/30 p-3" onClick={()=>{setOutsideClick(outsideClick+1)}}>
+            <div className="max-w-[600px] w-full bg-white rounded-lg p-5 flex flex-col justify-center items-center gap-5" onClick={()=>{setInsideClick(insideClick+1)}}>
                 <div className="w-full flex justify-between items-center">
                     <div className=""></div>
                     <p>Verify Your Email</p>

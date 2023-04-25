@@ -11,6 +11,10 @@ import { useDropzone } from 'react-dropzone'
 import verifyIcon from '../../../../asset/icons/dashboard/profile/verify.svg'
 import DiamondIcon from '../../../../asset/icons/dashboard/profile/diamond.svg'
 
+import frame from '../../../../asset/images/dashboard/user/verify/frame.png'
+import demo from '../../../../asset/images/dashboard/user/verify/demo-verify.png'
+
+
 
 function Profiles() {
     const { username } = useSelector(state => state.user)
@@ -100,9 +104,23 @@ export const Verify = ({ e, setVerify }) => {
     // eslint-disable-next-line
     const [preview, setPreview] = useState('')
     const [verificationImage, setVerificationImage] = useState('')
+
+    const [insideClick, setInsideClick] = useState(0)
+    const [outsideClick, setOutsideClick] = useState(0)
+    useEffect(() => {
+  
+      if (outsideClick > insideClick) {
+        setVerify(false)
+        setInsideClick(0)
+        setOutsideClick(0)
+      }
+      // eslint-disable-next-line
+    }, [outsideClick])
+
+
     return (
-        <div className="fixed -top-5 left-0 flex justify-center items-center h-screen w-full bg-black/20 z-50">
-            <div className="max-w-[1000px] min-w-[700px]  rounded-xl bg-[#F5F5F5] p-5">
+        <div className="fixed -top-5 left-0 flex justify-center items-center h-screen w-full bg-black/20 z-50" onClick={()=>{setOutsideClick(outsideClick+1)}}>
+            <div className="max-w-[1000px] min-w-[700px]  rounded-xl bg-[#F5F5F5] p-5" onClick={()=>{setInsideClick(insideClick+1)}}>
                 <div className="flex justify-end">
                     <Close onClick={() => setVerify(false)} />
                 </div>
@@ -128,12 +146,22 @@ export const Verify = ({ e, setVerify }) => {
                     </div>
                 }
                 {
-                    step === 2 && <div className="flex flex-col justify-center items-center h-full gap-5">
+                    step===2 && <div className="flex flex-col justify-center items-center h-full gap-5">
+                        <div className="relative flex justify-between items-center">
+                            <img className='absolute h-[280px] w-[405px]' src={frame} alt="" />
+                            <img className='h-[270px] w-[400px]' src={demo} alt="" />
+                        </div>
+                        <div className="w-[33px] h-[33px] rounded-full bg-[#4A4A4A]"></div>
+                        <button className='px-10 py-3 rounded-xl bg-[#34C38F] text-white font-bold text-sm' onClick={() => { setStep(3) }}>Submit</button>
+                    </div>
+                }
+                {
+                    step === 3 && <div className="flex flex-col justify-center items-center h-full gap-5">
                         <ProfilePhoto {...e} setPreview={setPreview} setVerificationImage={setVerificationImage} />
                         <button className='px-10 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => {
                             if (verificationImage) {
                                 axios.post(`${BackendIP}/verify/request`, { id: e.id, verificationImage }).then(res => {
-                                    setStep(3)
+                                    setStep(4)
                                 })
 
                             } else {
@@ -143,7 +171,7 @@ export const Verify = ({ e, setVerify }) => {
                     </div>
                 }
                 {
-                    step === 3 && <div className="h-full flex flex-col justify-center items-center gap-5">
+                    step === 4 && <div className="h-full flex flex-col justify-center items-center gap-5">
                         <div className="h-10 w-10 rounded-full border border-[#34C38F] text-[#34C38F] flex justify-center items-center">
                             <Done />
                         </div>

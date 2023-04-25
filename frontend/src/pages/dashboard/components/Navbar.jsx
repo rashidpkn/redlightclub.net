@@ -125,9 +125,10 @@ const Notifications = () => {
 
   // eslint-disable-next-line
   const [viewAllNotification, setViewAllNotification] = useState(true)
+  const [clearall, setClearall] = useState(false)
+  
   const [insideClick, setInsideClick] = useState(0)
   const [outsideClick, setOutsideClick] = useState(0)
-  const [clearall, setClearall] = useState(false)
   useEffect(() => {
 
     if (outsideClick > insideClick) {
@@ -172,7 +173,7 @@ const Notifications = () => {
       </div>}
 
 
-      <div className="h-6 w-6 rounded-full  absolute -top-3 -right-2 overflow-hidden bg-white flex justify-center items-center z-50 cursor-pointer">
+      <div className="h-6 w-6 rounded-full  absolute -top-3 -right-2 overflow-hidden bg-white flex justify-center items-center z-50 cursor-pointer" onClick={() => { setShowNotification(!showNotification) }}>
         <div className={`h-5 w-5  rounded-full flex justify-center items-center ${isDarkMode ? 'bg-white text-black' : 'bg-red-500 text-white'} `}>{notification.length}</div>
       </div>
 

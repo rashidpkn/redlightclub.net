@@ -52,6 +52,19 @@ export default AuctionProgress
 
 
 const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) => {
+
+    const [insideClick, setInsideClick] = useState(0)
+    const [outsideClick, setOutsideClick] = useState(0)
+    useEffect(() => {
+  
+      if (outsideClick > insideClick) {
+        setMakeOffer(false)
+        setInsideClick(0)
+        setOutsideClick(0)
+      }
+      // eslint-disable-next-line
+    }, [outsideClick])
+
     const { username } = useSelector(state => state.user)
     const [makeOffer, setMakeOffer] = useState(false)
     const [amount, setAmount] = useState(largestBidAmount + 10)
@@ -110,14 +123,16 @@ const Card = ({ tier, largestBidAmount, position, status, bid, e, fetchData }) =
             </div>
             {
                 makeOffer &&
-                <div className={`
+                <div onClick={()=>{setOutsideClick(outsideClick+1)}}
+                className={`
                     h-screen w-full fixed top-0 left-0 bg-black/10 flex justify-center items-center z-50
                     
 
                 `}
                 
                 >
-                    <div 
+                    <div
+                    onClick={()=>{setInsideClick(insideClick+1)}} 
                     onAnimationEnd={()=>{setEffect(false)}}
                     className={`
                     w-[600px] bg-white rounded-lg p-5 space-y-5
