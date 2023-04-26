@@ -7,6 +7,9 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import BackendIP from '../../../../BackendIP'
 
+import upVote from '../../../../asset/images/dashboard/user/report-issue/up-vote.png'
+import downVote from '../../../../asset/images/dashboard/user/report-issue/down-vote.png'
+
 function ReportIssues() {
     const [reports, setReports] = useState([])
 
@@ -62,10 +65,14 @@ const TableRow = ({ id, phoneNumber, subject, description, vote, e,fetchData}) =
                 <td className='h-full w-[20%] font-bold text-xs'>
                     <div className="flex justify-center items-center w-full h-full gap-5">
                         <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 bg-black" onClick={()=>axios.post(`${BackendIP}/issues/vote`,{id,username,response:true}).then(res=>{res.data?window.alert("Done"):window.alert("You are alredy voted");fetchData()})}></div>
+                            <div  onClick={()=>axios.post(`${BackendIP}/issues/vote`,{id,username,response:true}).then(res=>{res.data?window.alert("Done"):window.alert("You are alredy voted");fetchData()})}>
+                                <img src={upVote} alt="" />
+                            </div>
                             <p>{vote?.filter(e => e.response === true).length}</p></div>
                         <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 bg-black" onClick={()=>axios.post(`${BackendIP}/issues/vote`,{id,username,response:false}).then(res=>{res.data?window.alert("Done"):window.alert("You are alredy voted");fetchData()})}></div>
+                            <div  onClick={()=>axios.post(`${BackendIP}/issues/vote`,{id,username,response:false}).then(res=>{res.data?window.alert("Done"):window.alert("You are alredy voted");fetchData()})}>
+                                <img src={downVote} alt="" />
+                            </div>
                             <p>{vote?.filter(e => e.response === false).length}</p></div>
                     </div>
                 </td>
@@ -133,6 +140,18 @@ const Menu = ({fetchData}) => {
     })
 
 
+    const [insideClick, setInsideClick] = useState(0)
+    const [outsideClick, setOutsideClick] = useState(0)
+    useEffect(() => {
+  
+      if (outsideClick > insideClick) {
+        setReportIssue(false)
+        setInsideClick(0)
+        setOutsideClick(0)
+      }
+      // eslint-disable-next-line
+    }, [outsideClick])
+
 
     return (
         <>
@@ -152,8 +171,8 @@ const Menu = ({fetchData}) => {
                     <button className='hover:shadow-2xl duration-500 w-36 h-14 rounded-xl text-white bg-[#CE0000] text-sm font-bold' onClick={setReportIssue}>Report a issue</button>
                 </div>
             </div>
-            {reportIssue && <div className="fixed z-50 -top-5 left-0 h-screen w-full bg-black/30 flex justify-center items-center">
-                <div className=" w-[736px] rounded-2xl bg-white p-8">
+            {reportIssue && <div className="fixed z-50 -top-5 left-0 h-screen w-full bg-black/30 flex justify-center items-center" onClick={()=>{setOutsideClick(outsideClick+1)}}>
+                <div className=" w-[736px] rounded-2xl bg-white p-8" onClick={()=>{setInsideClick(insideClick+1)}}>
                     <p className='text-xl font-bold'>Report a Issues</p>
                     <div className="mt-6 flex gap-5">
                         <div className="space-y-3.5">

@@ -10,12 +10,12 @@ import Sidebar from '../components/Sidebar'
 import Analatics from './components/Analatics'
 import Blacklisted from './components/Blacklisted'
 
-import Comments from './components/Comments'
+
 import Earn from './components/Earn'
 import EditAds from './components/EditAds'
 
-import Manage from './components/Manage'
 import SettingsMenu from './components/SettingsMenu'
+
 
 
 import HomeIcon from '../../../asset/icons/sidebar/home.js'
@@ -78,7 +78,7 @@ function UserDashboard() {
             <Menu Icon={HomeIcon} url='home' title={'Home'} />
             <Menu Icon={ProfileIcon} url='Profiles' title={'Profiles'} />
             <Menu Icon={AuctionIcon} url='auction-progress' title={'Top Spot Live Auctions'} />
-            <div className="" onClick={setShowBillMenu}>
+            <div style={{margin:'0px'}} onClick={setShowBillMenu}>
               <Menu Icon={BidPaymentsIcon} url='payment-history' title={'Billing'}  />
             </div>
             {
@@ -121,15 +121,12 @@ function UserDashboard() {
             {menu === 'available-credit' && <AvailableCredit />}
             {menu === 'sex-toys' && <SexToys />}
             {menu === 'ads-analytics' && <Analatics />}
+            {menu === 'earn-credit' && <Earn />}
 
-
-            {menu === 'my-adverts' && <Manage />}
-            {menu === 'analatics' && <Analatics />}
-            {menu === 'free-credit' && <Earn />}
-            {menu === 'comments' && <Comments />}
             {menu === 'settings' && <SettingsMenu />}
             {menu === 'blacklisted' && <Blacklisted />}
             {menu === 'edit-ads' && <EditAds />}
+            
 
           </Main>
         </div>

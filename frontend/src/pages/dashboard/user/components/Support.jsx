@@ -65,6 +65,21 @@ function Support() {
 export default Support
 
 const NewTicket = ({ setNewTicket, fetchData }) => {
+
+
+    const [insideClick, setInsideClick] = useState(0)
+    const [outsideClick, setOutsideClick] = useState(0)
+    useEffect(() => {
+  
+      if (outsideClick > insideClick) {
+        setNewTicket(false)
+        setInsideClick(0)
+        setOutsideClick(0)
+      }
+      // eslint-disable-next-line
+    }, [outsideClick])
+
+
     const { username, email } = useSelector(state => state.user)
     const [ticket, setTicket] = useState({
         username,
@@ -75,8 +90,6 @@ const NewTicket = ({ setNewTicket, fetchData }) => {
         images: []
 
     })
-
-    console.log(ticket);
 
 
     const createTicket = () => {
@@ -89,8 +102,8 @@ const NewTicket = ({ setNewTicket, fetchData }) => {
 
 
     return (
-        <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center px-3">
-            <form className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5" onSubmit={e => { e.preventDefault(); createTicket() }}>
+        <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center px-3" onClick={()=>{setOutsideClick(outsideClick+1)}}>
+            <form className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5" onSubmit={e => { e.preventDefault(); createTicket() }} onClick={()=>{setInsideClick(insideClick+1)}}>
                 <div className="flex justify-between items-center">
                     <p className='text-2xl font-bold'>Please Provide the below details</p>
                     <Close onClick={() => { setNewTicket(false) }} />
@@ -206,10 +219,22 @@ const TableRow = ({ id, subject, type, status, e }) => {
 const Ticket = ({ username, email, type, subject, detail, setShowTicket, response }) => {
 
 
+    const [insideClick, setInsideClick] = useState(0)
+    const [outsideClick, setOutsideClick] = useState(0)
+    useEffect(() => {
+  
+      if (outsideClick > insideClick) {
+        setShowTicket(false)
+        setInsideClick(0)
+        setOutsideClick(0)
+      }
+      // eslint-disable-next-line
+    }, [outsideClick])
+
 
     return (
-        <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center px-3">
-            <div className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5" >
+        <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center px-3" onClick={()=>{setOutsideClick(outsideClick+1)}}>
+            <div className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5"  onClick={()=>{setInsideClick(insideClick+1)}}>
                 <div className="flex justify-between items-center">
                     <p className='font-bold'>Ticket Details</p>
                     <Close onClick={() => setShowTicket(false)} />

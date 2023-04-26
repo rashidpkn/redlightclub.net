@@ -86,6 +86,22 @@ const TableRow = ({ url, status, credit }) => {
     )
 }
 const NewBanner = ({ setNewBanner,fetchDate }) => {
+
+
+    const [insideClick, setInsideClick] = useState(0)
+    const [outsideClick, setOutsideClick] = useState(0)
+    useEffect(() => {
+  
+      if (outsideClick > insideClick) {
+        setNewBanner(false)
+        setInsideClick(0)
+        setOutsideClick(0)
+      }
+      // eslint-disable-next-line
+    }, [outsideClick])
+
+
+
     const { username } = useSelector(state => state.user)
     const [url, setUrl] = useState()
     const createBanner = () => {
@@ -98,8 +114,8 @@ const NewBanner = ({ setNewBanner,fetchDate }) => {
         })
     }
     return (
-        <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center p-3">
-            <form className="max-w-[592px]  rounded-lg bg-white w-full p-5 space-y-10" onSubmit={e=>{e.preventDefault();createBanner()}}>
+        <div className="fixed -top-5 left-0 h-screen w-full bg-black/30 z-50 flex justify-center items-center p-3" onClick={()=>{setOutsideClick(outsideClick+1)}}>
+            <form className="max-w-[592px]  rounded-lg bg-white w-full p-5 space-y-10" onSubmit={e=>{e.preventDefault();createBanner()}} onClick={()=>{setInsideClick(insideClick+1)}}>
                 <Close className='text-[#A5A5A5] float-right' onClick={() => setNewBanner(false)} />
                 <p className='text-black text-sm font-bold text-center'>Paste Link</p>
                 <div className="px-0 md:px-5">

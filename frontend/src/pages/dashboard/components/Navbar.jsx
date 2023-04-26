@@ -128,9 +128,10 @@ const Notifications = () => {
 
   // eslint-disable-next-line
   const [viewAllNotification, setViewAllNotification] = useState(true)
+  const [clearall, setClearall] = useState(false)
+  
   const [insideClick, setInsideClick] = useState(0)
   const [outsideClick, setOutsideClick] = useState(0)
-  const [clearall, setClearall] = useState(false)
   useEffect(() => {
 
     if (outsideClick > insideClick) {

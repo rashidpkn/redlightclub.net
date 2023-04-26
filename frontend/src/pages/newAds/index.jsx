@@ -13,6 +13,9 @@ import { Close, Done } from '@mui/icons-material'
 
 import verifyIcon from '../../asset/icons/dashboard/profile/verify.svg'
 import { useDropzone } from 'react-dropzone'
+import frame from '../../asset/images/dashboard/user/verify/frame.png'
+import demo from '../../asset/images/dashboard/user/verify/demo-verify.png'
+
 
 
 
@@ -159,12 +162,22 @@ export const Verify = ({ e, setVerify}) => {
                     </div>
                 }
                 {
-                    step === 2 && <div className="flex flex-col justify-center items-center h-full gap-5">
+                    step===2 && <div className="flex flex-col justify-center items-center h-full gap-5">
+                        <div className="relative flex justify-between items-center">
+                            <img className='absolute h-[280px] w-[405px]' src={frame} alt="" />
+                            <img className='h-[270px] w-[400px]' src={demo} alt="" />
+                        </div>
+                        <div className="w-[33px] h-[33px] rounded-full bg-[#4A4A4A]"></div>
+                        <button className='px-10 py-3 rounded-xl bg-[#34C38F] text-white font-bold text-sm' onClick={() => { setStep(3) }}>Submit</button>
+                    </div>
+                }
+                {
+                    step === 3 && <div className="flex flex-col justify-center items-center h-full gap-5">
                         <ProfilePhoto {...e} setPreview={setPreview} setVerificationImage={setVerificationImage} />
                         <button className='px-10 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => {
                             if (verificationImage) {
                                 axios.post(`${BackendIP}/verify/request`, { id: e.id, verificationImage }).then(res => {
-                                    setStep(3)
+                                    setStep(4)
                                     setTimeout(() => {
                                         navigate('/dashboard')
                                     }, 2000);
@@ -177,7 +190,7 @@ export const Verify = ({ e, setVerify}) => {
                     </div>
                 }
                 {
-                    step === 3 && <div className="h-full flex flex-col justify-center items-center gap-5">
+                    step === 4 && <div className="h-full flex flex-col justify-center items-center gap-5">
                         <div className="h-10 w-10 rounded-full border border-[#34C38F] text-[#34C38F] flex justify-center items-center">
                             <Done />
                         </div>
