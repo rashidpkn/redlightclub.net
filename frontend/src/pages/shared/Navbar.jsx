@@ -57,7 +57,7 @@ function Navbar() {
             Search
           </button>
           {token ? (
-            <button className="h-10 px-3 text-white " onClick={() => { dispatch(setToken(undefined)); sessionStorage.clear() }}>
+            <button className="h-10 px-3 text-white " onClick={() => { dispatch(setToken(undefined)); localStorage.clear() }}>
               Log Out
             </button>
           ) : (

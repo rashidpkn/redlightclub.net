@@ -7,8 +7,10 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import BackendIP from '../../../../BackendIP'
 
-import upVote from '../../../../asset/images/dashboard/user/report-issue/up-vote.png'
-import downVote from '../../../../asset/images/dashboard/user/report-issue/down-vote.png'
+// import upVote from '../../../../asset/images/dashboard/user/report-issue/up-vote.png'
+// import downVote from '../../../../asset/images/dashboard/user/report-issue/down-vote.png'
+
+import thumb from '../../../../asset/images/dashboard/user/report-issue/thumb.png'
 
 function ReportIssues() {
     const [reports, setReports] = useState([])
@@ -31,7 +33,7 @@ function ReportIssues() {
                 <thead className='w-full font-bold text-sm'>
 
                     <tr className='w-full h-16 border-b'>
-                        <th className='h-full w-[10%]  text-start'>SL.NO</th>
+                        <th className='h-full w-[10%] text-center'>SL.NO</th>
                         <th className='h-full w-[20%] text-start'>Profile</th>
                         <th className='h-full w-[20%] text-start'>Reason</th>
                         <th className='h-full w-[30%] text-start'>Description</th>
@@ -39,7 +41,7 @@ function ReportIssues() {
                     </tr>
                 </thead>
                 <tbody className='w-full'>
-                    {reports.map(e => <TableRow {...e} e={e} fetchData={fetchData}/>)}
+                    {reports.map((e,index) => <TableRow key={index} index={index} {...e} e={e} fetchData={fetchData}/>)}
 
 
                 </tbody>
@@ -52,13 +54,13 @@ export default ReportIssues
 
 
 
-const TableRow = ({ id, phoneNumber, subject, description, vote, e,fetchData}) => {
+const TableRow = ({ id, phoneNumber, subject, description, vote, e,fetchData,index}) => {
     const [alertDetails, setAlertDetails] = useState(false)
     const {username} = useSelector(state=>state.user)
     return (
         <>
             <tr className='w-full h-16 border-b hover:shadow-lg'>
-                <td className='h-full w-[10%]  font-bold text-xs'>1</td>
+                <td className='h-full w-[10%]  font-bold text-xs text-center'>{index+1}</td>
                 <td className='h-full w-[20%] font-bold text-xs'>{e.username}</td>
                 <td className='h-full w-[20%] font-bold text-xs'>{subject}</td>
                 <td className='h-full w-[30%] font-bold text-xs'>{description}</td>
@@ -66,12 +68,14 @@ const TableRow = ({ id, phoneNumber, subject, description, vote, e,fetchData}) =
                     <div className="flex justify-center items-center w-full h-full gap-5">
                         <div className="flex items-center gap-3">
                             <div  onClick={()=>axios.post(`${BackendIP}/issues/vote`,{id,username,response:true}).then(res=>{res.data?window.alert("Done"):window.alert("You are alredy voted");fetchData()})}>
-                                <img src={upVote} alt="" />
+                                {/* <img src={upVote} alt="" /> */}
+                                <img src={thumb} alt="" className='cursor-pointer' />
                             </div>
                             <p>{vote?.filter(e => e.response === true).length}</p></div>
                         <div className="flex items-center gap-3">
                             <div  onClick={()=>axios.post(`${BackendIP}/issues/vote`,{id,username,response:false}).then(res=>{res.data?window.alert("Done"):window.alert("You are alredy voted");fetchData()})}>
-                                <img src={downVote} alt="" />
+                                {/* <img src={downVote} alt="" /> */}
+                                <img src={thumb} alt="" className='rotate-180 cursor-pointer' />
                             </div>
                             <p>{vote?.filter(e => e.response === false).length}</p></div>
                     </div>

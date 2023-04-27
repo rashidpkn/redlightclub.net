@@ -25,7 +25,7 @@ import BlacklistedProfileIcon from '../../../asset/icons/sidebar/blacklisted.js'
 import AuctionIcon from '../../../asset/icons/sidebar/Auction.js'
 import PaymentHistoryIcon from '../../../asset/icons/sidebar/payment-history.js'
 // import PaymentAdsIcon from '../../../asset/icons/sidebar/payment-adverts.js'
-import BidPaymentsIcon from '../../../asset/icons/sidebar/bid-Payment.js'
+// import BidPaymentsIcon from '../../../asset/icons/sidebar/bid-Payment.js'
 import SiteAnalyticsIcon from '../../../asset/icons/sidebar/site-analytics.js'
 import AdsAnalyticsIcon from '../../../asset/icons/sidebar/ads-analytics.js'
 import BannerIcon from '../../../asset/icons/sidebar/banner.js'
@@ -54,7 +54,6 @@ function AdminDashboard() {
           <Menu Icon={AuctionIcon} title={'Auction In Progress'} url='auction-progress' />
           <Menu Icon={PaymentHistoryIcon} title={'Payment History'} url='payment-history' />
           {/* <Menu Icon={PaymentAdsIcon} title={'Payments For Adverts'} url='payment-adverts' /> */}
-          <Menu Icon={BidPaymentsIcon} title={'Bid Payments'} url='bid-Payments' />
           <Menu Icon={SiteAnalyticsIcon} title={'Site Analytics'} url='site-analytics' />
           <Menu Icon={AdsAnalyticsIcon} title={'Ads Analytics'} url='ads-analytics' />
           <Menu Icon={BannerIcon} title={'Banner'} url='banner' />

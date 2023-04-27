@@ -6,6 +6,9 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
 import BackendIP from '../../../../BackendIP'
+import { Link } from 'react-router-dom'
+
+import sidebarImage from '../../../../asset/images/dashboard/user/user-sidebar.png'
 
 
 
@@ -30,6 +33,12 @@ function AvailableCredit() {
                 <div className="text-xl">
                     <p>Credit Balance</p>
                     <p className='font-bold'>AED {user.credit}</p>
+                </div>
+
+                <div className="flex h-full items-center">
+                    <Link to={'/dashboard/earn-credit'}>
+                        <img className='w-[238px] cursor-pointer' src={sidebarImage} alt="" />
+                    </Link>
                 </div>
 
                 <Card {...user} />
@@ -98,7 +107,11 @@ const Card = ({ credit, username }) => {
                     </div>
                 </div>
             </div>
-            <p className='text-[13px]'>Need more credits? <span className='text-[#0062F4] cursor-pointer'>Learn How</span> </p>
+            <p className='text-[13px]'>Need more credits?  
+            <Link to={'/dashboard/earn-credit'}>
+                <span className='text-[#0062F4] cursor-pointer'>Learn How</span> 
+            </Link>
+            </p>
         </div>
     )
 }

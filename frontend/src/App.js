@@ -26,8 +26,6 @@ import { setRegion } from "./redux/slice/utilSlice";
 
 function App() {
 
-  // axios.defaults.baseURL='http://192.168.1.124:3000'
-
   const { token, role } = useSelector((state) => state.user);
   const dispatch = useDispatch()
   useEffect(() => {

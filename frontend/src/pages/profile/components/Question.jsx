@@ -14,7 +14,7 @@ function Question({ads}) {
                 <form
                 onSubmit={e=>{
                     e.preventDefault()
-                    if(sessionStorage.token){
+                    if(localStorage.token){
                         axios.post(`${BackendIP}/ads/ask-question`,{id:ads.id,username,question}).then(res=>{
                             window.alert("Yor are asked a question Please wait for replay")
                         }).catch(err=>{

@@ -94,7 +94,7 @@ const Step1 = ()=>{
                         </div>
                         <div className="absolute h-full w-full backdrop-blur-xl rounded-xl px-7 py-10 text-white z-10 " style={{ background: 'linear-gradient(0.6deg, rgba(0, 89, 169, 0.6) 0.41%, rgba(80, 165, 241, 0.6) 99.39%)' }}>
                             <p className='font-bold'>Step 1</p>
-                            <div className="w-[230] h-[160px] mt-8 mb-6 flex justify-center items-center">
+                            <div className="w-[230] h-[160px] mt-8 mb-6 flex justify-center items-center hover:scale-110 hover:z-10 duration-500 cursor-pointer">
                                 <img src={earn5} alt="" />
                             </div>
                             <p className='w-[260px] text-sm'>Go to the "Choose Banner" section on our website and select the banner you would like to use on your website. Once you have chosen a banner, copy the code provided and paste it onto your website, linking it to our website.</p>
@@ -106,7 +106,7 @@ const Step1 = ()=>{
 const Step2 = ()=>{
 
     return(
-        <div className={`h-[480px] w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer`} data-aos='zoom-in' data-aos-duration="1000" data-aos-delay="500">
+        <div className={`h-[480px] w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer`} data-aos='zoom-in' data-aos-duration="1000" data-aos-delay="250">
                         <div className="absolute -top-7 right-3 -z-10">
                             <img src={ball4} alt="" />
                         </div>
@@ -115,7 +115,7 @@ const Step2 = ()=>{
                         </div>
                         <div className="absolute h-full w-full backdrop-blur-xl rounded-xl px-7 py-10 text-white z-10" style={{ background: 'linear-gradient(0.6deg, rgba(0, 95, 60, 0.6) 0.41%, rgba(52, 195, 143, 0.6) 99.39%)' }}>
                             <p className='font-bold'>Step 2</p>
-                            <div className="w-[230] h-[160px] mt-8 mb-6 flex justify-center items-center">
+                            <div className="w-[230] h-[160px] mt-8 mb-6 flex justify-center items-center hover:scale-110 hover:z-10 duration-500 cursor-pointer">
                                 <img src={earn6} alt="" />
                             </div>
                             <p className='w-[260px] text-sm'>Navigate to the "Add New Banner" section on our website and submit the link to the page where the banner is located on your website. We will review your submission and, if approved, credit your account with the appropriate number of credits.</p>
@@ -126,13 +126,13 @@ const Step2 = ()=>{
 
 const Step3 = ()=>{
     return(
-        <div className={`h-[480px] w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer delay-[1.5s]`} data-aos='zoom-in' data-aos-duration="1000" data-aos-delay="1000">
+        <div className={`h-[480px] w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer delay-[1.5s]`} data-aos='zoom-in' data-aos-duration="1000" data-aos-delay="500">
                         <div className="absolute -bottom-10 right-3 -z-10">
                             <img src={ball6} alt="" />
                         </div>
                         <div className="absolute h-full w-full backdrop-blur-xl rounded-xl px-7 py-10 text-white z-10" style={{ background: 'linear-gradient(0.6deg, rgba(0, 89, 169, 0.6) 0.41%, rgba(80, 165, 241, 0.6) 99.39%)' }}>
                             <p className='font-bold'>Step 3</p>
-                            <div className="w-[230] h-[160px] mt-8 mb-6 flex justify-center items-center">
+                            <div className="w-[230] h-[160px] mt-8 mb-6 flex justify-center items-center hover:scale-110 hover:z-10 duration-500 cursor-pointer">
                                 <img src={earn7} alt="" />
                             </div>
                             <p className='w-[260px] text-sm'>Credits can be used to purchase products or services on our website. The more banners you place on your website, the more credits you can earn.</p>

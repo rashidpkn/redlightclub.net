@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.c67131cf.css",
-    "main.js": "/static/js/main.6ba910cc.js",
+    "main.css": "/static/css/main.75ae1ac8.css",
+    "main.js": "/static/js/main.20bff3f3.js",
     "static/media/lady.png": "/static/media/lady.53ac6f75387354f8bc01.png",
     "static/media/sextoy1.png": "/static/media/sextoy1.fe393ceddae2e0d6dd9a.png",
     "static/media/sextoy3.png": "/static/media/sextoy3.ef35b863dd56df461886.png",
@@ -44,11 +44,11 @@
     "index.html": "/index.html",
     "static/media/email.svg": "/static/media/email.4efe0c7e8dea67a7c2ba4a986ca76d75.svg",
     "static/media/thailand.webp": "/static/media/thailand.5c4ff419995a55f0804e.webp",
-    "main.c67131cf.css.map": "/static/css/main.c67131cf.css.map",
-    "main.6ba910cc.js.map": "/static/js/main.6ba910cc.js.map"
+    "main.75ae1ac8.css.map": "/static/css/main.75ae1ac8.css.map",
+    "main.20bff3f3.js.map": "/static/js/main.20bff3f3.js.map"
   },
   "entrypoints": [
-    "static/css/main.c67131cf.css",
-    "static/js/main.6ba910cc.js"
+    "static/css/main.75ae1ac8.css",
+    "static/js/main.20bff3f3.js"
   ]
 }

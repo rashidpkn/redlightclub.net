@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  username: sessionStorage.username,
+  username: localStorage.username,
   password: '',
-  email: sessionStorage.email,
-  token: sessionStorage.token,
-  role: sessionStorage.role
+  email: localStorage.email,
+  token: localStorage.token,
+  role: localStorage.role
 }
 
 const userSlice = createSlice({
@@ -14,20 +14,20 @@ const userSlice = createSlice({
   reducers: {
     setUsername(state, { payload }) {
       state.username = payload
-      sessionStorage.setItem('username', payload)
+      localStorage.setItem('username', payload)
     },
     setPassword(state, { payload }) { state.password = payload },
     setEmail(state, { payload }) {
       state.email = payload
-      sessionStorage.setItem('email', payload)
+      localStorage.setItem('email', payload)
     },
     setToken(state, { payload }) {
       state.token = payload;
-      sessionStorage.setItem("token", payload);
+      localStorage.setItem("token", payload);
     },
     setRole(state, { payload }) {
       state.role = payload;
-      sessionStorage.setItem("role", payload);
+      localStorage.setItem("role", payload);
     }
   }
 });

@@ -15,6 +15,8 @@ import { setIsDarkMode, setRegion } from "../../../redux/slice/utilSlice";
 import { useEffect } from "react";
 import axios from "axios";
 import BackendIP from "../../../BackendIP";
+import { setToken } from "../../../redux/slice/userSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Navbar() {
@@ -57,14 +59,37 @@ export default Navbar
 const Profile = () => {
   const { isDarkMode } = useSelector(state => state.util)
   const { username, role } = useSelector(state => state.user)
+  const [showMenu, setShowMenu] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const logout = () =>{
+    dispatch(setToken(undefined)); 
+    localStorage.clear() 
+    navigate('/')
+  }
   return (
+    <>
     <div className="flex  items-center gap-5">
-      <div className="w-12 h-12 bg-[#D8D8D8] rounded-2xl"></div>
+      <div className="w-12 h-12 bg-[#D8D8D8] rounded-2xl cursor-pointer" onClick={()=>{setShowMenu(!showMenu)}}></div>
       <div className="hidden md:flex flex-col justify-center items-center">
         <p className={`text-base font-bold ${isDarkMode ? 'text-white' : 'text-black'} duration-500 capitalize`}>{username}</p>
         <p className="text-xs font-light text-[#8F8F8F] capitalize">{role}</p>
       </div>
     </div>
+    {
+      showMenu && 
+    <div className="fixed z-50 right-0 top-24 bg-black  w-48 rounded-bl-2xl flex flex-col gap-2 justify-center items-center text-white p-4">
+      <Link to={'/dashboard/settings'}>
+        <button>Settings</button>
+      </Link>
+      
+        <div className="w-full h-[1px] bg-white "></div>
+
+      <button onClick={logout}>Logout</button>
+
+    </div>
+    }
+    </>
   )
 }
 

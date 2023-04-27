@@ -21,7 +21,32 @@ function Banner() {
       fetchDate()
       // eslint-disable-next-line
     }, [])
+
+    const [copy, setCopy] = useState(0)
     
+    const copied = (size=1) =>{
+        setCopy(size)
+            if(size===1){
+                navigator.clipboard.writeText(`
+                    <a href='https://redlightclub.net'> 
+                    <img src='https://redlightclub.net/banner/banner-1.png' alt='' height='144'/>
+                    </a>
+                `)
+            }
+            else if(size===2){
+                navigator.clipboard.writeText(`
+                <a href='https://redlightclub.net'> 
+                    <img src='https://redlightclub.net/banner/banner-2.png' alt='' height='144'/>
+                </a>
+                `)
+            }else{
+                navigator.clipboard.writeText(`
+                <a href='https://redlightclub.net'> 
+                    <img src='https://redlightclub.net/banner/banner-3.png' alt='' height='144'/>
+                </a>
+                `)
+            }
+    }
 
     return (
         <div className='space-y-5'>
@@ -33,6 +58,29 @@ function Banner() {
                 <div className="flex justify-center items-center gap-5">
                     <input className='h-12 w-52 rounded-xl pl-3' type="text" placeholder='Search here' />
                     <button className='h-12 w-44 rounded-xl bg-[#34C38f] text-white hover:shadow-xl' onClick={setNewBanner}>Add New Banner</button>
+                </div>
+            </div>
+            <div className="">
+                <p className='font-cairo font-bold text-lg'>Choose Banner</p>
+                <div className="flex gap-6 mt-4">
+                    <div className="flex flex-col gap-3 justify-center items-center">
+                        <div className="">
+                            <img src="/banner/banner-1.png" className=' h-36 rounded-xl' alt="" />
+                        </div>
+                        <button className='px-4 py-3 rounded-xl bg-[#474747] text-sm font-bold text-white' onClick={()=>copied(1)}>{'</>'}{copy===1 ? 'Code Copied': 'Copy Code' } </button>
+                    </div>
+                    <div className="flex flex-col gap-3 justify-center items-center">
+                        <div className="">
+                        <img src="/banner/banner-2.png" className=' h-36 rounded-xl' alt="" />
+                        </div>
+                        <button className='px-4 py-3 rounded-xl bg-[#474747] text-sm font-bold text-white' onClick={()=>copied(2)}>{'</>'}{copy===2 ? 'Code Copied': 'Copy Code' } </button>
+                    </div>
+                    <div className="flex flex-col gap-3 justify-center items-center">
+                        <div className="">
+                        <img src="/banner/banner-3.png" className=' h-36 rounded-xl' alt="" />
+                        </div>
+                        <button className='px-4 py-3 rounded-xl bg-[#474747] text-sm font-bold text-white' onClick={()=>copied(3)}>{'</>'}{copy===3 ? 'Code Copied': 'Copy Code' } </button>
+                    </div>
                 </div>
             </div>
             <table className='bg-white rounded-md w-full '>
@@ -86,8 +134,7 @@ const TableRow = ({ url, status, credit }) => {
     )
 }
 const NewBanner = ({ setNewBanner,fetchDate }) => {
-
-
+    
     const [insideClick, setInsideClick] = useState(0)
     const [outsideClick, setOutsideClick] = useState(0)
     useEffect(() => {
@@ -103,7 +150,22 @@ const NewBanner = ({ setNewBanner,fetchDate }) => {
 
 
     const { username } = useSelector(state => state.user)
-    const [url, setUrl] = useState()
+    const [url, setUrl] = useState('')
+
+    const isValidUrl = urlString=> {
+        try { 
+            return Boolean(new URL(urlString)); 
+        }
+        catch(e){ 
+            return false; 
+        }
+    }
+    useEffect(() => {
+        navigator.clipboard.readText().then(res=>isValidUrl(res)&& setUrl(res))
+    }, [])
+    
+
+
     const createBanner = () => {
         axios.post(`${BackendIP}/banner`, { username, url }).then(res=>{
             setNewBanner(false)
@@ -119,7 +181,7 @@ const NewBanner = ({ setNewBanner,fetchDate }) => {
                 <Close className='text-[#A5A5A5] float-right' onClick={() => setNewBanner(false)} />
                 <p className='text-black text-sm font-bold text-center'>Paste Link</p>
                 <div className="px-0 md:px-5">
-                    <input className='w-full h-12  border bg-[#F5F5F5] rounded-md pl-3' type="url" required onChange={e => setUrl(e.target.value)} />
+                    <input className='w-full h-12  border bg-[#F5F5F5] rounded-md pl-3' type="url" required value={url} onChange={e => setUrl(e.target.value)} />
                 </div>
                 <div className="flex justify-center items-center">
                     <button className='w-[250px] h-12 rounded-lg bg-[#34C38F] text-white hover:shadow-xl' type='submit'>Add new banner</button>

@@ -3,20 +3,30 @@ import { Rating } from '@mui/material'
 import React, { useState } from 'react'
 import Login from './Login'
 import WriteReviews from './WriteReviews'
+import { useEffect } from 'react'
 
 function Review({ads}) {
     const [writeReview, setWriteReview] = useState(false)
+    const {review} = ads
+    const [rating, setRating] = useState(0)
+    useEffect(() => {
+      let rate = 0
+        review?.map(e=>{
+            rate = rate + e.rating
+        })
+        
+        setRating(Math.round(rate/review?.length))
+    }, [review])
+    
     return (
         <div className=" w-full lg:w-1/2 space-y-5 flex flex-col items-center">
 
-            <div className="flex justify-center items-center gap-5">
-                <p className=''>Your Rating : </p> <Rating />
-            </div>
+            
 
             <div className=" w-full lg:w-[90%]  rounded-3xl bg-white p-3 flex flex-col gap-2 items-center">
                 <p className='text-xl font-medium'>Reviews</p>
                 <div className="w-full lg:w-[60%] h-12 rounded-full bg-[#513968] flex justify-center items-center text-white gap-3">
-                    <Rating value={3} readOnly />
+                    <Rating value={rating} readOnly />
                     <p>3 out of 5 </p>
                     <AddComment className='text-white' onClick={() => { setWriteReview(true) }} />
                 </div>
@@ -29,7 +39,7 @@ function Review({ads}) {
                     
                 </div>
                 {
-                    writeReview  && (sessionStorage.token ? <WriteReviews ads={ads} setWriteReview={setWriteReview} /> : <Login setClose={setWriteReview}/> )
+                    writeReview  && (localStorage.token ? <WriteReviews ads={ads} setWriteReview={setWriteReview} /> : <Login setClose={setWriteReview}/> )
                 }
 
 
@@ -60,6 +70,7 @@ const Reviews = ({percent,title}) => <div className="w-full  h-[20px] flex items
         <span className="text-white">{percent}%</span>
     </div>
 </div>
+
 
 function Rev({ name,rating,desc,title }) {
     return (
