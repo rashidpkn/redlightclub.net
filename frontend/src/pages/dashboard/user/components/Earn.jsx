@@ -88,7 +88,7 @@ export default Earn
 
 const Step1 = ()=>{
     return(
-<div className={`h-[480px]  w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer`} data-aos='zoom-in' data-aos-duration="1000">
+<div className={`h-[480px]  w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer`} >
                         <div className="absolute top-2 -left-7 -z-10">
                             <img src={ball3} alt="" />
                         </div>
@@ -106,7 +106,7 @@ const Step1 = ()=>{
 const Step2 = ()=>{
 
     return(
-        <div className={`h-[480px] w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer`} data-aos='zoom-in' data-aos-duration="1000" data-aos-delay="250">
+        <div className={`h-[480px] w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer`} >
                         <div className="absolute -top-7 right-3 -z-10">
                             <img src={ball4} alt="" />
                         </div>
@@ -126,7 +126,7 @@ const Step2 = ()=>{
 
 const Step3 = ()=>{
     return(
-        <div className={`h-[480px] w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer delay-[1.5s]`} data-aos='zoom-in' data-aos-duration="1000" data-aos-delay="500">
+        <div className={`h-[480px] w-[325px] relative hover:scale-110 hover:z-10 duration-500 cursor-pointer delay-[1.5s]`}>
                         <div className="absolute -bottom-10 right-3 -z-10">
                             <img src={ball6} alt="" />
                         </div>
