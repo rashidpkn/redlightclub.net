@@ -62,22 +62,22 @@ function Banner() {
             </div>
             <div className="">
                 <p className='font-cairo font-bold text-lg'>Choose Banner</p>
-                <div className="flex gap-6 mt-4">
+                <div className="flex gap-6 mt-4 flex-wrap">
                     <div className="flex flex-col gap-3 justify-center items-center">
                         <div className="">
-                            <img src="/banner/1.png" className=' h-36 rounded-xl' alt="" />
+                            <img src="/banner/1.png"  className='h-[150px] rounded-xl' alt="" />
                         </div>
                         <button className='px-4 py-3 rounded-xl bg-[#474747] text-sm font-bold text-white' onClick={()=>copied(1)}>{'</>'}{copy===1 ? 'Code Copied': 'Copy Code' } </button>
                     </div>
                     <div className="flex flex-col gap-3 justify-center items-center">
                         <div className="">
-                        <img src="/banner/2.png" className=' h-36 rounded-xl' alt="" />
+                        <img src="/banner/2.png"  className='h-[150px] rounded-xl' alt="" />
                         </div>
                         <button className='px-4 py-3 rounded-xl bg-[#474747] text-sm font-bold text-white' onClick={()=>copied(2)}>{'</>'}{copy===2 ? 'Code Copied': 'Copy Code' } </button>
                     </div>
                     <div className="flex flex-col gap-3 justify-center items-center">
                         <div className="">
-                        <img src="/banner/3.png" className=' h-36 rounded-xl' alt="" />
+                        <img src="/banner/3.png"  className='h-[150px] rounded-xl' alt="" />
                         </div>
                         <button className='px-4 py-3 rounded-xl bg-[#474747] text-sm font-bold text-white' onClick={()=>copied(3)}>{'</>'}{copy===3 ? 'Code Copied': 'Copy Code' } </button>
                     </div>

@@ -17,9 +17,9 @@ import Star from '../../../../asset/icons/dashboard/home-user/star'
 import clickRate from '../../../../asset/icons/dashboard/home-user/click-rate.svg'
 import responseRate from '../../../../asset/icons/dashboard/home-user/response-rate.svg'
 
-import { Line } from 'react-chartjs-2'
+import { Line,Doughnut } from 'react-chartjs-2'
 import {
-    Chart as ChartJS, CategoryScale,
+    Chart as ChartJS, CategoryScale,ArcElement,
     LinearScale,
     PointElement,
     LineElement,
@@ -27,6 +27,19 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement
+)
+
+
 
 
 
@@ -238,6 +251,49 @@ const OverallStatistics = ({ ads }) => {
     //   console.log(review)
     // }, [selectedAds])
     
+    const options = {
+        plugins: {
+            tooltip: {
+                enabled: true
+            },
+            legend: {
+                display: false
+            }
+        }
+    }
+
+    const data = {
+        labels: [1, 2, 3, 4, 5],
+        datasets: [
+          {
+            label: "Star rate",
+            data: [
+                review?.filter(e=>Number(e.rating) ===1 ).length,
+                review?.filter(e=>Number(e.rating) ===2 ).length,
+                review?.filter(e=>Number(e.rating) ===3 ).length,
+                review?.filter(e=>Number(e.rating) ===4 ).length,
+                review?.filter(e=>Number(e.rating) ===5 ).length
+            ],
+            backgroundColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+          },
+        ],
+      };
+
 
     return (
         <div className="h-[380px] w-[300px] rounded-xl bg-white p-4 space-y-5">
@@ -258,8 +314,12 @@ const OverallStatistics = ({ ads }) => {
                 </div>
             </div>
             <div className="flex justify-between">
-                <div className=""></div>
-                <div className="space-y-5">
+
+                <div className="w-[75%]">
+                    <Doughnut data={data} options={options}/>
+                </div>
+
+                <div className="space-y-5 w-1/4">
                     <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e=>Number(e.rating) ===1 ).length} /1</p>
                         <Star fill='#6418C3' />
                     </div>
@@ -419,15 +479,7 @@ const VerifyBox = ({ setVerifyEmailAlert }) => {
 
 
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-)
+
 
 function Graph({ date, view }) {
     const { isDarkMode } = useSelector(state => state.util)
