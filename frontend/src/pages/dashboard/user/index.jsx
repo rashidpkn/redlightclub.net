@@ -53,6 +53,7 @@ import BackendIP from '../../../BackendIP'
 import { useSelector } from 'react-redux'
 
 import DueAlert from './components/DueAlert'
+import Affiliative from './components/Affiliative'
 
 
 
@@ -94,6 +95,7 @@ function UserDashboard() {
             <Menu Icon={LiveCamIcon} url='live-cam' title={'Live Cam'} />
             <Menu Icon={SexToysIcon} url='sex-toys' title={'Sex Toys'} />
             <Menu Icon={BannerIcon} url='banner' title={'Banner'} />
+            <Menu url={'affiliative'} title={'Affiliative'} />
             <Menu Icon={SupportIcon} url='support' title={'Support'} />
             <Menu Icon={ReportedIssueIcon} url='reported-issues' title={'Reported Issues'} />
             <Link to={'/dashboard/earn-credit'}>
@@ -126,6 +128,7 @@ function UserDashboard() {
             {menu === 'settings' && <SettingsMenu />}
             {menu === 'blacklisted' && <Blacklisted />}
             {menu === 'edit-ads' && <EditAds />}
+            {menu === 'affiliative' && <Affiliative/>}
             
 
           </Main>
