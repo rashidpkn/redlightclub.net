@@ -34,7 +34,7 @@ import ReportedIssueIcon from '../../../asset/icons/sidebar/reported-issue.js'
 import EarnCredit from '../../../asset/icons/sidebar/earn-credit.js'
 import LiveCamIcon from '../../../asset/icons/sidebar/live-cam'
 import SexToysIcon from '../../../asset/icons/sidebar/sex-toys'
-
+import affiliativeIcon from '../../../asset/icons/sidebar/affiliative'
 import AuctionProgress from './components/AuctionProgress'
 import LiveCam from './components/LiveCam'
 import Banner from './components/Banner'
@@ -95,7 +95,7 @@ function UserDashboard() {
             <Menu Icon={LiveCamIcon} url='live-cam' title={'Live Cam'} />
             <Menu Icon={SexToysIcon} url='sex-toys' title={'Sex Toys'} />
             <Menu Icon={BannerIcon} url='banner' title={'Banner'} />
-            <Menu url={'affiliative'} title={'Affiliative'} />
+            <Menu Icon={affiliativeIcon} url={'affiliative'} title={'Affiliative'} />
             <Menu Icon={SupportIcon} url='support' title={'Support'} />
             <Menu Icon={ReportedIssueIcon} url='reported-issues' title={'Reported Issues'} />
             <Link to={'/dashboard/earn-credit'}>

@@ -12,8 +12,10 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import BackendIP from '../../../../BackendIP'
 
+import copyIcon from '../../../../asset/icons/dashboard/affiliative/copy.svg'
+
 function Affiliative() {
-    const {username} = useSelector(state=>state.user)
+    const { username } = useSelector(state => state.user)
 
     const [user, setUser] = useState({})
     useEffect(() => {
@@ -21,7 +23,7 @@ function Affiliative() {
             setUser(res.data)
         })
     }, [username])
-    
+
     return (
         <div className='space-y-5'>
             <p className='text-2xl font-bold'> Affiliative </p>
@@ -45,7 +47,7 @@ function Affiliative() {
                                 </div>
                                 <div className="mt-3">
                                     <div className="w-full h-2 bg-white rounded-full relative flex justify-between items-center">
-                                        <div className="absolute  h-full rounded-full bg-[#635FFF]" style={{width:`${user?.referredto?.length*10}%`}}></div>
+                                        <div className="absolute  h-full rounded-full bg-[#635FFF]" style={{ width: `${user?.referredto?.length * 10}%` }}></div>
                                         <div className="w-4 h-4 bg-[#6418C3] rounded-full relative z-10"></div>
                                         <div className="w-7 h-7 bg-[#6418C3] rounded-full relative z-10"></div>
                                         <div className="w-4 h-4 bg-[#6418C3] rounded-full relative z-10"></div>
@@ -63,26 +65,39 @@ function Affiliative() {
 
 
                         <div className="flex justify-between w-full text-black">
-                            <div className="w-56 h-16 bg-white rounded-xl flex justify-center items-center gap-7">
+
+                            <div className="w-52 h-16 bg-white rounded-xl flex justify-center items-center gap-7 hover:scale-110  duration-500">
                                 <div className="flex gap-1">
-                                    <img src={startIcon} width={20} alt="" />
-                                    <img src={startIcon} width={20} alt="" />
+                                    {user?.referredto?.length < 5 && <img src={startIcon} width={20} alt="" />}
+                                    {user?.referredto?.length >= 5 && user?.referredto?.length < 10 && [...Array(2)].map(e => <img src={startIcon} width={20} alt="" />)}
+                                    {user?.referredto?.length >= 10 && [...Array(3)].map(e => <img src={startIcon} width={20} alt="" />)}
                                 </div>
                                 <div className="">
-                                    <p className='text-lg font-bold'>Intermediate</p>
+                                    <p className='text-lg font-bold'>
+                                        {user?.referredto?.length < 5 && <>Beginner</>}
+                                        {user?.referredto?.length >= 5 && user?.referredto?.length < 10 && <>Intermediate</>}
+                                        {user?.referredto?.length >= 10 && <>Expert </>}
+
+                                    </p>
                                     <p className='text-[10px]'>Current Status</p>
                                 </div>
                             </div>
-                            <div className="w-56 h-16 bg-white rounded-xl flex justify-center items-center gap-7">
+
+                            <div className="w-52 h-16 bg-white rounded-xl flex justify-center items-center gap-7 hover:scale-110  duration-500">
                                 <div className="w-12 h-12">
                                     <img src={cashIcon} alt="" />
                                 </div>
                                 <div className="">
-                                    <p className='text-lg font-bold'>364 AED</p>
+                                    <p className='text-lg font-bold'>{
+
+                                        user?.referredto?.map(e => e.amount ? e.amount : 0).reduce((a, b) => a + b)
+
+                                    } AED</p>
                                     <p className='text-[10px]'>Total Credits Earned</p>
                                 </div>
                             </div>
-                            <div className="w-56 h-16 bg-white rounded-xl flex justify-center items-center gap-7">
+
+                            <div className="w-52 h-16 bg-white rounded-xl flex justify-center items-center gap-7 hover:scale-110  duration-500">
                                 <div className="w-12 h-12">
                                     <img src={referralIcon} className='w-full h-full' alt="" />
                                 </div>
@@ -91,6 +106,7 @@ function Affiliative() {
                                     <p className='text-[10px]'>Referrals Joined</p>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div className="w-1/3 h-full p-3 space-y-4">
@@ -99,10 +115,18 @@ function Affiliative() {
                             <p className='text-sm font-light'>Note: This is custom generated link specially for your use</p>
                         </div>
 
-                        <input type="text" className='bg-white w-[325px] h-12 rounded-xl text-black' readOnly value={`https://redlightclub.net/invite/${username}`} onClick={e=>{
-                            navigator.clipboard.writeText(e.target.value)
-                            window.alert("You are copied the invitation link please send to your friends")
+                        <div className="relative w-full h-12">
+                            <div className="absolute right-3 h-full w-10 bg-white flex justify-center items-center" onClick={()=>{
+                                navigator.clipboard.writeText(`https://redlightclub.net/invite/${username}`)
+                                window.alert("You are copied the invitation link please send to your friends")
+                            }}>
+                                <img src={copyIcon} alt="" />
+                            </div>
+                            <input type="text" className='bg-white w-full h-12 rounded-xl text-black pl-5 text-sm' readOnly value={`https://redlightclub.net/invite/${username}`} onClick={e => {
+                                navigator.clipboard.writeText(e.target.value)
+                                // window.alert("You are copied the invitation link please send to your friends")
                             }} />
+                        </div>
 
                         <div className="w-full">
                             <p className='text-xl font-bold'>Tier Breakdown</p>
@@ -129,7 +153,7 @@ function Affiliative() {
                                         <img src={startIcon} alt="" />
                                         <img src={startIcon} alt="" />
                                     </div>
-                                    <p className='w-3/4'><b> Expert </b> : You get 30% of spend by your referrals</p>
+                                    <p className='w-3/4'><b> Expert </b> : You get 40% of spend by your referrals</p>
                                 </div>
 
                             </div>
@@ -213,7 +237,7 @@ function Affiliative() {
                         </tr>
                     </thead>
                     <tbody className='w-full'>
-                    {user?.referredto?.map((e,index)=><TableRow  {...e} index={index} />)}
+                        {user?.referredto?.map((e, index) => <TableRow  {...e} index={index} />)}
 
                     </tbody>
                 </table>
@@ -224,7 +248,7 @@ function Affiliative() {
 
 export default Affiliative
 
-const TableRow = ({index,username,amount,date}) => {
+const TableRow = ({ index, username, amount, date }) => {
     return (
         <tr className='w-full text-center text-xs h-12 hover:shadow-md font-medium'>
             <td className='w-[10%]'>{index + 1}</td>
