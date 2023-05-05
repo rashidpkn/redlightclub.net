@@ -1,17 +1,19 @@
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BackendIP from "../../../../BackendIP";
 import { setEmail, setPassword, setRole, setToken, setUsername } from "../../../../redux/slice/userSlice";
 
 function AdvertiserSignup() {
+  const { referredby } = useParams()
+  console.log(referredby );
   const { username, email, password, } = useSelector(state => state.user)
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
   const Signup = () => {
-    axios.post(`${BackendIP}/user/signup`, { username, email, password, role: 'advertiser' }).then(res => {
+    axios.post(`${BackendIP}/user/signup`, { username, email, password, role: 'advertiser',referredby }).then(res => {
       const { status } = res.data
       if (status) {
         navigate('/dashboard')

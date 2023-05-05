@@ -34,6 +34,16 @@ export class User extends Model {
         position:number
     }]
 
+    @Column
+    referredby:string
+
+    @Column({type:DataType.ARRAY(DataType.JSON),defaultValue:[]})
+    referredto:[
+            username:string,
+            amount:string,
+            date:string
+    ]
+
 }
 
 console.log('User Table is OK')

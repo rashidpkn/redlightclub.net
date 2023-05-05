@@ -26,127 +26,132 @@ import { setRegion } from "./redux/slice/utilSlice";
 
 function App() {
 
-  const { token, role } = useSelector((state) => state.user);
-  const dispatch = useDispatch()
-  useEffect(() => {
-    axios.post(`${BackendIP}/analytics`).catch(err => {
-      window.alert(err.message)
-    })
-  }, [])
+	const { token, role } = useSelector((state) => state.user);
+	const dispatch = useDispatch()
+	useEffect(() => {
+		axios.post(`${BackendIP}/analytics`).catch(err => {
+			window.alert(err.message)
+		})
+	}, [])
 
-  const { region } = useSelector(state => state.util)
-  return (
-    <div className="App  font-inter">
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/"
-          element={
-            <>
-              <Navbar />
-              <Outlet />
-              <Footer />
-            </>
-          }
-        >
+	const { region } = useSelector(state => state.util)
+	return (
+		<div className="App  font-inter">
+			<ScrollToTop />
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route
+					path="/"
+					element={
+						<>
+							<Navbar />
+							<Outlet />
+							<Footer />
+						</>
+					}
+				>
 
-          <Route path="/import" element={<DataImport />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route
-            path="/terms-and-conditions"
-            element={<TermsAndConditions />}
-          />
-          <Route path='/filter' element={<Filter />} />
-          <Route path="/profile/:id" element={<Profile />} />
-        </Route>
+					<Route path="/import" element={<DataImport />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/faq" element={<FAQ />} />
+					<Route
+						path="/terms-and-conditions"
+						element={<TermsAndConditions />}
+					/>
+					<Route path='/filter' element={<Filter />} />
+					<Route path="/profile/:id" element={<Profile />} />
+				</Route>
 
-        <Route
-          path="/auth"
-          element={token ? <Navigate to={"/dashboard"} /> : <Auth />}
-        />
+				<Route
+					path="/auth"
+					element={token ? <Navigate to={"/dashboard"} /> : <Auth />}
+				/>
 
-        <Route
-          path="/register"
-          element={token ? <Navigate to={"/dashboard"} /> : <Outlet />}
-        >
-          <Route index element={<Navigate to={"/register/user"} />} />
-          <Route path="user" element={<UserSignup />} />
-          <Route path="advertiser" element={<AdvertiserSignup />} />
-        </Route>
+				<Route
+					path="/register"
+					element={token ? <Navigate to={"/dashboard"} /> : <Outlet />}
+				>
+					<Route index element={<Navigate to={"/register/user"} />} />
+					<Route path="user" element={<UserSignup />} />
+					<Route path="advertiser" element={<AdvertiserSignup />} />
+				</Route>
 
-        <Route
-          path="/dashboard"
-          element={
-            token ? (
-              role === "admin" ? (
-                <AdminDashboard />
-              ) : (
-                <UserDashboard />
-              )
-            ) : (
-              <Navigate to={"/auth"} />
-            )
-          }
-        />
+				<Route
+					path="/invite/:referredby"
+					element={token ? <Navigate to={"/dashboard"} /> :  <AdvertiserSignup/>}
+				/>
 
-        <Route
-          path="/dashboard/:menu"
-          element={
-            token ? (
-              role === "admin" ? (
-                <AdminDashboard />
-              ) : (
-                <UserDashboard />
-              )
-            ) : (
-              <Navigate to={"/auth"} />
-            )
-          }
-        />
+				<Route
+					path="/dashboard"
+					element={
+						token ? (
+							role === "admin" ? (
+								<AdminDashboard />
+							) : (
+								<UserDashboard />
+							)
+						) : (
+							<Navigate to={"/auth"} />
+						)
+					}
+				/>
 
-        <Route
-          path="/new-ads"
-          element={
-            (token) ? <NewAds /> : <Navigate to={"/auth"} />
-          } />
+				<Route
+					path="/dashboard/:menu"
+					element={
+						token ? (
+							role === "admin" ? (
+								<AdminDashboard />
+							) : (
+								<UserDashboard />
+							)
+						) : (
+							<Navigate to={"/auth"} />
+						)
+					}
+				/>
 
-       
+				<Route
+					path="/new-ads"
+					element={
+						(token) ? <NewAds /> : <Navigate to={"/auth"} />
+					} />
 
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      {
-        !region && <div className="fixed top-0 left-0 h-screen w-full bg-black/10 z-50 flex justify-center items-center">
-          <div className="w-96  bg-white rounded-xl p-5 space-y-10">
-            <p className="text-xl font-bold">Select Your Region</p>
-            <div className="flex justify-center">
 
-              <select className="h-12 outline-none border w-64 text-black" onChange={e => { dispatch(setRegion(e.target.value)) }}>
-                <option className="text-black" value={''}>Select a region</option>
-                <option className="text-black" value={'Dubai'}>Dubai</option>
-                <option className="text-black" value={'UK'}>UK</option>
-                <option className="text-black" value={'Thailand'}>Thailand</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      }
-    </div>
-  );
+
+				<Route path="*" element={<NotFound />} />
+			</Routes>
+			{
+				!region && <div className="fixed top-0 left-0 h-screen w-full bg-black/10 z-50 flex justify-center items-center">
+					<div className="w-96  bg-white rounded-xl p-5 space-y-10">
+						<p className="text-xl font-bold">Select Your Region</p>
+						<div className="flex justify-center">
+
+							<select className="h-12 outline-none border w-64 text-black" onChange={e => { dispatch(setRegion(e.target.value)) }}>
+								<option className="text-black" value={''}>Select a region</option>
+								<option className="text-black" value={'Dubai'}>Dubai</option>
+								<option className="text-black" value={'UK'}>UK</option>
+								<option className="text-black" value={'Thailand'}>Thailand</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	);
 }
 
 export default App;
 
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+	const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
-  return null
+	return null
 
 }

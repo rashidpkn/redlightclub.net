@@ -11,6 +11,7 @@ function Review({ads}) {
     const [rating, setRating] = useState(0)
     useEffect(() => {
       let rate = 0
+      // eslint-disable-next-line
         review?.map(e=>{
             rate = rate + e.rating
         })

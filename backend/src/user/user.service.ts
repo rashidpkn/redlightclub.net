@@ -3,16 +3,20 @@ import { User } from 'src/database/model/user.entity';
 
 @Injectable()
 export class UserService {
-  create = async (username: string, email: string, password: string, role: string) => {
+  create = async (username: string, email: string, password: string, role: string,referredby :string) => {
     try {
-      const found = await User.findOne({ where: { email } });
+      const found = await User.findOne({ where: { email,username } });
       if (found) {
         return {
           status: false,
           reason: 'User already exist',
         };
       } else {
-        await User.create({ username, email, password, role });
+        await User.create({ username, email, password, role ,referredby });
+        if(referredby){
+          const {referredto } = await User.findOne({where:{username:referredby}})
+          await User.update({referredto:[...referredto,{username,date:new Date()}]},{where:{username:referredby}})
+        }
 
         return {
           status: true,

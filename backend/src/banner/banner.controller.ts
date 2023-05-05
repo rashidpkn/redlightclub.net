@@ -37,6 +37,27 @@ export class BannerController {
     @Body('credit') credit : number
   ){
     await User.increment('credit',{by:credit,where:{username}})
+
+    const { referredby}: any = await User.findOne({ where: { username } })
+
+    console.log(credit);
+
+    if(referredby){
+      const { referredto}: any = await User.findOne({ where: { username:referredby } })
+      const ref = referredto.map((e: { username: any; amount: number; }) => {
+        e.username === username && e.amount? e.amount  = e.amount  + credit*20/100  :  e.amount = credit*20/100
+        return e
+      })
+
+        User.update({         
+          referredto:ref
+      } , {where:{username:referredby}})
+
+      await User.increment('credit',{by:credit*20/100,where:{username:referredby}})
+    }
+
+
+
     Banners.update({status:true,credit},{where:{id}})
     return true
   }

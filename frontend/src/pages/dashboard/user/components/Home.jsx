@@ -241,10 +241,12 @@ const OverallStatistics = ({ ads }) => {
 
     useEffect(() => {
       let rate = 0
+      // eslint-disable-next-line
         review?.map(e=>{
             rate = rate + Number(e.rating)
         })
         setRating(Math.round(rate/review?.length))
+        // eslint-disable-next-line
     }, [selectedAds])
 
     // useEffect(() => {
