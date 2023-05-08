@@ -5,8 +5,9 @@ import { User } from 'src/database/model/user.entity';
 export class UserService {
   create = async (username: string, email: string, password: string, role: string,referredby :string) => {
     try {
-      const found = await User.findOne({ where: { email,username } });
-      if (found) {
+      const foundUsername = await User.findOne({ where: { username } });
+      const foundEmail = await User.findOne({ where: { email} });
+      if (foundUsername || foundEmail) {
         return {
           status: false,
           reason: 'User already exist',
