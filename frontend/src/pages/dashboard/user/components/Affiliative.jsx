@@ -4,8 +4,8 @@ import auctionsIcon from '../../../../asset/icons/dashboard/affiliative/Auctions
 import bannerIcon from '../../../../asset/icons/dashboard/affiliative/Banners.svg'
 import purchaseIcon from '../../../../asset/icons/dashboard/affiliative/purchase.svg'
 import startIcon from '../../../../asset/icons/dashboard/affiliative/star.svg'
-import cashIcon from '../../../../asset/icons/dashboard/affiliative/cash.svg'
-import referralIcon from '../../../../asset/icons/dashboard/affiliative/Referral.svg'
+import cashIcon from '../../../../asset/icons/dashboard/affiliative/cash.png'
+import referralIcon from '../../../../asset/icons/dashboard/affiliative/Referral.png'
 import ring from '../../../../asset/icons/dashboard/affiliative/ring.png'
 import mark from '../../../../asset/icons/dashboard/affiliative/mark.svg'
 import { useSelector } from 'react-redux'
@@ -13,6 +13,10 @@ import axios from 'axios'
 import BackendIP from '../../../../BackendIP'
 
 import copyIcon from '../../../../asset/icons/dashboard/affiliative/copy.svg'
+
+import ball1 from '../../../../asset/images/dashboard/user/earn/ball/ball1.png'
+import ball2 from '../../../../asset/images/dashboard/user/earn/ball/ball2.png'
+import Arrow from '../../../../asset/icons/dashboard/affiliative/arrow'
 
 function Affiliative() {
     const { username } = useSelector(state => state.user)
@@ -29,6 +33,14 @@ function Affiliative() {
             <p className='text-2xl font-bold'> Affiliative </p>
             <div className="w-full min-h-[435px] h-full  relative mt-2 hover:shadow-earn-credit-shadow duration-200 cursor-pointer rounded-xl">
 
+                <div className="absolute -top-8 -right-8">
+                    <img src={ball1} alt="" />
+                </div>
+
+                <div className="absolute -bottom-10 left-8">
+                    <img src={ball2} alt="" />
+                </div>
+
                 <div className="absolute h-full w-full backdrop-blur-xl rounded-xl px-7 py-8  text-white flex divide-x" style={{ background: 'rgba(255, 0, 0, 0.44)' }}>
 
                     <div className="w-2/3 h-full flex flex-col items-center justify-between p-3">
@@ -39,11 +51,20 @@ function Affiliative() {
 
                             <div className="w-[510px] h-[90px] flex flex-col justify-center">
                                 <div className="w-full flex justify-between items-center">
-                                    <div className="w-1/3"></div>
+                                    <div className="w-[40%]"></div>
+
                                     <div className="w-[17px] h-[22px">
                                         <img src={mark} alt="" />
                                     </div>
-                                    <p className='w-1/3 text-[10px]'>Next tier in : 4 more Referrals</p>
+
+                                    <p className='w-[40%] text-xs font-light flex items-center gap-1'>Next tier in : 4 more Referrals
+                                        <div className="flex">
+                                            <div className="animate-arrow "><Arrow /> </div>
+                                            <div className="animate-arrow delay-500"><Arrow /> </div>
+                                            <div className="animate-arrow delay-1000"><Arrow /> </div>
+                                        </div>
+                                    </p>
+
                                 </div>
                                 <div className="mt-3">
                                     <div className="w-full h-2 bg-white rounded-full relative flex justify-between items-center">
@@ -116,7 +137,7 @@ function Affiliative() {
                         </div>
 
                         <div className="relative w-full h-12">
-                            <div className="absolute right-3 h-full w-10 bg-white flex justify-center items-center" onClick={()=>{
+                            <div className="absolute right-3 h-full w-10 bg-white flex justify-center items-center" onClick={() => {
                                 navigator.clipboard.writeText(`https://redlightclub.net/invite/${username}`)
                                 window.alert("You are copied the invitation link please send to your friends")
                             }}>
@@ -172,7 +193,7 @@ function Affiliative() {
                                 <img src={auctionsIcon} className='w-full h-full' alt="" />
                             </div>
                             <div className="">
-                                <p className='text-lg font-bold'>364 AED</p>
+                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0).reduce((a, b) => a + b)} AED</p>
                                 <p className='text-[10px]'>Credits Earned from <br />
                                     from Auctions by referrals</p>
                             </div>
@@ -183,7 +204,7 @@ function Affiliative() {
                                 <img src={bannerIcon} className='w-full h-full' alt="" />
                             </div>
                             <div className="">
-                                <p className='text-lg font-bold'>364 AED</p>
+                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0).reduce((a, b) => a + b)} AED</p>
                                 <p className='text-[10px]'>Credits Earned from <br />
                                     from Auctions by referrals</p>
                             </div>
@@ -194,7 +215,7 @@ function Affiliative() {
                                 <img src={purchaseIcon} className='w-full h-full' alt="" />
                             </div>
                             <div className="">
-                                <p className='text-lg font-bold'>364 AED</p>
+                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0).reduce((a, b) => a + b)} AED</p>
                                 <p className='text-[10px]'>Credits Earned from <br />
                                     from Auctions by referrals</p>
                             </div>

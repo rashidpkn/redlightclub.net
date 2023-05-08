@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BackendIP from "../../../BackendIP";
 import { setEmail, setPassword, setRole, setToken, setUsername } from "../../../redux/slice/userSlice";
 
@@ -22,10 +22,12 @@ import passwordIcon from '../../../asset/images/signin/password-icon.png'
 
 
 function Auth() {
+  const [role, setRoles] = useState('')
 
-  const { email, password } = useSelector(state => state.user)
+  const { email, password, username } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  
   const Login = () => {
     axios.post(`${BackendIP}/user/signin`, { email, password }).then(res => {
       const { status } = res.data
@@ -40,6 +42,19 @@ function Auth() {
     })
   }
 
+  const Signup = () => {
+    axios.post(`${BackendIP}/user/signup`, { username, email, password, role }).then(res => {
+      const { status } = res.data
+      if (status) {
+        navigate('/dashboard')
+        dispatch(setToken(res.data.token))
+        dispatch(setRole(res.data.role))
+      } else {
+        window.alert(res.data.reason)
+      }
+    })
+  }
+
   const [video, setVideo] = useState(true)
 
   return (
@@ -47,15 +62,15 @@ function Auth() {
     <div className="h-screen w-full relative flex justify-center items-center text-white">
 
 
-      
+
 
 
       <img src={banner} className="absolute w-full h-full object-cover" alt="" />
 
-  {video  &&
-      <video loop={true}  autoPlay={true}  muted={true} className="fixed w-full h-full object-cover z-0">
-           <source src={bannermp4} type="video/mp4" /> 
-      </video>}
+      {video &&
+        <video loop={true} autoPlay={true} muted={true} className="fixed w-full h-full object-cover z-0">
+          <source src={bannermp4} type="video/mp4" />
+        </video>}
 
 
 
@@ -70,17 +85,29 @@ function Auth() {
           <form
             onSubmit={e => {
               e.preventDefault()
-              Login()
+              role ? Signup() : Login()
+
             }}
             className="space-y-5">
-            <p>Login</p>
+            {
+              role ? <p>Sign up  as <span className="capitalize">{role}</span></p> : <p>Login</p>
+            }
 
             <div className="w-[360px] h-16 rounded-2xl bg-black/40 flex items-center px-4 gap-3">
               <div className="w-5 h-5">
                 <img src={userIcon} className="w-full h-full" alt="" />
               </div>
-              <input placeholder="Username" type="text" className="h-full w-[calc(100%-20px)] bg-transparent outline-none" onChange={e => dispatch(setEmail(e.target.value))} required />
+              <input placeholder="Email" type="text" className="h-full w-[calc(100%-20px)] bg-transparent outline-none" onChange={e => dispatch(setEmail(e.target.value))} required />
             </div>
+
+            {role &&
+              <div className="w-[360px] h-16 rounded-2xl bg-black/40 flex items-center px-4 gap-3">
+                <div className="w-5 h-5">
+                  <img src={userIcon} className="w-full h-full" alt="" />
+                </div>
+                <input placeholder="Username" type="text" className="h-full w-[calc(100%-20px)] bg-transparent outline-none" onChange={e => dispatch(setUsername(e.target.value))} required />
+              </div>}
+
             <div className="w-[360px] h-16 rounded-2xl bg-black/40 flex items-center px-4 gap-3">
               <div className="w-5 h-5">
                 <img src={passwordIcon} className="w-full h-full" alt="" />
@@ -97,41 +124,60 @@ function Auth() {
         <div className="w-1/2 h-full flex flex-col justify-center items-center gap-16">
 
           <div className="text-center space-y-5">
-            <p>Don't have an account yet?</p>
-            <p>Register now - it's free!</p>
+            {role ? <p>You  have an account ?</p>
+              : <>
+                <p>Don't have an account yet?</p>
+                <p>Register now - it's free!</p>
+              </>}
           </div>
 
-          <div className="flex flex-col justify-center items-center gap-6">
-            <Link to={'/register/user'}>
-              <button className="w-[450px]  bg-black/40 hover:bg-[#ff0000] rounded-2xl px-9 py-6 flex items-center gap-5" 
-                onMouseEnter={()=>setVideo(false)} 
-                onMouseLeave={()=>setVideo(true)}>
-                <div className="w-14 h-12">
-                  <img src={user} className="w-full h-full" alt="" />
-                </div>
-                <div className="flex flex-col gap-3 items-start">
-                  <p className="text-lg font-semibold">I am a User</p>
-                  <p>Keep update on activity in your area!</p>
-                </div>
-              </button>
-            </Link>
+          {role ? <div className="flex flex-col justify-center items-center gap-6">
+            <button className="w-[450px]  bg-black/40 hover:bg-[#ff0000] rounded-2xl px-9 py-6 flex items-center gap-5"
+              onMouseEnter={() => setVideo(false)}
+              onMouseLeave={() => setVideo(true)}
+              onClick={() => setRoles('')}
+            >
+              <div className="w-14 h-12">
+                <img src={user} className="w-full h-full" alt="" />
+              </div>
+              <div className="flex flex-col gap-3 items-start">
+                <p className="text-lg font-semibold">Login</p>
+                <p>Keep update on activity in your area!</p>
+              </div>
+            </button>
+          </div> : <div className="flex flex-col justify-center items-center gap-6">
 
-            <Link to={'/register/advertiser'}>
-              <button className="w-[450px]  bg-black/40 hover:bg-[#ff0000] rounded-2xl px-9 py-6 flex items-center gap-5"
-              onMouseEnter={()=>setVideo(false)} 
-              onMouseLeave={()=>setVideo(true)}
-              >
-                <div className="w-14 h-12">
-                  <img src={advertiser} className="w-full h-full" alt="" />
-                </div>
-                <div className="flex flex-col gap-3 items-start">
-                  <p className="text-lg font-semibold">I am an Advertiser</p>
-                  <p>Get listed for free today!</p>
-                </div>
-              </button>
-            </Link>
+            <button className="w-[450px]  bg-black/40 hover:bg-[#ff0000] rounded-2xl px-9 py-6 flex items-center gap-5"
+              onMouseEnter={() => setVideo(false)}
+              onMouseLeave={() => setVideo(true)}
+              onClick={() => setRoles('user')}
+            >
+              <div className="w-14 h-12">
+                <img src={user} className="w-full h-full" alt="" />
+              </div>
+              <div className="flex flex-col gap-3 items-start">
+                <p className="text-lg font-semibold">I am a User</p>
+                <p>Keep update on activity in your area!</p>
+              </div>
+            </button>
 
-          </div>
+
+
+            <button className="w-[450px]  bg-black/40 hover:bg-[#ff0000] rounded-2xl px-9 py-6 flex items-center gap-5"
+              onMouseEnter={() => setVideo(false)}
+              onMouseLeave={() => setVideo(true)}
+              onClick={() => setRoles('advertiser')}
+            >
+              <div className="w-14 h-12">
+                <img src={advertiser} className="w-full h-full" alt="" />
+              </div>
+              <div className="flex flex-col gap-3 items-start">
+                <p className="text-lg font-semibold">I am an Advertiser</p>
+                <p>Get listed for free today!</p>
+              </div>
+            </button>
+          </div>}
+
         </div>
       </div>
     </div>

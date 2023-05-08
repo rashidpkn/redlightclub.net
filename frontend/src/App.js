@@ -6,7 +6,6 @@ import BackendIP from "./BackendIP";
 import NotFound from "./pages/404";
 import Auth from "./pages/auth/login";
 import AdvertiserSignup from "./pages/auth/signup/advertiser/AdvertiserSignup";
-import UserSignup from "./pages/auth/signup/user/UserSignup";
 import AdminDashboard from "./pages/dashboard/admin";
 import UserDashboard from "./pages/dashboard/user";
 import Filter from "./pages/filter";
@@ -72,7 +71,7 @@ function App() {
 					element={token ? <Navigate to={"/dashboard"} /> : <Outlet />}
 				>
 					<Route index element={<Navigate to={"/register/user"} />} />
-					<Route path="user" element={<UserSignup />} />
+					{/* <Route path="user" element={<UserSignup />} /> */}
 					<Route path="advertiser" element={<AdvertiserSignup />} />
 				</Route>
 
