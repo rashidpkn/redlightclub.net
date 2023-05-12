@@ -55,8 +55,6 @@ function Auth() {
     })
   }
 
-  const [video, setVideo] = useState(true)
-
   return (
 
     <div className="h-screen w-full relative flex justify-center items-center text-white">
@@ -67,10 +65,10 @@ function Auth() {
 
       <img src={banner} className="absolute w-full h-full object-cover" alt="" />
 
-      {video &&
+      
         <video loop={true} autoPlay={true} muted={true} className="fixed w-full h-full object-cover z-0">
           <source src={bannermp4} type="video/mp4" />
-        </video>}
+        </video>
 
 
 
@@ -116,7 +114,7 @@ function Auth() {
             </div>
 
             <div className="flex items-center gap-4">
-              <button className="w-[170px] h-12 rounded-2xl bg-black/40">Login</button>
+              <button className="w-[170px] h-12 rounded-2xl bg-black/40 hover:bg-[#ff0000]"> {role? "Sign Up": "Login"}</button>
               <p className="text-sm">Forgot your password?</p>
             </div>
           </form>
@@ -133,8 +131,6 @@ function Auth() {
 
           {role ? <div className="flex flex-col justify-center items-center gap-6">
             <button className="w-[450px]  bg-black/40 hover:bg-[#ff0000] rounded-2xl px-9 py-6 flex items-center gap-5"
-              onMouseEnter={() => setVideo(false)}
-              onMouseLeave={() => setVideo(true)}
               onClick={() => setRoles('')}
             >
               <div className="w-14 h-12">
@@ -148,9 +144,7 @@ function Auth() {
           </div> : <div className="flex flex-col justify-center items-center gap-6">
 
             <button className="w-[450px]  bg-black/40 hover:bg-[#ff0000] rounded-2xl px-9 py-6 flex items-center gap-5"
-              onMouseEnter={() => setVideo(false)}
-              onMouseLeave={() => setVideo(true)}
-              onClick={() => setRoles('user')}
+            onClick={() => setRoles('user')}
             >
               <div className="w-14 h-12">
                 <img src={user} className="w-full h-full" alt="" />
@@ -164,8 +158,6 @@ function Auth() {
 
 
             <button className="w-[450px]  bg-black/40 hover:bg-[#ff0000] rounded-2xl px-9 py-6 flex items-center gap-5"
-              onMouseEnter={() => setVideo(false)}
-              onMouseLeave={() => setVideo(true)}
               onClick={() => setRoles('advertiser')}
             >
               <div className="w-14 h-12">

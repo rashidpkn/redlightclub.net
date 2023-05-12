@@ -22,9 +22,9 @@ import TermsAndConditions from "./pages/static/TermsAndConditions";
 
 
 import { setRegion } from "./redux/slice/utilSlice";
+import Dev from "./pages/dev";
 
 function App() {
-
 	const { token, role } = useSelector((state) => state.user);
 	const dispatch = useDispatch()
 	useEffect(() => {
@@ -58,6 +58,7 @@ function App() {
 						element={<TermsAndConditions />}
 					/>
 					<Route path='/filter' element={<Filter />} />
+					<Route path="/dev" element={<Dev/>} />
 					<Route path="/profile/:id" element={<Profile />} />
 				</Route>
 
@@ -77,7 +78,7 @@ function App() {
 
 				<Route
 					path="/invite/:referredby"
-					element={token ? <Navigate to={"/dashboard"} /> :  <AdvertiserSignup/>}
+					element={token ? <Navigate to={"/dashboard"} /> : <AdvertiserSignup />}
 				/>
 
 				<Route
