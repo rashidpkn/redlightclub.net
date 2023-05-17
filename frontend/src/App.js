@@ -18,11 +18,8 @@ import Navbar from "./pages/shared/Navbar";
 import About from "./pages/static/about";
 import FAQ from "./pages/static/faq";
 import TermsAndConditions from "./pages/static/TermsAndConditions";
-
-
-
 import { setRegion } from "./redux/slice/utilSlice";
-import Dev from "./pages/dev";
+
 
 function App() {
 	const { token, role } = useSelector((state) => state.user);
@@ -58,7 +55,6 @@ function App() {
 						element={<TermsAndConditions />}
 					/>
 					<Route path='/filter' element={<Filter />} />
-					<Route path="/dev" element={<Dev/>} />
 					<Route path="/profile/:id" element={<Profile />} />
 				</Route>
 
@@ -72,7 +68,6 @@ function App() {
 					element={token ? <Navigate to={"/dashboard"} /> : <Outlet />}
 				>
 					<Route index element={<Navigate to={"/register/user"} />} />
-					{/* <Route path="user" element={<UserSignup />} /> */}
 					<Route path="advertiser" element={<AdvertiserSignup />} />
 				</Route>
 
@@ -121,6 +116,7 @@ function App() {
 
 
 				<Route path="*" element={<NotFound />} />
+				
 			</Routes>
 			{
 				!region && <div className="fixed top-0 left-0 h-screen w-full bg-black/10 z-50 flex justify-center items-center">

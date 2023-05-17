@@ -1,73 +1,119 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import BackendIP from '../../BackendIP'
-import { DesktopFilter } from './components/DesktopFilter'
-import Gold from './components/Gold'
-
-import MainFilter from './components/MainFilter'
-import MobileFilter from './components/MobileFilter'
-import None from './components/None'
-import Platinum from './components/Platinum'
-import Silver from './components/Silver'
+import { FavoriteOutlined } from '@mui/icons-material'
+import FilterBar from './components/FilterBar'
+import { Link } from 'react-router-dom'
 
 function Filter() {
-    const [ads, setAds] = useState([])
-    const { showFilter } = useSelector(state => state.util.filter)
-    const { hair, eye, price, age, nationality, location, height, weight } = useSelector(state => state.filter)
-    const fetchData = () => {
-        axios.get(`${BackendIP}/ads/get-all-ads`).then(res => {
-            setAds(res.data)
-        })
-    }
-    useEffect(() => {
-        fetchData()
-    }, [])
+  const [ads, setAds] = useState([])
+  useEffect(() => {
+    axios.get(`${BackendIP}/ads/get-all-ads`).then(res => {
+      setAds(res.data)
+    })
 
-    useEffect(() => {
-        if (showFilter) {
-            fetchData()
-        }
-    }, [showFilter])
+  }, [])
 
-    return (
-        <div style={{ background: 'linear-gradient(rgb(112, 16, 19), rgb(92, 12, 18), rgb(72, 9, 15), rgb(53, 7, 9), rgb(37, 0, 0))' }} className=' min-h-screen w-full lg:px-[5%] space-y-5 py-5'>
-            <div className="h-36 w-full bg-white"></div>
-            <MainFilter />
-            <div className="flex gap-5 flex-wrap">
-                {
-                    ads.map(e => e.tier === 'platinum' && <Platinum {...e} />)
-                }
-            </div>
-            <div className="flex gap-5 flex-wrap">
-                {ads.map(e => e.tier === 'gold' && <Gold {...e} />)}
-            </div>
-            <div className="flex gap-5 flex-wrap">
-                {ads.map(e => e.tier === 'silver' && <Silver {...e} />)}
-            </div>
-            <div className="flex gap-5 flex-wrap px-3 lg:px-0">
-                {
-                    ads.map(e =>
-                        (e.tier === 'none') &&
-                        (hair ? e.hair === hair : true) &&
-                        (location ? e.location === location : true) &&
-                        (eye ? e.eye === eye : true) &&
-                        (nationality ? e.nationality === nationality : true) &&
-                        (e.inCall.oneHourIn >= price.from && e.inCall.oneHourIn <= price.to) &&
-                        (e.age >= age.from && e.age <= age.to) &&
-                        (e.height >= height.from && e.height <= height.to) &&
-                        (e.weight >= weight.from && e.weight <= weight.to) &&
-                        e.visibility === true && e.vacation === false &&
-                        <None adsTitle={e.adsTitle} age={e.age} introduction={e.intro} profilePhoto={e.profilePhoto} id={e.id} />)
-                }
-            </div>
-            {showFilter && <>
-                <MobileFilter />
-                <DesktopFilter />
-            </>}
+  return (
+    <div className="pt-44 pb-24 bg-black space-y-5">
+      <FilterBar />
+
+      <div className="flex justify-center items-center px-14">
+        <div className="w-full h-60 rounded-xl bg-[#4D3A66]"></div>
+      </div>
+
+      <div className="profiles space-y-5">
+        <div className="platinum flex flex-wrap justify-center items-center gap-4">
+          {ads.map(e => e.tier === 'platinum' && <Platinum {...e} />)}
         </div>
-    )
+        <div className="gold flex flex-wrap justify-center items-center gap-4">
+          {ads.map(e => e.tier === 'gold' && <Gold {...e} />)}
+        </div>
+        <div className="silver flex flex-wrap justify-center items-center gap-4">
+          {ads.map(e => e.tier === 'silver' && <Silver {...e} />)}
+        </div>
+        <div className="none flex flex-wrap justify-center items-center gap-3">
+          {ads.map(e => e.tier === 'none' && <None {...e} />)}
+        </div>
+      </div>
+    </div>
+
+
+
+
+  )
 }
 
 export default Filter
 
+
+const Platinum = ({ id, adsTitle, intro, profilePhoto }) => {
+  return (
+    <Link to={'/profile/' + id}>
+      <div className="w-[220px] h-[450px] p-1 space-y-3" style={{ background: 'linear-gradient(0deg, #FF0000 -51.52%, #BE1722 100%)', }}>
+        <div className="profilephoto w-full h-56">
+          <img src={profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+        </div>
+        <div className="title w-full flex justify-between items-center">
+          <p className='capitalize text-lg font-bold'>{adsTitle}</p>
+          <FavoriteOutlined />
+        </div>
+        <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
+      </div>
+    </Link>
+  )
+}
+
+const Gold = ({ id, adsTitle, intro, profilePhoto }) => {
+  return (
+    <Link to={'/profile/' + id}>
+
+      <div className="w-[220px] h-[450px] p-1 space-y-3" style={{ background: 'linear-gradient(162.09deg, #663500 0%, #B28A4C 48.44%, #FDEDC9 100.18%, #D0AD6A 100.18%)', }}>
+        <div className="profilephoto w-full h-56">
+          <img src={profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+        </div>
+        <div className="title w-full flex justify-between items-center">
+          <p className='capitalize text-lg font-bold'>{adsTitle}</p>
+          <FavoriteOutlined />
+        </div>
+        <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
+      </div>
+    </Link>
+  )
+}
+
+const Silver = ({ id, adsTitle, intro, profilePhoto }) => {
+  return (
+    <Link to={'/profile/' + id}>
+
+      <div className="w-[220px] h-[370px] p-1 space-y-3" style={{ background: 'linear-gradient(0deg, #FFFFFF 0%, #BEBEBE 39.28%, #C8C8C8 59.71%, #C9C9C9 69.33%, #CFCFCF 79.97%, #AAAAAA 88.25%, #9F9F9F 95%, #C8C8C8 100%)', }}>
+        <div className="profilephoto w-full h-52">
+          <img src={profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+        </div>
+        <div className="title w-full flex justify-between items-center">
+          <p className='capitalize text-lg font-bold'>{adsTitle}</p>
+          <FavoriteOutlined />
+        </div>
+        <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
+      </div>
+    </Link>
+  )
+}
+
+const None = ({ id, adsTitle, intro, profilePhoto }) => {
+  return (
+    <Link to={'/profile/' + id}>
+
+      <div className="w-[190px] h-[370px] p-1 space-y-3 " style={{ background: 'white', }}>
+        <div className="profilephoto w-full h-44">
+          <img src={profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+        </div>
+        <div className="title w-full flex justify-between items-center">
+          <p className='capitalize text-lg font-bold'>{adsTitle}</p>
+          <FavoriteOutlined />
+        </div>
+        <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
+      </div>
+    </Link>
+  )
+}

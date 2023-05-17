@@ -30,6 +30,7 @@ import SiteAnalyticsIcon from '../../../asset/icons/sidebar/site-analytics.js'
 import AdsAnalyticsIcon from '../../../asset/icons/sidebar/ads-analytics.js'
 import BannerIcon from '../../../asset/icons/sidebar/banner.js'
 import SupportIcon from '../../../asset/icons/sidebar/support.js'
+import affiliativeIcon from '../../../asset/icons/sidebar/affiliative'
 // import ReportedIssueIcon from '../../../asset/icons/sidebar/reported-issue.js'
 
 import BlacklistedProfiles from './components/BlacklistedProfiles'
@@ -38,6 +39,7 @@ import AuctionProgress from './components/AuctionProgress'
 import Support from './components/Support'
 // import ReportIssues from './components/ReportIssues'
 import EditAds from './components/EditAds'
+import Affiliative from './components/Affiliative'
 
 
 function AdminDashboard() {
@@ -57,6 +59,7 @@ function AdminDashboard() {
           <Menu Icon={SiteAnalyticsIcon} title={'Site Analytics'} url='site-analytics' />
           <Menu Icon={AdsAnalyticsIcon} title={'Ads Analytics'} url='ads-analytics' />
           <Menu Icon={BannerIcon} title={'Banner'} url='banner' />
+          <Menu Icon={affiliativeIcon} url={'affiliative'} title={'Affiliative'} />
           <Menu Icon={SupportIcon} title={'Support'} url='support' />
           {/* <Menu Icon={ReportedIssueIcon} title={'Reported Issues'} url='reported-issues' /> */}
 
@@ -84,6 +87,7 @@ function AdminDashboard() {
           {menu === 'ads-analytics' && <ProfileAnalytics />}          
           {menu === 'customers' && <Customers />}
           {menu === 'verification' && <Verification />}
+          {menu === 'affiliative' && <Affiliative/>}
         </Main>
       </div>
     </div>
