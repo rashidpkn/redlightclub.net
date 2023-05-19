@@ -50,7 +50,7 @@ export default Filter
 const Platinum = ({ id, adsTitle, intro, profilePhoto }) => {
   return (
     <Link to={'/profile/' + id}>
-      <div className="w-[220px] h-[450px] p-1 space-y-3" style={{ background: 'linear-gradient(0deg, #FF0000 -51.52%, #BE1722 100%)', }}>
+      <div className="w-[220px] h-[450px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(0deg, #FF0000 -51.52%, #BE1722 100%)', }}>
         <div className="profilephoto w-full h-56">
           <img src={profilePhoto} className='w-full h-full object-cover object-top' alt="" />
         </div>
@@ -68,7 +68,7 @@ const Gold = ({ id, adsTitle, intro, profilePhoto }) => {
   return (
     <Link to={'/profile/' + id}>
 
-      <div className="w-[220px] h-[450px] p-1 space-y-3" style={{ background: 'linear-gradient(162.09deg, #663500 0%, #B28A4C 48.44%, #FDEDC9 100.18%, #D0AD6A 100.18%)', }}>
+      <div className="w-[220px] h-[450px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(162.09deg, #663500 0%, #B28A4C 48.44%, #FDEDC9 100.18%, #D0AD6A 100.18%)', }}>
         <div className="profilephoto w-full h-56">
           <img src={profilePhoto} className='w-full h-full object-cover object-top' alt="" />
         </div>
@@ -86,7 +86,7 @@ const Silver = ({ id, adsTitle, intro, profilePhoto }) => {
   return (
     <Link to={'/profile/' + id}>
 
-      <div className="w-[220px] h-[370px] p-1 space-y-3" style={{ background: 'linear-gradient(0deg, #FFFFFF 0%, #BEBEBE 39.28%, #C8C8C8 59.71%, #C9C9C9 69.33%, #CFCFCF 79.97%, #AAAAAA 88.25%, #9F9F9F 95%, #C8C8C8 100%)', }}>
+      <div className="w-[220px] h-[370px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(0deg, #FFFFFF 0%, #BEBEBE 39.28%, #C8C8C8 59.71%, #C9C9C9 69.33%, #CFCFCF 79.97%, #AAAAAA 88.25%, #9F9F9F 95%, #C8C8C8 100%)', }}>
         <div className="profilephoto w-full h-52">
           <img src={profilePhoto} className='w-full h-full object-cover object-top' alt="" />
         </div>
@@ -104,7 +104,7 @@ const None = ({ id, adsTitle, intro, profilePhoto }) => {
   return (
     <Link to={'/profile/' + id}>
 
-      <div className="w-[190px] h-[370px] p-1 space-y-3 " style={{ background: 'white', }}>
+      <div className="w-[190px] h-[370px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden " style={{ background: 'white', }}>
         <div className="profilephoto w-full h-44">
           <img src={profilePhoto} className='w-full h-full object-cover object-top' alt="" />
         </div>

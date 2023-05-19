@@ -2,7 +2,7 @@ import React from 'react'
 
 function Ratings() {
   return (
-    <div className="w-[600px] space-y-3">
+    <div className="max-w-[600px] w-full space-y-3">
           <p className='text-[red] text-lg font-bold'>Reviews</p>
           <div className="w-full bg-white/20 h-[250px] flex flex-col justify-between p-9 text-lg">
               

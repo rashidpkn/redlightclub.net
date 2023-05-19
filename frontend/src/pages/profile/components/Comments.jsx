@@ -2,7 +2,7 @@ import React from 'react'
 
 function Comments({review}) {
   return (
-    <div className="Comments flex justify-center">
+    <div className="Comments flex justify-center px-5 md:px-0">
     <div className=" max-w-[1272px] w-full space-y-3">
       <p className='text-[red] text-lg font-bold'>Comments</p>
       <p>Add your comments</p>

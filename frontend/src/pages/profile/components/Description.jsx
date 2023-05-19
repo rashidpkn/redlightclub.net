@@ -2,7 +2,7 @@ import React from 'react'
 
 function Description({intro}) {
   return (
-    <div className="Description flex justify-center">
+    <div className="Description flex justify-center px-5 md:px-0">
         <div className=" max-w-[1272px] w-full space-y-3">
           
           <div className="w-full flex justify-between items-center">

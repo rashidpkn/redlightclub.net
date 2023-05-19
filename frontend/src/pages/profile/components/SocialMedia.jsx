@@ -10,7 +10,7 @@ function SocialMedia() {
     return (
         <div className="w-[600px] space-y-3">
             <p className='text-[red] text-lg font-bold'>Look me up at</p>
-            {/* <div className="flex flex-wrap w-full gap-4">
+            <div className="flex flex-wrap w-full gap-4">
                 <div className="flex flex-col items-center">
                     <button className='w-[132px] h-[40px] bg-[red] flex justify-center items-center'>
                         <img src={vidioIcon} alt="" />
@@ -48,7 +48,7 @@ function SocialMedia() {
                     <p>TikTok</p>
                 </div>
                 
-            </div> */}
+            </div>
         </div>
     )
 }

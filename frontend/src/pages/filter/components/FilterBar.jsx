@@ -93,7 +93,7 @@ function FilterBar() {
                 <option className='text-black' value="White/Gray">White/Gray</option>
                 <option className='text-black' value="Red">Red</option>
             </select>
-            <button className='h-10 px-12 bg-[#ff0000]  rounded-md'>Search</button>
+            <button className='h-10 px-12 bg-[#ff0000]  rounded-md hover:scale-110 duration-200'>Search</button>
             <button className='text-[#f00]'>Advanced Search</button>
         </div>
     )

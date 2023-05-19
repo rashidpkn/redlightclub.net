@@ -4,7 +4,7 @@ import BackendIP from '../../../BackendIP'
 function Photos({profilePhoto,gallery}) {
   return (
     <div className='photos space-y-3'>
-        <div className="profilePhoto w-[630px] h-[600px]">
+        <div className="profilePhoto max-w-[630px] w-full h-[600px]">
             <img src={BackendIP +profilePhoto} alt="" className='w-full h-full object-top' />
         </div>
         <div className="w-full flex justify-center items-center">
