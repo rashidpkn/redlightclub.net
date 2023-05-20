@@ -25,21 +25,16 @@ function Filter() {
       <div className="profiles space-y-5">
         <div className="platinum flex flex-wrap justify-center items-center gap-4">
           {ads.map(e => e.tier === 'platinum' && <Platinum {...e} />)}
-          {ads.map(e => e.tier === 'platinum' && <Platinum {...e} />)}
-          {ads.map(e => e.tier === 'platinum' && <Platinum {...e} />)}
+          {[...Array(6 - ads.filter(e => e.tier === 'platinum').length).keys()].map(e => <Platinum />)}
         </div>
         <div className="gold flex flex-wrap justify-center items-center gap-4">
           {ads.map(e => e.tier === 'gold' && <Gold {...e} />)}
-          {ads.map(e => e.tier === 'gold' && <Gold {...e} />)}
-          {ads.map(e => e.tier === 'gold' && <Gold {...e} />)}
+          {[...Array(6 - ads.filter(e => e.tier === 'gold').length).keys()].map(e => <Gold />)}
+
         </div>
         <div className="silver flex flex-wrap justify-center items-center gap-4">
           {ads.map(e => e.tier === 'silver' && <Silver {...e} />)}
-          {ads.map(e => e.tier === 'silver' && <Silver {...e} />)}
-          {ads.map(e => e.tier === 'silver' && <Silver {...e} />)}
-          {ads.map(e => e.tier === 'silver' && <Silver {...e} />)}
-          {ads.map(e => e.tier === 'silver' && <Silver {...e} />)}
-          {ads.map(e => e.tier === 'silver' && <Silver {...e} />)}
+          {[...Array(6 - ads.filter(e => e.tier === 'silver').length).keys()].map(e => <Silver />)}
         </div>
         <div className="none flex flex-wrap justify-center items-center gap-3">
           {ads.map(e => e.tier === 'none' && <None {...e} />)}
@@ -58,54 +53,88 @@ export default Filter
 
 const Platinum = ({ id, adsTitle, intro, profilePhoto }) => {
   return (
-    <Link to={'/profile/' + id}>
-      <div className="w-[190px] md:w-[220px] h-[450px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(0deg, #FF0000 -51.52%, #BE1722 100%)', }}>
-        <div className="profilephoto w-full h-56">
-          <img src={BackendIP + profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+
+
+    id ?
+      <Link to={'/profile/' + id}>
+        <div className="w-[190px] md:w-[220px] h-[450px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(0deg, #FF0000 -51.52%, #BE1722 100%)', }}>
+          <div className="profilephoto w-full h-56">
+            <img src={BackendIP + profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+          </div>
+          <div className="title w-full flex justify-between items-center">
+            <p className='capitalize text-lg font-bold'>{adsTitle}</p>
+            <FavoriteOutlined />
+          </div>
+          <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
         </div>
-        <div className="title w-full flex justify-between items-center">
-          <p className='capitalize text-lg font-bold'>{adsTitle}</p>
-          <FavoriteOutlined />
+      </Link>
+
+      : <div className="w-[190px] md:w-[220px] h-[450px] p-1 space-y-5 hover:scale-105 duration-200 overflow-hidden  " style={{ background: 'linear-gradient(0deg, #FF0000 -51.52%, #BE1722 100%)', }}>
+        <div className="profilephoto w-full h-56 blur-sm">
+          <img src="https://redlightclub.net/files/Test-aleksa-polish-escort-in-dubai-6308128_listing.jpg" className='w-full h-full object-cover object-top' alt="" />
         </div>
-        <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
+        <p className='text-center text-xl text-white'>Spots are available</p>
+        <div className="flex justify-center">
+          <button className='px-4 py-2 rounded-md bg-yellow-400 text-white hover:scale-110 duration-200'>BID NOW</button>
+        </div>
       </div>
-    </Link>
+
   )
 }
 
 const Gold = ({ id, adsTitle, intro, profilePhoto }) => {
   return (
-    <Link to={'/profile/' + id}>
+    id ?
+      <Link to={'/profile/' + id}>
 
-      <div className="w-[190px] md:w-[220px] h-[450px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(162.09deg, #663500 0%, #B28A4C 48.44%, #FDEDC9 100.18%, #D0AD6A 100.18%)', }}>
-        <div className="profilephoto w-full h-56">
-          <img src={BackendIP + profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+        <div className="w-[190px] md:w-[220px] h-[450px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(162.09deg, #663500 0%, #B28A4C 48.44%, #FDEDC9 100.18%, #D0AD6A 100.18%)', }}>
+          <div className="profilephoto w-full h-56">
+            <img src={BackendIP + profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+          </div>
+          <div className="title w-full flex justify-between items-center">
+            <p className='capitalize text-lg font-bold'>{adsTitle}</p>
+            <FavoriteOutlined />
+          </div>
+          <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
         </div>
-        <div className="title w-full flex justify-between items-center">
-          <p className='capitalize text-lg font-bold'>{adsTitle}</p>
-          <FavoriteOutlined />
+      </Link>
+      : <div className="w-[190px] md:w-[220px] h-[450px] p-1 space-y-5 hover:scale-105 duration-200 overflow-hidden " style={{ background: 'linear-gradient(162.09deg, #663500 0%, #B28A4C 48.44%, #FDEDC9 100.18%, #D0AD6A 100.18%)', }}>
+        <div className="profilephoto w-full h-56 blur-sm">
+          <img src="https://redlightclub.net/files/Test-aleksa-polish-escort-in-dubai-6308128_listing.jpg" className='w-full h-full object-cover object-top' alt="" />
         </div>
-        <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
+        <p className='text-center text-xl text-white'>Spots are available</p>
+        <div className="flex justify-center">
+        <button className='px-4 py-2 rounded-md bg-yellow-400 text-white hover:scale-110 duration-200'>BID NOW</button>
       </div>
-    </Link>
+      </div>
   )
 }
 
 const Silver = ({ id, adsTitle, intro, profilePhoto }) => {
   return (
-    <Link to={'/profile/' + id}>
+    id ?
+      <Link to={'/profile/' + id}>
 
-      <div className="w-[190px] md:w-[220px] h-[370px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(0deg, #FFFFFF 0%, #BEBEBE 39.28%, #C8C8C8 59.71%, #C9C9C9 69.33%, #CFCFCF 79.97%, #AAAAAA 88.25%, #9F9F9F 95%, #C8C8C8 100%)', }}>
-        <div className="profilephoto w-full h-52">
-          <img src={BackendIP + profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+        <div className="w-[190px] md:w-[220px] h-[370px] p-1 space-y-3 hover:scale-105 duration-200 overflow-hidden" style={{ background: 'linear-gradient(0deg, #FFFFFF 0%, #BEBEBE 39.28%, #C8C8C8 59.71%, #C9C9C9 69.33%, #CFCFCF 79.97%, #AAAAAA 88.25%, #9F9F9F 95%, #C8C8C8 100%)', }}>
+          <div className="profilephoto w-full h-52">
+            <img src={BackendIP + profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+          </div>
+          <div className="title w-full flex justify-between items-center">
+            <p className='capitalize text-lg font-bold'>{adsTitle}</p>
+            <FavoriteOutlined />
+          </div>
+          <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
         </div>
-        <div className="title w-full flex justify-between items-center">
-          <p className='capitalize text-lg font-bold'>{adsTitle}</p>
-          <FavoriteOutlined />
+      </Link>
+      : <div className="w-[190px] md:w-[220px] h-[370px] p-1 space-y-5 hover:scale-105 duration-200 overflow-hidden " style={{ background: 'linear-gradient(0deg, #FFFFFF 0%, #BEBEBE 39.28%, #C8C8C8 59.71%, #C9C9C9 69.33%, #CFCFCF 79.97%, #AAAAAA 88.25%, #9F9F9F 95%, #C8C8C8 100%)', }}>
+        <div className="profilephoto w-full h-56 blur-sm">
+          <img src="https://redlightclub.net/files/Test-aleksa-polish-escort-in-dubai-6308128_listing.jpg" className='w-full h-full object-cover object-top' alt="" />
         </div>
-        <p className='overflow-hidden text-[10px] text-justify pb-3'>{intro}</p>
+        <p className='text-center text-xl text-white'>Spots are available</p>
+        <div className="flex justify-center">
+        <button className='px-4 py-2 rounded-md bg-yellow-400 text-white hover:scale-110 duration-200'>BID NOW</button>
       </div>
-    </Link>
+      </div>
   )
 }
 
