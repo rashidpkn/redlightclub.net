@@ -1,11 +1,10 @@
-import { HomeOutlined, Person, Search } from "@mui/icons-material";
+
 import React from "react";
-import { useDispatch } from "react-redux";
+
 import { Link } from "react-router-dom";
-import { setShowFilter } from "../../redux/slice/utilSlice";
 
 function Footer() {
-  const dispatch = useDispatch()
+
   return (
     <>
       <div className="footer   px-5 md:px-[100px] bg-[#17191E] text-white pt-3 hidden lg:flex  flex-col gap-3 pb-5">
@@ -59,23 +58,6 @@ function Footer() {
           </Link>
         </div>
       </div>
-
-
-      <div className="fixed block md:hidden  -bottom-2 z-50 w-full h-[80px]">
-        <img src="/images/common/footer/footer.png" className="w-full" alt="" />
-        <Link to={'/'} >
-          <HomeOutlined fontSize="large" className=' text-white cursor-pointer absolute top-[25px] left-[70px]' />
-        </Link>
-        <div className="h-[63px] w-[63px] bg-[#AE0C37] rounded-full absolute z-50 -top-5 inset-x-0 mx-auto flex justify-center items-center">
-          <Link to={'/filter'} onClick={()=>{dispatch(setShowFilter())}}>
-            <Search fontSize="large" className="text-white" />
-          </Link>
-        </div>
-        <Link to={'/auth'}>
-          <Person fontSize="large" className=' text-white cursor-pointer absolute top-[25px] right-[70px]' />
-        </Link>
-      </div>
-
       {/* <img src="/images/common/footer/home.png" className='cursor-pointer absolute top-[25px] left-[70px]' alt="" /> */}
       {/* <img src="/images/common/footer/search.png" className='cursor-pointer' alt="" /> */}
       {/*   <img src="/images/common/footer/profile.png" className='cursor-pointer absolute top-[25px] right-[70px]'  alt="" /> */}
