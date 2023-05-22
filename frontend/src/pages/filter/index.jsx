@@ -7,6 +7,14 @@ import { Link } from 'react-router-dom'
 
 function Filter() {
   const [ads, setAds] = useState([])
+  const [filter, setFilter] = useState({
+    price:false,
+    language:false,
+    age:false,
+    eye:false,
+    hair:false
+  })
+  console.log(filter);
   useEffect(() => {
     axios.get(`${BackendIP}/ads/get-all-ads`).then(res => {
       setAds(res.data)
@@ -14,9 +22,11 @@ function Filter() {
 
   }, [])
 
+
+
   return (
     <div className="pt-12 md:pt-44 pb-24 bg-black space-y-5">
-      <FilterBar />
+      <FilterBar filter={filter} setFilter={setFilter}/>
 
       <div className="flex justify-center items-center px-14">
         <div className="w-full h-60 rounded-xl bg-[#4D3A66]"></div>
@@ -37,7 +47,14 @@ function Filter() {
           {[...Array(6 - ads.filter(e => e.tier === 'silver').length).keys()].map(e => <Silver />)}
         </div>
         <div className="none flex flex-wrap justify-center items-center gap-3">
-          {ads.map(e => e.tier === 'none' && <None {...e} />)}
+          {ads.map(e => 
+            e.tier === 'none' &&
+            filter.price ? e.inCall.oneHourIn <1000 : true &&
+            filter.language ? e.language === filter.language :true &&
+            filter.age ? Number(filter.age) > e.age : true &&
+            filter.eye ? e.eye === filter.eye :true &&
+            filter.hair ? e.hair === filter.hair :true &&
+          <None {...e} />)}
         </div>
       </div>
     </div>

@@ -20,20 +20,20 @@ function ProfileDetails({ adsTitle, updatedAt, service, age, height, weight, hai
             </div>
             <div className="contact w-full flex flex-wrap justify-between items-center px-8 gap-y-3">
                 <a href={`tel:` + phone?.code + phone?.number}>
-                    <button className='w-32 h-10 bg-[red] flex justify-center items-center'>
+                    <button className='w-32 h-10 bg-[red] flex justify-center items-center hover:scale-110 duration-200'>
                         <img src={CallIcon} alt="" />
                     </button>
                 </a>
                 <a href={`https://api.whatsapp.com/send?phone=${phone?.code}${phone?.number}&text=Hi.`}>
-                    <button className='w-32 h-10 bg-[red] flex justify-center items-center'>
+                    <button className='w-32 h-10 bg-[red] flex justify-center items-center hover:scale-110 duration-200'>
                         <img src={WhatsappIcon} alt="" />
                     </button>
                 </a>
-                <button className='w-32 h-10 bg-[red] flex justify-center items-center'>
+                <button className='w-32 h-10 bg-[red] flex justify-center items-center hover:scale-110 duration-200'>
                     <img src={TelegramIcon} alt="" />
                 </button>
                 <a href={"mailto:"+email}>
-                <button className='w-32 h-10 bg-[red] flex justify-center items-center'>
+                <button className='w-32 h-10 bg-[red] flex justify-center items-center hover:scale-110 duration-200'>
                     <img src={EmailIcon} alt="" />
                 </button>
                 </a>

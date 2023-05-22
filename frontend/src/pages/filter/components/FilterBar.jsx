@@ -1,18 +1,18 @@
 import React from 'react'
 
-function FilterBar() {
+function FilterBar({filter, setFilter}) {
     return (
         <div className="hidden lg:flex px-12 justify-center items-center w-full gap-3 text-white flex-wrap">
-            <select className='w-52 h-10  rounded-md bg-transparent outline-none' name="" id="">
-                <option className='text-black' value="">Select Price Range</option>
+            <select className='w-52 h-10  rounded-md bg-transparent outline-none' onChange={e=>setFilter({...filter, price:e.target.value})}>
+                <option className='text-black' value={0}>Select Price Range</option>
                 <option className='text-black' value={1}>1 - 1000</option>
                 <option className='text-black' value={2}>1000 - 2000</option>
                 <option className='text-black' value={3}>2000 - 3000</option>
                 <option className='text-black' value={4}>3000 - 4000</option>
                 <option className='text-black' value={5}>4000 - 5000</option>
             </select>
-            <select className='w-52 h-10  rounded-md bg-transparent outline-none' name="" id="">
-                <option className='text-black' value="">Select Language</option>
+            <select className='w-52 h-10  rounded-md bg-transparent outline-none' onChange={e=>setFilter({...filter,language:e.target.value})}>
+                <option className='text-black' value={0}>Select Language</option>
                 <option className='text-black' value="Afrikaans">Afrikaans</option>
                 <option className='text-black' value="Albanian">Albanian</option>
                 <option className='text-black' value="Arabic">Arabic</option>
@@ -69,15 +69,15 @@ function FilterBar() {
                 <option className='text-black' value="Vietnamese">Vietnamese</option>
                 <option className='text-black' value="Zulu">Zulu</option>
             </select>
-            <select className='w-36 h-10  rounded-md bg-transparent outline-none' name="" id="">
-                <option className='text-black' value="">Select Age</option>
-                <option className='text-black' value={1}>18 - 25</option>
-                <option className='text-black' value={2}>25 - 30</option>
-                <option className='text-black' value={3}>30 - 35</option>
-                <option className='text-black' value={4}>35 - 40</option>
+            <select className='w-36 h-10  rounded-md bg-transparent outline-none' onChange={e=>setFilter({...filter,age:Number(e.target.value)})}>
+                <option className='text-black' value={0}>Select Age</option>
+                <option className='text-black' value={25}>18 - 25</option>
+                <option className='text-black' value={30}>25 - 30</option>
+                <option className='text-black' value={35}>30 - 35</option>
+                <option className='text-black' value={40}>35 - 40</option>
             </select>
-            <select className='w-52 h-10  rounded-md bg-transparent outline-none' name="" id="">
-                <option className='text-black' value="">Select Eye Color</option>
+            <select className='w-52 h-10  rounded-md bg-transparent outline-none' onChange={e=>setFilter({...filter,eye:e.target.value})}>
+                <option className='text-black' value={0}>Select Eye Color</option>
                 <option className='text-black' value="Brown">Brown</option>
                 <option className='text-black' value="Blue">Blue</option>
                 <option className='text-black' value="Hazel">Hazel</option>
@@ -85,8 +85,8 @@ function FilterBar() {
                 <option className='text-black' value="Green">Green</option>
                 <option className='text-black' value="Gray">Gray</option>
             </select>
-            <select className='w-52 h-10  rounded-md bg-transparent outline-none' name="" id="">
-                <option className='text-black' value="">Select Hair Color</option>
+            <select className='w-52 h-10  rounded-md bg-transparent outline-none' onChange={e=>setFilter({...filter,hair:e.target.value})}>
+                <option className='text-black' value={0}>Select Hair Color</option>
                 <option className='text-black' value="Black">Black</option>
                 <option className='text-black' value="Brown">Brown</option>
                 <option className='text-black' value="Blond">Blond</option>
