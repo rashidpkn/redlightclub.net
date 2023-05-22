@@ -8,13 +8,13 @@ import { Link } from 'react-router-dom'
 function Filter() {
   const [ads, setAds] = useState([])
   const [filter, setFilter] = useState({
-    price:false,
-    language:false,
-    age:false,
-    eye:false,
-    hair:false
+    price:0,
+    language:0,
+    age:0,
+    eye:0,
+    hair:0
   })
-  console.log(filter);
+  
   useEffect(() => {
     axios.get(`${BackendIP}/ads/get-all-ads`).then(res => {
       setAds(res.data)
@@ -49,11 +49,10 @@ function Filter() {
         <div className="none flex flex-wrap justify-center items-center gap-3">
           {ads.map(e => 
             e.tier === 'none' &&
-            filter.price ? e.inCall.oneHourIn <1000 : true &&
-            filter.language ? e.language === filter.language :true &&
-            filter.age ? Number(filter.age) > e.age : true &&
-            filter.eye ? e.eye === filter.eye :true &&
-            filter.hair ? e.hair === filter.hair :true &&
+            ( filter.hair !=0 ? e.hair === filter.hair : true) &&
+           ( filter.eye !=0 ? e.eye === filter.eye : true) &&
+           ( filter.language !=0 ? e?.language?.find(language=>language===filter.language )  : true) &&
+           ( filter.age !=0 ? e.age < filter.age : true) &&
           <None {...e} />)}
         </div>
       </div>
