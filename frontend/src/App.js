@@ -19,6 +19,7 @@ import About from "./pages/static/about";
 import FAQ from "./pages/static/faq";
 import TermsAndConditions from "./pages/static/TermsAndConditions";
 import { setRegion } from "./redux/slice/utilSlice";
+import Dev from "./pages/dev";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 		<div className="App  font-inter">
 			<ScrollToTop />
 			<Routes>
+			<Route path="/dev" element={<Dev />} />
 				<Route path="/" element={<Home />} />
 				<Route
 					path="/"
