@@ -37,6 +37,9 @@ function Screen1() {
                 <p className='font-bold text-2xl'>Show Listings from</p>
                 <select name="" id="" className='w-[381px] h-11 rounded-lg border border-white bg-black/20 pl-6 '>
                     <option value="">Select Location</option>
+                    <option value="Dubai">Dubai</option>
+                    <option value="UK">UK</option>
+                    <option value="Thailand">Thailand</option>
                 </select>
             </div>
         </div>
