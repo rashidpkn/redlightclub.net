@@ -15,7 +15,6 @@ function Screen1() {
             axios.get('https://api.country.is').then(res => {
                 setCountryCode(res.data.country)
                     setCountry(states.find(e=>e.iso2 === res.data.country).name)
-                    // setState(state.filter(e=>e.iso== res.data.country && e.state.name))
                     setState(states.find(e=>e.iso2=== res.data.country).states);
         }).catch(err=>{
             console.log(err.message);
@@ -32,9 +31,6 @@ function Screen1() {
                 <p className='text-[13px]'>Choose from these recommended locations</p>
                 <div className="flex gap-2 overflow-y-auto">
                     {state.map(e=><button className={` px-2 h-12 min-w-fit border border-white rounded-sm ${region === e.name && 'border-yellow-300'}`} onClick={()=>{dispatch(setRegion(e.name))}}>{e.name}</button>)}
-                    {/* {location.region && <button className={`px-3 py-2 border border-white rounded-sm ${region === location.region && 'border-yellow-300'}`} onClick={()=>{dispatch(setRegion(location.region))}}>{location.region}</button>}
-                    {location.country_capital && <button className={`px-3 py-2 border border-white rounded-sm ${region === location.country_capital && 'border-yellow-300'}`} onClick={()=>{dispatch(setRegion(location.country_capital))}}>{location.country_capital}</button>}
-                    {location.city && <button className={`px-3 py-2 border border-white rounded-sm ${region === location.city && 'border-yellow-300'}`} onClick={()=>{dispatch(setRegion(location.city))}}>{location.city}</button>} */}
                 </div>
             </div>
             <div className="absolute mx-auto inset-x-0 text-center  bottom-28 text-white  space-y-5">

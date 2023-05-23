@@ -37,13 +37,14 @@ function Screen2() {
                 <div className="w-1/4 flex-shrink-0 space-y-5">
                     <div className='text-3xl cursor-pointer '>Lorem ipsum dolor sit amet consectetur. Elit dictumst velit mattis nec sed lacus at.</div>
                     <p className='text-justify'>Lorem ipsum dolor sit amet consectetur. Vulputate arcu ornare urna nisi adipiscing penatibus ultrices duis. Magnis eget mauris imperdiet a scelerisque lacus velit cursus. Ut morbi dui diam velit sed elit.</p>
+                    <input type="text" className='w-full h-10 rounded-lg bg-white outline-none text-black pl-5' placeholder='Search' />
                 </div>
-                <Profile {...ads.find(e => e.id === 2)} order={orders.order1} />
-                <Profile {...ads.find(e => e.id === 8)} order={orders.order2} />
-                <Profile {...ads.find(e => e.id === 4)} order={orders.order3} />
-                <Profile {...ads.find(e => e.id === 5)} order={orders.order4} />
-                <Profile {...ads.find(e => e.id === 6)} order={orders.order5} />
-                <Profile {...ads.find(e => e.id === 7)} order={orders.order6} />
+                <Profile {...ads.find(e => e.id === 24)} order={orders.order1} />
+                <Profile {...ads.find(e => e.id === 29)} order={orders.order2} />
+                <Profile {...ads.find(e => e.id === 44)} order={orders.order3} />
+                <Profile {...ads.find(e => e.id === 14)} order={orders.order4} />
+                <Profile {...ads.find(e => e.id === 7)} order={orders.order5} />
+                <Profile {...ads.find(e => e.id === 35)} order={orders.order6} />
 
             </div>
 
@@ -55,12 +56,12 @@ function Screen2() {
                     <div className=' text-2xl cursor-pointer text-justify'>Lorem ipsum dolor sit amet consectetur. Elit dictumst velit mattis nec sed lacus at.</div>
                     <p className='text-justify'>Lorem ipsum dolor sit amet consectetur. Vulputate arcu ornare urna nisi adipiscing penatibus ultrices duis. Magnis eget mauris imperdiet a scelerisque lacus velit cursus. Ut morbi dui diam velit sed elit.</p>
                 </div>
-                <Profile {...ads.find(e => e.id === 2)} order={orders.order1} />
-                <Profile {...ads.find(e => e.id === 8)} order={orders.order2} />
-                <Profile {...ads.find(e => e.id === 4)} order={orders.order3} />
-                <Profile {...ads.find(e => e.id === 5)} order={orders.order4} />
-                <Profile {...ads.find(e => e.id === 6)} order={orders.order5} />
-                <Profile {...ads.find(e => e.id === 7)} order={orders.order6} />
+                <Profile {...ads.find(e => e.id === 24)} order={orders.order1} />
+                <Profile {...ads.find(e => e.id === 29)} order={orders.order2} />
+                <Profile {...ads.find(e => e.id === 44)} order={orders.order3} />
+                <Profile {...ads.find(e => e.id === 14)} order={orders.order4} />
+                <Profile {...ads.find(e => e.id === 7)} order={orders.order5} />
+                <Profile {...ads.find(e => e.id === 35)} order={orders.order6} />
 
             </div>
             
@@ -109,7 +110,7 @@ const Profile = ({ id, profilePhoto, adsTitle, location, order }) => {
         <div className= {`w-1/2 lg:w-1/4  flex-shrink-0 relative duration-500 overflow-hidden rounded-lg ${order===1 ? 'h-[300px] lg:h-[500px] ' : 'h-[250px] lg:h-[400px]'}`} 
         >
             <Link to={`/profile/${id}`}>
-                <img src={`${profilePhoto}`} className='h-full object-cover  w-full hover:scale-150 lg:hover:scale-125 duration-500 hover:object-top' alt="" />
+                <img src={profilePhoto} className='h-full object-cover  w-full hover:scale-150 lg:hover:scale-125 duration-500 hover:object-top' alt="" />
                 <div className="absolute bottom-2 left-2">
                     <p className='text-lg'>{adsTitle}</p>
                     <p>{location}</p>

@@ -34,7 +34,7 @@ function Navbar() {
           </li>
         </ul>
         <div className="flex justify-center items-center gap-5">
-          <input
+          {/* <input
           onChange={e=>{
             setAdsTitle(e.target.value)
           }}
@@ -55,7 +55,7 @@ function Navbar() {
           }}
           className="h-10 px-3 text-white  ">
             Search
-          </button>
+          </button> */}
           {token ? (
             <button className="h-10 px-3 text-white " onClick={() => { dispatch(setToken(undefined)); localStorage.clear() }}>
               Log Out

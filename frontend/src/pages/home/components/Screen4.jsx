@@ -1,45 +1,27 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import BackendIP from '../../../BackendIP'
+import React from 'react'
+import img4 from '../../../asset/images/home/screen4.png'
 
 function Screen4() {
-  const [ads, setAds] = useState([])
-  const fetchData = () => {
-    axios.get(`${BackendIP}/ads/get-all-ads`).then(res => {
-      setAds(res.data.sort((a, b) => a.id - b.id))
-    })
-  }
-  useEffect(() => {
-    fetchData()
-  }, [])
   return (
-    <div className='lg:hidden w-full sticky top-0 p-[5%] bg-[#1e1e1e] space-y-10' >
-        <Profile {...ads.find(e => e.id === 2)} />
-        <Profile {...ads.find(e => e.id === 3)} />
-        <Profile {...ads.find(e => e.id === 4)} />
-        <Profile {...ads.find(e => e.id === 5)} />
-        <Profile {...ads.find(e => e.id === 6)} />
-        <Profile {...ads.find(e => e.id === 7)} />
-        <Profile {...ads.find(e => e.id === 8)} />
-        <Profile {...ads.find(e => e.id === 11)} />
-        <Profile {...ads.find(e => e.id === 12)} />
+    <div className='min-h-screen h-full w-full flex justify-center items-center gap-16 bg-[#1E1E1E]'>
+                <img src={img4} width={495} height={545} alt="" />
+                <div className="">
+                    <h2 className='text-[red] text-5xl'>Lorem ipsum dolor sit <br /> amet consectetur.</h2>
+                    <p className='w-[631px] text-white text-lg '>
+Lorem ipsum dolor sit amet consectetur. Enim leo venenatis lacinia 
+amet at sit diam. Posuere nulla mauris est odio odio nibh lectus risus. 
+Blandit ac montes mauris mattis cursus at facilisis aenean. Imperdiet 
+integer neque rutrum ullamcorper nibh adipiscing quam. Tortor in 
+faucibus nunc vel et. Bibendum vitae tellus luctus viverra diam nulla 
+commodo diam. Id sed lorem duis morbi morbi vestibulum nisi. 
+Pharetra eget viverra amet magna. Enim nisi tempor odio vel non 
+venenatis. Pretium pellentesque ut facilisis senectus erat libero lacus 
+pharetra diam. Velit feugiat enim pulvinar congue venenatis 
+imperdiet id cras euismod.
+                        </p>
+                </div>
     </div>
   )
 }
 
 export default Screen4
-
-
-const Profile = ({ profilePhoto, adsTitle, location,id }) => {
-  const navigate = useNavigate()
-  return (
-    <div className=" h-[50vh]" onClick={()=>navigate(`profile/${id}`)}>
-      <img src={`${profilePhoto}`} className='h-5/6 w-full object-cover object-top' alt="" />
-      <div className="flex flex-col justify-between w-full h-1/6 p-3">
-        <p className='text-red-600 text-2xl'>{adsTitle}</p>
-        <p className='text-white'>{location}</p>
-      </div>
-    </div>
-  )
-}
