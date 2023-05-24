@@ -110,7 +110,7 @@ const Profile = ({ id, profilePhoto, adsTitle, location, order }) => {
         <div className= {`w-1/2 lg:w-1/4  flex-shrink-0 relative duration-500 overflow-hidden rounded-lg ${order===1 ? 'h-[300px] lg:h-[500px] ' : 'h-[250px] lg:h-[400px]'}`} 
         >
             <Link to={`/profile/${id}`}>
-                <img src={profilePhoto} className='h-full object-cover  w-full hover:scale-150 lg:hover:scale-125 duration-500 hover:object-top' alt="" />
+                <img src={BackendIP + profilePhoto} className='h-full object-cover  w-full hover:scale-150 lg:hover:scale-125 duration-500 hover:object-top' alt="" />
                 <div className="absolute bottom-2 left-2">
                     <p className='text-lg'>{adsTitle}</p>
                     <p>{location}</p>

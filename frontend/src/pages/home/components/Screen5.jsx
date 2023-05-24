@@ -48,7 +48,7 @@ const BigProfile = ({ id }) => {
             <div className="h-full w-full  flex justify-between">
                 <div className="h-full w-1/6"></div>
                 <div className="h-full w-4/6">
-                    <img src={ads.profilePhoto} className='w-full h-full object-cover' alt="" />
+                    <img src={BackendIP + ads.profilePhoto} className='w-full h-full object-cover' alt="" />
                 </div>
                 <div className="h-full w-1/6"></div>
             </div>
@@ -65,7 +65,7 @@ const SmallProfile = ({ id }) => {
     }, [id])
     return (
         <div className="h-[30%] w-full border border-black">
-            <img src={ads.profilePhoto} className='w-full h-full object-cover object-top' alt="" />
+            <img src={BackendIP + ads.profilePhoto} className='w-full h-full object-cover object-top' alt="" />
         </div>
     )
 }
