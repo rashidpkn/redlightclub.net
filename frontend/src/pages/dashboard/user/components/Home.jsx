@@ -17,9 +17,9 @@ import Star from '../../../../asset/icons/dashboard/home-user/star'
 import clickRate from '../../../../asset/icons/dashboard/home-user/click-rate.svg'
 import responseRate from '../../../../asset/icons/dashboard/home-user/response-rate.svg'
 
-import { Line,Doughnut } from 'react-chartjs-2'
+import { Line, Doughnut } from 'react-chartjs-2'
 import {
-    Chart as ChartJS, CategoryScale,ArcElement,
+    Chart as ChartJS, CategoryScale, ArcElement,
     LinearScale,
     PointElement,
     LineElement,
@@ -50,15 +50,24 @@ function Home() {
     const [user, setUser] = useState({})
     const [ads, setAds] = useState([])
 
+    const [lockAnalatics, setLockAnalatics] = useState(false)
+
     useEffect(() => {
         axios.get(`${BackendIP}/ads/get-user-ads`, { params: { username } }).then(res => {
             setAds(res.data)
         })
         axios.get(`${BackendIP}/user/get-a-user`, { params: { username } }).then(res => {
             setUser(res.data)
+            const created_at = new Date(res.data?.createdAt)
+
+            const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
+            setLockAnalatics(yesterday < created_at)
+            console.log(yesterday < created_at);
         })
         // eslint-disable-next-line
     }, [])
+
+
 
 
 
@@ -72,9 +81,9 @@ function Home() {
                 <button className='px-4 py-3 rounded-xl bg-[#34C38F] text-white' onClick={() => setVerifyEmailAlert(true)}>Verify Now</button>
             </div>
 
-            <Profile ads={ads} user={user} />
+            <Profile ads={ads} user={user} lockAnalatics={lockAnalatics} />
 
-            <HomeAnalatics ads={ads} />
+            <HomeAnalatics ads={ads} lockAnalatics={lockAnalatics} />
 
             {verifyEmailAlert && <VerifyBox setVerifyEmailAlert={setVerifyEmailAlert} />}
         </div>
@@ -84,7 +93,7 @@ function Home() {
 export default Home
 
 
-const Profile = ({ ads, user }) => {
+const Profile = ({ ads, user, lockAnalatics }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     return (
@@ -107,8 +116,8 @@ const Profile = ({ ads, user }) => {
                         >Edit Profile</button>
                     </div>
                 </div>
-                <div className="flex gap-5 items-center justify-center">
-                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
+                <div className="flex gap-5 items-center justify-center relative">
+                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4 relative">
                         <p className='text-[10px] text-[#202020]'>Live Ads</p>
                         <div className="flex gap-3 items-center">
                             <div className="w-6 h-6">
@@ -116,8 +125,9 @@ const Profile = ({ ads, user }) => {
                             </div>
                             <p className='text-lg font-bold'>{ads.length}</p>
                         </div>
+
                     </div>
-                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
+                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4 relative">
                         <p className='text-[10px] text-[#202020]'>Profile Views</p>
                         <div className="flex gap-3 items-center">
                             <div className="w-6 h-6">
@@ -125,8 +135,9 @@ const Profile = ({ ads, user }) => {
                             </div>
                             <p className='text-lg font-bold'>{ads[0]?.view}</p>
                         </div>
+
                     </div>
-                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4">
+                    <div className="w-36  rounded-lg bg-[#F5F5F5] p-4 relative">
                         <p className='text-[10px] text-[#202020]'>Rating</p>
                         <div className="flex gap-3 items-center">
                             <div className="w-6 h-6">
@@ -134,7 +145,12 @@ const Profile = ({ ads, user }) => {
                             </div>
                             <p className='text-lg font-bold'>0</p>
                         </div>
+
                     </div>
+                    {lockAnalatics && <div className='absolute top-0 left-0 w-full h-full flex justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
+                        <div className="w-4 h-4 bg-black"></div>
+                        <p className='text-[9px]'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
+                    </div>}
                 </div>
             </div>
 
@@ -144,13 +160,13 @@ const Profile = ({ ads, user }) => {
 }
 
 
-export const HomeAnalatics = ({ ads }) => {
+export const HomeAnalatics = ({ ads, lockAnalatics }) => {
     return (
         <>
             <div className=" flex gap-3 flex-wrap">
-                <AdsAnalytics ads={ads} />
-                <OverallStatistics ads={ads} />
-                <ClickAndResponse />
+                <AdsAnalytics ads={ads} lockAnalatics={lockAnalatics} />
+                <OverallStatistics ads={ads} lockAnalatics={lockAnalatics} />
+                <ClickAndResponse lockAnalatics={lockAnalatics} />
             </div>
             <SiteTraffic />
         </>
@@ -158,7 +174,7 @@ export const HomeAnalatics = ({ ads }) => {
 }
 
 
-const AdsAnalytics = ({ ads }) => {
+const AdsAnalytics = ({ ads, lockAnalatics }) => {
     const [date, setDate] = useState([])
     const [view, setView] = useState([])
     const [id, setId] = useState(0)
@@ -178,7 +194,7 @@ const AdsAnalytics = ({ ads }) => {
 
 
     return (
-        <div className="h-[380px] w-[570px] rounded-xl bg-white p-4">
+        <div className="h-[380px] w-[570px] rounded-xl bg-white p-4 relative">
             <div className="flex justify-between items-center">
                 <div className="">
                     <p className='text-xl font-bold'>Ad Analytics</p>
@@ -199,16 +215,21 @@ const AdsAnalytics = ({ ads }) => {
             <div className="">
                 <Graph date={date} view={view} />
             </div>
+            {lockAnalatics && <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
+                <p className='text-[20px] font-bold'>Ad Analytics</p>
+                <div className="w-4 h-4 bg-black"></div>
+                <p className='text-[9px]'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
+            </div>}
         </div>
     )
 }
 
 
-const ClickAndResponse = () => {
+const ClickAndResponse = ({ lockAnalatics }) => {
     return (
         <div className="w-[210px] space-y-5">
 
-            <div className="w-full rounded-xl bg-white p-4 space-y-3">
+            <div className="w-full rounded-xl bg-white p-4 space-y-3 relative">
                 <p className='text-xl font-bold'>Click Rate</p>
                 <div className="flex items-center gap-3">
                     <div className="w-7 h-7 rounded-lg flex justify-center items-center bg-[#0062F4]">
@@ -217,8 +238,14 @@ const ClickAndResponse = () => {
                     <p className='text-xl font-bold'>1.5%</p>
                 </div>
                 <p className='text-[9px]'>How often customers have clicked on your profile on our site.</p>
+                {lockAnalatics && <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
+                <p className='text-[20px] font-bold'>Click Rate</p>
+                <div className="w-4 h-4 bg-black"></div>
+                <p className='text-[9px] text-center'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
+            </div>}
             </div>
-            <div className="w-full rounded-xl bg-white p-4 space-y-3">
+
+            <div className="w-full rounded-xl bg-white p-4 space-y-3 relative">
                 <p className='text-xl font-bold'>Response Rate</p>
                 <div className="flex items-center gap-3">
                     <div className="w-7 h-7 rounded-lg flex justify-center items-center bg-[#6418C3]">
@@ -227,32 +254,37 @@ const ClickAndResponse = () => {
                     <p className='text-xl font-bold'>20%</p>
                 </div>
                 <p className='text-[9px]'>The percentage of customers who view your profile that speak to you.</p>
+                {lockAnalatics && <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
+                <p className='text-[20px] font-bold'>Response Rate</p>
+                <div className="w-4 h-4 bg-black"></div>
+                <p className='text-[9px] text-center'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
+            </div>}
             </div>
 
         </div>
     )
 }
 
-const OverallStatistics = ({ ads }) => {
+const OverallStatistics = ({ ads, lockAnalatics }) => {
     const [selectedAds, setSelectedAds] = useState({})
-    const review = ads?.find(e=>e.id===selectedAds && e)?.review
-    
+    const review = ads?.find(e => e.id === selectedAds && e)?.review
+
     const [rating, setRating] = useState(0)
 
     useEffect(() => {
-      let rate = 0
-      // eslint-disable-next-line
-        review?.map(e=>{
+        let rate = 0
+        // eslint-disable-next-line
+        review?.map(e => {
             rate = rate + Number(e.rating)
         })
-        setRating(Math.round(rate/review?.length))
+        setRating(Math.round(rate / review?.length))
         // eslint-disable-next-line
     }, [selectedAds])
 
     // useEffect(() => {
     //   console.log(review)
     // }, [selectedAds])
-    
+
     const options = {
         plugins: {
             tooltip: {
@@ -267,47 +299,47 @@ const OverallStatistics = ({ ads }) => {
     const data = {
         labels: [1, 2, 3, 4, 5],
         datasets: [
-          {
-            label: "Star rate",
-            data: [
-                review?.filter(e=>Number(e.rating) ===1 ).length,
-                review?.filter(e=>Number(e.rating) ===2 ).length,
-                review?.filter(e=>Number(e.rating) ===3 ).length,
-                review?.filter(e=>Number(e.rating) ===4 ).length,
-                review?.filter(e=>Number(e.rating) ===5 ).length
-            ],
-            backgroundColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-            ],
-          },
+            {
+                label: "Star rate",
+                data: [
+                    review?.filter(e => Number(e.rating) === 1).length,
+                    review?.filter(e => Number(e.rating) === 2).length,
+                    review?.filter(e => Number(e.rating) === 3).length,
+                    review?.filter(e => Number(e.rating) === 4).length,
+                    review?.filter(e => Number(e.rating) === 5).length
+                ],
+                backgroundColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 159, 64, 1)",
+                ],
+                borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 159, 64, 1)",
+                ],
+            },
         ],
-      };
+    };
 
 
     return (
-        <div className="h-[380px] w-[300px] rounded-xl bg-white p-4 space-y-5">
+        <div className="h-[380px] w-[300px] rounded-xl bg-white p-4 space-y-5 relative">
             <div className="flex justify-between items-center">
                 <p className='text-xl font-bold'>Overall Statistics</p>
-                <select className='text-xs font-bold' onChange={e=>{setSelectedAds(Number(e.target.value))}}>
+                <select className='text-xs font-bold' onChange={e => { setSelectedAds(Number(e.target.value)) }}>
                     {ads?.map((e, index) => <option key={index} value={e?.id}>{e?.adsTitle}</option>)}
                 </select>
             </div>
             <div className="flex ">
                 <div className="w-full flex flex-col justify-center">
-                    <p className='text-xl font-bold'>{rating?rating:0}</p>
+                    <p className='text-xl font-bold'>{rating ? rating : 0}</p>
                     <p className='text-sm'>Overall Rating</p>
                 </div>
                 <div className="w-full flex flex-col justify-center">
@@ -318,27 +350,32 @@ const OverallStatistics = ({ ads }) => {
             <div className="flex justify-between">
 
                 <div className="w-[75%]">
-                    <Doughnut data={data} options={options}/>
+                    <Doughnut data={data} options={options} />
                 </div>
 
                 <div className="space-y-5 w-1/4">
-                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e=>Number(e.rating) ===1 ).length} /1</p>
+                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e => Number(e.rating) === 1).length} /1</p>
                         <Star fill='#6418C3' />
                     </div>
-                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e=>Number(e.rating) ===2 ).length} /2</p>
+                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e => Number(e.rating) === 2).length} /2</p>
                         <Star fill='#5ECFFF' />
                     </div>
-                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e=>Number(e.rating) ===3 ).length} /3</p>
+                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e => Number(e.rating) === 3).length} /3</p>
                         <Star fill='#E328AF' />
                     </div>
-                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e=>Number(e.rating) ===4 ).length} /4</p>
+                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e => Number(e.rating) === 4).length} /4</p>
                         <Star fill='#FFAB2D' />
                     </div>
-                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e=>Number(e.rating) ===5 ).length} /5</p>
+                    <div className="flex justify-center items-center gap-1"> <p>{review?.filter(e => Number(e.rating) === 5).length} /5</p>
                         <Star fill='#FF4A55' />
                     </div>
                 </div>
             </div>
+            {lockAnalatics && <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
+                <p className='text-[20px] font-bold'>Overall Statistics</p>
+                <div className="w-4 h-4 bg-black"></div>
+                <p className='text-[9px]'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
+            </div>}
         </div>
     )
 }
@@ -362,7 +399,7 @@ const SiteTraffic = () => {
                     date.push(e.date)
                 }
                 else if (select === 'Monthly') {
-                    date = [2,3,4]
+                    date = [2, 3, 4]
                     if (Number(e.date.split('-')[1]) === 2) {
                         feb = feb + e.view
                     }
@@ -374,18 +411,18 @@ const SiteTraffic = () => {
                     }
                 }
             })
-            
+
             setDate(date)
-            if(select==='Daily'){
+            if (select === 'Daily') {
                 setView(view)
-            }else if(select==='Monthly'){
+            } else if (select === 'Monthly') {
                 setView([feb, march, april])
             }
         })
         //eslint-disable-next-line
     }, [select])
 
-   
+
     return (
         <div className="  rounded-xl bg-white p-4">
             <div className="flex justify-between items-center">

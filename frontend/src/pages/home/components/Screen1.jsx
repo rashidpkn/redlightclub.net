@@ -44,9 +44,22 @@ function Screen1() {
                 <div className="w-[380px] h-[45px] border border-white">
                     <select type="text"  className='w-[calc(100%-110px)] h-full bg-transparent  pl-5 outline-none' placeholder='Search Location'>
                         <option className='text-black' value="">Search Location</option>
-                        <option className='text-black' value="Dubai">Dubai ({ads.filter(e=>e.region === 'Dubai').length}) </option>
-                        <option className='text-black' value="Thailand">Thailand ({ads.filter(e=>e.region === 'Thailand').length}) </option>
-                        <option className='text-black' value="UK">UK ({ads.filter(e=>e.region === 'UK').length}) </option>
+                        <optgroup label='United Arab Emirates' className='text-black'>
+                            <option className='text-black' value="Dubai">Dubai ({ads.filter(e=>e.region === 'Dubai').length}) </option>
+                            <option className='text-black' value="Abu Dhabi">Abu Dhabi ({ads.filter(e=>e.region === 'Abu Dhabi').length}) </option>
+                            <option className='text-black' value="Sharjah">Sharjah ({ads.filter(e=>e.region === 'Sharjah').length}) </option>
+                            <option className='text-black' value="Ajman"> Ajman({ads.filter(e=>e.region === 'Ajman').length}) </option>
+                            <option className='text-black' value="Umm Al-Quwain"> Umm Al-Quwain({ads.filter(e=>e.region === 'Umm Al-Quwain').length}) </option>
+                            <option className='text-black' value="Fujairah">Fujairah ({ads.filter(e=>e.region === 'Fujairah').length}) </option>
+                            <option className='text-black' value="Ras Al Khaimah">Ras Al Khaimah ({ads.filter(e=>e.region === 'Ras Al Khaimah').length}) </option>
+                        </optgroup>
+
+                        <optgroup label='United Kingdom' className='text-black'>
+                            {states.find(e=>e.name==='United Kingdom')?.states.map(e=><option className='text-black' value={e.name}>{e.name} ({ads.filter(e=>e.region === e.name).length}) </option>) }
+                        </optgroup>
+                        <optgroup label='Thailand' className='text-black'>
+                            {states.find(e=>e.name==='Thailand')?.states.map(e=><option className='text-black' value={e.name}>{e.name} ({ads.filter(e=>e.region === e.name).length}) </option>) }
+                        </optgroup>
                     </select>
                     <Link to={'/filter'}>
                         <button className='w-[110px] h-full bg-white text-black'>Search</button>    
