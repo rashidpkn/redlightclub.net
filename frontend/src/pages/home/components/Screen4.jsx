@@ -3,7 +3,7 @@ import img4 from '../../../asset/images/home/screen4.png'
 
 function Screen4() {
   return (
-    <div className='min-h-screen h-full w-full flex justify-center items-center gap-16 bg-[#1E1E1E]'>
+    <div className='min-h-screen h-full w-full flex justify-center items-center gap-16 bg-black'>
                 <img src={img4} width={495} height={545} alt="" />
                 <div className="">
                     <h2 className='text-[red] text-5xl'>Lorem ipsum dolor sit <br /> amet consectetur.</h2>

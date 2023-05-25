@@ -28,7 +28,7 @@ function Screen2() {
     
 
     return (
-        <div className='w-full overflow-hidden bg-[#1E1E1E] p-5 space-y-5 ' >
+        <div className='w-full overflow-hidden bg-black p-5 space-y-5 ' >
 
             {/* desktop screen */}
             <div
