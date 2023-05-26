@@ -36,8 +36,9 @@ export class UserService {
 
   login = async (email: string, password: string) => {
     try {
-      const found = await User.findOne({ where: { email, password } });
-      if (found) {
+      const found = await User.findOne({ where: { email} });
+
+      if (found?.password === password) {
         return {
           status: true,
           reason: '',
@@ -45,10 +46,16 @@ export class UserService {
           role: found.role,
           username: found.username
         };
-      } else {
+      }else if(found){
         return {
           status: false,
-          reason: 'User not Exist',
+          reason: 'Please Check Your Password',
+        };
+      }
+       else {
+        return {
+          status: false,
+          reason: 'We have no registered user with this email account',
         };
       }
     } catch (error) {

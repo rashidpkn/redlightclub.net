@@ -37,7 +37,6 @@ export class AdsController {
   getAAds(
     @Query('adsTitle') adsTitle: string
   ) {
-    Ads.increment('view', { by: 1, where: { adsTitle } },)
     return Ads.findOne({ where: { adsTitle } })
   }
 
