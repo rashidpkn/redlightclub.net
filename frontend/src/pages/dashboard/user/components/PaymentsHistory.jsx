@@ -20,6 +20,7 @@ import diamondIcon from '../../../../asset/icons/dashboard/profile/diamond.svg'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import BackendIP from '../../../../BackendIP';
+import { Link } from 'react-router-dom';
 
 
 ChartJS.register(
@@ -75,6 +76,8 @@ function PaymentsHistory() {
                 </tbody>
 
             </table>
+
+            {PaymentsHistory.length === 0  && <p className='text-center mt-5 font-medium'>You haven’t made any transactions yet! Lets make history and boost your traffic now - <Link to={'/dashboard/auction-progress'}> <b> Click here </b> </Link> </p> }
 
 
         </div>

@@ -29,7 +29,7 @@ function Profiles() {
     return (
         <div className='space-y-5'>
             <div className="flex justify-between items-center">
-                <p className='text-2xl font-bold'>Your Profile</p>
+                <p className='text-2xl font-bold'>Your Ad Profiles</p>
                 <div className="flex gap-5 text-white text-sm font-bold">
                     
                     <Link to={'/new-ads'}>
@@ -129,7 +129,7 @@ export const Verify = ({ e, setVerify }) => {
                     <div className="flex justify-center items-center">
                         <div className="space-y-3">
                             <p className='text-lg font-bold'>What to do</p>
-                            <p>Step 1 : Take a white paper and write down the unique code shown.</p>
+                            <p>Step 1 :Take a white piece of paper and write down the unique code shown below.</p>
                             <p>Step 2 : Take a selfie clearly showing you holding the paper with unique code and your face</p>
                             <p>Step 3 : Upload the image onto our website and thats it. We’ll take care of the rest!</p>
                             <div className="flex justify-center items-center">

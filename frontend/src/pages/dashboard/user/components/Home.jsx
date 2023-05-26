@@ -166,7 +166,7 @@ export const HomeAnalatics = ({ ads, lockAnalatics }) => {
             <div className=" flex gap-3 flex-wrap">
                 <AdsAnalytics ads={ads} lockAnalatics={lockAnalatics} />
                 <OverallStatistics ads={ads} lockAnalatics={lockAnalatics} />
-                <ClickAndResponse lockAnalatics={lockAnalatics} />
+                <ClickAndResponse lockAnalatics={lockAnalatics} ads={ads} />
             </div>
             <SiteTraffic />
         </>
@@ -225,7 +225,7 @@ const AdsAnalytics = ({ ads, lockAnalatics }) => {
 }
 
 
-const ClickAndResponse = ({ lockAnalatics }) => {
+const ClickAndResponse = ({ lockAnalatics,ads }) => {
     return (
         <div className="w-[210px] space-y-5">
 
@@ -235,14 +235,19 @@ const ClickAndResponse = ({ lockAnalatics }) => {
                     <div className="w-7 h-7 rounded-lg flex justify-center items-center bg-[#0062F4]">
                         <img src={clickRate} alt="" />
                     </div>
-                    <p className='text-xl font-bold'>1.5%</p>
+                    <p className='text-xl font-bold'>0%</p>
                 </div>
                 <p className='text-[9px]'>How often customers have clicked on your profile on our site.</p>
+                {ads?.length ===0 && <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
+                    <p className='text-[20px] font-bold'>Click Rate</p>
+                    <div className="w-4 h-4 bg-black"></div>
+                    <p className='text-[9px] text-center'>Create a profile to view</p>
+                </div>}
                 {lockAnalatics && <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
-                <p className='text-[20px] font-bold'>Click Rate</p>
-                <div className="w-4 h-4 bg-black"></div>
-                <p className='text-[9px] text-center'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
-            </div>}
+                    <p className='text-[20px] font-bold'>Click Rate</p>
+                    <div className="w-4 h-4 bg-black"></div>
+                    <p className='text-[9px] text-center'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
+                </div>}
             </div>
 
             <div className="w-full rounded-xl bg-white p-4 space-y-3 relative">
@@ -251,14 +256,21 @@ const ClickAndResponse = ({ lockAnalatics }) => {
                     <div className="w-7 h-7 rounded-lg flex justify-center items-center bg-[#6418C3]">
                         <img src={responseRate} alt="" />
                     </div>
-                    <p className='text-xl font-bold'>20%</p>
+                    <p className='text-xl font-bold'>0%</p>
                 </div>
                 <p className='text-[9px]'>The percentage of customers who view your profile that speak to you.</p>
+
+                {ads?.length ===0 &&  <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
+                    <p className='text-[20px] font-bold'>Response Rate</p>
+                    <div className="w-4 h-4 bg-black"></div>
+                    <p className='text-[9px] text-center'>Create a profile to view</p>
+                </div>}
+
                 {lockAnalatics && <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-4 bg-white/80 backdrop-blur-sm'>
-                <p className='text-[20px] font-bold'>Response Rate</p>
-                <div className="w-4 h-4 bg-black"></div>
-                <p className='text-[9px] text-center'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
-            </div>}
+                    <p className='text-[20px] font-bold'>Response Rate</p>
+                    <div className="w-4 h-4 bg-black"></div>
+                    <p className='text-[9px] text-center'>Collecting Results : Please Wait 24-48 Hours to see this information.</p>
+                </div>}
             </div>
 
         </div>

@@ -59,13 +59,24 @@ const ReportedProfile = ({adsTitle,reason,createdAt,id , fetchData}) => {
     }
     const [deleteAdsAlert, setDeleteAdsAlert] = useState(false)
     const [deleteReportAlert, setDeleteReportAlert] = useState(false)
+    const [profilePic, setProfilePic] = useState('')
+    useEffect(() => {
+        
+        axios.get(`${BackendIP}/ads/get-a-ads`,{params:{adsTitle}}).then(res=>{
+            setProfilePic(res.data.profilePhoto)
+        })
+// eslint-disable-next-line
+    }, [])
+    
     return (
         <>
         <tr className='w-full h-16 border-b hover:shadow-lg'>
             <td className='h-full w-[5%] text-center'><input type="checkbox" name="" id="" /></td>
             <td className='h-full w-[20%] '>
                 <div className="h-full w-full flex items-center gap-3">
-                    <div className="w-8 h-8 bg-black rounded-md"></div>
+                    <div className="w-8 h-8 bg-black rounded-md">
+                        <img src={profilePic} className='w-full h-full rounded-md' alt="" />
+                    </div>
                     <div className="">
                         <p className='font-bold text-xs'>{adsTitle}</p>
                         <p className='text-xs'>India</p>
@@ -137,7 +148,6 @@ const Menu = ({data, setReportedProfiles,fetchData}) => {
         <div className="flex justify-between items-center flex-wrap gap-3">
             <div className="">
                 <h2 className='font-bold text-2xl'>Reported Issues</h2>
-                <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
             </div>
             <div className="flex gap-3 flex-wrap justify-center">
                 <div className="w-64 h-14 relative">

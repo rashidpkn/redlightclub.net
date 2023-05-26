@@ -152,7 +152,7 @@ const Notifications = () => {
   const [notification, setNotification] = useState([])
 
   // eslint-disable-next-line
-  const [viewAllNotification, setViewAllNotification] = useState(true)
+  const [viewAllNotification, setViewAllNotification] = useState(false)
   const [clearall, setClearall] = useState(false)
   
   const [insideClick, setInsideClick] = useState(0)
@@ -185,14 +185,17 @@ const Notifications = () => {
 
           <div className="space-y-5">
             {
-              notification.map(e => <Notification clearall={clearall} key={e.id} {...e} setNotification={setNotification} notification={notification} time='2m' />)
+              !viewAllNotification && notification.slice(0,3).map(e => <Notification clearall={clearall} key={e.id} {...e} setNotification={setNotification} notification={notification} time='2m' />)
+            }
+            {
+              viewAllNotification && notification.map(e => <Notification clearall={clearall} key={e.id} {...e} setNotification={setNotification} notification={notification} time='2m' />)
             }
 
 
           </div>
 
           <div className="w-full flex justify-center">
-            <button className="w-[330px] h-12 rounded-lg bg-[#F6EEFF] text-[#6418C3] font-bold" onClick={() => { setViewAllNotification(true) }}>View All Notification</button>
+            <button className="w-[330px] h-12 rounded-lg bg-[#F6EEFF] text-[#6418C3] font-bold" onClick={() => { setViewAllNotification(true) }}> View all notifications</button>
           </div>
 
 

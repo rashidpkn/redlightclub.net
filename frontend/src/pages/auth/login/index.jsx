@@ -88,7 +88,9 @@ function Auth() {
             }}
             className="space-y-5">
             {
-              role ? <p>Sign up  as <span className="capitalize">{role}</span></p> : <p>Login</p>
+              role ? 
+              role==='advertiser'?<p>Sign Up  As  An <span className="capitalize">{role}</span> </p> : <p>Sign Up  As  A <span className="capitalize">{role}</span> 
+              </p> : <p>Login</p>
             }
 
             <div className="w-[360px] h-16 rounded-2xl bg-black/40 flex items-center px-4 gap-3">
@@ -115,7 +117,8 @@ function Auth() {
 
             <div className="flex items-center gap-4">
               <button className="w-[170px] h-12 rounded-2xl bg-black/40 hover:bg-[#ff0000]"> {role? "Sign Up": "Login"}</button>
-              <p className="text-sm">Forgot your password?</p>
+              {role==='' && <p className="text-sm">Forgot your password?</p>}
+              
             </div>
           </form>
         </div>
@@ -138,7 +141,7 @@ function Auth() {
               </div>
               <div className="flex flex-col gap-3 items-start">
                 <p className="text-lg font-semibold">Login</p>
-                <p>Keep update on activity in your area!</p>
+                <p className="text-[14px]">Keep updated on new profiles in your area!</p>
               </div>
             </button>
           </div> : <div className="flex flex-col justify-center items-center gap-6">
@@ -151,7 +154,7 @@ function Auth() {
               </div>
               <div className="flex flex-col gap-3 items-start">
                 <p className="text-lg font-semibold">I am a User</p>
-                <p>Keep update on activity in your area!</p>
+                <p className="text-[14px]">Keep updated on new profiles in your area!</p>
               </div>
             </button>
 
@@ -165,7 +168,7 @@ function Auth() {
               </div>
               <div className="flex flex-col gap-3 items-start">
                 <p className="text-lg font-semibold">I am an Advertiser</p>
-                <p>Get listed for free today!</p>
+                <p className="text-[14px]">List Your Profile Free Now!</p>
               </div>
             </button>
           </div>}

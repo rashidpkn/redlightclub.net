@@ -87,7 +87,6 @@ const Menu = () => {
         <div className="flex justify-between items-center flex-wrap gap-3">
             <div className="">
                 <h2 className='font-bold text-2xl'>Support</h2>
-                <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
             </div>
             <div className="flex gap-3 flex-wrap justify-center">
                 <div className="w-64 h-14 relative">
@@ -120,7 +119,7 @@ const [response, setResponse] = useState('')
             <div className="max-w-[736px] w-full  bg-white rounded-lg p-5 space-y-5 overflow-y-scroll" >
                 <div className="flex justify-between items-center">
                     <p className='font-bold'>Ticket Details</p>
-                    <Close onClick={()=>setShowTicket(false)}/>
+                    <Close className='cursor-pointer' onClick={()=>setShowTicket(false)}/>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between items-center gap-10 ">
                     <div className="w-full md:w-1/2">

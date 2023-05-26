@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
 // icon
-import userIcon from '../../../../asset/icons/dashboard/home/user.png'
-import verifiedIcon from '../../../../asset/icons/dashboard/home/verified.png'
-import adsRedIcon from '../../../../asset/icons/dashboard/home/ads-red.png'
-import adsGreenIcon from '../../../../asset/icons/dashboard/home/ads-green.png'
-// import upArrowIcon from '../../../../asset/icons/dashboard/home/upArrow.svg'
-// import upGraphIcon from '../../../../asset/icons/dashboard/home/upGraph.svg'
+import userIcon from '../../../../asset/icons/dashboard/home/Customers.svg'
+import verifiedIcon from '../../../../asset/icons/dashboard/home/Pending Verifications.svg'
+import adsRedIcon from '../../../../asset/icons/dashboard/home/Inactive Ads.svg'
+import adsGreenIcon from '../../../../asset/icons/dashboard/home/Active Ads.svg'
+
 
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -87,16 +86,16 @@ const Table = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <TableRow ads={ads} location={'Dubai'} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
-                    <TableRow ads={ads} location={'UK'} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
-                    <TableRow ads={ads} location={'Thailand'} newAds={4} TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                    <TableRow ads={ads} location={'Dubai'}  TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                    <TableRow ads={ads} location={'UK'}  TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
+                    <TableRow ads={ads} location={'Thailand'}  TotalContribution={32} totalRevenue={5121213} BidRevenue={22121} />
                 </tbody>
             </table>
         </div>
     )
 }
 
-const TableRow = ({location,ads,totalAds,newAds,TotalContribution,totalRevenue,BidRevenue}) => {
+const TableRow = ({location,ads,TotalContribution,totalRevenue,BidRevenue}) => {
     function getPreviousWeek(date = new Date()) {
         const previous = new Date(date.getTime());
         previous.setDate(date.getDate() - 7);

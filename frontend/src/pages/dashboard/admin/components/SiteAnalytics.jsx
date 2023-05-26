@@ -59,7 +59,7 @@ function SiteAnalytics() {
             </div>
             <div className="flex items-center flex-wrap gap-5">
                 
-                <div className="w-64 h-[150px] bg-white rounded-md p-5 flex flex-col justify-between">
+                <div className="w-64 h-[150px] bg-white rounded-md p-5 flex flex-col justify-between hover:shadow-md cursor-pointer">
                     <p className='text-xl font-bold'>Total Site Visits</p>
                     <div className="flex gap-3 items-center">
                         <div className="h-7 w-7 bg-[#0062F4] rounded-lg flex justify-center items-center">
@@ -67,10 +67,10 @@ function SiteAnalytics() {
                         </div>
                         <p className='text-xl font-bold'>{totalViewers}</p>
                     </div>
-                    <p className='text-[10px]'>Lorem ipsum dolor sit amet, </p>
+                    <p className='text-[10px]'></p>
                 </div>
 
-                <div className="w-64 h-[150px] bg-white rounded-md p-5 flex flex-col justify-between">
+                <div className="w-64 h-[150px] bg-white rounded-md p-5 flex flex-col justify-between hover:shadow-md cursor-pointer">
                     <p className='text-xl font-bold'>Users</p>
                     <div className="flex gap-3 items-center">
                         <div className="h-7 w-7 bg-[#6418C3] rounded-lg flex justify-center items-center">
@@ -78,10 +78,10 @@ function SiteAnalytics() {
                         </div>
                         <p className='text-xl font-bold'>{users.length}</p>
                     </div>
-                    <p className='text-[10px]'>Lorem ipsum dolor sit amet, </p>
+                    <p className='text-[10px]'></p>
                 </div>
 
-                <div className="w-64 h-[150px] bg-white rounded-md p-5 flex flex-col justify-between">
+                <div className="w-64 h-[150px] bg-white rounded-md p-5 flex flex-col justify-between hover:shadow-md cursor-pointer">
                     <p className='text-xl font-bold'>Customers</p>
                     <div className="flex gap-3 items-center">
                         <div className="h-7 w-7 bg-[#34C38F] rounded-lg flex justify-center items-center">
@@ -89,7 +89,7 @@ function SiteAnalytics() {
                         </div>
                         <p className='text-xl font-bold'>{users.filter(e=>e.role==='user').length}</p>
                     </div>
-                    <p className='text-[10px]'>Lorem ipsum dolor sit amet, </p>
+                    <p className='text-[10px]'></p>
                 </div>
 
                 

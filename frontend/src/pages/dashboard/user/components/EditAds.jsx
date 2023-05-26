@@ -21,7 +21,7 @@ function EditAds() {
 
   const editAds = () => {
     axios.post(`${BackendIP}/ads/edit`, { edit: ads, id: ads.id }).then(res => {
-      window.alert("Edit is done")
+      window.alert("Your Changes have been saved")
     })
   }
 

@@ -17,15 +17,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setId } from '../../../../redux/slice/utilSlice'
 import { Link, useNavigate } from 'react-router-dom'
 
+let fetch_data = []
 
 function Profile() {
     const [filter, setFilter] = useState(1)
     const [ads, setAds] = useState([])
     const [location, setLocation] = useState('')
     const fetchData = () => {
-        axios.get(`${BackendIP}/ads/get-all-ads`).then(res => {
+        fetch_data.length === 0 ? axios.get(`${BackendIP}/ads/get-all-ads`).then(res => {
+            fetch_data = res.data
             setAds(res.data)
-        })
+        }) : setAds(fetch_data)
     }
     useEffect(() => {
         fetchData()
@@ -150,11 +152,15 @@ const Menu = ({data,setAds,fetchData,locations,setLocation}) => {
         <div className="flex justify-between items-center flex-wrap gap-3">
             <div className="">
                 <h2 className='font-bold text-2xl'>Profiles</h2>
-                <p className='text-sm text-[#A5A5A5]'>Lorem ipsum olor sit amet </p>
             </div>
             <div className="flex gap-3 flex-wrap justify-center">
                 <div className="w-64 h-14 relative">
-                    <input className='w-full h-full rounded-xl bg-white outline-none pl-10' onChange={e=>{setAdsTitle(e.target.value)}} placeholder='Search here' type="text" />
+                    <input className='w-full h-full rounded-xl bg-white outline-none pl-10' onChange={e=>{
+                            setAdsTitle(e.target.value)
+                            if(e.target.value === ''){
+                                fetchData()
+                            }
+                        }} placeholder='Search here' type="text" />
 
                     <img src={lensIcon} className='absolute w-5 h-5 top-[1.10rem] left-3' alt="" />
 
@@ -162,7 +168,7 @@ const Menu = ({data,setAds,fetchData,locations,setLocation}) => {
 
 
                 <div className="w-64 h-14 relative px-3 bg-white rounded-xl">
-                    <select className='w-full h-full   outline-none px-10' placeholder='Location' type="text" onChange={e=>setLocation(e.target.value)} >
+                    <select className='w-full h-full   outline-none px-10' placeholder='Location' type="text" onChange={e=>setLocation(e.target.value) } >
                         <option value="">Location</option>
                         {locations.map(e=><option value={e}>{e}</option>)}
                     </select>
