@@ -62,7 +62,7 @@ function PaymentsHistory() {
                 <div className="w-[600px] min-h-[260px] h-auto bg-white rounded-lg p-5">
                     <div className="">
                         <p className='text-xl font-bold'>Bid Income</p>
-                        <p className='text-sm text-[#A5A5A5]'>Lorem ipsum dolor sit amet, consectetur adip</p>
+                        <p className='text-sm text-[#A5A5A5]'></p>
                     </div>
                     <Graph />
                 </div>

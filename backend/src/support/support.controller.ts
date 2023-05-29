@@ -37,4 +37,12 @@ export class SupportController {
     return true
   }
 
+  @Post('close')
+  async Close(
+    @Body() body:any
+  ){
+    const {id} = body
+    await Supports.update({status:true},{where:{id}})
+    return true
+  }
 }

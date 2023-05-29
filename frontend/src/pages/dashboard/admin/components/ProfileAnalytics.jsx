@@ -5,6 +5,7 @@ import BackendIP from '../../../../BackendIP'
 import { setId } from '../../../../redux/slice/utilSlice'
 import Graph from '../../components/Graph'
 import { MainMenu } from './Home'
+import { Link } from 'react-router-dom'
 
 function ProfileAnalytics() {
     const dispatch = useDispatch()
@@ -46,6 +47,8 @@ function ProfileAnalytics() {
             setDate(date)
             setView(view)
         })
+
+        console.log(ads?.find(e=>e.id === Number(id)));
         //eslint-disable-next-line
     }, [id])
 
@@ -67,9 +70,11 @@ function ProfileAnalytics() {
 
                     <div className="flex gap-5 ">
                         <div className="flex gap-5">
-                            <div className="h-10 w-10 bg-black"></div>
+                            <div className="h-10 w-10">
+                                <img className='rounded-md' src={ads?.find(e=>e.id === Number(id))?.profilePhoto} alt="" />
+                            </div>
                             <div className="">
-                                <p className='text-xs font-bold'>240</p>
+                                <p className='text-xs font-bold'>{ads.length}</p>
                                 <p className='text-xs'>Total Ads Count</p>
                             </div>
                         </div>
@@ -78,7 +83,7 @@ function ProfileAnalytics() {
                             <div className="w-1/3 flex gap-2">
                                 <div className="w-2 h-2 rounded-full bg-[#0062F4]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>400</p>
+                                    <p className='font-bold'>{ads.filter(e=>e.tier ==='platinum').length}</p>
                                     <p>Platinum</p>
                                 </div>
                             </div>
@@ -87,7 +92,7 @@ function ProfileAnalytics() {
                             <div className="w-1/3 flex gap-2">
                                 <div className="w-2 h-2 rounded-full bg-[#F4B000]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>200</p>
+                                    <p className='font-bold'>{ads.filter(e=>e.tier ==='gold').length}</p>
                                     <p>Gold</p>
                                 </div>
                             </div>
@@ -96,7 +101,7 @@ function ProfileAnalytics() {
                             <div className="w-1/3 flex gap-2">
                                 <div className="w-2 h-2 rounded-full bg-[#A63200]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>230</p>
+                                    <p className='font-bold'>{ads.filter(e=>e.tier ==='silver').length}</p>
                                     <p>Silver</p>
                                 </div>
                             </div>
@@ -119,11 +124,7 @@ function ProfileAnalytics() {
                         <p className='text-xs'>Profiles with the most traffic</p>
                     </div>
 
-                    <TopVisitedProfile />
-                    <TopVisitedProfile />
-                    <TopVisitedProfile />
-                    <TopVisitedProfile />
-                    <TopVisitedProfile />
+                    {ads.sort((a,b)=>b.view - a.view).slice(0,5).map(e=><TopVisitedProfile {...e} />)}
 
                 </div>
             </div>
@@ -136,18 +137,22 @@ function ProfileAnalytics() {
 export default ProfileAnalytics
 
 
-const TopVisitedProfile = () => {
+const TopVisitedProfile = ({id,adsTitle,profilePhoto,view,region}) => {
     return (
         <div className="flex justify-between hover:shadow-lg cursor-pointer">
+            <Link to={`/profile/${id}`}>
             <div className="flex gap-3 items-center">
-                <div className="w-11 h-11 rounded-md bg-black"></div>
+                <div className="">
+                    <img src={BackendIP + profilePhoto} className='w-11 h-11 rounded-md' alt="" />
+                </div>
                 <div className="flex flex-col justify-start items-start">
-                    <p className='font-bold text-xs'>Roshni</p>
-                    <p className='text-xs'>India</p>
+                    <p className='font-bold text-xs'>{adsTitle}</p>
+                    <p className='text-xs'>{region}</p>
                 </div>
             </div>
+        </Link>
             <div className="flex flex-col items-end">
-                <p className='text-xs font-bold'>300</p>
+                <p className='text-xs font-bold'>{view}</p>
                 <p className='text-xs '>8:30</p>
             </div>
         </div>

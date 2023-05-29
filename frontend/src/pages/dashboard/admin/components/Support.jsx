@@ -69,7 +69,11 @@ const TableRow = ({ id, username, subject, status, email, type, detail,images })
                     <div className="w-full h-full flex justify-center items-center gap-5 text-white">
                         <button className='w-20 h-9 rounded-lg bg-[#0062F4]' onClick={()=>{setShowTicket(true)}}>View Details</button>
 
-                        <button className='w-20 h-9 rounded-lg bg-[#34C38F]'>Mark Resolved</button>
+                        <button className='w-20 h-9 rounded-lg bg-[#34C38F]'  onClick={()=>{
+                            axios.post(`${BackendIP}/support/close`,{id}).then(res=>{
+                                window.alert("This Ticket is closed")
+                            })
+                        }}>Mark Resolved</button>
                     </div>
                 </td>
             </tr>
@@ -166,7 +170,12 @@ const [response, setResponse] = useState('')
                         }}>Message User</button>
                     
                     
-                    <button className='w-40 h-12 rounded-xl bg-[#34C38F] text-white text-sm font-bold' >Mark Resolved</button>
+                    <button className='w-40 h-12 rounded-xl bg-[#34C38F] text-white text-sm font-bold' onClick={()=>{
+                            axios.post(`${BackendIP}/support/close`,{id}).then(res=>{
+                                window.alert("This Ticket is closed")
+                                setShowTicket(false)
+                            })
+                        }}>Mark Resolved</button>
 
                 </div>
 

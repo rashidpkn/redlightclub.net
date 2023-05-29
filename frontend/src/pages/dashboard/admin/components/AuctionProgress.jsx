@@ -35,16 +35,22 @@ ChartJS.register(
 
 function AuctionProgress() {
     const [bid, setBid] = useState([])
+
+    const [paymentHistory, setPaymentHistory] = useState([])
+
     const fetchData = () => {
-
-        
-
         axios.get(`${BackendIP}/bid`).then(res => {
             setBid(res.data)
         })
+      
     }
 
     useEffect(() => {
+        
+        axios.get(`${BackendIP}/payment`).then(res=>{
+            setPaymentHistory(res.data?.filter(e=>e.status === 'paid'))
+        })
+
         const fetchBid = setInterval(() => {
             fetchData()    
         }, 2000);
@@ -65,9 +71,9 @@ function AuctionProgress() {
 
                         <div className="w-3/4 flex gap-3">
                             <div className="w-1/3 flex gap-2">
-                                <div className="w-2 h-2 rounded-full bg-[#0062F4]"></div>
+                                <div className="w-2 h-2 rounded-full bg-[#dc0e16]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>AED 300</p>
+                                    <p className='font-bold'>AED {paymentHistory.filter(e=>e.bid.tier === 'platinum')?.reduce((n,{amount})=>n + amount,0)}</p>
                                     <p>In Progress</p>
                                 </div>
                             </div>
@@ -76,16 +82,16 @@ function AuctionProgress() {
                             <div className="w-1/3 flex gap-2">
                                 <div className="w-2 h-2 rounded-full bg-[#F4B000]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>AED 250</p>
+                                    <p className='font-bold'>AED {paymentHistory.filter(e=>e.bid.tier === 'gold')?.reduce((n,{amount})=>n + amount,0)}</p>
                                     <p>In Progress</p>
                                 </div>
                             </div>
 
 
                             <div className="w-1/3 flex gap-2">
-                                <div className="w-2 h-2 rounded-full bg-[#A63200]"></div>
+                                <div className="w-2 h-2 rounded-full bg-[#c9c9c9]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>AED 250</p>
+                                    <p className='font-bold'>AED {paymentHistory.filter(e=>e.bid.tier === 'silver')?.reduce((n,{amount})=>n + amount,0)}</p>
                                     <p>Closed</p>
                                 </div>
                             </div>
@@ -109,9 +115,9 @@ function AuctionProgress() {
                         <div className="flex justify-between">
 
                             <div className="w-1/3 flex gap-2">
-                                <div className="w-2 h-2 rounded-full bg-[#0062F4]"></div>
+                                <div className="w-2 h-2 rounded-full bg-[#dc0e16]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>400</p>
+                                    <p className='font-bold'>{paymentHistory.filter(e=>e.bid.tier === 'platinum').length}</p>
                                     <p>Platinum</p>
                                 </div>
                             </div>
@@ -120,16 +126,16 @@ function AuctionProgress() {
                             <div className="w-1/3 flex gap-2">
                                 <div className="w-2 h-2 rounded-full bg-[#F4B000]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>200</p>
+                                    <p className='font-bold'>{paymentHistory.filter(e=>e.bid.tier === 'gold').length}</p>
                                     <p>Gold</p>
                                 </div>
                             </div>
 
 
                             <div className="w-1/3 flex gap-2">
-                                <div className="w-2 h-2 rounded-full bg-[#A63200]"></div>
+                                <div className="w-2 h-2 rounded-full bg-[#c9c9c9]"></div>
                                 <div className="text-xs">
-                                    <p className='font-bold'>230</p>
+                                    <p className='font-bold'>{paymentHistory.filter(e=>e.bid.tier === 'silver').length}</p>
                                     <p>Silver</p>
                                 </div>
                             </div>
@@ -203,7 +209,7 @@ const Card = ({ position, tier, bidEnd, bid, fetchData }) => {
     return (
         <>
             <div className="h-[260px] w-[170px] bg-white rounded-md flex flex-col gap-3  justify-center items-center hover:shadow-xl">
-                <div className={`h-8 w-8 rounded-md ${tier === 'platinum' && 'bg-[#0062F4]'} ${tier === 'gold' && 'bg-[#F4B000]'} ${tier === 'silver' && 'bg-[#A63200]'} flex justify-center items-center`}>
+                <div className={`h-8 w-8 rounded-md ${tier === 'platinum' && 'bg-[#dc0e16]'} ${tier === 'gold' && 'bg-[#F4B000]'} ${tier === 'silver' && 'bg-[#c9c9c9]'} flex justify-center items-center`}>
                     <img src={diamondIcon} alt="" />
                 </div>
 
@@ -243,7 +249,7 @@ const Card = ({ position, tier, bidEnd, bid, fetchData }) => {
 
                         <div className="space-y-3">
                             <div className="flex gap-3 items-center">
-                                <div className={`w-10 h-10 rounded-lg ${tier === 'platinum' && 'bg-[#0062F4]'} ${tier === 'gold' && 'bg-[#F4B000]'} ${tier === 'silver' && 'bg-[#A63200]'}  flex justify-center items-center`}>
+                                <div className={`w-10 h-10 rounded-lg ${tier === 'platinum' && 'bg-[#dc0e16]'} ${tier === 'gold' && 'bg-[#F4B000]'} ${tier === 'silver' && 'bg-[#c9c9c9]'}  flex justify-center items-center`}>
                                     <img src={diamondIcon} alt="" />
                                 </div>
                                 <div className="">
@@ -304,7 +310,7 @@ const Bids = ({ amount, username }) => {
         <div className="flex justify-between hover:shadow-xl">
             <div className="flex gap-3 items-center">
                 <p className='text-xs'>2m ago</p>
-                <div className="w-9 h-9 rounded-lg bg-[#0062F4]"></div>
+                <div className="w-9 h-9 rounded-lg bg-[#dc0e16]"></div>
                 <div className="text-xs">
                     <p className='font-bold capitalize'>{username}</p>
                     <p>Monday,June 31,2022</p>
@@ -353,7 +359,7 @@ const Chart = () => {
                 label: "Platinum",
                 categoryPercentage: 0.5,
                 data: [1, 2, 3, 4, 5, 6, 7],
-                backgroundColor: "#0062F4",
+                backgroundColor: "#dc0e16",
                 barThickness: 8,
                 borderRadius: 50
             },
@@ -393,8 +399,8 @@ const Winner = () => {
             <div className="text-lg font-bold">
                 <p>Hurray!</p>
                 <p>
-                    <span className='text-[#0062F4] cursor-pointer'>Roshni</span> has won</p>
-                <p className='text-[#0062F4] '>Platinum Bid</p>
+                    <span className='text-[#dc0e16] cursor-pointer'>Roshni</span> has won</p>
+                <p className='text-[#dc0e16] '>Platinum Bid</p>
                 <p className='text-xs font-normal text-[#A5A5A5]'>Bid on Position 1</p>
             </div>
 
