@@ -111,7 +111,7 @@ function Affiliative() {
                                 <div className="">
                                     <p className='text-lg font-bold'>{
 
-                                        user?.referredto?.map(e => e.amount ? e.amount : 0).reduce((a, b) => a + b)
+                                        user?.referredto?.map(e => e.amount ? e.amount : 0)?.reduce((a, b) => a + b)
 
                                     } AED</p>
                                     <p className='text-[10px]'>Total Credits Earned</p>
@@ -193,7 +193,7 @@ function Affiliative() {
                                 <img src={auctionsIcon} className='w-full h-full' alt="" />
                             </div>
                             <div className="">
-                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0).reduce((a, b) => a + b)} AED</p>
+                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0)?.reduce((a, b) => a + b)} AED</p>
                                 <p className='text-[10px]'>Credits Earned from <br />
                                     from Auctions by referrals</p>
                             </div>
@@ -204,7 +204,7 @@ function Affiliative() {
                                 <img src={bannerIcon} className='w-full h-full' alt="" />
                             </div>
                             <div className="">
-                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0).reduce((a, b) => a + b)} AED</p>
+                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0)?.reduce((a, b) => a + b)} AED</p>
                                 <p className='text-[10px]'>Credits Earned from <br />
                                     from Auctions by referrals</p>
                             </div>
@@ -215,7 +215,7 @@ function Affiliative() {
                                 <img src={purchaseIcon} className='w-full h-full' alt="" />
                             </div>
                             <div className="">
-                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0).reduce((a, b) => a + b)} AED</p>
+                                <p className='text-lg font-bold'>{user?.referredto?.map(e => e.amount ? e.amount : 0)?.reduce((a, b) => a + b)} AED</p>
                                 <p className='text-[10px]'>Credits Earned from <br />
                                     from Auctions by referrals</p>
                             </div>

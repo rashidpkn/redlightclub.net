@@ -48,7 +48,7 @@ function AuctionProgress() {
     useEffect(() => {
         
         axios.get(`${BackendIP}/payment`).then(res=>{
-            setPaymentHistory(res.data?.filter(e=>e.status === 'paid'))
+            setPaymentHistory(res.data)
         })
 
         const fetchBid = setInterval(() => {
@@ -96,15 +96,15 @@ function AuctionProgress() {
                                 </div>
                             </div>
 
-                            <select className='w-[80px] h-[28px] rounded-lg border text-xs'>
+                            {/* <select className='w-[80px] h-[28px] rounded-lg border text-xs'>
                                 <option value="">Position 1</option>
-                            </select>
+                            </select> */}
 
                         </div>
 
                     </div>
 
-                    <Chart />
+                    <Chart paymentHistory={paymentHistory}/>
 
                 </div>
 
@@ -144,7 +144,7 @@ function AuctionProgress() {
 
                     </div>
 
-                    <Winner />
+                    <Winner {...paymentHistory?.sort((a,b)=>a.id-b.id).reverse()[0]} />
 
 
                 </div>
@@ -324,7 +324,7 @@ const Bids = ({ amount, username }) => {
 
 
 
-const Chart = () => {
+const Chart = ({paymentHistory}) => {
 
 
     const options = {
@@ -358,7 +358,14 @@ const Chart = () => {
             {
                 label: "Platinum",
                 categoryPercentage: 0.5,
-                data: [1, 2, 3, 4, 5, 6, 7],
+                data: [
+                    paymentHistory?.filter(e=>e.bid.tier==='platinum' && e.bid.position===1)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='platinum' && e.bid.position===2)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='platinum' && e.bid.position===3)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='platinum' && e.bid.position===4)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='platinum' && e.bid.position===5)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='platinum' && e.bid.position===6)?.length, 
+                ],
                 backgroundColor: "#dc0e16",
                 barThickness: 8,
                 borderRadius: 50
@@ -366,7 +373,14 @@ const Chart = () => {
             {
                 label: "Gold",
                 categoryPercentage: 0.5,
-                data: [1, 2, 3, 4, 5, 6, 7],
+                data: [
+                    paymentHistory?.filter(e=>e.bid.tier==='gold' && e.bid.position===1)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='gold' && e.bid.position===2)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='gold' && e.bid.position===3)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='gold' && e.bid.position===4)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='gold' && e.bid.position===5)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='gold' && e.bid.position===6)?.length, 
+                ],
                 backgroundColor: "#F4B000",
                 barThickness: 8,
                 borderRadius: 50
@@ -374,7 +388,14 @@ const Chart = () => {
             {
                 label: "Silver",
                 categoryPercentage: 0.5,
-                data: [1, 2, 3, 4, 5, 6, 7],
+                data: [
+                    paymentHistory?.filter(e=>e.bid.tier==='silver' && e.bid.position===1)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='silver' && e.bid.position===2)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='silver' && e.bid.position===3)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='silver' && e.bid.position===4)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='silver' && e.bid.position===5)?.length, 
+                    paymentHistory?.filter(e=>e.bid.tier==='silver' && e.bid.position===6)?.length, 
+                ],
                 backgroundColor: "#FF4D00",
                 barThickness: 8,
                 borderRadius: 50
@@ -390,7 +411,7 @@ const Chart = () => {
 }
 
 
-const Winner = () => {
+const Winner = ({id,username,bid,amount}) => {
     return (
         <div className="w-full  bg-white rounded-lg p-5 space-y-5 relative">
 
@@ -399,13 +420,13 @@ const Winner = () => {
             <div className="text-lg font-bold">
                 <p>Hurray!</p>
                 <p>
-                    <span className='text-[#dc0e16] cursor-pointer'>Roshni</span> has won</p>
-                <p className='text-[#dc0e16] '>Platinum Bid</p>
-                <p className='text-xs font-normal text-[#A5A5A5]'>Bid on Position 1</p>
+                    <span className='text-[#dc0e16] cursor-pointer capitalize'>{username}</span> has won</p>
+                <p className='text-[#dc0e16] capitalize'>{bid?.tier} Bid</p>
+                <p className='text-xs font-normal text-[#A5A5A5]'>Bid on Position {bid?.position}</p>
             </div>
 
             <div className="">
-                <p className='text-2xl font-bold text-[#6418C3]'>290 AED</p>
+                <p className='text-2xl font-bold text-[#6418C3]'>{amount} AED</p>
                 <button className='w-[132px] h-9 rounded-lg bg-[#6418C3] text-white text-xs'>Notify Via Email</button>
             </div>
 

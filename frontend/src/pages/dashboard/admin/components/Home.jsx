@@ -177,7 +177,7 @@ const Menu = ({ children, path }) => {
     const { isDarkMode } = useSelector(state => state.util)
     return (
         <Link to={`/dashboard/${path}`}>
-            <div className={`${isDarkMode ? 'bg-[#1A1F28] text-white  shadow-blue-500 menu-shadow' : 'bg-white hover:shadow-xl'} w-56 h-32  rounded-xl flex items-center justify-center gap-5  duration-[1.5s] cursor-pointer`}>
+            <div className={`${isDarkMode ? 'bg-[#1A1F28] text-white  shadow-blue-500 menu-shadow' : 'bg-white hover:shadow-xl'} w-64 h-32  rounded-xl flex items-center justify-center gap-5  duration-[1.5s] cursor-pointer`}>
                 {children}
             </div>
         </Link>
