@@ -21,11 +21,7 @@ export const Nationality = ['Afghan', 'Albanian', 'Algerian', 'American', 'Andor
     'Venezuelan', 'Vietnamese', 'Welsh', 'Yemenite', 'Zambian', 'Zimbabwean']
 
 export const services = [
-    'Anal sex', 'Foot fetish', 'Parties', 'Submissive', 'BDSM', 'French kissing', 'Reverse oral', 'Squirting',
-    'CIM', 'GFE', 'Giving rimming', 'Tantric massage', 'COB', 'Teabagging', 'Couples', 'Role play',
-    'Tie and tease',
-    'Deep  throat', 'Lap dancing', 'Sex toys', 'Uniforms', 'Domination', 'Massage', 'Spanking', 'Face sitting',
-    'Nuru massage', 'Strapon', 'Fingering', 'Oral sex blow job', 'Striptease', 'Webcam sex', 'Fisting', 'OWO'
+    "Photoshot","Videoshot"."Movies","Series","Ads"
 ]
 
 export const codes = [
