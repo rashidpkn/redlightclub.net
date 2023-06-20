@@ -21,7 +21,7 @@ export const Nationality = ['Afghan', 'Albanian', 'Algerian', 'American', 'Andor
     'Venezuelan', 'Vietnamese', 'Welsh', 'Yemenite', 'Zambian', 'Zimbabwean']
 
 export const services = [
-    "Photoshot","Videoshot"."Movies","Series","Ads"
+    "Photoshot","Videoshot","Movies","Series","Ads"
 ]
 
 export const codes = [
