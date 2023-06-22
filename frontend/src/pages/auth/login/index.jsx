@@ -57,18 +57,18 @@ function Auth() {
 
   return (
 
-    <div className="h-screen w-full relative flex justify-center items-center text-white">
+    <div className="h-screen w-full relative flex justify-center items-center text-white bg-black">
 
 
 
 
 
-      <img src={banner} className="absolute w-full h-full object-cover" alt="" />
+      {/* <img src={banner} className="absolute w-full h-full object-cover" alt="" />
 
       
         <video loop={true} autoPlay={true} muted={true} className="fixed w-full h-full object-cover z-0">
           <source src={bannermp4} type="video/mp4" />
-        </video>
+        </video> */}
 
 
 
